@@ -62,7 +62,7 @@ public class DbAction {
  public ArrayList<Bean> selectListAfter() {
      ArrayList<Bean> beanList = new ArrayList<Bean>();
      
-     String WhereDefault = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice from Class as c, Attend as a where c.cId = a.cId and cName in (select cName from Class where cDate >= curdate()) and sEmail =" + currentuser;
+     String WhereDefault = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice from Class as c, Attend as a where c.cId = a.cId and cName in (select cName from Class where cDate >= curdate())";
      try{
          Class.forName("com.mysql.cj.jdbc.Driver");
          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);

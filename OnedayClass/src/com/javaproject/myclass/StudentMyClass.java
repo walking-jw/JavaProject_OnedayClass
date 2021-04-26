@@ -14,6 +14,8 @@ import javax.swing.table.TableColumn;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class StudentMyClass {
 
@@ -42,6 +44,15 @@ public class StudentMyClass {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				TableInitAfter();
+				TableInitBefore();
+				SearchActionAfter();
+				SearchActionBefore();
+			}
+		});
 		frame.setTitle("수강관리");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,6 +89,7 @@ public class StudentMyClass {
 				}
 			});
 			Inner_Table_After.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			Inner_Table_After.setModel(Outer_Table_After);
 			
 		}
 		return Inner_Table_After;
@@ -115,8 +127,15 @@ public class StudentMyClass {
 	private JTable getInner_Table_Before() {
 		if (Inner_Table_Before == null) {
 			Inner_Table_Before = new JTable();
+			Inner_Table_Before.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+			});
 			Inner_Table_Before.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			Inner_Table_Before.setModel(Outer_Table_Before);
 		}
+
 		return Inner_Table_Before;
 	}
 	
