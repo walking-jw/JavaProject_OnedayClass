@@ -9,10 +9,20 @@ import java.util.ArrayList;
 
 public class DbAction {
  
+	// 재원
+	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	
+	// 공용
+	public static final String id_mysql = "root";
+	public static final String pw_mysql = "qwer1234";
+	
+	public static String currentuser = "hyoeun@gmail.com";
+	
+	
  // Field
- private final static String url_mysql = ShareVar.url_mysql;
- private final static String id_mysql = ShareVar.id_mysql;
- private final static String pw_mysql = ShareVar.pw_mysql;
+// private final static String url_mysql = ShareVar.url_mysql;
+// private final static String id_mysql = ShareVar.id_mysql;
+// private final static String pw_mysql = ShareVar.pw_mysql;
  
  int cId;
  String cAttendDate;
@@ -52,7 +62,7 @@ public class DbAction {
  public ArrayList<Bean> selectListAfter() {
      ArrayList<Bean> beanList = new ArrayList<Bean>();
      
-     String WhereDefault = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice from Class as c, Attend as a where c.cId = a.cId and cName in (select cName from Class where cDate >= curdate())";
+     String WhereDefault = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice from Class as c, Attend as a where c.cId = a.cId and cName in (select cName from Class where cDate >= curdate()) and sEmail =" + currentuser;
      try{
          Class.forName("com.mysql.cj.jdbc.Driver");
          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
