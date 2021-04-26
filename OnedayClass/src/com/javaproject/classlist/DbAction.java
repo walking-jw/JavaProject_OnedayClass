@@ -9,7 +9,17 @@ import java.util.ArrayList;
 public class DbAction {
 
 	
-	//Field
+//	//Field
+//	public static final String url_mysql = "jdbc:mysql://IP/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+//	public static final String id_mysql = "root";
+//	public static final String pw_mysql = "qwer1234";
+//	
+//	public static String currentuser = "";
+	
+
+	
+	
+	
 	
 	
 	//Constructor
@@ -37,14 +47,14 @@ public class DbAction {
 					
 				 ResultSet rs = stmt_mysql.executeQuery(whereDefault1 + whereDefault2 + whereDefault3 + ComboxColumn + whereDefault4);  
 				          
-				 while(rs.next()){  // 데이터 가져오기 --DB는 한줄씩 움직이니까 //Record단위
-				 String wkClassName = rs.getString(1);
-				 String wkTeacherName = rs.getString(2);
-				 String wkClassLocation = rs.getString(3);
-				 String wkClassDate = rs.getString(4);
-
-				Bean bean = new Bean(wkClassName, wkTeacherName, wkClassLocation, wkClassDate);
-				beanList.add(bean);
+					 while(rs.next()){  // 데이터 가져오기 --DB는 한줄씩 움직이니까 //Record단위
+					 String wkClassName = rs.getString(1);
+					 String wkTeacherName = rs.getString(2);
+					 String wkClassLocation = rs.getString(3);
+					 String wkClassDate = rs.getString(4);
+	
+					 Bean bean = new Bean(wkClassName, wkTeacherName, wkClassLocation, wkClassDate);
+					 beanList.add(bean);
 				
 				 }
 				 conn_mysql.close();
