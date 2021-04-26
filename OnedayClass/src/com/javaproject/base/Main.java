@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 
 import com.javaproject.classlist.Category;
 import com.javaproject.myclass.StudentMyClass;
+import com.javaproject.teacherpage.TeacherMypage;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -139,9 +140,9 @@ public class Main {
 			btnJaewon.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-//					TeacherMypage category = new TeacherMypage();
-//					category.setVisible_TeacherMypage();
-//					frame.dispose();
+					TeacherMypage category = new TeacherMypage();
+					category.setVisible_TeacherMypage(true);
+					frame.dispose();
 					
 				}
 			});
