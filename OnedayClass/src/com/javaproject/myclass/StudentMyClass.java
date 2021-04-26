@@ -9,6 +9,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class StudentMyClass {
 
@@ -21,6 +26,8 @@ public class StudentMyClass {
 	private JScrollPane scrollPane_1;
 	private JButton btnReview;
 	private JTable Inner_Table_Before;
+	private final DefaultTableModel Outer_Table_After = new DefaultTableModel();
+	private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();
 
 
 	/**
@@ -65,7 +72,13 @@ public class StudentMyClass {
 	private JTable getInner_Table_After() {
 		if (Inner_Table_After == null) {
 			Inner_Table_After = new JTable();
+			Inner_Table_After.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+			});
 			Inner_Table_After.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
 		}
 		return Inner_Table_After;
 	}
@@ -110,5 +123,139 @@ public class StudentMyClass {
 	public void setVisible_StudentMyClass(boolean j) {
 		frame.setVisible(j);
 	}
+	
+	private void TableInitAfter(){
+	       int i = Outer_Table_After.getRowCount();
+	       
+	       Outer_Table_After.addColumn("강의ID");
+	       Outer_Table_After.addColumn("신청날짜");
+	       Outer_Table_After.addColumn("강의명");
+	       Outer_Table_After.addColumn("수강날짜");
+	       Outer_Table_After.addColumn("장소");
+	       Outer_Table_After.addColumn("가격");
+	       Outer_Table_After.setColumnCount(6);
+
+	       for(int j = 0 ; j < i ; j++){
+	           Outer_Table_After.removeRow(0);
+	       }
+
+	       Inner_Table_After.setAutoResizeMode(Inner_Table_After.AUTO_RESIZE_OFF);
+	       
+
+	       int vColIndex = 0;
+	       TableColumn col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       int width = 40;
+	       col.setPreferredWidth(width);
+
+	       vColIndex = 1;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 100;
+	       col.setPreferredWidth(width);
+	       
+	       vColIndex = 2;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 120;
+	       col.setPreferredWidth(width);
+
+	       vColIndex = 3;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 100;
+	       col.setPreferredWidth(width);
+	       
+	       vColIndex = 4;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 70;
+	       col.setPreferredWidth(width);
+	     
+	       vColIndex = 5;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 50;
+	       col.setPreferredWidth(width);
+	       
+
+	 }
+	 private void TableInitBefore(){
+
+	     int k = Outer_Table_Before.getRowCount();
+	     
+	     Outer_Table_Before.addColumn("강의ID");
+	     Outer_Table_Before.addColumn("신청날짜");
+	     Outer_Table_Before.addColumn("강의명");
+	     Outer_Table_Before.addColumn("수강날짜");
+	     Outer_Table_Before.addColumn("장소");
+	     Outer_Table_Before.addColumn("가격");
+	     Outer_Table_Before.setColumnCount(6);
+	     
+	     for(int j = 0 ; j < k ; j++){
+	       Outer_Table_Before.removeRow(0);
+	     }
+
+	     Inner_Table_Before.setAutoResizeMode(Inner_Table_Before.AUTO_RESIZE_OFF);
+
+	     int vColIndex = 0;
+	     TableColumn col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     int width = 40;
+	     col.setPreferredWidth(width);
+	 
+	     vColIndex = 1;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 100;
+	     col.setPreferredWidth(width);
+	     
+	     vColIndex = 2;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 120;
+	     col.setPreferredWidth(width);
+	     
+	     vColIndex = 3;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 100;
+	     col.setPreferredWidth(width);
+	     
+	     vColIndex = 4;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 70;
+	     col.setPreferredWidth(width);
+	     
+	     vColIndex = 5;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 50;
+	     col.setPreferredWidth(width);
+	     
+	 }
+
+	 private void SearchActionAfter(){
+	     
+	     DbAction dbAction = new DbAction();
+	     ArrayList<Bean> beanList = dbAction.selectListAfter();
+	     
+	     int listCount = beanList.size();
+	     for(int i=0; i<listCount; i++) {
+	       String temp1 = Integer.toString(beanList.get(i).getcId());
+	       String temp2 = Integer.toString(beanList.get(i).getcPrice());
+	       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
+	       Outer_Table_After.addRow(qTxt);
+	     }
+
+	 
+	     
+	 }
+	 private void SearchActionBefore(){
+	     
+	     DbAction dbAction = new DbAction();
+	     ArrayList<Bean> beanList = dbAction.selectListBefore();
+	     
+	     int listCount = beanList.size();
+	     for(int i=0; i<listCount; i++) {
+	       String temp1 = Integer.toString(beanList.get(i).getcId());
+	       String temp2 = Integer.toString(beanList.get(i).getcPrice());
+	       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
+	       Outer_Table_Before.addRow(qTxt);
+	     }
+	     
+	     
+	     
+	 }
+	
 	
 }
