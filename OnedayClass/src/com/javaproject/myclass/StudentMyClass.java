@@ -132,7 +132,15 @@ import java.awt.event.ActionEvent;
 		private JButton getBtnReview() {
 			if (btnReview == null) {
 				btnReview = new JButton("후기 등록");
-				btnReview.setBounds(414, 546, 117, 29);
+				btnReview.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Review review = new Review();
+						review.setVisible_Review(true);
+						frame.dispose();
+						
+					}
+				});
+				btnReview.setBounds(414, 546, 92, 29);
 			}
 			return btnReview;
 		}
