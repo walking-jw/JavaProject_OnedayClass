@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import com.javaproject.myclass.StudentMyClass;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -86,9 +89,9 @@ public class Main {
 			btnDoyoung.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					Signin category = new Signin();
-					category.setVisible_Signin();
-					frame.dispose();
+//					Signin category = new Signin();
+//					category.setVisible_Signin();
+//					frame.dispose();
 					
 				}
 			});
@@ -102,8 +105,8 @@ public class Main {
 			btnHyeji.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					StudentMylecture category = new StudentMylecture();
-					category.setVisible_StudentMylecture();
+					StudentMyClass category = new StudentMyClass();
+					category.setVisible_StudentMyClass();
 					frame.dispose();
 		
 				}
@@ -118,9 +121,9 @@ public class Main {
 			btnHyoeun.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					Category category = new Category();
-					category.setVisible_Category();
-					frame.dispose();
+//					Category category = new Category();
+//					category.setVisible_Category();
+//					frame.dispose();
 					
 					
 				}
@@ -135,9 +138,9 @@ public class Main {
 			btnJaewon.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					TeacherMypage category = new TeacherMypage();
-					category.setVisible_TeacherMypage();
-					frame.dispose();
+//					TeacherMypage category = new TeacherMypage();
+//					category.setVisible_TeacherMypage();
+//					frame.dispose();
 					
 				}
 			});
