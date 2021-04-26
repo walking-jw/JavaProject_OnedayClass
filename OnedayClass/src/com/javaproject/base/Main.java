@@ -93,7 +93,7 @@ public class Main {
 				public void actionPerformed(ActionEvent e) {
 					
 					SignInView category = new SignInView();
-					category.setVisible_Signin(true);
+					category.setVisible_SigninView(true);
 					frame.dispose();
 					
 				}

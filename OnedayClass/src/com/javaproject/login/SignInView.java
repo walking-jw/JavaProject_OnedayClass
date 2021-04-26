@@ -188,5 +188,7 @@ public class SignInView {
 		return btnFindPwd;
 	}
 	
-	private 
+	public void setVisible_SigninView(boolean b) {
+		frame.setVisible(b);
+	}
 }
