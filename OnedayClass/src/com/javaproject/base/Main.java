@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import com.javaproject.classlist.Category;
 import com.javaproject.myclass.StudentMyClass;
 
 import java.awt.Font;
@@ -121,9 +122,9 @@ public class Main {
 			btnHyoeun.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-//					Category category = new Category();
-//					category.setVisible_Category();
-//					frame.dispose();
+					Category category = new Category();
+					category.setVisible_Category();
+					frame.dispose();
 					
 					
 				}
