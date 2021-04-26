@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.javaproject.classlist.Category;
+import com.javaproject.login.SignInView;
 import com.javaproject.myclass.StudentMyClass;
 import com.javaproject.teacherpage.TeacherMypage;
 
@@ -91,9 +92,9 @@ public class Main {
 			btnDoyoung.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-//					Signin category = new Signin();
-//					category.setVisible_Signin();
-//					frame.dispose();
+					SignInView category = new SignInView();
+					category.setVisible_Signin(true);
+					frame.dispose();
 					
 				}
 			});
@@ -108,7 +109,7 @@ public class Main {
 				public void actionPerformed(ActionEvent e) {
 					
 					StudentMyClass category = new StudentMyClass();
-					category.setVisible_StudentMyClass();
+					category.setVisible_StudentMyClass(true);
 					frame.dispose();
 		
 				}
