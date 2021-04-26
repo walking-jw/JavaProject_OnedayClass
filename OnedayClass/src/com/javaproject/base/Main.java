@@ -125,7 +125,7 @@ public class Main {
 				public void actionPerformed(ActionEvent e) {
 					
 					Category category = new Category();
-					category.setVisible_Category();
+					category.setVisible_Category(true);
 					frame.dispose();
 					
 					

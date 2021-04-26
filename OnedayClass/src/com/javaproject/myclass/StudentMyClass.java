@@ -106,4 +106,9 @@ public class StudentMyClass {
 		}
 		return Inner_Table_Before;
 	}
+	
+	public void setVisible_StudentMyClass(boolean j) {
+		frame.setVisible(j);
+	}
+	
 }
