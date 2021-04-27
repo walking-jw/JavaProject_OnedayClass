@@ -114,11 +114,9 @@ public class SignInView {
 			btnSignIn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//TODO Sign In
-					//
-					//
-					//
-					//
-					//
+					SignIn signIn = new SignIn();
+					signIn.setVisible_SignIn(true);
+					frame.dispose();
 				}
 			});
 			btnSignIn.setBounds(118, 320, 305, 42);
