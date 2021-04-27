@@ -13,11 +13,12 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강의 수정 / 삭제하기
 
 	private JFrame frame;
-	private JTextField tfImg;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -42,6 +43,7 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 	private JLabel lblNewLabel_6_1_2;
 	private JButton btnRegister_1;
 	private JComboBox cbLocation;
+	private JLabel lblImage;
 
 
 	/**
@@ -60,7 +62,6 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getTfImg());
 		frame.getContentPane().add(getLblNewLabel());
 		frame.getContentPane().add(getLblNewLabel_1());
 		frame.getContentPane().add(getLblNewLabel_2());
@@ -84,14 +85,7 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		frame.getContentPane().add(getLblNewLabel_6_1_2());
 		frame.getContentPane().add(getBtnRegister_1());
 		frame.getContentPane().add(getCbLocation());
-	}
-	private JTextField getTfImg() {
-		if (tfImg == null) {
-			tfImg = new JTextField();
-			tfImg.setBounds(37, 20, 478, 179);
-			tfImg.setColumns(10);
-		}
-		return tfImg;
+		frame.getContentPane().add(getLblImage());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -290,6 +284,15 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 			cbLocation.setBounds(140, 269, 148, 27);
 		}
 		return cbLocation;
+	}
+	private JLabel getLblImage() {
+		if (lblImage == null) {
+			lblImage = new JLabel("");
+			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+			lblImage.setIcon(new ImageIcon("/Users/parksunghun/Documents/스크린샷 2021-04-05 오전 10.38.06.png"));
+			lblImage.setBounds(37, 20, 478, 152);
+		}
+		return lblImage;
 	}
 }
 

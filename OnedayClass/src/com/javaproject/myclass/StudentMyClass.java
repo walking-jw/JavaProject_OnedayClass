@@ -13,6 +13,9 @@ import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+import com.javaproject.teacherpage.TeacherClassRegister;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -128,6 +131,13 @@ import java.awt.event.ActionEvent;
 		private JScrollPane getScrollPane_1() {
 			if (scrollPane_1 == null) {
 				scrollPane_1 = new JScrollPane();
+				scrollPane_1.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+//						DbAction.i = ReviewSub();
+//						System.out.println(DbAction.i);
+					}
+				});
 				scrollPane_1.setBounds(30, 334, 501, 202);
 				scrollPane_1.setViewportView(getInner_Table_Before());
 			}
@@ -138,10 +148,12 @@ import java.awt.event.ActionEvent;
 				btnReview = new JButton("후기 등록");
 				btnReview.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Review review = new Review();
-						review.setVisible_Review(true);
+//						Review review = new Review();
+//						review.setVisible_Review(true);
+//						frame.dispose();
+						TeacherClassRegister register = new TeacherClassRegister();
+						register.setVisible_TeacherClassRegister(true);
 						frame.dispose();
-						
 					}
 				});
 				btnReview.setBounds(414, 546, 92, 29);
@@ -335,6 +347,7 @@ import java.awt.event.ActionEvent;
 
 		}			  
     	}
+		  
 		  
 		  
 		  public int ReviewSub() {
