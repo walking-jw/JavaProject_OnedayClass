@@ -29,6 +29,8 @@ import java.util.ArrayList;
 		 String cDate;
 		 String cLocation;
 		 int cPrice;
+		 String cReview;
+		 int cScore;
 		 
 		 // Constructor*****************************************
 		 
@@ -42,6 +44,14 @@ import java.util.ArrayList;
 			super();
 			this.cId = cId;
 		}
+		 
+		// 리뷰 등록하는 reviewRegister 에서 사용
+		 public DbAction(int cId, String cReview, int cScore) {
+		      super();
+		      this.cId = cId;
+		      this.cReview = cReview;
+		      this.cScore = cScore;
+		   }
 
 
 		// Method*****************************************
@@ -118,9 +128,7 @@ import java.util.ArrayList;
 		     return beanList;
 		 }
 		 
-		
-		 
-		 
+		 // 수강 예정 강의 중 mysql에서 수강 취소하는 메소드
 		 public boolean delete() {
 		     
 		       PreparedStatement ps = null;
@@ -147,5 +155,34 @@ import java.util.ArrayList;
 		     }
 		     
 
- 
+		   public boolean reviewRegister() {
+		         PreparedStatement ps = null;
+		         try{
+		             Class.forName("com.mysql.cj.jdbc.Driver");
+		             Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+		             @SuppressWarnings("unused")
+		            Statement stmt_mysql = conn_mysql.createStatement();
+
+		             String A = "update Attend set cReview = ?, cScore = ? where cId = ? ";
+		             
+
+		             ps = conn_mysql.prepareStatement(A);
+		             
+		             ps.setString(1, cReview.trim());
+		             ps.setInt(2, cScore);
+		             ps.setInt(3, cId);
+
+		             
+		             ps.executeUpdate();
+
+		             conn_mysql.close();
+		             return true;
+		         } catch (Exception e){                   
+		             e.printStackTrace();
+		             return false;
+		         }
+
+		      }
+
+		   
 	}

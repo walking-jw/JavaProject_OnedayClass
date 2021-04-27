@@ -35,6 +35,10 @@ import java.awt.event.ActionEvent;
 		// OuterTable 초기 설정
 		private final DefaultTableModel Outer_Table_After = new DefaultTableModel();
 		private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();
+
+//		public int i = Inner_Table_Before.getSelectedRow();
+//		public String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
+//		public int inSequence = Integer.parseInt(wkSequence);
 	
 	
 		/**
@@ -333,6 +337,12 @@ import java.awt.event.ActionEvent;
     	}
 		  
 		  
+		  public int ReviewSub() {
+				int i = Inner_Table_Before.getSelectedRow();
+				String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
+				int inSequence = Integer.parseInt(wkSequence);
+				return inSequence;
+		  }
 		  
 		  
 	} // ————
