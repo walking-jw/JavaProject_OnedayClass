@@ -24,7 +24,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-	public class StudentMyClass { // 혜지 view - 수강 예정과 수강 이력 데이터 테이블표에 불러오기 & 수강 예정 강의 수강 신청 취소하기
+	public class StudentMyClass { // 2021.04.26 조혜지 view - 수강 예정과 수강 이력 데이터 테이블표에 불러오기 & 수강 예정 강의 수강 신청 취소하기
 	
 		private JFrame frame;
 		private JLabel lblNewLabel;

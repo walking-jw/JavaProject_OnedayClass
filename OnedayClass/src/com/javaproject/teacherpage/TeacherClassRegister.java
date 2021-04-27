@@ -24,7 +24,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
+public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의 등록하기
 
 	private JFrame frame;
 	private JLabel lblNewLabel;
@@ -233,7 +233,7 @@ public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
 	private JComboBox getCbMonth() {
 		if (cbMonth == null) {
 			cbMonth = new JComboBox();
-			cbMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+			cbMonth.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
 			cbMonth.setBounds(262, 329, 76, 27);
 		}
 		return cbMonth;
@@ -241,7 +241,7 @@ public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
 	private JComboBox getCbDay() {
 		if (cbDay == null) {
 			cbDay = new JComboBox();
-			cbDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+			cbDay.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 			cbDay.setBounds(364, 329, 76, 27);
 		}
 		return cbDay;
@@ -335,6 +335,7 @@ public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
 		
 	}
 	
+	// 사용자가 입력한 정보를 가져와 강의 등록하는 메소드
 	private void RegisterAction(){
 		String cName = tfCname.getText();
 		String cCategory = cbCategory.getSelectedItem().toString();
@@ -344,6 +345,7 @@ public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
 		String cTime = cbHour.getSelectedItem().toString();
 		int cPrice = Integer.parseInt(tfPrice.getText());
 		String cContents = tContents.getText();
+		String cRegisterDate = "";
 	
 		// Image File
 		FileInputStream input = null;
@@ -355,7 +357,7 @@ public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
 			e.printStackTrace();
 		}
 		
-		RUDDbAction dbaction = new RUDDbAction(input, cName, cCategory, cLocation1, cLocation2, cTime, cDate, cDate, cDate, cContents, cPrice);
+		RUDDbAction dbaction = new RUDDbAction(input, cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice, cRegisterDate);
 		boolean aaa = dbaction.RegisterAction();
 		if(aaa == true){
 	          JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
@@ -364,6 +366,7 @@ public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
 		}
 	}
 	
+	// 이미지 등록하는 메소드
 	private void FilePath() {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg","png","bmp");
@@ -379,5 +382,6 @@ public class TeacherClassRegister { // 혜지 view - 강사 강의 등록하기
 		lblImage.setIcon(new ImageIcon(filePath));
 		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 	}
+	
 	
 }

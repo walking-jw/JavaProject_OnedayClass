@@ -6,8 +6,10 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -15,8 +17,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강의 수정 / 삭제하기
+public class TeacherClassUpdateDelete { // 2021.04.28 조혜지 view - 강사가 등록한 강의 수정 / 삭제하기
 
 	private JFrame frame;
 	private JLabel lblNewLabel;
@@ -44,6 +47,9 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 	private JButton btnRegister_1;
 	private JComboBox cbLocation;
 	private JLabel lblImage;
+	private JLabel lblNewLabel_7;
+	private JTextField tfFilePath;
+	private JButton btnFilePath;
 
 
 	/**
@@ -86,6 +92,9 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		frame.getContentPane().add(getBtnRegister_1());
 		frame.getContentPane().add(getCbLocation());
 		frame.getContentPane().add(getLblImage());
+		frame.getContentPane().add(getLblNewLabel_7());
+		frame.getContentPane().add(getTfFilePath());
+		frame.getContentPane().add(getBtnFilePath());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -223,7 +232,7 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		if (cbMonth == null) {
 			cbMonth = new JComboBox();
 			cbMonth.setBounds(262, 329, 76, 27);
-			cbMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+			cbMonth.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
 		}
 		return cbMonth;
 	}
@@ -231,7 +240,7 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		if (cbDay == null) {
 			cbDay = new JComboBox();
 			cbDay.setBounds(364, 329, 76, 27);
-			cbDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+			cbDay.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		}
 		return cbDay;
 	}
@@ -271,12 +280,35 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		return btnRegister_1;
 	}
 	
-	// 메소드 시작 ***************************************************************
-	
-	// 메인과 해당 창을 연결하는 메소드
-	public void setVisible_TeacherClassUpdateDelete(boolean j) {
-		frame.setVisible(j);
+	private JLabel getLblNewLabel_7() {
+		if (lblNewLabel_7 == null) {
+			lblNewLabel_7 = new JLabel("파일 경로");
+			lblNewLabel_7.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_7.setBounds(47, 184, 61, 16);
+		}
+		return lblNewLabel_7;
 	}
+	private JTextField getTfFilePath() {
+		if (tfFilePath == null) {
+			tfFilePath = new JTextField();
+			tfFilePath.setBounds(140, 180, 261, 26);
+			tfFilePath.setColumns(10);
+		}
+		return tfFilePath;
+	}
+	private JButton getBtnFilePath() {
+		if (btnFilePath == null) {
+			btnFilePath = new JButton("이미지 등록");
+			btnFilePath.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FilePath();
+				}
+			});
+			btnFilePath.setBounds(413, 180, 102, 29);
+		}
+		return btnFilePath;
+	}
+	
 	private JComboBox getCbLocation() {
 		if (cbLocation == null) {
 			cbLocation = new JComboBox();
@@ -293,6 +325,29 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 			lblImage.setBounds(37, 20, 478, 152);
 		}
 		return lblImage;
+	}
+	
+	// 메소드 시작 ***************************************************************
+	
+	// 메인과 해당 창을 연결하는 메소드
+	public void setVisible_TeacherClassUpdateDelete(boolean j) {
+		frame.setVisible(j);
+	}
+	
+	private void FilePath() {
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg","png","bmp");
+		chooser.setFileFilter(filter);
+		
+		int ret = chooser.showOpenDialog(null);
+		if(ret != JFileChooser.APPROVE_OPTION) {
+			JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다!", "경고", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		String filePath = chooser.getSelectedFile().getPath();
+		tfFilePath.setText(filePath);
+		lblImage.setIcon(new ImageIcon(filePath));
+		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 }
 
