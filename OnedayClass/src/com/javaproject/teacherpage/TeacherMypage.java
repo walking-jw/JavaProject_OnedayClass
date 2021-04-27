@@ -24,13 +24,13 @@ public class TeacherMypage {
 	private JLabel lbl_Email_1_1;
 	private JTextField tf_Password;
 	private JTextField tf_PasswordConfirm;
-	private JLabel lbl_Email_1_1_1;
+	private JLabel lbl_QnA;
 	private JLabel lbl_Average;
 	private JTextField tf_AveragePoint;
-	private JLabel lbl_Average_1;
+	private JLabel lbl_Myclass;
 	private JLabel lbl_Average_1_1;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JButton btn_TeacherMyclass;
+	private JButton btn_QnA;
 	private JButton btn_Out;
 	private JButton btn_Out_1;
 	private JLabel lbl_Logout;
@@ -64,13 +64,13 @@ public class TeacherMypage {
 		frame.getContentPane().add(getLbl_Email_1_1());
 		frame.getContentPane().add(getTf_Password());
 		frame.getContentPane().add(getTf_PasswordConfirm());
-		frame.getContentPane().add(getLbl_Email_1_1_1());
+		frame.getContentPane().add(getLbl_QnA());
 		frame.getContentPane().add(getLbl_Average());
 		frame.getContentPane().add(getTf_AveragePoint());
-		frame.getContentPane().add(getLbl_Average_1());
+		frame.getContentPane().add(getLbl_Myclass());
 		frame.getContentPane().add(getLbl_Average_1_1());
-		frame.getContentPane().add(getBtnNewButton());
-		frame.getContentPane().add(getBtnNewButton_1());
+		frame.getContentPane().add(getBtn_TeacherMyclass());
+		frame.getContentPane().add(getBtn_QnA());
 		frame.getContentPane().add(getBtn_Out());
 		frame.getContentPane().add(getBtn_Out_1());
 		frame.getContentPane().add(getLbl_Logout());
@@ -163,13 +163,13 @@ public class TeacherMypage {
 		}
 		return tf_PasswordConfirm;
 	}
-	private JLabel getLbl_Email_1_1_1() {
-		if (lbl_Email_1_1_1 == null) {
-			lbl_Email_1_1_1 = new JLabel("비밀번호확인");
-			lbl_Email_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Email_1_1_1.setBounds(187, 332, 84, 16);
+	private JLabel getLbl_QnA() {
+		if (lbl_QnA == null) {
+			lbl_QnA = new JLabel("비밀번호확인");
+			lbl_QnA.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lbl_QnA.setBounds(187, 332, 84, 16);
 		}
-		return lbl_Email_1_1_1;
+		return lbl_QnA;
 	}
 	private JLabel getLbl_Average() {
 		if (lbl_Average == null) {
@@ -187,35 +187,57 @@ public class TeacherMypage {
 		}
 		return tf_AveragePoint;
 	}
-	private JLabel getLbl_Average_1() {
-		if (lbl_Average_1 == null) {
-			lbl_Average_1 = new JLabel("평    점");
-			lbl_Average_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Average_1.setBounds(71, 418, 61, 16);
+	private JLabel getLbl_Myclass() {
+		if (lbl_Myclass == null) {
+			lbl_Myclass = new JLabel("내 강의");
+			lbl_Myclass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lbl_Myclass.setBounds(71, 418, 61, 16);
 		}
-		return lbl_Average_1;
+		return lbl_Myclass;
 	}
 	private JLabel getLbl_Average_1_1() {
 		if (lbl_Average_1_1 == null) {
-			lbl_Average_1_1 = new JLabel("평    점");
+			lbl_Average_1_1 = new JLabel("Q & A");
 			lbl_Average_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lbl_Average_1_1.setBounds(71, 461, 61, 16);
 		}
 		return lbl_Average_1_1;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("0개");
-			btnNewButton.setBounds(151, 413, 117, 29);
+	private JButton getBtn_TeacherMyclass() {
+		if (btn_TeacherMyclass == null) {
+			btn_TeacherMyclass = new JButton("0개");
+			btn_TeacherMyclass.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					// 내 강의 Button :TeacherMypage -> TeacherMyClass  [2021.04.26, 11:34]
+					TeacherMyClass myclass = new TeacherMyClass();
+					myclass.setVisible_TeacherMyClass(true);
+					frame.dispose();		
+					
+					
+				}
+			});
+			btn_TeacherMyclass.setBounds(151, 413, 117, 29);
 		}
-		return btnNewButton;
+		return btn_TeacherMyclass;
 	}
-	private JButton getBtnNewButton_1() {
-		if (btnNewButton_1 == null) {
-			btnNewButton_1 = new JButton("0개");
-			btnNewButton_1.setBounds(151, 457, 117, 29);
+	private JButton getBtn_QnA() {
+		if (btn_QnA == null) {
+			btn_QnA = new JButton("0개");
+			btn_QnA.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					// Mypage --> QnA 
+					TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * *  
+					qna.setVisible_TeacherQnA_List(true);
+					frame.dispose();		
+					
+					
+				}
+			});
+			btn_QnA.setBounds(151, 457, 117, 29);
 		}
-		return btnNewButton_1;
+		return btn_QnA;
 	}
 	private JButton getBtn_Out() {
 		if (btn_Out == null) {
