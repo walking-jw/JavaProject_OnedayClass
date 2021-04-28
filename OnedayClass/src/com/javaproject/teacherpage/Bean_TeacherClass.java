@@ -11,6 +11,14 @@ public class Bean_TeacherClass {
 	String cLocation;
 	int attendCount;
 	
+	// Mypage 사용하기 위한 bean 값
+	String tName;
+	String tNickName;
+	String tEmail;
+	String tTelNo;
+	
+	
+	
 	
 	// Constructor
 	
@@ -27,8 +35,13 @@ public class Bean_TeacherClass {
 		this.attendCount = attendCount;
 	}
 	
-	
-	
+	public Bean_TeacherClass(String tName, String tNickName, String tEmail, String tTelNo) {
+		super();
+		this.tName = tName;
+		this.tNickName = tNickName;
+		this.tEmail = tEmail;
+		this.tTelNo = tTelNo;
+	}
 	
 	
 	
@@ -40,6 +53,37 @@ public class Bean_TeacherClass {
 	
 
 
+	public String gettName() {
+		return tName;
+	}
+
+	public void settName(String tName) {
+		this.tName = tName;
+	}
+
+	public String gettNickName() {
+		return tNickName;
+	}
+
+	public void settNickName(String tNickName) {
+		this.tNickName = tNickName;
+	}
+
+	public String gettEmail() {
+		return tEmail;
+	}
+
+	public void settEmail(String tEmail) {
+		this.tEmail = tEmail;
+	}
+
+	public String gettTelNo() {
+		return tTelNo;
+	}
+
+	public void settTelNo(String tTelNo) {
+		this.tTelNo = tTelNo;
+	}
 
 	public int getcId() {
 		return cId;

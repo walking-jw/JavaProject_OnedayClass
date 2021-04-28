@@ -1,6 +1,6 @@
 package com.javaproject.myclass;
 
-	public class Bean { // 혜지 DbAction의 서브클라스 - selectListAfter와 selectListBefore의 Bean을 가진 ArrayList 만들기 위해 클라스 추가
+	public class Bean { // 2021.04.27 조혜지 - selectListAfter와 selectListBefore의 Bean을 가진 ArrayList 만들기 위해 Bean 클라스 추가
 	
 		 // Field
 		 int cId;

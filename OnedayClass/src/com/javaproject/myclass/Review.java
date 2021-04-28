@@ -49,8 +49,8 @@ import java.awt.event.WindowEvent;
 			frame.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowOpened(WindowEvent e) {
-//					StudentMyClass studentMyClass = new StudentMyClass();
-//					System.out.println(studentMyClass.ReviewSub());
+					StudentMyClass studentMyClass = new StudentMyClass();
+					System.out.println(studentMyClass.ReviewSub());
 				}
 			});
 			frame.setBounds(100, 100, 560, 625);

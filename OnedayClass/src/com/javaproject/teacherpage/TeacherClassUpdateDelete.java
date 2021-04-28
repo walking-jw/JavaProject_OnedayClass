@@ -6,18 +6,22 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강의 수정 / 삭제하기
+public class TeacherClassUpdateDelete { // 2021.04.28 조혜지 view - 강사가 등록한 강의 수정 / 삭제하기
 
 	private JFrame frame;
-	private JTextField tfImg;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -26,22 +30,27 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 	private JLabel lblNewLabel_5;
 	private JScrollPane scrollPane;
 	private JTextPane tContents;
-	private JTextField textField_1;
+	private JTextField tfPrice;
 	private JLabel lblNewLabel_6;
-	private JButton btnRegister;
+	private JButton btnDelete;
 	private JButton btnCancle;
 	private JTextField tfCname;
-	private JTextField tfTname;
 	private JTextField tfLocation;
-	private JComboBox tfHour;
+	private JComboBox cbHour;
 	private JComboBox cbYear;
 	private JComboBox cbMonth;
 	private JComboBox cbDay;
 	private JLabel lblNewLabel_6_1;
 	private JLabel lblNewLabel_6_1_1;
 	private JLabel lblNewLabel_6_1_2;
-	private JButton btnRegister_1;
+	private JButton btnUpdate;
 	private JComboBox cbLocation;
+	private JLabel lblImage;
+	private JLabel lblNewLabel_7;
+	private JTextField tfFilePath;
+	private JButton btnFilePath;
+	private JComboBox cbCategory;
+
 
 
 	/**
@@ -60,7 +69,6 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getTfImg());
 		frame.getContentPane().add(getLblNewLabel());
 		frame.getContentPane().add(getLblNewLabel_1());
 		frame.getContentPane().add(getLblNewLabel_2());
@@ -68,30 +76,27 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		frame.getContentPane().add(getLblNewLabel_4());
 		frame.getContentPane().add(getLblNewLabel_5());
 		frame.getContentPane().add(getScrollPane());
-		frame.getContentPane().add(getTextField_1());
+		frame.getContentPane().add(getTfPrice());
 		frame.getContentPane().add(getLblNewLabel_6());
-		frame.getContentPane().add(getBtnRegister());
+		frame.getContentPane().add(getBtnDelete());
 		frame.getContentPane().add(getBtnCancle());
 		frame.getContentPane().add(getTfCname());
-		frame.getContentPane().add(getTfTname());
 		frame.getContentPane().add(getTfLocation());
-		frame.getContentPane().add(getTfHour());
+		frame.getContentPane().add(getCbHour());
 		frame.getContentPane().add(getCbYear());
 		frame.getContentPane().add(getCbMonth());
 		frame.getContentPane().add(getCbDay());
 		frame.getContentPane().add(getLblNewLabel_6_1());
 		frame.getContentPane().add(getLblNewLabel_6_1_1());
 		frame.getContentPane().add(getLblNewLabel_6_1_2());
-		frame.getContentPane().add(getBtnRegister_1());
+		frame.getContentPane().add(getBtnUpdate());
 		frame.getContentPane().add(getCbLocation());
-	}
-	private JTextField getTfImg() {
-		if (tfImg == null) {
-			tfImg = new JTextField();
-			tfImg.setBounds(37, 20, 478, 179);
-			tfImg.setColumns(10);
-		}
-		return tfImg;
+		frame.getContentPane().add(getLblImage());
+		frame.getContentPane().add(getLblNewLabel_7());
+		frame.getContentPane().add(getTfFilePath());
+		frame.getContentPane().add(getBtnFilePath());
+		frame.getContentPane().add(getCbCategory());
+
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -103,8 +108,8 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("강사");
-			lblNewLabel_1.setBounds(47, 242, 61, 16);
+			lblNewLabel_1 = new JLabel("강의 카테고리");
+			lblNewLabel_1.setBounds(47, 242, 99, 16);
 			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		}
 		return lblNewLabel_1;
@@ -155,13 +160,13 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		}
 		return tContents;
 	}
-	private JTextField getTextField_1() {
-		if (textField_1 == null) {
-			textField_1 = new JTextField();
-			textField_1.setBounds(364, 505, 124, 26);
-			textField_1.setColumns(10);
+	private JTextField getTfPrice() {
+		if (tfPrice == null) {
+			tfPrice = new JTextField();
+			tfPrice.setBounds(364, 505, 124, 26);
+			tfPrice.setColumns(10);
 		}
-		return textField_1;
+		return tfPrice;
 	}
 	private JLabel getLblNewLabel_6() {
 		if (lblNewLabel_6 == null) {
@@ -171,12 +176,12 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		}
 		return lblNewLabel_6;
 	}
-	private JButton getBtnRegister() {
-		if (btnRegister == null) {
-			btnRegister = new JButton("삭제");
-			btnRegister.setBounds(374, 543, 76, 29);
+	private JButton getBtnDelete() {
+		if (btnDelete == null) {
+			btnDelete = new JButton("삭제");
+			btnDelete.setBounds(374, 543, 76, 29);
 		}
-		return btnRegister;
+		return btnDelete;
 	}
 	private JButton getBtnCancle() {
 		if (btnCancle == null) {
@@ -193,14 +198,6 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		}
 		return tfCname;
 	}
-	private JTextField getTfTname() {
-		if (tfTname == null) {
-			tfTname = new JTextField();
-			tfTname.setBounds(140, 238, 112, 26);
-			tfTname.setColumns(10);
-		}
-		return tfTname;
-	}
 	private JTextField getTfLocation() {
 		if (tfLocation == null) {
 			tfLocation = new JTextField();
@@ -209,13 +206,13 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		}
 		return tfLocation;
 	}
-	private JComboBox getTfHour() {
-		if (tfHour == null) {
-			tfHour = new JComboBox();
-			tfHour.setBounds(140, 299, 99, 27);
-			tfHour.setModel(new DefaultComboBoxModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10"}));
+	private JComboBox getCbHour() {
+		if (cbHour == null) {
+			cbHour = new JComboBox();
+			cbHour.setBounds(140, 299, 99, 27);
+			cbHour.setModel(new DefaultComboBoxModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10"}));
 		}
-		return tfHour;
+		return cbHour;
 	}
 	private JComboBox getCbYear() {
 		if (cbYear == null) {
@@ -229,7 +226,7 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		if (cbMonth == null) {
 			cbMonth = new JComboBox();
 			cbMonth.setBounds(262, 329, 76, 27);
-			cbMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+			cbMonth.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
 		}
 		return cbMonth;
 	}
@@ -237,7 +234,7 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		if (cbDay == null) {
 			cbDay = new JComboBox();
 			cbDay.setBounds(364, 329, 76, 27);
-			cbDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+			cbDay.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		}
 		return cbDay;
 	}
@@ -265,16 +262,72 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 		}
 		return lblNewLabel_6_1_2;
 	}
-	private JButton getBtnRegister_1() {
-		if (btnRegister_1 == null) {
-			btnRegister_1 = new JButton("수정");
-			btnRegister_1.addActionListener(new ActionListener() {
+	private JButton getBtnUpdate() {
+		if (btnUpdate == null) {
+			btnUpdate = new JButton("수정");
+			btnUpdate.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnRegister_1.setBounds(294, 543, 76, 29);
+			btnUpdate.setBounds(294, 543, 76, 29);
 		}
-		return btnRegister_1;
+		return btnUpdate;
+	}
+	
+	private JLabel getLblNewLabel_7() {
+		if (lblNewLabel_7 == null) {
+			lblNewLabel_7 = new JLabel("파일 경로");
+			lblNewLabel_7.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_7.setBounds(47, 184, 61, 16);
+		}
+		return lblNewLabel_7;
+	}
+	private JTextField getTfFilePath() {
+		if (tfFilePath == null) {
+			tfFilePath = new JTextField();
+			tfFilePath.setBounds(140, 180, 261, 26);
+			tfFilePath.setColumns(10);
+		}
+		return tfFilePath;
+	}
+	private JButton getBtnFilePath() {
+		if (btnFilePath == null) {
+			btnFilePath = new JButton("이미지 등록");
+			btnFilePath.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FilePath();
+				}
+			});
+			btnFilePath.setBounds(413, 180, 102, 29);
+		}
+		return btnFilePath;
+	}
+	
+	private JComboBox getCbLocation() {
+		if (cbLocation == null) {
+			cbLocation = new JComboBox();
+			cbLocation.setModel(new DefaultComboBoxModel(new String[] {"서울특별시", "강원도", "경기도", "충청남도", "충청북도", "경상남도", "경상북도", "전라남도", "전라북도", "인천광역시", "대전광역시", "대구광역시", "부산광역시", "울산광역시", "광주광역시", "세종특별자치시", "제주특별자치도"}));
+			cbLocation.setBounds(140, 269, 148, 27);
+		}
+		return cbLocation;
+	}
+	private JLabel getLblImage() {
+		if (lblImage == null) {
+			lblImage = new JLabel("");
+			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+			lblImage.setIcon(new ImageIcon("/Users/parksunghun/Documents/스크린샷 2021-04-05 오전 10.38.06.png"));
+			lblImage.setBounds(37, 20, 478, 152);
+		}
+		return lblImage;
+	}
+	
+	private JComboBox getCbCategory() {
+		if (cbCategory == null) {
+			cbCategory = new JComboBox();
+			cbCategory.setModel(new DefaultComboBoxModel(new String[] {"요리", "베이킹", "미술", "코딩", "사진", "어학", "상식", "공예"}));
+			cbCategory.setBounds(140, 239, 148, 27);
+		}
+		return cbCategory;
 	}
 	
 	// 메소드 시작 ***************************************************************
@@ -283,13 +336,21 @@ public class TeacherClassUpdateDelete { // 혜지 view - 강사가 등록한 강
 	public void setVisible_TeacherClassUpdateDelete(boolean j) {
 		frame.setVisible(j);
 	}
-	private JComboBox getCbLocation() {
-		if (cbLocation == null) {
-			cbLocation = new JComboBox();
-			cbLocation.setModel(new DefaultComboBoxModel(new String[] {"서울특별시", "강원도", "경기도", "충청남도", "충청북도", "경상남도", "경상북도", "전라남도", "전라북도", "인천광역시", "대전광역시", "대구광역시", "부산광역시", "울산광역시", "광주광역시", "세종특별자치시", "제주특별자치도"}));
-			cbLocation.setBounds(140, 269, 148, 27);
+	
+	private void FilePath() {
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg","png","bmp");
+		chooser.setFileFilter(filter);
+		
+		int ret = chooser.showOpenDialog(null);
+		if(ret != JFileChooser.APPROVE_OPTION) {
+			JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다!", "경고", JOptionPane.WARNING_MESSAGE);
+			return;
 		}
-		return cbLocation;
+		String filePath = chooser.getSelectedFile().getPath();
+		tfFilePath.setText(filePath);
+		lblImage.setIcon(new ImageIcon(filePath));
+		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 }
 

@@ -8,7 +8,10 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TeacherMypage {
 
@@ -50,6 +53,12 @@ public class TeacherMypage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override()
+			public void windowOpened(WindowEvent e) {
+				DBtoClass();
+			}
+		});
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -264,4 +273,26 @@ public class TeacherMypage {
 		}
 		return lbl_Logout;
 	}
+	
+	public void DBtoClass() {
+		
+		DbAction db = new DbAction();
+		Bean_TeacherClass bean = db.DBtoMypage();
+		
+		tf_Name.setText(bean.gettName());
+		tf_NickName.setText(bean.gettNickName());
+		tf_Email.setText(bean.gettEmail());
+		tf_Telno.setText(bean.gettTelNo());
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
