@@ -285,7 +285,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		if (lblImage == null) {
 			lblImage = new JLabel("");
 			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-			lblImage.setIcon(new ImageIcon("/Users/parksunghun/Documents/스크린샷 2021-04-05 오전 10.38.06.png"));
+			lblImage.setIcon(new ImageIcon("/Users/tj/Desktop/스크린샷 2021-04-28 오후 12.48.28.png"));
 			lblImage.setBounds(37, 20, 478, 152);
 		}
 		return lblImage;
@@ -346,7 +346,6 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		String cTime = cbHour.getSelectedItem().toString();
 		int cPrice = Integer.parseInt(tfPrice.getText());
 		String cContents = tContents.getText();
-		String cRegisterDate = "";
 	
 		// Image File
 		FileInputStream input = null;
@@ -370,18 +369,16 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 	private void RelationRegisterAction() {
 		RUDDbAction action = new RUDDbAction();
 		int cccId = action.getClassId();
-		
-		// Image File
-
-		try {
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(cccId);
+//		try {
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		RUDDbAction dbaction = new RUDDbAction(cccId);
-		boolean aaa = dbaction.RegisterAction();
+		boolean aaa = dbaction.RegisterDateAction();
 		if(aaa == true){
 			JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
 		}else{
@@ -390,6 +387,29 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		
 		
 	}
+//	private void RelationRegisterAction() {
+//		RUDDbAction action = new RUDDbAction();
+//		int cccId = action.getClassId();
+//		
+//		// Image File
+//		
+//		try {
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		RUDDbAction dbaction = new RUDDbAction(cccId);
+//		boolean aaa = dbaction.RegisterAction();
+//		if(aaa == true){
+//			JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
+//		}else{
+//			JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!");                    
+//		}
+//		
+//		
+//	}
 	
 	
 	

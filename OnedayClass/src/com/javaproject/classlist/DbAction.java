@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class DbAction {
 
 	
-//	//Field
-//	public static final String url_mysql = "jdbc:mysql://IP/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
-//	public static final String id_mysql = "root";
-//	public static final String pw_mysql = "qwer1234";
-//	
-//	public static String currentuser = "";
+	//Field
+	public static final String url_mysql = "jdbc:mysql://IP/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String id_mysql = "root";
+	public static final String pw_mysql = "qwer1234";
+	
+	public static String currentuser = "";
 	
 
 	
