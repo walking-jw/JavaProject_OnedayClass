@@ -20,7 +20,7 @@ public class SearchView {
 
 	private JFrame frame;
 	private JComboBox selectBox;
-	private JTextField textField;
+	private JTextField tfSearch;
 	private JButton btnSearch;
 	private JButton btnCancel;
 	private JScrollPane scrollPane;
@@ -45,7 +45,7 @@ public class SearchView {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getSelectBox());
-		frame.getContentPane().add(getTextField());
+		frame.getContentPane().add(getTfSearch());
 		frame.getContentPane().add(getBtnSearch());
 		frame.getContentPane().add(getBtnCancel());
 		frame.getContentPane().add(getScrollPane());
@@ -59,13 +59,13 @@ public class SearchView {
 		}
 		return selectBox;
 	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setBounds(137, 38, 234, 26);
-			textField.setColumns(10);
+	private JTextField getTfSearch() {
+		if (tfSearch == null) {
+			tfSearch = new JTextField();
+			tfSearch.setBounds(137, 38, 234, 26);
+			tfSearch.setColumns(10);
 		}
-		return textField;
+		return tfSearch;
 	}
 	private JButton getBtnSearch() {
 		if (btnSearch == null) {
@@ -169,18 +169,18 @@ public class SearchView {
 		default:
 			break;
 		}
-		
+
 		tableInit();
-		clearColumn();
 		//conditionQueryAction(conditonQueryColumn);
 	}
 	
-	private void clearColumn() {
-		
-	}
+	
 	
 	private void conditionQueryAction() {
+		String conditionSearch = tfSearch.getText().trim();
 		
+		DbSearchAction dbSearchAction = new DbSearchAction(conditionSearch, condi);
+		dbSearchAction.conditionQueryColumn();
 	}
 	
 }
