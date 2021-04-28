@@ -13,6 +13,19 @@ public class SearchBean {
 	public SearchBean() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+
+	public SearchBean(String name, String lacation, Date date, String price) {
+		super();
+		this.name = name;
+		this.lacation = lacation;
+		this.date = date;
+		this.price = price;
+	}
+
+
 
 
 	public String getName() {

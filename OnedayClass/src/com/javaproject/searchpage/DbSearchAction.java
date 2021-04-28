@@ -5,11 +5,19 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
+
+import com.javaproject.base.ShareVar;
 
 public class DbSearchAction {
 
 	//Field
+	String searching;
+	String conditionQueryColumn;
 	
+	private final String url_mysql = "jdbc:mysql://192.168.0.6/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	private final String id_mysql = ShareVar.id_mysql;
+	private final String pwd_mysql = ShareVar.pw_mysql;
 	
 	// Constructor
 	public DbSearchAction() {
@@ -17,7 +25,13 @@ public class DbSearchAction {
 	}
 	
 	
-	
+	public DbSearchAction(String searching, String conditionQueryColumn) {
+		super();
+		this.searching = searching;
+		this.conditionQueryColumn = conditionQueryColumn;
+	}
+
+
 	// Method
 	
 	public ArrayList<SearchBean> conditionQueryAction() {
@@ -34,16 +48,17 @@ public class DbSearchAction {
 			ResultSet rs = stmt_mysql.executeQuery(WhereDefault + WhereDefault2);
  
 			while(rs.next()){
-				int wkSeq = rs.getInt(1);
-				String wkName = rs.getString(2);
-				String wkTelno = rs.getString(3);
-				String wkRelation = rs.getString(4);
+				String wkName = rs.getString(1);
+				String wkLocation = rs.getString(2);
+				Date wkDate = rs.getDate(3);
+				String wkPrice = rs.getString(4);
 				
-				Bean bean = new Bean(wkSeq, wkName, wkTelno, wkRelation);
+				SearchBean bean = new SearchBean(wkName, wkLocation, wkDate, wkPrice);
 				
 				wkName = bean.getName();
-				wkTelno = bean.getTelno();
-				wkRelation = bean.getRelation();
+				wkLocation = bean.getLacation();
+				wkDate = bean.getDate();
+				wkPrice = bean.getPrice();
 				beanList.add(bean);
 			}
 			conn_mysql.close();
