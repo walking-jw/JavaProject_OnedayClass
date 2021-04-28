@@ -151,9 +151,16 @@ import java.awt.event.ActionEvent;
 //						Review review = new Review();
 //						review.setVisible_Review(true);
 //						frame.dispose();
+						
+						DbAction.ccId = ReviewSub();
+						
+//						Review review = new Review();
+//						review.setVisible_Review(true);
+//						frame.dispose();
 						TeacherClassRegister register = new TeacherClassRegister();
 						register.setVisible_TeacherClassRegister(true);
 						frame.dispose();
+						
 					}
 				});
 				btnReview.setBounds(414, 546, 92, 29);

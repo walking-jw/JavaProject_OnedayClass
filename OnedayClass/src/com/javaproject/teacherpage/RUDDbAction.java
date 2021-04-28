@@ -4,16 +4,17 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강의 등록할 때 뷰와 sql에 연결해주는 클라스
 
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.3/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyejji@gmail.com'";
-	public static int filename = 0;
+//	public static int filename = 0;
 	
 	// 여기까지 4줄은 완성되면 없애기 ***************************************************
 
@@ -35,8 +36,8 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 		String cDate;
 		String cContents;
 		int cPrice;
-		String cRegisterDate;
-		
+		int cId;
+
 		
 		// Constructor*****************************************
 		
@@ -47,7 +48,7 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 
 		// 강의 등록하는 RegisterAction에서 사용
 		public RUDDbAction(FileInputStream file, String cName, String cCategory, String cLocation1, String cLocation2,
-				String cTime, String cDate, String cContents, int cPrice, String cRegisterDate) {
+				String cTime, String cDate, String cContents, int cPrice) {
 			super();
 			this.file = file;
 			this.cName = cName;
@@ -58,11 +59,17 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 			this.cDate = cDate;
 			this.cContents = cContents;
 			this.cPrice = cPrice;
-			this.cRegisterDate = cRegisterDate;
+		}
+
+		
+		public RUDDbAction(int cId) {
+			super();
+			this.cId = cId;
 		}
 
 
 		// Method*****************************************
+
 
 		// 강의 등록하는 메소드로서 mysql에 insert해주는 메소드 생성
 		public boolean RegisterAction() {
@@ -73,8 +80,8 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 		          @SuppressWarnings("unused")
 					Statement stmt_mysql = conn_mysql.createStatement();
 		
-		          String QueryA = "insert into Class (cName, cCategory, cLocation1, cLocation2, cDate, cTime, cPrice, cContents, cImg, cRegisterDate";
-		          String QueryB = ") values (?,?,?,?,?,?,?,?,?, curdate())";
+		          String QueryA = "insert into Class (cName, cCategory, cLocation1, cLocation2, cDate, cTime, cPrice, cContents, cImg";
+		          String QueryB = ") values (?,?,?,?,?,?,?,?,?)";
 		
 		          ps = conn_mysql.prepareStatement(QueryA + QueryB);
 		          ps.setString(1, cName.trim());
@@ -95,28 +102,48 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 		      }
 		      return true;
 		}
+
 		
-//		public boolean RegisterDateAction() {
-//		      PreparedStatement ps = null;
-//		      try{
-//		          Class.forName("com.mysql.cj.jdbc.Driver");
-//		          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
-//		          @SuppressWarnings("unused")
-//					Statement stmt_mysql = conn_mysql.createStatement();
-//		
-//		          String QueryA = "insert into Register (cRegisterDate, cId, tEmail) values (curdate(), ?, '";
-//		          String QueryB = "currentuser')";
-//		
-//		          ps = conn_mysql.prepareStatement(QueryA + QueryB);
-//		          ps.setInt(1, cId);
-//		          ps.executeUpdate();
-//		
-//		          conn_mysql.close();
-//		      } catch (Exception e){
-//		          e.printStackTrace();
-//		          return false;
-//		      }
-//		      return true;
-//		}
-	
+		public boolean RegisterDateAction() {
+		      PreparedStatement ps = null;
+		      try{
+		          Class.forName("com.mysql.cj.jdbc.Driver");
+		          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+		          @SuppressWarnings("unused")
+					Statement stmt_mysql = conn_mysql.createStatement();
+		
+		          String QueryA = "insert into Register (cRegisterDate, cId, tEmail) values (curdate(), ?, '";
+		          String QueryB = "currentuser')";
+		
+		          ps = conn_mysql.prepareStatement(QueryA + QueryB);
+		          ps.setInt(1, cId);
+		          ps.executeUpdate();
+		
+		          conn_mysql.close();
+		      } catch (Exception e){
+		          e.printStackTrace();
+		          return false;
+		      }
+		      return true;
+		}
+		
+		public int getClassId() {
+			int wkcId = 0;
+			try {
+		          Class.forName("com.mysql.cj.jdbc.Driver");
+		          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+		          @SuppressWarnings("unused")
+					Statement stmt_mysql = conn_mysql.createStatement();
+		          String Query = "select cId +1 from register order by cId desc limit 1";
+		          ResultSet rs = stmt_mysql.executeQuery(Query);
+		          
+		          while(rs.next()) {
+		        	  wkcId = rs.getInt(1);
+		          }
+		          conn_mysql.close();
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			return wkcId;
+		}
 }
