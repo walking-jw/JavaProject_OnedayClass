@@ -366,7 +366,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		}
 	}
 	
-	//
+	// 강의 등록일자 insert하는 메소드
 	private void RelationRegisterAction() {
 		RUDDbAction action = new RUDDbAction();
 		int cccId = action.getClassId();
@@ -380,7 +380,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		RUDDbAction dbaction = new RUDDbAction(cccId);
 		boolean aaa = dbaction.RegisterDateAction();
 		if(aaa == true){
-			JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
+//			JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
 		}else{
 			JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!");                    
 		}

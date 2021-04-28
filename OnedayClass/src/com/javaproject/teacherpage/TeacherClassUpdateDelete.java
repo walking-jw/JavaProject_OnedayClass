@@ -428,6 +428,7 @@ import java.awt.event.WindowEvent;
 			 
 		 }
 
+		 // mysql에 있는 데이터를 view에 불러오는 메소드
 		 private void ShowData() {
 				int id = RUDDbAction.dcId;
 
