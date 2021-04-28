@@ -10,7 +10,7 @@ public class Bean_TeacherClass {
 	String cDate;
 	String cLocation;
 	int attendCount;
-	
+	String cTime;
 	// Mypage 사용하기 위한 bean 값
 	String tName;
 	String tNickName;
@@ -24,14 +24,13 @@ public class Bean_TeacherClass {
 	
 	public Bean_TeacherClass() {
 	}
-	
+
 	public Bean_TeacherClass(int cId, String cName, String cDate, String cLocation) {
 		super();
 		this.cId = cId;
 		this.cName = cName;
 		this.cDate = cDate;
 		this.cLocation = cLocation;
-		this.attendCount = attendCount;
 	}
 	
 	public Bean_TeacherClass(String tName, String tNickName, String tEmail, String tTelNo) {
@@ -48,8 +47,24 @@ public class Bean_TeacherClass {
 	
 	
 	
+	public Bean_TeacherClass(String cName, String cDate, String cLocation, String cTime, String tName) {
+		super();
+		this.cName = cName;
+		this.cDate = cDate;
+		this.cLocation = cLocation;
+		this.cTime = cTime;
+		this.tName = tName;
+	}
+
 	// Method
 	
+	public String getcTime() {
+		return cTime;
+	}
+	
+	public void setcTime(String cTime) {
+		this.cTime = cTime;
+	}
 
 
 	public Bean_TeacherClass(int cId) {
@@ -113,12 +128,4 @@ public class Bean_TeacherClass {
 	public void setcLocation(String cLocation) {
 		this.cLocation = cLocation;
 	}
-	public int getAttendCount() {
-		return attendCount;
-	}
-	public void setAttendCount(int attendCount) {
-		this.attendCount = attendCount;
-	}
-	
-	
 }
