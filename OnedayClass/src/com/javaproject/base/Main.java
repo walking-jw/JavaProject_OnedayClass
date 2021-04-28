@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import com.javaproject.classlist.Category;
+//import com.javaproject.classlist.Category;
 import com.javaproject.login.SignInView;
 import com.javaproject.myclass.StudentMyClass;
 import com.javaproject.teacherpage.TeacherMypage;
@@ -124,9 +124,9 @@ public class Main {
 			btnHyoeun.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					Category category = new Category();
-					category.setVisible_Category(true);
-					frame.dispose();
+//					Category category = new Category();
+//					category.setVisible_Category(true);
+//					frame.dispose();
 					
 					
 				}

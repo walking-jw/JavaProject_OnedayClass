@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -119,6 +120,7 @@ public class TeacherMypage {
 	private JTextField getTf_Email() {
 		if (tf_Email == null) {
 			tf_Email = new JTextField();
+			tf_Email.setEditable(false);
 			tf_Email.setColumns(10);
 			tf_Email.setBounds(267, 176, 206, 32);
 		}
@@ -219,8 +221,8 @@ public class TeacherMypage {
 				public void actionPerformed(ActionEvent e) {
 					
 					// 내 강의 Button :TeacherMypage -> TeacherMyClass  [2021.04.26, 11:34]
-					TeacherMyClass myclass = new TeacherMyClass();
-					myclass.setVisible_TeacherMyClass(true);
+					TeacherLectureList myclass = new TeacherLectureList();
+					myclass.setVisible_LectureList(true);
 					frame.dispose();		
 					
 					
@@ -260,6 +262,8 @@ public class TeacherMypage {
 			btn_Out_1 = new JButton("정보변경");
 			btn_Out_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					UpdateAction_Mypage();
+					ClearColumn();
 				}
 			});
 			btn_Out_1.setBounds(234, 527, 140, 29);
@@ -286,9 +290,35 @@ public class TeacherMypage {
 		
 	}
 	
+	// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
+	private void ClearColumn() {
+		tf_Name.setText("");
+		tf_NickName.setText("");
+		tf_Email.setText("");
+		tf_Telno.setText("");
+		tf_Password.setText("");
+		tf_PasswordConfirm.setText("");
+	}
+
 	
-	
-	
+	// * * * * * * * * * * * * * * *마이페이지 수정 메소드 [2021.04.28, 00:44]
+	private void UpdateAction_Mypage() {
+		
+		String name = tf_Name.getText().trim();
+		String nickname = tf_NickName.getText().trim();
+		String email = tf_Email.getText().trim();
+		String telno = tf_Telno.getText().trim();
+		String password = tf_Password.getText().trim();
+		
+		DbAction db = new DbAction(name, nickname, email, telno, password);
+		boolean msg = db.UpdateAction();
+		if (msg==true) {
+			JOptionPane.showMessageDialog(btn_Out, "Success");
+		}else {
+			JOptionPane.showInputDialog(this, "자료 수정 중 에러가 발생하였습니다.");
+		}
+		
+	}
 	
 	
 	

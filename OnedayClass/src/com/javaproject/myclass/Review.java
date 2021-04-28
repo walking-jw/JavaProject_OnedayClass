@@ -50,7 +50,7 @@ import java.awt.event.WindowEvent;
 				@Override
 				public void windowOpened(WindowEvent e) {
 					StudentMyClass studentMyClass = new StudentMyClass();
-					System.out.println(studentMyClass.ReviewSub());
+					System.out.println(DbAction.ccId);
 				}
 			});
 			frame.setBounds(100, 100, 560, 625);
@@ -170,7 +170,7 @@ import java.awt.event.WindowEvent;
 //		        int i = Inner_Table_Before.getSelectedRow();
 //		        String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
 //		        int inSequence = Integer.parseInt(wkSequence);
-		        
+		        int id = DbAction.ccId;
 		        int reviewscore = 0;
 		        if(rd1.isSelected()==true) {
 		           reviewscore = 1;
@@ -185,7 +185,7 @@ import java.awt.event.WindowEvent;
 		        }
 		        
 		      StudentMyClass studentMyClass = new StudentMyClass();  
-		      DbAction dbAction = new DbAction(studentMyClass.ReviewSub(), tReviewContents.getText().trim(), reviewscore);
+		      DbAction dbAction = new DbAction(id, tReviewContents.getText().trim(), reviewscore);
 		      boolean msg = dbAction.reviewRegister();
 		        try{
 

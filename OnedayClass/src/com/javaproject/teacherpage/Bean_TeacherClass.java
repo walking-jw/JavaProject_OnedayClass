@@ -19,14 +19,13 @@ public class Bean_TeacherClass {
 	
 	
 	
-	
 	// Constructor
 	
 	
 	public Bean_TeacherClass() {
 	}
 	
-	public Bean_TeacherClass(int cId, String cName, String cDate, String cLocation, int attendCount) {
+	public Bean_TeacherClass(int cId, String cName, String cDate, String cLocation) {
 		super();
 		this.cId = cId;
 		this.cName = cName;
@@ -52,6 +51,11 @@ public class Bean_TeacherClass {
 	// Method
 	
 
+
+	public Bean_TeacherClass(int cId) {
+		super();
+		this.cId = cId;
+	}
 
 	public String gettName() {
 		return tName;
