@@ -7,6 +7,5 @@ public static final String id_mysql = "root";
 public static final String pw_mysql = "qwer1234";
 	
 	public static String currentuser = "aaa@naver.com";
-	public static int cId = 0;
 	
 }

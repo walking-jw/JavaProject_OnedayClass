@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.javaproject.myclass.Review;
 import com.javaproject.teacherpage.TeacherClassRegister;
 
 import java.awt.event.MouseAdapter;
@@ -160,6 +161,7 @@ import java.awt.event.ActionEvent;
 				Inner_Table_Before.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+//						TableClick();
 					}
 				});
 				Inner_Table_Before.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -176,10 +178,11 @@ import java.awt.event.ActionEvent;
 				btnDetail.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						TableClick();
-						System.out.println(ShareVarTest.cId);
+						DbAction_List.classid = ReviewSub();
 						
-						
+						TeacherLectureDetail go = new TeacherLectureDetail();
+						go.setVisible_LectureListDetail(true);
+						frame.dispose();
 						
 						
 					}
@@ -194,9 +197,7 @@ import java.awt.event.ActionEvent;
 				btn_Update_n_Delete.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						TableClick();
 						
-						System.out.println(ShareVarTest.cId);
 						// 혜지님 파트로 넘기기!! --> 강의 
 						TeacherClassUpdateDelete teUnD = new TeacherClassUpdateDelete();
 						teUnD.setVisible_TeacherClassUpdateDelete(true);
@@ -223,8 +224,7 @@ import java.awt.event.ActionEvent;
 		       Outer_Table_After.addColumn("강의명");
 		       Outer_Table_After.addColumn("수강날짜");
 		       Outer_Table_After.addColumn("장소");
-		       Outer_Table_After.addColumn("수강인원");
-		       Outer_Table_After.setColumnCount(5);
+		       Outer_Table_After.setColumnCount(4);
 	
 		       for(int j = 0 ; j < i ; j++){
 		           Outer_Table_After.removeRow(0);
@@ -252,11 +252,6 @@ import java.awt.event.ActionEvent;
 		       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
 		       width = 150;
 		       col.setPreferredWidth(width);
-		       
-		       vColIndex = 4;
-		       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
-		       width = 70;
-		       col.setPreferredWidth(width);
 
 		 }
 		
@@ -269,8 +264,7 @@ import java.awt.event.ActionEvent;
 		     Outer_Table_Before.addColumn("강의명");
 		     Outer_Table_Before.addColumn("수강날짜");
 		     Outer_Table_Before.addColumn("장소");
-		     Outer_Table_Before.addColumn("수강인원");
-		     Outer_Table_Before.setColumnCount(5);
+		     Outer_Table_Before.setColumnCount(4);
 		     
 		     for(int j = 0 ; j < k ; j++){
 		       Outer_Table_Before.removeRow(0);
@@ -296,11 +290,6 @@ import java.awt.event.ActionEvent;
 		     vColIndex = 3;
 		     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
 		     width = 150;
-		     col.setPreferredWidth(width);
-		     
-		     vColIndex = 4;
-		     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-		     width = 70;
 		     col.setPreferredWidth(width);
 		     
 		 }
@@ -335,21 +324,26 @@ import java.awt.event.ActionEvent;
 		
 		// Table Click 해서 ShareVar에 cId 남겨두기
 		
-		private void TableClick() {
-			
-			int i = Inner_Table_After.getSelectedRow();
-			String tmp = (String)Inner_Table_After.getValueAt(i, 0);
-			int wkcId = Integer.parseInt(tmp);
-			
-			DbAction_List db = new DbAction_List(wkcId);
-			Bean_TeacherClass bean = db.TableClick();
-			 
-			ShareVarTest.cId = bean.getcId();
-			
-			
-			
-		}
-		
+//		private void TableClick() {
+//			
+//			int i = Inner_Table_After.getSelectedRow();
+//			String tmp = (String)Inner_Table_After.getValueAt(i, 0);
+//			
+//			DbAction_List db = new DbAction_List(tmp);
+//			Bean_TeacherClass bean = db.TableClick();
+//			 
+//			ShareVarTest.cId = Integer.toString(bean.getcId());
+//			
+//			
+//			
+//		}
+		 // 강의 아이디 불러오기
+		  public int ReviewSub() {
+				int i = Inner_Table_Before.getSelectedRow();
+				String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
+				int inSequence = Integer.parseInt(wkSequence);
+				return inSequence;
+		  }
 		
 		
 		
