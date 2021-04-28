@@ -34,11 +34,11 @@ public class DbSearchAction {
 
 	// Method
 	
-	public ArrayList<SearchBean> conditionQueryAction() {
+	public ArrayList<SearchBean> conditionList() {
 		 
 		ArrayList<SearchBean> beanList = new ArrayList<SearchBean>();
  
-		String WhereDefault = "select seqno, name, telno, relation from userinfo where " + conditionQueryColumn;
+		String WhereDefault = "select cName, cCategory, concat(cLocation1, ' ',cLocation2), cDate from Class where " + conditionQueryColumn;
 		String WhereDefault2 = " like '%" + searching + "%'";
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -49,16 +49,16 @@ public class DbSearchAction {
  
 			while(rs.next()){
 				String wkName = rs.getString(1);
-				String wkLocation = rs.getString(2);
-				Date wkDate = rs.getDate(3);
-				String wkPrice = rs.getString(4);
+				String wkCategory = rs.getString(2);
+				String wkLocation = rs.getString(3);
+				Date wkDate = rs.getDate(4);
 				
-				SearchBean bean = new SearchBean(wkName, wkLocation, wkDate, wkPrice);
+				SearchBean bean = new SearchBean(wkName, wkCategory, wkLocation, wkDate);
 				
 				wkName = bean.getName();
+				wkCategory = bean.getCategory();
 				wkLocation = bean.getLacation();
 				wkDate = bean.getDate();
-				wkPrice = bean.getPrice();
 				beanList.add(bean);
 			}
 			conn_mysql.close();

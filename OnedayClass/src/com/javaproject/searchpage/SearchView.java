@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -157,7 +158,7 @@ public class SearchView {
 			conditonQueryColumn = "강의명";
 			break;
 		case 1:
-			conditonQueryColumn = "강사";
+			conditonQueryColumn = "장소";
 			break;
 		case 2:
 			conditonQueryColumn = "장소";
@@ -176,11 +177,17 @@ public class SearchView {
 	
 	
 	
-	private void conditionQueryAction() {
+	private void conditionQueryAction(String ConditionQueryColumn) {
 		String conditionSearch = tfSearch.getText().trim();
 		
-		DbSearchAction dbSearchAction = new DbSearchAction(conditionSearch, condi);
-		dbSearchAction.conditionQueryColumn();
+		DbSearchAction dbSearchAction = new DbSearchAction(conditionSearch, ConditionQueryColumn);
+		ArrayList<SearchBean> beanList = dbSearchAction.conditionList();
+		
+		int listCount = beanList.size();
+		for(int i=0; i<listCount; i++) {
+			String[] qTxt = {beanList.get(i).getName(), beanList.get(i).getLacation() };
+			Outer_Table.addRow(qTxt);
+		}
 	}
 	
 }
