@@ -366,16 +366,16 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		}
 	}
 	
+	//
 	private void RelationRegisterAction() {
 		RUDDbAction action = new RUDDbAction();
 		int cccId = action.getClassId();
-		System.out.println(cccId);
-//		try {
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		RUDDbAction dbaction = new RUDDbAction(cccId);
 		boolean aaa = dbaction.RegisterDateAction();
@@ -387,31 +387,6 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		
 		
 	}
-//	private void RelationRegisterAction() {
-//		RUDDbAction action = new RUDDbAction();
-//		int cccId = action.getClassId();
-//		
-//		// Image File
-//		
-//		try {
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		RUDDbAction dbaction = new RUDDbAction(cccId);
-//		boolean aaa = dbaction.RegisterAction();
-//		if(aaa == true){
-//			JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
-//		}else{
-//			JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!");                    
-//		}
-//		
-//		
-//	}
-	
-	
 	
 	// 이미지 등록하는 메소드
 	private void FilePath() {

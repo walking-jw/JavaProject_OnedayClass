@@ -14,10 +14,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 	public class TeacherClassUpdateDelete { // 2021.04.28 조혜지 view - 강사가 등록한 강의 수정 / 삭제하기
 	
@@ -65,6 +68,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 		 */
 		private void initialize() {
 			frame = new JFrame();
+			frame.addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowOpened(WindowEvent e) {
+					ShowData();
+				}
+			});
 			frame.setTitle("강의 수정 / 삭제");
 			frame.setBounds(100, 100, 560, 625);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,6 +188,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 		private JButton getBtnDelete() {
 			if (btnDelete == null) {
 				btnDelete = new JButton("삭제");
+				btnDelete.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						DeleteAction();
+					}
+				});
 				btnDelete.setBounds(374, 543, 76, 29);
 			}
 			return btnDelete;
@@ -353,5 +367,64 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 			lblImage.setIcon(new ImageIcon(filePath));
 			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 		}
+		
+		// 강의 등록 취소하는 메소드
+		private void DeleteAction() {
+			int id = RUDDbAction.dcId;
+
+			RUDDbAction dbaction = new RUDDbAction(id);
+			boolean aaa = dbaction.RegisterDateAction();
+	        try{
+		           if(aaa == true) {
+		              JOptionPane.showMessageDialog(null, "강의 폐강이 완료되었습니다!","폐강 완료!", 
+		                    JOptionPane.INFORMATION_MESSAGE);
+		           }
+		        } catch (Exception e){
+		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+		                                         "Critical Error!", 
+		                                         JOptionPane.ERROR_MESSAGE);                    
+		            e.printStackTrace();
+		        }
+			
+		}
+
+		 private void ShowData() {
+				int id = RUDDbAction.dcId;
+
+				RUDDbAction dbaction = new RUDDbAction(id);
+		        RUDBean bean = dbaction.TableClick();
+		        
+		        tfCname.setText(bean.getcName());
+//		        tfCname.setText(Integer.toString(bean.getSeqno()));
+		        cbCategory.setSelectedItem(bean.getcCategory());
+		        cbLocation.setSelectedItem(bean.getcLocation1());
+		        tfLocation.setText(bean.getcLocation2());
+		        cbHour.setSelectedItem(bean.getcTime());
+		        String str = bean.getcDate();
+		        cbYear.setSelectedItem(str.substring(0,4));
+		        cbMonth.setSelectedItem(str.substring(5,7));
+		        cbDay.setSelectedItem(str.substring(8,10));
+		        tContents.setText(bean.getcContents());
+		        tfPrice.setText(Integer.toString(bean.getcPrice()));
+		        
+		        // Image처리
+		        // File name이 틀려야 즉각 보여주기가 가능하여   
+		        // ShareVar에서 int값으로 정의하여 계속 증가하게 하여 file name으로 사용후 삭제
+		        
+		      String filePath = Integer.toString(dbaction.filename);
+//		      String filePath = Integer.toString(ShareVar.filename);
+		      tfFilePath.setText(filePath);
+		      
+		      lblImage.setIcon(new ImageIcon(filePath));
+		      lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+		      
+		      File file = new File(filePath);
+		      file.delete();
+		      
+		      tfFilePath.setText("");
+		 
+		        
+		   }
+		
 	}
 
