@@ -13,7 +13,7 @@ import java.sql.Statement;
 public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강의 등록할 때 뷰와 sql에 연결해주는 클라스
 
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String url_mysql = "jdbc:mysql://192.168.0.3/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyejji@gmail.com'";
@@ -75,8 +75,23 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 			this.cId = cId;
 		}
 
+		public RUDDbAction(FileInputStream file, String cName, String cCategory, String cLocation1, String cLocation2,
+				String cTime, String cDate, String cContents, int cPrice, int cId) {
+			super();
+			this.file = file;
+			this.cName = cName;
+			this.cCategory = cCategory;
+			this.cLocation1 = cLocation1;
+			this.cLocation2 = cLocation2;
+			this.cTime = cTime;
+			this.cDate = cDate;
+			this.cContents = cContents;
+			this.cPrice = cPrice;
+			this.cId = cId;
+		}
 
 		// Method*****************************************
+
 
 
 		// 강의 등록하는 메소드로서 mysql에 insert해주는 메소드 생성
@@ -167,10 +182,42 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 					Statement stmt_mysql = conn_mysql.createStatement();
 		
 		          String QueryA = "update Register set cCloseDate = curdate()";
-		          String QueryB = " where cId = ? ";
+		          String QueryB = " where cId = ?";
 		
-		          ps = conn_mysql.prepareStatement(QueryA);
+		          ps = conn_mysql.prepareStatement(QueryA+QueryB);
 		          ps.setInt(1, cId);
+		          ps.executeUpdate();
+		
+		          conn_mysql.close();
+		      } catch (Exception e){
+		          e.printStackTrace();
+		          return false;
+		      }
+		      return true;
+		}
+		
+		public boolean UpdateAction() {
+		      PreparedStatement ps = null;
+		      try{
+		          Class.forName("com.mysql.cj.jdbc.Driver");
+		          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+		          @SuppressWarnings("unused")
+					Statement stmt_mysql = conn_mysql.createStatement();
+		
+		          String QueryA = "update Class set cName = ?, cCategory = ?, cLocation1 = ?, cLocation2 = ?, cTime = ?, cDate = ?, cContents = ?, cPrice = ?, cImg = ? ";
+		          String QueryB = " where cId = ?";
+		
+		          ps = conn_mysql.prepareStatement(QueryA+QueryB);
+		          ps.setString(1, cName);
+		          ps.setString(2, cCategory);
+		          ps.setString(3, cLocation1);
+		          ps.setString(4, cLocation2);
+		          ps.setString(5, cTime);
+		          ps.setString(6, cDate);
+		          ps.setString(7, cContents);
+		          ps.setInt(8, cPrice);
+		          ps.setBinaryStream(9, file);
+		          ps.setInt(10, cId);
 		          ps.executeUpdate();
 		
 		          conn_mysql.close();
@@ -184,7 +231,7 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 		
 		   public RUDBean TableClick() {
 			      RUDBean bean = null;
-			      String WhereDefault = "select cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice from Class ";
+			      String WhereDefault = "select cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice, cImg from Class ";
 			      String WhereDefault2 = "where cId = " + cId;
 			      
 			        try{
@@ -213,7 +260,7 @@ public class RUDDbAction { // 2021.04.27 조혜지  - 강사 페이지 중 강�
 			               File file = new File(Integer.toString(filename));
 //			               File file = new File(Integer.toString(ShareVar.filename));
 			               FileOutputStream output = new FileOutputStream(file);
-			               InputStream input = rs.getBinaryStream(7);
+			               InputStream input = rs.getBinaryStream(9);
 			                byte[] buffer = new byte[1024];
 			                while (input.read(buffer) > 0) {
 			                    output.write(buffer);

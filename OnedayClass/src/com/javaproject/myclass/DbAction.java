@@ -10,7 +10,7 @@ import java.util.ArrayList;
 	public class DbAction { // 2021.04.26 조혜지 - 수강 예정과 수강 이력 데이터 테이블표에 불러오 & 수강 예정 강의 mysql 연결해 수강 신청 취소하기
  
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String url_mysql = "jdbc:mysql://192.168.0.3/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyoeun@gmail.com'";
