@@ -14,7 +14,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.javaproject.teacherpage.RUDDbAction;
 import com.javaproject.teacherpage.TeacherClassRegister;
+import com.javaproject.teacherpage.TeacherClassUpdateDelete;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -152,14 +154,17 @@ import java.awt.event.ActionEvent;
 //						review.setVisible_Review(true);
 //						frame.dispose();
 						
-						DbAction.ccId = ReviewSub();
+//						DbAction.ccId = ReviewSub();
 						
-//						Review review = new Review();
-//						review.setVisible_Review(true);
-//						frame.dispose();
-						TeacherClassRegister register = new TeacherClassRegister();
-						register.setVisible_TeacherClassRegister(true);
+						RUDDbAction.dcId = ReviewSub();
+						
+						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
+						delete.setVisible_TeacherClassUpdateDelete(true);
 						frame.dispose();
+
+//						TeacherClassRegister register = new TeacherClassRegister();
+//						register.setVisible_TeacherClassRegister(true);
+//						frame.dispose();
 						
 					}
 				});
