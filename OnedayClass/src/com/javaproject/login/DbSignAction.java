@@ -33,15 +33,16 @@ public class DbSignAction {
 		this.telNo = telNo;
 		this.password = password;
 	}
-	
-	
-	
+	public DbSignAction(String email) {
+		super();
+		this.email = email;
+	}
 	public DbSignAction(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
-
+	
 	//Method
 	
 	// 로그인 메소드
@@ -145,18 +146,22 @@ public class DbSignAction {
 	
 	// 중복된 학생아이디 체크
 	public boolean checkingStudentId() {
-		String query = "SELECT count(sEmail) FROM Student WHERE sEmail = ?";
+		PreparedStatement ps = null;
+		String query = "SELECT sEmail FROM Student WHERE sEmail = ?";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			ResultSet rs =stmt_mysql.executeQuery(query);
+			ps = conn_mysql.prepareStatement(query);
+			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				if (rs.getInt(1) == 0) {
-					return true;
-				} else {
+				if (rs.getString(1).contentEquals(email)) {
 					return false;
+				} else {
+					return true;
 				}
 			}return false;
 		}catch (Exception e){
@@ -165,35 +170,40 @@ public class DbSignAction {
 		}
 	}
 	
-	// 중복된 강사아이디 체크
-		public boolean checkingTeacherId() {
-			String query = "SELECT count(tEmail) FROM Teacher WHERE tEmail = ?";
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
-				Statement stmt_mysql = conn_mysql.createStatement();
-
-				ResultSet rs =stmt_mysql.executeQuery(query);
-				if (rs.next()) {
-					if (rs.getInt(1) == 0) {
-						return true;
-					} else {
-						return false;
-					}
-				}return false;
-			}catch (Exception e){
-				e.printStackTrace();
-				return false;
-			}
+	// 중복된 학생아이디 체크
+	public boolean checkingTeacherId() {
+		PreparedStatement ps = null;
+		String query = "SELECT tEmail FROM Student WHERE tEmail = ?";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ps = conn_mysql.prepareStatement(query);
+			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				if (rs.getString(1).contentEquals(email)) {
+					return false;
+				} else {
+					return true;
+				}
+			}return false;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
 		}
+	}
+	
 		
 	// 아이디 찾기
-	public void findId() {
+	public void findId(String name, String phone) {
 		
 	}
 	
 	// 비밀번호 찾기
-	public void findPwd() {
+	public void findPwd(String name, String email) {
 		
 	}
 	
