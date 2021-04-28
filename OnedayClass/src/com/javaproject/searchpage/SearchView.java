@@ -196,6 +196,7 @@ public class SearchView {
 		for(int i=0; i<listCount; i++) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = format.format(beanList.get(i).getDate());
+			
 			String[] qTxt = {beanList.get(i).getName(),beanList.get(i).getCategory(), beanList.get(i).getLacation(), strDate};
 			Outer_Table.addRow(qTxt);
 		}
