@@ -16,8 +16,8 @@ import java.util.ArrayList;
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyoeun@gmail.com'";
 	public static int ccId = 0;
-	public static int rcId = 0;
-	public static int ucId = 0;
+//	public static int rcId = 0;
+//	public static int ucId = 0;
 	// 여기까지 4줄은 완성되면 없애기 ***************************************************
 	// 여기부터 3줄은 완성되면 살리기 ***************************************************
 		// private final static String url_mysql = ShareVar.url_mysql;
@@ -165,9 +165,9 @@ import java.util.ArrayList;
 		     ArrayList<MyClassBean> beanList = new ArrayList<MyClassBean>();
 		     
 		     String QueryA = "select c.cId, c.cDate, c.cName, concat(cLocation1, ' ', cLocation2) ";
-		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName not in (select cName from Class where cDate >= curdate()) ";
+		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cDate not in (select cDate from Class where cDate >= curdate()) ";
 		     String QueryC = "and sEmail = " + currentuser;
-		     String QueryD = " and r.cCloseDate is null and a.cReview is null and a.cScore is null";
+		     String QueryD = " and r.cCloseDate is null and a.cReview is null and a.cScore is null and a.cCancelDate is null";
 		     try{
 		         Class.forName("com.mysql.cj.jdbc.Driver");
 		         Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
@@ -200,7 +200,7 @@ import java.util.ArrayList;
 			 ArrayList<MyClassBean> beanList = new ArrayList<MyClassBean>();
 			 
 			 String QueryA = "select a.cId, c.cDate, c.cName, concat(cLocation1, ' ', cLocation2) ";
-			 String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName not in (select cName from Class where cDate >= curdate()) ";
+			 String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cDate not in (select cDate from Class where cDate >= curdate()) ";
 			 String QueryC = "and sEmail = " + currentuser;
 			 String QueryD = " and r.cCloseDate is null and a.cScore is not null and a.cReviewDeleteDate is null";
 			 try{

@@ -153,16 +153,16 @@ import java.awt.event.ActionEvent;
 				btnReview.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						ReviewManagement management = new ReviewManagement();
-						management.setVisible_ReviewManagement(true);
-						frame.dispose();
-									
-						MyClassDbAction.ccId = ReviewSub();
-//						RUDDbAction.dcId = ReviewSub();
-//						
-//						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
-//						delete.setVisible_TeacherClassUpdateDelete(true);
+//						ReviewManagement management = new ReviewManagement();
+//						management.setVisible_ReviewManagement(true);
 //						frame.dispose();
+						
+						// 아래 7줄은 재원님꺼와 연결 시 바로 삭제하기
+						RUDDbAction.ccId = ReviewSub();
+//						
+						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
+						delete.setVisible_TeacherClassUpdateDelete(true);
+						frame.dispose();
 
 //						TeacherClassRegister register = new TeacherClassRegister();
 //						register.setVisible_TeacherClassRegister(true);
@@ -351,7 +351,7 @@ import java.awt.event.ActionEvent;
 		
 		 // 수강 신청 취소하기
 		 private void CancleClick() {
-			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강취소", JOptionPane.YES_NO_OPTION);
+			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강 취소", JOptionPane.YES_NO_OPTION);
 			  if(result==JOptionPane.YES_OPTION) {
 				  try {
 
@@ -401,13 +401,13 @@ import java.awt.event.ActionEvent;
 			  		  
     	}
 		 
-		 // 강의 id를 리뷰 수정 / 삭제하는 클라스에서도 가져오게 하기 위해 메소드 생성
-		 public int ReviewSub() {
+		 // 재원님꺼랑 연결 시 바로 삭제하기
+		 private int ReviewSub() {
 			 int i = Inner_Table_Before.getSelectedRow();
 			 String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
 			 int inSequence = Integer.parseInt(wkSequence);
 			 return inSequence;
 
-		  }
+		 }
 
 	} // -------

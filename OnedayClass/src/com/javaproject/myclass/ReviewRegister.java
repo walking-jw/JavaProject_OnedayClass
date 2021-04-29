@@ -133,11 +133,11 @@ import java.awt.event.WindowEvent;
 		}
 		private JButton getBtnCancel() {
 			if (btnCancel == null) {
-				btnCancel = new JButton("취소");
+				btnCancel = new JButton("닫기");
 				btnCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						StudentMyClass category = new StudentMyClass();
-						category.setVisible_StudentMyClass(true);
+						ReviewManagement reviewManagement = new ReviewManagement();
+						reviewManagement.setVisible_ReviewManagement(true);
 						frame.dispose();
 					}
 				});
@@ -176,7 +176,7 @@ import java.awt.event.WindowEvent;
 		 // Review를 등록하는 메소드
 	    private void ReviewRegisterAction(){
 
-		        int id = MyClassDbAction.ucId;
+		        int id = MyClassDbAction.ccId;
 		        int reviewscore = 0;
 		        if(rd1.isSelected()==true) {
 		           reviewscore = 1;
@@ -198,6 +198,9 @@ import java.awt.event.WindowEvent;
 		              
 		              JOptionPane.showMessageDialog(null, "후기 등록이 완료되었습니다!","등록 완료!", 
 		                    JOptionPane.INFORMATION_MESSAGE);
+						ReviewManagement reviewManagement = new ReviewManagement();
+						reviewManagement.setVisible_ReviewManagement(true);
+						frame.dispose();
 
 		           }
 		        } catch (Exception e){

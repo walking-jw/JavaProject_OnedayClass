@@ -17,7 +17,7 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyejji@gmail.com'";
-	public static int dcId = 0;
+	public static int ccId = 0;
 	public static int filename = 0;
 	
 

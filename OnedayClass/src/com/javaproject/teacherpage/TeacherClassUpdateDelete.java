@@ -21,6 +21,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.javaproject.myclass.StudentMyClass;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -131,7 +134,7 @@ import java.awt.event.WindowEvent;
 		}
 		private JLabel getLblNewLabel_2() {
 			if (lblNewLabel_2 == null) {
-				lblNewLabel_2 = new JLabel("장소");
+				lblNewLabel_2 = new JLabel("강의 장소");
 				lblNewLabel_2.setBounds(47, 272, 61, 16);
 				lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			}
@@ -210,6 +213,9 @@ import java.awt.event.WindowEvent;
 				btnCancle.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// 여기에서 재원님이랑 연결
+						StudentMyClass myClass = new StudentMyClass();
+						myClass.setVisible_StudentMyClass(true);
+						frame.dispose();
 					}
 				});
 				btnCancle.setBounds(453, 543, 76, 29);
@@ -296,6 +302,10 @@ import java.awt.event.WindowEvent;
 						int check_i = check();
 						if(check_i==0) {
 							UpdateAction();
+							// 여기에서 재원님이랑 연결
+							StudentMyClass myClass = new StudentMyClass();
+							myClass.setVisible_StudentMyClass(true);
+							frame.dispose();
 						}
 					}
 				});
@@ -345,7 +355,7 @@ import java.awt.event.WindowEvent;
 			if (lblImage == null) {
 				lblImage = new JLabel("");
 				lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-				lblImage.setIcon(new ImageIcon("/Users/tj/Desktop/스크린샷 2021-04-28 오후 2.18.46.png"));
+				lblImage.setIcon(new ImageIcon("/Users/parksunghun/Desktop/KakaoTalk_Photo_2021-04-30-00-20-58.png"));
 				lblImage.setBounds(37, 20, 478, 152);
 			}
 			return lblImage;
@@ -405,7 +415,7 @@ import java.awt.event.WindowEvent;
 		
 		// 강의 등록 취소하는 메소드
 		private void DeleteAction() {
-			int id = RUDDbAction.dcId;
+			int id = RUDDbAction.ccId;
 
 			RUDDbAction dbaction = new RUDDbAction(id);
 	        RUDBean bean = dbaction.TableClick();
@@ -422,6 +432,10 @@ import java.awt.event.WindowEvent;
 				    if(aaa == true) {
 				    	JOptionPane.showMessageDialog(null, "강의 폐강이 완료되었습니다!","폐강 완료!", 
 		        				   JOptionPane.INFORMATION_MESSAGE);
+						// 여기에서 재원님이랑 연결
+				    	StudentMyClass myClass = new StudentMyClass();
+						myClass.setVisible_StudentMyClass(true);
+						frame.dispose();
 				    }
 				    
 		        	}
@@ -438,7 +452,7 @@ import java.awt.event.WindowEvent;
 		// 강의 등록 수정하는 메소드
 		 private void UpdateAction() {
 		      
-				int id = RUDDbAction.dcId;
+				int id = RUDDbAction.ccId;
 
 		        // Image File
 				String cName = tfCname.getText();
@@ -511,7 +525,7 @@ import java.awt.event.WindowEvent;
 
 		 // mysql에 있는 데이터를 view에 불러오는 메소드
 		 private void ShowData() {
-				int id = RUDDbAction.dcId;
+				int id = RUDDbAction.ccId;
 
 				RUDDbAction dbaction = new RUDDbAction(id);
 		        RUDBean bean = dbaction.TableClick();

@@ -111,7 +111,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 					register.setVisible_ReviewRegister(true);
 					frame.dispose();
 					
-					MyClassDbAction.ucId = ReviewIncomplete();
+					MyClassDbAction.ccId = ReviewIncomplete();
 				}
 			});
 			btnRegister.setBounds(445, 267, 86, 29);
@@ -150,7 +150,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 					updateDelete.setVisible_ReviewUpdateDelete(true);
 					frame.dispose();
 					
-					MyClassDbAction.rcId = ReviewComplete();
+					MyClassDbAction.ccId = ReviewComplete();
 					
 				}
 			});
