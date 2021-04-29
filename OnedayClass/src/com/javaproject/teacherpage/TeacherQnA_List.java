@@ -17,6 +17,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TeacherQnA_List {
 
@@ -26,6 +28,10 @@ public class TeacherQnA_List {
 	private JScrollPane scrollPane;
 	private JTable Inner_Table_QnA;
 	private final DefaultTableModel Outer_Table = new DefaultTableModel();
+	private final DefaultTableModel Outer_Table_AnswerOK = new DefaultTableModel();
+	private JScrollPane scrollPane_1;
+	private JTable Inner_Table_AnswerOK;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Create the application.
@@ -44,7 +50,10 @@ public class TeacherQnA_List {
 			public void windowOpened(WindowEvent e) {
 				
 				TableInit();
+				TableInit_OK();
 				SearchActionAfter();
+				SearchActionAfter_OK();
+				
 			}
 		});
 		frame.setBounds(100, 100, 560, 625);
@@ -53,6 +62,8 @@ public class TeacherQnA_List {
 		frame.getContentPane().add(getBtnAnswer());
 		frame.getContentPane().add(getLblNewLabel());
 		frame.getContentPane().add(getScrollPane());
+		frame.getContentPane().add(getScrollPane_1());
+		frame.getContentPane().add(getLblNewLabel_1());
 	}
 
 	
@@ -64,7 +75,20 @@ public class TeacherQnA_List {
 	private JButton getBtnAnswer() {
 		if (btnAnswer == null) {
 			btnAnswer = new JButton("답변하기");
-			btnAnswer.setBounds(374, 490, 117, 29);
+			btnAnswer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					DbAction_List.sName = ReviewSub();
+					
+					TeacherQnA go = new TeacherQnA();
+					go.setVisible_QnA(true);
+					frame.dispose();
+					
+					
+					
+				}
+			});
+			btnAnswer.setBounds(366, 260, 117, 29);
 		}
 		return btnAnswer;
 	}
@@ -78,7 +102,7 @@ public class TeacherQnA_List {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(56, 98, 430, 347);
+			scrollPane.setBounds(56, 98, 430, 150);
 			scrollPane.setViewportView(getInner_Table_QnA());
 		}
 		return scrollPane;
@@ -87,92 +111,129 @@ public class TeacherQnA_List {
 		if (Inner_Table_QnA == null) {
 			Inner_Table_QnA = new JTable();
 			Inner_Table_QnA.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			Inner_Table_QnA.setModel(Outer_Table);
-			
+			Inner_Table_QnA.setModel(Outer_Table); // * * * * * * * 상단 테이블 세팅
 		}
 		return Inner_Table_QnA;
 	}
 	
+	private JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(56, 371, 427, 155);
+			scrollPane_1.setViewportView(getInner_Table_AnswerOK());
+		}
+		return scrollPane_1;
+	}
+	private JTable getInner_Table_AnswerOK() {
+		if (Inner_Table_AnswerOK == null) {
+			Inner_Table_AnswerOK = new JTable();
+			Inner_Table_AnswerOK.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			Inner_Table_AnswerOK.setModel(Outer_Table_AnswerOK);// * * * * * * * 하단 테이블 세팅
+		}
+		return Inner_Table_AnswerOK;
+	}
+	
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("답변완료 리스트");
+			lblNewLabel_1.setBounds(56, 343, 216, 16);
+		}
+		return lblNewLabel_1;
+	}
+	
+	// * * * * * * MeThod * * * * * * //
+	
+	// Teacher - QnA (답변 아직 하지 않은 리스트 테이블 세팅) * * * * * * * * * * * * * * * [2021.04.29, 12:41]
 	private void TableInit(){
 	       int i = Outer_Table.getRowCount();
 	       
-	       Outer_Table.addColumn("질문자");
-	       Outer_Table.addColumn("질문날짜");
-	       Outer_Table.addColumn("질문내용");
-	       Outer_Table.setColumnCount(3);
-
-	       for(int j = 0 ; j < i ; j++){
-	           Outer_Table.removeRow(0);
-	       }
-
-	       Inner_Table_QnA.setAutoResizeMode(Inner_Table_QnA.AUTO_RESIZE_OFF);
-	       
-
-	       int vColIndex = 0;
-	       TableColumn col = Inner_Table_QnA.getColumnModel().getColumn(vColIndex);
-	       int width = 120;
-	       col.setPreferredWidth(width);
-
-	       vColIndex = 1;
-	       col = Inner_Table_QnA.getColumnModel().getColumn(vColIndex);
-	       width = 100;
-	       col.setPreferredWidth(width);
-	       
-	       vColIndex = 2;
-	       col = Inner_Table_QnA.getColumnModel().getColumn(vColIndex);
-	       width = 300;
-	       col.setPreferredWidth(width);
+			       Outer_Table.addColumn("질문자");
+			       Outer_Table.addColumn("질문날짜");
+			       Outer_Table.addColumn("질문내용");
+			       Outer_Table.setColumnCount(3);
+		
+				       for(int j = 0 ; j < i ; j++){
+				           Outer_Table.removeRow(0);
+				       }
+			
+				       Inner_Table_QnA.setAutoResizeMode(Inner_Table_QnA.AUTO_RESIZE_OFF);
+				       
+					       int vColIndex = 0;
+					       TableColumn col = Inner_Table_QnA.getColumnModel().getColumn(vColIndex);
+					       int width = 120;
+					       col.setPreferredWidth(width);
+				
+					       vColIndex = 1;
+					       col = Inner_Table_QnA.getColumnModel().getColumn(vColIndex);
+					       width = 100;
+					       col.setPreferredWidth(width);
+					       
+					       vColIndex = 2;
+					       col = Inner_Table_QnA.getColumnModel().getColumn(vColIndex);
+					       width = 300;
+					       col.setPreferredWidth(width);
 	 }
-	
-	// 수강 예정인 데이터를 mysql에서 불러오는 메소드
-			 public ArrayList<Bean_QnA> qnaListAfter() {
-			     ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
-			     
-//			     SELECT sEmail, qDate, qContents 
-//			     FROM QnA 
-//			     WHERE tEmail = 'aaa@naver.com';
-			     
-			     
-			     
-			     String Query00 = "select sEmail, qDate, qContents From QnA ";
-			     String Query01 = "WHERE tEmail = '" + ShareVarTest.currentuser + "'";		
-			     try{
-			         Class.forName("com.mysql.cj.jdbc.Driver");
-			         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
-			         Statement stmt_mysql = conn_mysql.createStatement();
-			
-			         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
-			
-			         while(rs.next()){
-			
-			           String wksEmail = rs.getString(1);
-			           String wktqDate = rs.getString(2);
-			           String wkqContents = rs.getString(3);
-			           
-			           Bean_QnA bean = new Bean_QnA(wksEmail, wktqDate, wkqContents);
-			           beanList.add(bean);
-			
-			         }
-			         conn_mysql.close();
-			         
-			     }
-			     catch (Exception e){
-			         e.printStackTrace();
-			     }
-			     return beanList;
-			 }
-			 
-			 private void SearchActionAfter(){
-			     
-			     DbAction_List dbAction_List = new DbAction_List();
-			     ArrayList<Bean_QnA> beanList = dbAction_List.selectList_QnA();
-			     int listCount = beanList.size();
-			     for(int i=0; i<listCount; i++) {
-			       String[] qTxt = {beanList.get(i).getsEmail(), beanList.get(i).getqDate(), beanList.get(i).getqContents()};
-			       Outer_Table.addRow(qTxt);
-			     }
+	// Teacher - QnA (답변 아직 하지 않은 리스트 DB에서 불러오기) * * * * * * * * * * * * [2021.04.29, 12:46]
+	private void SearchActionAfter(){
+	     
+	     DbAction_List dbAction_List = new DbAction_List();
+	     ArrayList<Bean_QnA> beanList = dbAction_List.selectList_QnA();
+	   
+	     int listCount = beanList.size();
+	     for(int i=0; i<listCount; i++) {
+	       String[] qTxt = {beanList.get(i).getsEmail(), beanList.get(i).getqDate(), beanList.get(i).getqContents()};
+	       Outer_Table.addRow(qTxt);
+	     }
+	 }// SearchActionAfter
+			 	
+	 // Teacher - QnA (답변 완료한 리스트 테이블 세팅) * * * * * * * * * * * * * * * * * [2021.04.29, 12:51]	 
+	 private void TableInit_OK(){
+		 int i = Outer_Table_AnswerOK.getRowCount();
+			       
+			     Outer_Table_AnswerOK.addColumn("질문자");
+			     Outer_Table_AnswerOK.addColumn("질문날짜");
+			     Outer_Table_AnswerOK.addColumn("질문내용");
+			     Outer_Table_AnswerOK.setColumnCount(3);
 
-			 }
-			 
+				       for(int j = 0 ; j < i ; j++){
+				           Outer_Table_AnswerOK.removeRow(0);
+				       }
 	
+				       Inner_Table_AnswerOK.setAutoResizeMode(Inner_Table_AnswerOK.AUTO_RESIZE_OFF);
+				       
+	
+					       int vColIndex = 0;
+					       TableColumn col = Inner_Table_AnswerOK.getColumnModel().getColumn(vColIndex);
+					       int width = 120;
+					       col.setPreferredWidth(width);
+		
+					       vColIndex = 1;
+					       col = Inner_Table_AnswerOK.getColumnModel().getColumn(vColIndex);
+					       width = 100;
+					       col.setPreferredWidth(width);
+					       
+					       vColIndex = 2;
+					       col = Inner_Table_AnswerOK.getColumnModel().getColumn(vColIndex);
+					       width = 300;
+					       col.setPreferredWidth(width);
+			 }
+	 // Teacher - QnA (답변 완료한 리스트 DB에서 불러오기) * * * * * * * * * * * * [2021.04.29, 12:55]		 
+	 private void SearchActionAfter_OK(){
+		     
+		     DbAction_List dbAction_List = new DbAction_List();
+		     ArrayList<Bean_QnA> beanList = dbAction_List.selectList_QnA_OK();
+		     int listCount = beanList.size();
+		     for(int i=0; i<listCount; i++) {
+		       String[] qTxt = {beanList.get(i).getsEmail(), beanList.get(i).getqDate(), beanList.get(i).getqContents()};
+		       Outer_Table_AnswerOK.addRow(qTxt);
+		     }
+	 }
+			 
+	  public String ReviewSub() {
+			int i = Inner_Table_QnA.getSelectedRow();
+			String wkSequence = (String)Inner_Table_QnA.getValueAt(i, 0);
+			return wkSequence;
+	  }
+	
+			 
 }
