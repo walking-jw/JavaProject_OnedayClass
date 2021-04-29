@@ -276,6 +276,7 @@ public class SignUp {
 		} else {
 			dbSignAction.signUpTeacher();
 		}
+	
 	}
 	
 	boolean checking = false;
@@ -297,6 +298,10 @@ public class SignUp {
 			JOptionPane.showMessageDialog(null, "정보를 전부 입력해주세요.");
 		} else if (strPwd().equals(strPwdCheck())) {
 			applyInfo();
+			JOptionPane.showMessageDialog(null, "금손양성소에 오신걸 환영합니다.");
+			SignIn signIn = new SignIn();
+			signIn.setVisible_SignIn(true);
+			frame.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "비밀번호가 확인과 다릅니다.");
 		}

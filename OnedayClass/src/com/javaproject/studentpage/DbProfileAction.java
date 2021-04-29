@@ -123,7 +123,7 @@ public class DbProfileAction {
 			Statement stmt_mysql = conn_mysql.createStatement();
 
 
-			String A = "delete from Student where sEmail = "+ ShareVar.currentuser;
+			String A = "delete from Student where sEmail = '"+ ShareVar.currentuser + "'";
 
 			ps = conn_mysql.prepareStatement(A);
 

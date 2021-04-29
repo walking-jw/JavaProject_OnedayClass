@@ -13,6 +13,7 @@ import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 
 public class FindIdAndPwd {
 
@@ -140,14 +141,16 @@ public class FindIdAndPwd {
 	private JComboBox getCbTelNo() {
 		if (cbTelNo == null) {
 			cbTelNo = new JComboBox();
-			cbTelNo.setBounds(208, 195, 63, 27);
+			cbTelNo.setModel(new DefaultComboBoxModel(new String[] {"010"}));
+			cbTelNo.setBounds(174, 195, 97, 27);
 		}
 		return cbTelNo;
 	}
 	private JComboBox getCbEmail() {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
-			cbEmail.setBounds(329, 388, 52, 27);
+			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "google.com"}));
+			cbEmail.setBounds(329, 388, 78, 27);
 		}
 		return cbEmail;
 	}
@@ -201,19 +204,29 @@ public class FindIdAndPwd {
 		return rdbtnTeacher;
 	}
 	
+	// Find ID
 	private void findId() {
 		String name = tfNameId.getText().trim();
-		String phoneNo = cbTelNo.getSelectedItem() + tfTelNo.getText().trim();
+		String phoneNo = cbTelNo.getSelectedItem() + "-" +tfTelNo.getText().trim();
 		DbSignAction action = new DbSignAction();
 		if (rdbtnCommon.isSelected()) {
 			String res = action.findCommonId(name, phoneNo);
-			JOptionPane.showMessageDialog(null, name + " 님의 아이디는 "+ res + " 입니다.");
+			if (res == null) {
+				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 존재하지 않거나 정보를 다시 입력해주세.");
+			} else {
+				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 "+ res + " 입니다.");
+			}
 		} else {
 			String res = action.findTeacherId(name, phoneNo);
-			JOptionPane.showMessageDialog(null, name + " 님의 아이디는 "+ res + " 입니다.");
+			if (res == null) {
+				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 존재하지 않거나 정보를 다시 입력해주세.");
+			}else {
+				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 "+ res + " 입니다.");
+			}
 		}
 	}
 	
+	// Find PWD
 	private void findPwd() {
 		String name = tfNamePwd.getText().trim();
 		String email = tfEmail.getText().trim() + "@" + cbEmail.getSelectedItem();
@@ -226,16 +239,18 @@ public class FindIdAndPwd {
 		}
 		DbSignAction action = new DbSignAction();
 		if (rdbtnCommon.isSelected()) {
-			if (action.findCommonPwd(name, email, newPwd) == true) {
+			if (action.checkStudentInfo(name, email) == true) {
+				action.findCommonPwd(name, email, newPwd);
 				JOptionPane.showMessageDialog(null, "임시 비밀번호는 ' " + newPwd + " ' 입니다. \n로그인 후 비밀번호를 재설정 해주세요.");
 			} else {
 				JOptionPane.showMessageDialog(null, "등록된 계정이 아닙니다. 이름과 이메일을 확인해주세요.");
 			}
 		} else {
-			if (action.findTeacherPwd(name, email, newPwd) == true) {
-				JOptionPane.showMessageDialog(null, "등록된 계정이 아닙니다. 이름과 이메일을 확인해주세요.");
+			if(action.checkTeacherInfo(name, email) == true) {
+				action.findTeacherPwd(name, email, newPwd);
+				JOptionPane.showMessageDialog(null, "임시 비밀번호는 ' " + newPwd + " ' 입니다. \n로그인 후 비밀번호를 재설정 해주세요.");
 			} else {
-				
+				JOptionPane.showMessageDialog(null, "등록된 계정이 아닙니다. 이름과 이메일을 확인해주세요.");
 			}
 		}
 		
