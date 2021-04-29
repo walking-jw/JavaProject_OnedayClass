@@ -10,7 +10,7 @@ import java.util.ArrayList;
 	public class DbAction { // 2021.04.26 조혜지 - 수강 예정과 수강 이력 데이터 테이블표에 불러오 & 수강 예정 강의 mysql 연결해 수강 신청 취소하기
  
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String url_mysql = "jdbc:mysql://192.168.0.3/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyoeun@gmail.com'";
@@ -62,14 +62,15 @@ import java.util.ArrayList;
 		     ArrayList<Bean> beanList = new ArrayList<Bean>();
 		     
 		     String QueryA = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice ";
-		     String QueryB = "from Class as c, Attend as a where c.cId = a.cId and cName in (select cName from Class where cDate >= curdate()) ";
+		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName in (select cName from Class where cDate >= curdate()) ";
 		     String QueryC = "and sEmail = " + currentuser;
+		     String QueryD = " and r.cCloseDate is null";
 		     try{
 		         Class.forName("com.mysql.cj.jdbc.Driver");
 		         Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 		         Statement stmt_mysql = conn_mysql.createStatement();
 		
-		         ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
+		         ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC + QueryD);
 		
 		         while(rs.next()){
 		
@@ -98,14 +99,15 @@ import java.util.ArrayList;
 		     ArrayList<Bean> beanList = new ArrayList<Bean>();
 		     
 		     String QueryA = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice ";
-		     String QueryB = "from Class as c, Attend as a where c.cId = a.cId and cName not in (select cName from Class where cDate >= curdate()) ";
-		     String QueryC = "and sEmail = " + currentuser;		     
+		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName not in (select cName from Class where cDate >= curdate()) ";
+		     String QueryC = "and sEmail = " + currentuser;
+		     String QueryD = " and r.cCloseDate is null";     
 		     try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
 		       Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 		       Statement stmt_mysql = conn_mysql.createStatement();
 		       
-		       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
+		       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC + QueryD);
 		       
 		       while(rs.next()){
 		           
@@ -156,34 +158,35 @@ import java.util.ArrayList;
 		     }
 		     
 
-		   public boolean reviewRegister() {
-		         PreparedStatement ps = null;
-		         try{
-		             Class.forName("com.mysql.cj.jdbc.Driver");
-		             Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
-		             @SuppressWarnings("unused")
-		            Statement stmt_mysql = conn_mysql.createStatement();
+		 // Review 등록하는 Method
+		 public boolean reviewRegister() {
+			 PreparedStatement ps = null;
+	         try{
+	             Class.forName("com.mysql.cj.jdbc.Driver");
+	             Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+	             @SuppressWarnings("unused")
+	            Statement stmt_mysql = conn_mysql.createStatement();
 
-		             String A = "update Attend set cReview = ?, cScore = ? where cId = ? ";
-		             
+	             String A = "update Attend set cReview = ?, cScore = ? where cId = ? and sEmail = " + currentuser;
+	             
 
-		             ps = conn_mysql.prepareStatement(A);
-		             
-		             ps.setString(1, cReview.trim());
-		             ps.setInt(2, cScore);
-		             ps.setInt(3, cId);
+	             ps = conn_mysql.prepareStatement(A);
+	             
+	             ps.setString(1, cReview.trim());
+	             ps.setInt(2, cScore);
+	             ps.setInt(3, cId);
 
-		             
-		             ps.executeUpdate();
+	             
+	             ps.executeUpdate();
 
-		             conn_mysql.close();
-		             return true;
-		         } catch (Exception e){                   
-		             e.printStackTrace();
-		             return false;
-		         }
+	             conn_mysql.close();
+	             return true;
+	         } catch (Exception e){                   
+	             e.printStackTrace();
+	             return false;
+	         }
 
-		      }
+	      }
 
-		   public static int i = 0;
-	}
+  
+		}

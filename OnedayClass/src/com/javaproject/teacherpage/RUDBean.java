@@ -11,15 +11,16 @@ public class RUDBean { // 2021.04.28 조혜지 - ShowData의 Bean을 가진 Arra
 	String cDate;
 	String cContents;
 	int cPrice;
+	int cCount;
 	
 	// Constructor
 	public RUDBean() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 
 	public RUDBean(String cName, String cCategory, String cLocation1, String cLocation2, String cTime, String cDate,
-			String cContents, int cPrice) {
+			String cContents, int cPrice, int cCount) {
 		super();
 		this.cName = cName;
 		this.cCategory = cCategory;
@@ -29,6 +30,7 @@ public class RUDBean { // 2021.04.28 조혜지 - ShowData의 Bean을 가진 Arra
 		this.cDate = cDate;
 		this.cContents = cContents;
 		this.cPrice = cPrice;
+		this.cCount = cCount;
 	}
 
 	// Method
@@ -109,7 +111,16 @@ public class RUDBean { // 2021.04.28 조혜지 - ShowData의 Bean을 가진 Arra
 
 	public void setcPrice(int cPrice) {
 		this.cPrice = cPrice;
-	}	
-	
-	
+	}
+
+
+	public int getcCount() {
+		return cCount;
+	}
+
+
+	public void setcCount(int cCount) {
+		this.cCount = cCount;
+	}
+
 }

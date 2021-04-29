@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -22,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-	public class TeacherClassUpdateDelete { // 2021.04.28 조혜지 view - 강사가 등록한 강의 수정 / 삭제하기
+	public class TeacherClassUpdateDelete { // 2021.04.28 조혜지 view - 강사가 등록한 강의 수정 / 삭제 버튼 눌렀을 때 상황
 	
 		private JFrame frame;
 		private JLabel lblNewLabel;
@@ -53,6 +55,8 @@ import java.awt.event.WindowEvent;
 		private JTextField tfFilePath;
 		private JButton btnFilePath;
 		private JComboBox cbCategory;
+		private JTextField tfCount;
+		private JLabel lblNewLabel_8;
 	
 	
 	
@@ -105,6 +109,8 @@ import java.awt.event.WindowEvent;
 			frame.getContentPane().add(getTfFilePath());
 			frame.getContentPane().add(getBtnFilePath());
 			frame.getContentPane().add(getCbCategory());
+			frame.getContentPane().add(getTfCount());
+			frame.getContentPane().add(getLblNewLabel_8());
 	
 		}
 		private JLabel getLblNewLabel() {
@@ -172,6 +178,7 @@ import java.awt.event.WindowEvent;
 		private JTextField getTfPrice() {
 			if (tfPrice == null) {
 				tfPrice = new JTextField();
+				tfPrice.setHorizontalAlignment(SwingConstants.TRAILING);
 				tfPrice.setBounds(364, 505, 124, 26);
 				tfPrice.setColumns(10);
 			}
@@ -281,6 +288,10 @@ import java.awt.event.WindowEvent;
 				btnUpdate = new JButton("수정");
 				btnUpdate.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int check_i = check();
+						if(check_i==0) {
+							UpdateAction();
+						}
 					}
 				});
 				btnUpdate.setBounds(294, 543, 76, 29);
@@ -344,6 +355,25 @@ import java.awt.event.WindowEvent;
 			return cbCategory;
 		}
 		
+		private JTextField getTfCount() {
+			if (tfCount == null) {
+				tfCount = new JTextField();
+				tfCount.setHorizontalAlignment(SwingConstants.TRAILING);
+				tfCount.setBounds(37, 505, 43, 26);
+				tfCount.setColumns(10);
+			}
+			return tfCount;
+		}
+		private JLabel getLblNewLabel_8() {
+			if (lblNewLabel_8 == null) {
+				lblNewLabel_8 = new JLabel("명 신청");
+				lblNewLabel_8.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+				lblNewLabel_8.setBounds(85, 510, 61, 16);
+			}
+			return lblNewLabel_8;
+		}
+	
+		
 		// 메소드 시작 ***************************************************************
 		
 		// 메인과 해당 창을 연결하는 메소드
@@ -373,21 +403,106 @@ import java.awt.event.WindowEvent;
 			int id = RUDDbAction.dcId;
 
 			RUDDbAction dbaction = new RUDDbAction(id);
-			boolean aaa = dbaction.RegisterDateAction();
+	        RUDBean bean = dbaction.TableClick();
+
 	        try{
-		           if(aaa == true) {
-		              JOptionPane.showMessageDialog(null, "강의 폐강이 완료되었습니다!","폐강 완료!", 
-		                    JOptionPane.INFORMATION_MESSAGE);
+	        	
+		        if(bean.getcCount()>0) {
+		        	JOptionPane.showMessageDialog(null, "수강 인원이 1명 이상이기 때문에 폐강할 수 없습니다!\n폐강을 원하시면 강의를 신청한 수강생에게 연락해\n수강 취소를 요청한 후, 다시 시도해주세요!" ,"폐강 불가!", 
+	        				   JOptionPane.INFORMATION_MESSAGE);
+		        }else {
+		        	
+		        	boolean aaa = dbaction.DeleteAction();
+				    if(aaa == true) {
+				    	JOptionPane.showMessageDialog(null, "강의 폐강이 완료되었습니다!","폐강 완료!", 
+		        				   JOptionPane.INFORMATION_MESSAGE);
+
+		        	   }
 		           }
 		        } catch (Exception e){
-		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
 		                                         "Critical Error!", 
 		                                         JOptionPane.ERROR_MESSAGE);                    
 		            e.printStackTrace();
 		        }
 			
 		}
+		
+		// 강의 등록 수정하는 메소드
+		 private void UpdateAction() {
+		      
+				int id = RUDDbAction.dcId;
 
+		        // Image File
+				String cName = tfCname.getText();
+				String cCategory = cbCategory.getSelectedItem().toString();
+				String cLocation1 = cbLocation.getSelectedItem().toString();
+				String cLocation2 = tfLocation.getText();
+				String cDate = cbYear.getSelectedItem().toString() + "-" + cbMonth.getSelectedItem().toString() + "-" + cbDay.getSelectedItem().toString();
+				String cTime = cbHour.getSelectedItem().toString();
+				int cPrice = Integer.parseInt(tfPrice.getText());
+				String cContents = tContents.getText();
+				
+				// Image File
+				FileInputStream input = null;
+				File file = new File(tfFilePath.getText());
+				try {
+					input = new FileInputStream(file);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				RUDDbAction dbaction = new RUDDbAction(input, cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice, id);
+				boolean aaa = dbaction.UpdateAction();
+				if(aaa == true){
+			          JOptionPane.showMessageDialog(null, "강의 수정이 완료되었습니다!");                    
+				}else{
+			          JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!");                    
+				}
+		
+
+			 
+		 }
+		 
+			// 사용자가 정보 입력 시 비어있는 값이 있는지 확인하는 메소드
+			private int check() {
+				int check = 0;
+				String message = "에 대해 추가로 입력해주세요!";
+				if(tfPrice.getText().trim().isEmpty()) {
+					message = "'강의 가격' " + message;
+					check++;
+					tfPrice.requestFocus();
+				}	
+				if(tContents.getText().trim().isEmpty()) {
+					message = "'강의 소개' " + message;
+					check++;
+					tContents.requestFocus();
+				}	
+				if(tfLocation.getText().trim().isEmpty()) {
+					message = "'장소' " + message;
+					check++;
+					tfLocation.requestFocus();
+				}
+				if(tfCname.getText().trim().isEmpty()) {
+					message = "'강의명' " + message;
+					check++;
+					tfCname.requestFocus();
+				}
+				if(tfFilePath.getText().trim().isEmpty()) {
+					message = "'이미지' " + message;
+					check++;
+					tfFilePath.requestFocus();
+				}
+				
+				if(check>0) {
+					JOptionPane.showMessageDialog(null, message);
+				}
+				
+				return check;
+			}
+
+		 // mysql에 있는 데이터를 view에 불러오는 메소드
 		 private void ShowData() {
 				int id = RUDDbAction.dcId;
 
@@ -395,7 +510,6 @@ import java.awt.event.WindowEvent;
 		        RUDBean bean = dbaction.TableClick();
 		        
 		        tfCname.setText(bean.getcName());
-//		        tfCname.setText(Integer.toString(bean.getSeqno()));
 		        cbCategory.setSelectedItem(bean.getcCategory());
 		        cbLocation.setSelectedItem(bean.getcLocation1());
 		        tfLocation.setText(bean.getcLocation2());
@@ -406,6 +520,7 @@ import java.awt.event.WindowEvent;
 		        cbDay.setSelectedItem(str.substring(8,10));
 		        tContents.setText(bean.getcContents());
 		        tfPrice.setText(Integer.toString(bean.getcPrice()));
+		        tfCount.setText(Integer.toString(bean.getcCount()));
 		        
 		        // Image처리
 		        // File name이 틀려야 즉각 보여주기가 가능하여   
@@ -423,8 +538,6 @@ import java.awt.event.WindowEvent;
 		      
 		      tfFilePath.setText("");
 		 
-		        
 		   }
-		
-	}
 
+	}

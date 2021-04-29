@@ -14,7 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.javaproject.myclass.Review;
+import com.javaproject.myclass.ReviewRegister;
 import com.javaproject.teacherpage.TeacherClassRegister;
 
 import java.awt.event.MouseAdapter;
