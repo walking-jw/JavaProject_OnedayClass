@@ -9,7 +9,10 @@ import com.javaproject.searchpage.SearchView;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class HomeView {
 
@@ -23,8 +26,8 @@ public class HomeView {
 	private JButton btnNewButton_9;
 	private JButton btnNewButton_9_1;
 	private JButton btnNewButton_9_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_3_1;
+	private JLabel lblFirstRecClassName;
+	private JLabel lblSecondRecClassName;
 
 	
 
@@ -40,6 +43,12 @@ public class HomeView {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				applyRecommnd();
+			}
+		});
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -52,8 +61,8 @@ public class HomeView {
 		frame.getContentPane().add(getBtnNewButton_9());
 		frame.getContentPane().add(getBtnNewButton_9_1());
 		frame.getContentPane().add(getBtnNewButton_9_2());
-		frame.getContentPane().add(getLblNewLabel_3());
-		frame.getContentPane().add(getLblNewLabel_3_1());
+		frame.getContentPane().add(getLblFirstRecClassName());
+		frame.getContentPane().add(getLblSecondRecClassName());
 	}
 
 	private JLabel getLblNewLabel() {
@@ -152,13 +161,16 @@ public class HomeView {
 	}
 	
 	//Method
+	int firstRecommndClassId;
+	int secondRecommandClassId;
 	
-	public void firstRecommand() {
-		// cid, cName
-	}
-	
-	public void secondRecommand() {
-		// cid, cName
+	public void applyRecommnd() {
+		DbHomeAction dbHomeAction = new DbHomeAction();
+		ArrayList<HomeBean> beanList = dbHomeAction.recommandClass();
+		firstRecommndClassId = beanList.get(0).getId();
+		secondRecommandClassId = beanList.get(1).getId();
+		lblFirstRecClassName.setText(beanList.get(0).getName());
+		lblSecondRecClassName.setText(beanList.get(1).getName());
 	}
 	
 	public void setVisible_HomeView(boolean b) {
@@ -182,18 +194,18 @@ public class HomeView {
 //		frame.dispose();
 //	}
 	
-	private JLabel getLblNewLabel_3() {
-		if (lblNewLabel_3 == null) {
-			lblNewLabel_3 = new JLabel("New label");
-			lblNewLabel_3.setBounds(59, 289, 212, 16);
+	private JLabel getLblFirstRecClassName() {
+		if (lblFirstRecClassName == null) {
+			lblFirstRecClassName = new JLabel("New label");
+			lblFirstRecClassName.setBounds(59, 289, 212, 16);
 		}
-		return lblNewLabel_3;
+		return lblFirstRecClassName;
 	}
-	private JLabel getLblNewLabel_3_1() {
-		if (lblNewLabel_3_1 == null) {
-			lblNewLabel_3_1 = new JLabel("New label");
-			lblNewLabel_3_1.setBounds(293, 289, 212, 16);
+	private JLabel getLblSecondRecClassName() {
+		if (lblSecondRecClassName == null) {
+			lblSecondRecClassName = new JLabel("New label");
+			lblSecondRecClassName.setBounds(293, 289, 212, 16);
 		}
-		return lblNewLabel_3_1;
+		return lblSecondRecClassName;
 	}
 }
