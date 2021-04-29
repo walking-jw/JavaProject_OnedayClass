@@ -13,10 +13,14 @@ import javax.swing.JButton;
 
 public class AttendOk {
 
+	//------------------------------------Field
 	private JFrame frame;
 	private JButton btnClose;
 	private JLabel lblNewLabel;
 
+	
+	
+	//------------------------------------Constructor
 	/**
 	 * Launch the application.
 	 */
@@ -84,13 +88,15 @@ public class AttendOk {
 	}
 	
 	
-	
+	//------------------------------------Method
 	/*/
-	 * 
+	 * 2021-04-27 권효은
+	 * 확인 프레임 나오게 하기 
 	 */
 	
 	public void setVisible_AttendOk(boolean h) {
 		frame.setVisible(h);
 		
-	}
-}
+	}//setVisible_AttendOk End
+	
+}//end
