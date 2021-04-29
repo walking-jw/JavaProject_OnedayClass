@@ -6,27 +6,26 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DbActionInfo {
 
-	
-//	
-//	//ShareVar에 저장해둔 DataBase 환경 연결
+	//-----------------------Field
+		//ShareVar에 저장해둔 DataBase 환경 연결
 //		public final String url_mysql = ShareVar.url_mysql;
 //		public final String id_mysql = ShareVar.id_mysql;
 //		public final String pw_mysql = ShareVar.pw_mysql;
-//		public static String currentuser ="'java@naver.com'";  // 계속 바꿔주기
+	
+//		public static String currentuser ="'jaewon@naver.com'";  // 계속 바꿔주기
+//		
+//		//이미지 파일
+//		public static int filename = 0;
 		
-	//임시
-	
-	//Database 환경 정의    
-	public static final String url_mysql = "jdbc:mysql://192.168.35.241/useraddress?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
-	public static final String id_mysql = "root";
-	public static final String pw_mysql = "qwer1234";
-
-	
-	
-	
+		//이미지를 넣어주기 
+		FileInputStream file;
+		
+		
+		
 		//필드값
 		
 		int cId;
@@ -40,8 +39,7 @@ public class DbActionInfo {
 		String cTime;
 		String cContents;
 		String ComboxColumn;
-		//이미지
-		FileInputStream cImg;
+		
 		
 		
 		
@@ -61,7 +59,7 @@ public class DbActionInfo {
 		
 		
 		
-		
+		//--------------------------------constructor
 		//기본 생성자
 		public DbActionInfo() {
 			// TODO Auto-generated constructor stub
@@ -77,7 +75,7 @@ public class DbActionInfo {
 			this.cId = cId;
 		}
 		
-		// 강의정보에 들어가는 6개 항목
+		// 강의정보에 들어가는 7개 항목
 		public DbActionInfo( String cName, String tName, String cLocation, String cTime,String cDate, String cContents , int cPrice) {
 			super();
 			this.cName = cName;
@@ -88,6 +86,23 @@ public class DbActionInfo {
 			this.cContents = cContents;
 			this.cPrice = cPrice;
 		}
+		
+		// 이미지를 함께 넣기 
+		public DbActionInfo(FileInputStream file, int cPrice, String tName, String cName, String cLocation, String cDate,
+				String cTime, String cContents) {
+			super();
+			this.file = file;
+			this.cPrice = cPrice;
+			this.tName = tName;
+			this.cName = cName;
+			this.cLocation = cLocation;
+			this.cDate = cDate;
+			this.cTime = cTime;
+			this.cContents = cContents;
+		}
+		
+		
+
 
 		//강사 이름을 통해 강사 정보 불러오기
 		public DbActionInfo(String tName) {
@@ -96,7 +111,8 @@ public class DbActionInfo {
 		}
 		
 		
-		//강의 후기
+
+		//강의 후기 불러오기
 		public DbActionInfo(int cId, int cScore, String sName, String cReview) {
 			super();
 			this.cId = cId;
@@ -106,7 +122,7 @@ public class DbActionInfo {
 		}
 		
 		
-		//QnA
+		//QnA 등록
 		
 		public DbActionInfo(String qContents, String tEmail) {
 			super();
@@ -116,13 +132,13 @@ public class DbActionInfo {
 		
 		
 		
-		
+		//---------------------------------------Method
 		
 		//Button Click -> 강의 세부정보 
 		public Bean2 ButtonClassInfo() {
 		Bean2 bean2 = null;   
-
-		String WhereDefault1 = "select c.cId, c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cTime, c.cDate, c.cContents, cPrice ";
+		//cImg?
+		String WhereDefault1 = "select c.cId, c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cTime, c.cDate, c.cContents, cPrice, cImg ";
 		String WhereDefault2 = "from Class as c, Teacher as t , Register as r "; 
 		String WhereDefault3 = " where c.cId = r.cId and t.tEmail = r.tEmail and c.cId = " ;
 		      
@@ -131,7 +147,7 @@ public class DbActionInfo {
 		        Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 		        Statement stmt_mysql = conn_mysql.createStatement();
 
-		        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 + WhereDefault3+ cId);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
+		        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 + WhereDefault3 + cId);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
 
 		        while(rs.next()){
 //		        	FileInputStream wkcImg=(rs.get);??
@@ -144,6 +160,20 @@ public class DbActionInfo {
 		        	String wkcDate =(rs.getString(6));
 		        	String wkcContents =(rs.getString(7));
 		        	int wkcPrice =(rs.getInt(8));
+		        	
+		        	
+//		        	// File 이미지 불러오기
+//		               filename = filename + 1;
+////		               ShareVar.filename = ShareVar.filename + 1;
+//		               File file = new File(Integer.toString(filename));
+////		               File file = new File(Integer.toString(ShareVar.filename));
+//		               FileOutputStream output = new FileOutputStream(file);
+//		               InputStream input = rs.getBinaryStream(9);
+//		                byte[] buffer = new byte[1024];
+//		                while (input.read(buffer) > 0) {
+//		                    output.write(buffer);
+//		                }
+
 		        
 		          	bean2 = new Bean2( wkcId, wkcName, wktName, wkcLocation, wkcTime, wkcDate, wkcContents, wkcPrice);
 
@@ -169,6 +199,7 @@ public class DbActionInfo {
 			
 			ArrayList<Bean2> beanList = new ArrayList<Bean2>();   		
 
+			
 			String WhereDefault1 = "select c.cId, s.sName, a.cReview, a.cScore from Student as s , Class as c, Attend as a ";
 			String WhereDefault2 = " where s.sEmail = a.sEmail and a.cId = c.cId and c.cId = " ;
 			      
@@ -185,6 +216,7 @@ public class DbActionInfo {
 			        	String wksName =(rs.getString(2));
 			        	String wkcReview =(rs.getString(3));
 			        	Integer wkcScore =(rs.getInt(4));
+			        
 			     
 			        
 			        Bean2 bean2 = new Bean2(wkcId,wksName, wkcReview,wkcScore);
@@ -243,7 +275,7 @@ public class DbActionInfo {
 		
 		
 		
-		//////////----------
+		
 		/*/
 		 * 2021-04-28 오전 12:35_권효은
 		 * QnA insert를 위한 메소드 
@@ -262,8 +294,7 @@ public class DbActionInfo {
 	            String B = ") values (?,curdate(),"+currentuser+",?)";
 	            
 	            ps = conn_mysql.prepareStatement(A+B);
-	            //아래 tfName, tfTelno 등이 누군지 모름
-	            //1. 생성자할때 넣어주자!   혹은 2. 매소드 안에 매개변수를 만들어 줄수도 있음 ---> 우리는 1번 씀
+	           
 	            ps.setString(1, qContents);
 	            ps.setString(2, tEmail);
 	        
@@ -279,6 +310,39 @@ public class DbActionInfo {
 		}//insertQnA End
 		
 
-		//---- 이미지
+		
+		
+		/*/
+		 * 2021-04-29 15:46 권효은
+		 * 강의 수강신청 (버튼 클릭) 시 강의 날짜 , 학생이메일, 강의id - DB에 삽입 
+		 */
+		public boolean AttendOk() {
+			 PreparedStatement ps = null;
+		     try{
+		         Class.forName("com.mysql.cj.jdbc.Driver");
+		         Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+		         @SuppressWarnings("unused")
+					Statement stmt_mysql = conn_mysql.createStatement();//여기선 안쓰는 애
+		
+		         String A = "insert into Attend(cAttendDate, sEmail, cId";
+		         String B = ") values(curdate(),"+ currentuser+", ?)";
+		         
+		         ps = conn_mysql.prepareStatement(A+B);
+		        
+		         ps.setInt(1, cId);
+		      
+		     
+		         ps.executeUpdate();
+		
+		         conn_mysql.close();
+		         
+		         return true;   
+		     } catch (Exception e){
+		
+		         e.printStackTrace();
+		         return false;  
+		     }
+			
+		}//AttendOk End
 	
 }
