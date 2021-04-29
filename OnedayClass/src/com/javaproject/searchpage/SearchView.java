@@ -48,6 +48,7 @@ public class SearchView {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("검색");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

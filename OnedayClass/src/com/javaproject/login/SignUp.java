@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.UIManager;
 
 public class SignUp {
 
@@ -50,6 +52,7 @@ public class SignUp {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("회원가입");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -78,7 +81,8 @@ public class SignUp {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("회원가입");
-			lblNewLabel.setBounds(62, 70, 61, 16);
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 19));
+			lblNewLabel.setBounds(39, 68, 73, 23);
 		}
 		return lblNewLabel;
 	}
@@ -86,56 +90,56 @@ public class SignUp {
 		if (rdbtnCommon == null) {
 			rdbtnCommon = new JRadioButton("일반회원");
 			rdbtnCommon.setSelected(true);
-			rdbtnCommon.setBounds(58, 132, 141, 23);
+			rdbtnCommon.setBounds(39, 117, 111, 23);
 		}
 		return rdbtnCommon;
 	}
 	private JRadioButton getRdbtnTeacher() {
 		if (rdbtnTeacher == null) {
 			rdbtnTeacher = new JRadioButton("강사회원");
-			rdbtnTeacher.setBounds(230, 132, 141, 23);
+			rdbtnTeacher.setBounds(144, 117, 141, 23);
 		}
 		return rdbtnTeacher;
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("아이디(이메일)");
-			lblNewLabel_1.setBounds(62, 196, 111, 16);
+			lblNewLabel_1.setBounds(39, 172, 111, 16);
 		}
 		return lblNewLabel_1;
 	}
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("비밀번호");
-			lblNewLabel_2.setBounds(62, 259, 61, 16);
+			lblNewLabel_2.setBounds(39, 215, 61, 16);
 		}
 		return lblNewLabel_2;
 	}
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("비밀번호 확인");
-			lblNewLabel_3.setBounds(62, 311, 90, 16);
+			lblNewLabel_3.setBounds(39, 263, 90, 16);
 		}
 		return lblNewLabel_3;
 	}
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("이름");
-			lblNewLabel_4.setBounds(62, 370, 61, 16);
+			lblNewLabel_4.setBounds(39, 323, 61, 16);
 		}
 		return lblNewLabel_4;
 	}
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
 			lblNewLabel_5 = new JLabel("닉네임");
-			lblNewLabel_5.setBounds(62, 427, 61, 16);
+			lblNewLabel_5.setBounds(39, 377, 61, 16);
 		}
 		return lblNewLabel_5;
 	}
 	private JLabel getLblNewLabel_6() {
 		if (lblNewLabel_6 == null) {
 			lblNewLabel_6 = new JLabel("전화");
-			lblNewLabel_6.setBounds(62, 485, 61, 16);
+			lblNewLabel_6.setBounds(39, 420, 61, 16);
 		}
 		return lblNewLabel_6;
 	}
@@ -143,7 +147,7 @@ public class SignUp {
 		if (tfName == null) {
 			tfName = new JTextField();
 			tfName.setColumns(10);
-			tfName.setBounds(174, 365, 130, 26);
+			tfName.setBounds(144, 318, 130, 26);
 		}
 		return tfName;
 	}
@@ -151,7 +155,7 @@ public class SignUp {
 		if (tfNickName == null) {
 			tfNickName = new JTextField();
 			tfNickName.setColumns(10);
-			tfNickName.setBounds(174, 422, 130, 26);
+			tfNickName.setBounds(144, 372, 130, 26);
 		}
 		return tfNickName;
 	}
@@ -159,28 +163,28 @@ public class SignUp {
 		if (tfPhone == null) {
 			tfPhone = new JTextField();
 			tfPhone.setColumns(10);
-			tfPhone.setBounds(241, 480, 130, 26);
+			tfPhone.setBounds(243, 415, 157, 26);
 		}
 		return tfPhone;
 	}
 	private JPasswordField getPwdF() {
 		if (pwdF == null) {
 			pwdF = new JPasswordField();
-			pwdF.setBounds(173, 254, 130, 26);
+			pwdF.setBounds(144, 210, 130, 26);
 		}
 		return pwdF;
 	}
 	private JPasswordField getPwdFCheck() {
 		if (pwdFCheck == null) {
 			pwdFCheck = new JPasswordField();
-			pwdFCheck.setBounds(174, 306, 130, 26);
+			pwdFCheck.setBounds(144, 258, 130, 26);
 		}
 		return pwdFCheck;
 	}
 	private JTextField getTfEmail() {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
-			tfEmail.setBounds(174, 191, 130, 26);
+			tfEmail.setBounds(144, 167, 130, 26);
 			tfEmail.setColumns(10);
 		}
 		return tfEmail;
@@ -189,20 +193,22 @@ public class SignUp {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
 			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "google.com"}));
-			cbEmail.setBounds(316, 192, 73, 27);
+			cbEmail.setBounds(274, 168, 143, 27);
 		}
 		return cbEmail;
 	}
 	private JComboBox getCbPhone() {
 		if (cbPhone == null) {
 			cbPhone = new JComboBox();
-			cbPhone.setBounds(174, 481, 52, 27);
+			cbPhone.setModel(new DefaultComboBoxModel(new String[] {"010"}));
+			cbPhone.setBounds(144, 416, 87, 27);
 		}
 		return cbPhone;
 	}
 	private JButton getBtnCheck() {
 		if (btnCheck == null) {
 			btnCheck = new JButton("아이디 확인");
+			btnCheck.setBackground(UIManager.getColor("Desktop.background"));
 			btnCheck.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//id check
@@ -215,7 +221,7 @@ public class SignUp {
 					}
 				}
 			});
-			btnCheck.setBounds(401, 191, 117, 29);
+			btnCheck.setBounds(414, 167, 117, 29);
 		}
 		return btnCheck;
 	}
@@ -229,7 +235,7 @@ public class SignUp {
 					frame.dispose();
 				}
 			});
-			btnCancel.setBounds(241, 539, 117, 29);
+			btnCancel.setBounds(270, 539, 117, 29);
 		}
 		return btnCancel;
 	}
@@ -242,7 +248,7 @@ public class SignUp {
 					signUpAction();
 				}
 			});
-			btnDone.setBounds(388, 539, 117, 29);
+			btnDone.setBounds(399, 539, 117, 29);
 		}
 		return btnDone;
 	}

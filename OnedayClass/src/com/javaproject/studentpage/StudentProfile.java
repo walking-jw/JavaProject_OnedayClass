@@ -52,6 +52,7 @@ public class StudentProfile {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("내 정보");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -84,28 +85,28 @@ public class StudentProfile {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("당신은 손입니다.");
-			lblNewLabel.setBounds(236, 104, 106, 16);
+			lblNewLabel.setBounds(224, 78, 106, 16);
 		}
 		return lblNewLabel;
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("이름");
-			lblNewLabel_1.setBounds(146, 156, 61, 16);
+			lblNewLabel_1.setBounds(134, 150, 61, 16);
 		}
 		return lblNewLabel_1;
 	}
 	private JLabel getLblNewLabel_1_1() {
 		if (lblNewLabel_1_1 == null) {
 			lblNewLabel_1_1 = new JLabel("닉네임");
-			lblNewLabel_1_1.setBounds(146, 184, 61, 16);
+			lblNewLabel_1_1.setBounds(134, 178, 61, 16);
 		}
 		return lblNewLabel_1_1;
 	}
 	private JTextField getTfName() {
 		if (tfName == null) {
 			tfName = new JTextField();
-			tfName.setBounds(219, 151, 130, 26);
+			tfName.setBounds(202, 145, 183, 26);
 			tfName.setColumns(10);
 		}
 		return tfName;
@@ -114,21 +115,21 @@ public class StudentProfile {
 		if (tfNickName == null) {
 			tfNickName = new JTextField();
 			tfNickName.setColumns(10);
-			tfNickName.setBounds(219, 179, 130, 26);
+			tfNickName.setBounds(202, 173, 183, 26);
 		}
 		return tfNickName;
 	}
 	private JLabel getLblNewLabel_1_1_1() {
 		if (lblNewLabel_1_1_1 == null) {
 			lblNewLabel_1_1_1 = new JLabel("이메일");
-			lblNewLabel_1_1_1.setBounds(146, 219, 61, 16);
+			lblNewLabel_1_1_1.setBounds(134, 213, 61, 16);
 		}
 		return lblNewLabel_1_1_1;
 	}
 	private JLabel getLblNewLabel_1_1_1_2() {
 		if (lblNewLabel_1_1_1_2 == null) {
 			lblNewLabel_1_1_1_2 = new JLabel("전화번호");
-			lblNewLabel_1_1_1_2.setBounds(146, 247, 61, 16);
+			lblNewLabel_1_1_1_2.setBounds(134, 241, 61, 16);
 		}
 		return lblNewLabel_1_1_1_2;
 	}
@@ -150,7 +151,7 @@ public class StudentProfile {
 			tfEmail = new JTextField();
 			tfEmail.setEditable(false);
 			tfEmail.setColumns(10);
-			tfEmail.setBounds(219, 214, 130, 26);
+			tfEmail.setBounds(202, 206, 183, 26);
 		}
 		return tfEmail;
 	}
@@ -158,7 +159,7 @@ public class StudentProfile {
 		if (tfPhoneNumber == null) {
 			tfPhoneNumber = new JTextField();
 			tfPhoneNumber.setColumns(10);
-			tfPhoneNumber.setBounds(219, 242, 130, 26);
+			tfPhoneNumber.setBounds(202, 236, 183, 26);
 		}
 		return tfPhoneNumber;
 	}
@@ -182,7 +183,7 @@ public class StudentProfile {
 					changePassword();
 				}
 			});
-			btnChangePwd.setBounds(248, 439, 117, 29);
+			btnChangePwd.setBounds(202, 414, 183, 29);
 		}
 		return btnChangePwd;
 	}
@@ -196,35 +197,35 @@ public class StudentProfile {
 					loadProfile();
 				}
 			});
-			btnEdit.setBounds(232, 274, 117, 29);
+			btnEdit.setBounds(202, 275, 189, 29);
 		}
 		return btnEdit;
 	}
 	private JLabel getLblNewLabel_1_1_1_2_1() {
 		if (lblNewLabel_1_1_1_2_1 == null) {
 			lblNewLabel_1_1_1_2_1 = new JLabel("비밀번호");
-			lblNewLabel_1_1_1_2_1.setBounds(146, 353, 61, 16);
+			lblNewLabel_1_1_1_2_1.setBounds(134, 353, 61, 16);
 		}
 		return lblNewLabel_1_1_1_2_1;
 	}
 	private JLabel getLblNewLabel_1_1_1_2_1_1() {
 		if (lblNewLabel_1_1_1_2_1_1 == null) {
 			lblNewLabel_1_1_1_2_1_1 = new JLabel("비밀번호확인");
-			lblNewLabel_1_1_1_2_1_1.setBounds(146, 381, 73, 16);
+			lblNewLabel_1_1_1_2_1_1.setBounds(134, 381, 73, 16);
 		}
 		return lblNewLabel_1_1_1_2_1_1;
 	}
 	private JPasswordField getPwdF() {
 		if (pwdF == null) {
 			pwdF = new JPasswordField();
-			pwdF.setBounds(224, 348, 130, 26);
+			pwdF.setBounds(202, 348, 188, 26);
 		}
 		return pwdF;
 	}
 	private JPasswordField getPwdFCheck() {
 		if (pwdFCheck == null) {
 			pwdFCheck = new JPasswordField();
-			pwdFCheck.setBounds(219, 376, 130, 26);
+			pwdFCheck.setBounds(202, 376, 183, 26);
 		}
 		return pwdFCheck;
 	}

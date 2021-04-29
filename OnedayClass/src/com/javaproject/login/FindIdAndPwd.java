@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class FindIdAndPwd {
 
@@ -36,6 +37,8 @@ public class FindIdAndPwd {
 	private JRadioButton rdbtnTeacher;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnSignIn;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_5_1;
 
 	
 	/**
@@ -50,6 +53,7 @@ public class FindIdAndPwd {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("아이디/비밀번호 찾기");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -70,46 +74,48 @@ public class FindIdAndPwd {
 		frame.getContentPane().add(getRdbtnCommon());
 		frame.getContentPane().add(getRdbtnTeacher());
 		frame.getContentPane().add(getBtnSignIn());
+		frame.getContentPane().add(getLblNewLabel_5());
+		frame.getContentPane().add(getLblNewLabel_5_1());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("가입시 등록한 이름과 전화번호를 입력하세요.");
-			lblNewLabel.setBounds(101, 110, 244, 16);
+			lblNewLabel.setBounds(101, 139, 244, 16);
 		}
 		return lblNewLabel;
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("이름");
-			lblNewLabel_1.setBounds(101, 346, 61, 16);
+			lblNewLabel_1.setBounds(101, 383, 61, 16);
 		}
 		return lblNewLabel_1;
 	}
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("이름");
-			lblNewLabel_2.setBounds(90, 158, 61, 16);
+			lblNewLabel_2.setBounds(101, 172, 61, 16);
 		}
 		return lblNewLabel_2;
 	}
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("전화번호");
-			lblNewLabel_3.setBounds(101, 199, 61, 16);
+			lblNewLabel_3.setBounds(101, 204, 61, 16);
 		}
 		return lblNewLabel_3;
 	}
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("이메일");
-			lblNewLabel_4.setBounds(101, 392, 61, 16);
+			lblNewLabel_4.setBounds(101, 411, 61, 16);
 		}
 		return lblNewLabel_4;
 	}
 	private JTextField getTfNameId() {
 		if (tfNameId == null) {
 			tfNameId = new JTextField();
-			tfNameId.setBounds(198, 153, 130, 26);
+			tfNameId.setBounds(158, 167, 130, 26);
 			tfNameId.setColumns(10);
 		}
 		return tfNameId;
@@ -118,7 +124,7 @@ public class FindIdAndPwd {
 		if (tfTelNo == null) {
 			tfTelNo = new JTextField();
 			tfTelNo.setColumns(10);
-			tfTelNo.setBounds(283, 194, 130, 26);
+			tfTelNo.setBounds(260, 199, 158, 26);
 		}
 		return tfTelNo;
 	}
@@ -126,7 +132,7 @@ public class FindIdAndPwd {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
 			tfEmail.setColumns(10);
-			tfEmail.setBounds(187, 387, 130, 26);
+			tfEmail.setBounds(174, 406, 130, 26);
 		}
 		return tfEmail;
 	}
@@ -134,7 +140,7 @@ public class FindIdAndPwd {
 		if (tfNamePwd == null) {
 			tfNamePwd = new JTextField();
 			tfNamePwd.setColumns(10);
-			tfNamePwd.setBounds(174, 341, 130, 26);
+			tfNamePwd.setBounds(174, 378, 130, 26);
 		}
 		return tfNamePwd;
 	}
@@ -142,7 +148,7 @@ public class FindIdAndPwd {
 		if (cbTelNo == null) {
 			cbTelNo = new JComboBox();
 			cbTelNo.setModel(new DefaultComboBoxModel(new String[] {"010"}));
-			cbTelNo.setBounds(174, 195, 97, 27);
+			cbTelNo.setBounds(158, 200, 97, 27);
 		}
 		return cbTelNo;
 	}
@@ -150,14 +156,14 @@ public class FindIdAndPwd {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
 			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "google.com"}));
-			cbEmail.setBounds(329, 388, 78, 27);
+			cbEmail.setBounds(314, 407, 117, 27);
 		}
 		return cbEmail;
 	}
 	private JLabel getLblNewLabel_6() {
 		if (lblNewLabel_6 == null) {
 			lblNewLabel_6 = new JLabel("가입시 등록한 이름과 이메일을 입력하세요.");
-			lblNewLabel_6.setBounds(101, 313, 244, 16);
+			lblNewLabel_6.setBounds(101, 350, 244, 16);
 		}
 		return lblNewLabel_6;
 	}
@@ -170,7 +176,7 @@ public class FindIdAndPwd {
 					findId();
 				}
 			});
-			btnFindId.setBounds(94, 234, 117, 29);
+			btnFindId.setBounds(101, 232, 330, 29);
 		}
 		return btnFindId;
 	}
@@ -182,7 +188,7 @@ public class FindIdAndPwd {
 					findPwd();
 				}
 			});
-			btnFindPwd.setBounds(101, 462, 358, 29);
+			btnFindPwd.setBounds(101, 444, 330, 29);
 		}
 		return btnFindPwd;
 	}
@@ -191,7 +197,7 @@ public class FindIdAndPwd {
 			rdbtnCommon = new JRadioButton("일반회원");
 			buttonGroup.add(rdbtnCommon);
 			rdbtnCommon.setSelected(true);
-			rdbtnCommon.setBounds(88, 50, 141, 23);
+			rdbtnCommon.setBounds(101, 65, 97, 23);
 		}
 		return rdbtnCommon;
 	}
@@ -199,7 +205,7 @@ public class FindIdAndPwd {
 		if (rdbtnTeacher == null) {
 			rdbtnTeacher = new JRadioButton("강사회원");
 			buttonGroup.add(rdbtnTeacher);
-			rdbtnTeacher.setBounds(272, 50, 141, 23);
+			rdbtnTeacher.setBounds(210, 65, 141, 23);
 		}
 		return rdbtnTeacher;
 	}
@@ -274,5 +280,21 @@ public class FindIdAndPwd {
 			btnSignIn.setBounds(396, 532, 117, 29);
 		}
 		return btnSignIn;
+	}
+	private JLabel getLblNewLabel_5() {
+		if (lblNewLabel_5 == null) {
+			lblNewLabel_5 = new JLabel("아이디 찾기");
+			lblNewLabel_5.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			lblNewLabel_5.setBounds(101, 110, 80, 16);
+		}
+		return lblNewLabel_5;
+	}
+	private JLabel getLblNewLabel_5_1() {
+		if (lblNewLabel_5_1 == null) {
+			lblNewLabel_5_1 = new JLabel("비밀번호 찾기");
+			lblNewLabel_5_1.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			lblNewLabel_5_1.setBounds(101, 322, 80, 16);
+		}
+		return lblNewLabel_5_1;
 	}
 }
