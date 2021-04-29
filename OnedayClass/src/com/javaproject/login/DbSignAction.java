@@ -163,7 +163,7 @@ public class DbSignAction {
 				} else {
 					return true;
 				}
-			}return false;
+			}return true;
 		}catch (Exception e){
 			e.printStackTrace();
 			return false;
@@ -189,25 +189,153 @@ public class DbSignAction {
 				} else {
 					return true;
 				}
-			}return false;
+			}return true;
 		}catch (Exception e){
 			e.printStackTrace();
 			return false;
 		}
 	}
 	
+	// Find ID
+	// ======================================================
+	// ======================================================
+	// 학생 아이디 찾기
+	public String findCommonId(String name, String phone) {
 		
-	// 아이디 찾기
-	public void findId(String name, String phone) {
+		String id = null;
 		
+		String query = "SELECT sEmail FROM Student WHERE sName = '"+ name + "' and sTelNo = '" + phone + "'";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			ResultSet rs = stmt_mysql.executeQuery(query);
+			
+			if(rs.next()) {
+				id = rs.getString(1);
+			}
+			conn_mysql.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
-	// 비밀번호 찾기
-	public void findPwd(String name, String email) {
+	// 강사 아이디 찾기
+	public String findTeacherId(String name, String phone) {
 		
+		String id = null;
+		
+		String query = "SELECT tEmail FROM Teacher WHERE tName = '"+ name + "' and tTelNo = '" + phone + "'";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			ResultSet rs = stmt_mysql.executeQuery(query);
+			
+			if(rs.next()) {
+				id = rs.getString(1);
+			}
+			conn_mysql.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return id;
+	}
+
+	// 비밀번호 찾기 PART
+	// ==================================================================================
+	// ==================================================================================
+	
+// 학생 정보 확인
+	public boolean checkStudentInfo(String name, String email) {
+		PreparedStatement ps = null;
+		String query = "SELECT sName FROM Student WHERE sEmail = '" + email + "'";
+		try {
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ps = conn_mysql.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				if (rs.getString(1).contentEquals(name)) {
+					return true;
+				} else {
+					return false;
+				}
+			}return false;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	// 학생 비밀번호 찾기
+	public void findCommonPwd(String name, String email, String pwd) {
+		PreparedStatement ps = null;
+		try{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			@SuppressWarnings("unused")
+			Statement stmt_mysql = conn_mysql.createStatement();
+			String query = "update Student set sPassword = '" + pwd + "' WHERE sName = '"+ name + "' and sEmail = '" + email + "'";
+			
+			ps = conn_mysql.prepareStatement(query);
+			ps.executeUpdate();
+			conn_mysql.close();
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	
-	
+	// 강사 정보 확인
+	public boolean checkTeacherInfo(String name, String email) {
+		PreparedStatement ps = null;
+		String query = "SELECT tName FROM Teacher WHERE tEmail = '" + email + "'";
+		try {
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ps = conn_mysql.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				if (rs.getString(1).contentEquals(name)) {
+					return true;
+				} else {
+					return false;
+				}
+			}return false;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	// 강사 비밀번호 찾기
+	public void findTeacherPwd(String name, String email, String pwd) {
+		PreparedStatement ps = null;
+		try{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			@SuppressWarnings("unused")
+			Statement stmt_mysql = conn_mysql.createStatement();
+			String query = "update Teacher set tPassword = '" + pwd + "' WHERE tName = '"+ name + "' and tEmail = '" + email + "'";
+			
+			ps = conn_mysql.prepareStatement(query);
+			ps.executeUpdate();
+			conn_mysql.close();
+		
+		} catch (Exception e){
+			e.printStackTrace();
+		
+		}
+	}
 	
 	
 }

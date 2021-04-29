@@ -164,10 +164,67 @@ public class DbAction {
 		return true;
 	}//
 	
+	public Bean_TeacherClass AverageScore(){
+		
+		Bean_TeacherClass bean = null;
+		
+		String Query00 = "SELECT avg(cScore) FROM Attend, Class, Register, Teacher ";
+		String Query01 = "WHERE Attend.cId = Class.cId and Class.cId = Register.cId and Register.tEmail = Teacher.tEmail ";
+		String Query02 = "And Register.tEmail ='" + ShareVarTest.currentuser + "'";
+		  try{
+		       Class.forName("com.mysql.cj.jdbc.Driver");
+		       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+		       Statement stmt_mysql = conn_mysql.createStatement();
+		       														// url 지금 주석처리되어있어서 그럼!!
+		
+		       ResultSet rs = stmt_mysql.executeQuery(Query00+Query01+Query02);
+		       
+		       if(rs.next()) {
+		    	   
+		    	   int wkScore = rs.getInt(1);
+		    
+		    	   bean = new Bean_TeacherClass(wkScore);
+		       }//if
+		       conn_mysql.close();
+		    } // try 
+			catch (Exception e){
+			e.printStackTrace();
+			}//catch
+			return bean;
+		}	
 	
 	
 	
 	
+	
+	
+public Bean_TeacherClass CountOfClass(){
+		
+		Bean_TeacherClass bean = null;
+		
+		String Query00 = "SELECT count(Class.cId) FROM Class, Register ";
+		String Query01 = "WHERE Register.cId = Class.cId AND Register.tEmail = '" + ShareVarTest.currentuser + "'";
+		  try{
+		       Class.forName("com.mysql.cj.jdbc.Driver");
+		       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+		       Statement stmt_mysql = conn_mysql.createStatement();
+		       														// url 지금 주석처리되어있어서 그럼!!
+		
+		       ResultSet rs = stmt_mysql.executeQuery(Query00+Query01);
+		       
+		       if(rs.next()) {
+		    	   
+		    	   int wkScore = rs.getInt(1);
+		    
+		    	   bean = new Bean_TeacherClass(wkScore);
+		       }//if
+		       conn_mysql.close();
+		    } // try 
+			catch (Exception e){
+			e.printStackTrace();
+			}//catch
+			return bean;
+		}	
 	
 	
 	
@@ -227,7 +284,34 @@ public class DbAction {
 //		
 		
 		
-		
+public Bean_QnA CountOfQnA() {
+	Bean_QnA bean = null;   
+
+	 String Query00 = "SELECT count(qContents) FROM QnA ";
+     String Query01 = "WHERE aContents is null AND tEmail = '" + ShareVarTest.currentuser + "' ";	
+	      
+		try{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+	        Statement stmt_mysql = conn_mysql.createStatement();
+
+	        ResultSet rs = stmt_mysql.executeQuery(Query00+Query01);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
+
+	        while(rs.next()){
+	    
+	        	 int wksEmail = rs.getInt(1);
+	        
+	          	bean = new Bean_QnA(wksEmail);
+
+	        }
+	          conn_mysql.close();
+	          
+	      	}catch (Exception e){
+	      		
+	          e.printStackTrace();
+	      }
+			return bean;
+}
 	
 	
 	

@@ -14,6 +14,10 @@ public class DbAction {
 //		public final String id_mysql = ShareVar.id_mysql;
 //		public final String pw_mysql = ShareVar.pw_mysql;
 //
+	
+	/*/
+	 * static 이므로 -----> (금 작업)
+	 */
 //		//강의 아이디 가져오기
 //		public static int classid = 0;  
 		

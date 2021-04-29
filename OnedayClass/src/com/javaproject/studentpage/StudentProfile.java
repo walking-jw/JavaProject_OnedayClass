@@ -16,11 +16,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Font;
 
 public class StudentProfile {
 
 	private JFrame frame;
-	private JLabel lblNewLabel;
+	private JLabel lblLevel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_1_1;
 	private JTextField tfName;
@@ -37,22 +38,9 @@ public class StudentProfile {
 	private JLabel lblNewLabel_1_1_1_2_1_1;
 	private JPasswordField pwdF;
 	private JPasswordField pwdFCheck;
+	private JLabel lblNewLabel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StudentProfile window = new StudentProfile();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
@@ -66,17 +54,19 @@ public class StudentProfile {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("내 정보");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				tfEmail.setText(ShareVar.currentuser);
 				loadProfile();
+				level();
 			}
 		});
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getLblNewLabel());
+		frame.getContentPane().add(getLblLevel());
 		frame.getContentPane().add(getLblNewLabel_1());
 		frame.getContentPane().add(getLblNewLabel_1_1());
 		frame.getContentPane().add(getTfName());
@@ -93,33 +83,35 @@ public class StudentProfile {
 		frame.getContentPane().add(getLblNewLabel_1_1_1_2_1_1());
 		frame.getContentPane().add(getPwdF());
 		frame.getContentPane().add(getPwdFCheck());
+		frame.getContentPane().add(getLblNewLabel());
 	}
 
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("당신은 손입니다.");
-			lblNewLabel.setBounds(236, 104, 106, 16);
+	private JLabel getLblLevel() {
+		if (lblLevel == null) {
+			lblLevel = new JLabel("발!");
+			lblLevel.setFont(new Font("Lucida Grande", Font.PLAIN, 21));
+			lblLevel.setBounds(303, 86, 27, 16);
 		}
-		return lblNewLabel;
+		return lblLevel;
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("이름");
-			lblNewLabel_1.setBounds(146, 156, 61, 16);
+			lblNewLabel_1.setBounds(134, 150, 61, 16);
 		}
 		return lblNewLabel_1;
 	}
 	private JLabel getLblNewLabel_1_1() {
 		if (lblNewLabel_1_1 == null) {
 			lblNewLabel_1_1 = new JLabel("닉네임");
-			lblNewLabel_1_1.setBounds(146, 184, 61, 16);
+			lblNewLabel_1_1.setBounds(134, 178, 61, 16);
 		}
 		return lblNewLabel_1_1;
 	}
 	private JTextField getTfName() {
 		if (tfName == null) {
 			tfName = new JTextField();
-			tfName.setBounds(219, 151, 130, 26);
+			tfName.setBounds(202, 145, 183, 26);
 			tfName.setColumns(10);
 		}
 		return tfName;
@@ -128,21 +120,21 @@ public class StudentProfile {
 		if (tfNickName == null) {
 			tfNickName = new JTextField();
 			tfNickName.setColumns(10);
-			tfNickName.setBounds(219, 179, 130, 26);
+			tfNickName.setBounds(202, 173, 183, 26);
 		}
 		return tfNickName;
 	}
 	private JLabel getLblNewLabel_1_1_1() {
 		if (lblNewLabel_1_1_1 == null) {
 			lblNewLabel_1_1_1 = new JLabel("이메일");
-			lblNewLabel_1_1_1.setBounds(146, 219, 61, 16);
+			lblNewLabel_1_1_1.setBounds(134, 213, 61, 16);
 		}
 		return lblNewLabel_1_1_1;
 	}
 	private JLabel getLblNewLabel_1_1_1_2() {
 		if (lblNewLabel_1_1_1_2 == null) {
 			lblNewLabel_1_1_1_2 = new JLabel("전화번호");
-			lblNewLabel_1_1_1_2.setBounds(146, 247, 61, 16);
+			lblNewLabel_1_1_1_2.setBounds(134, 241, 61, 16);
 		}
 		return lblNewLabel_1_1_1_2;
 	}
@@ -164,7 +156,7 @@ public class StudentProfile {
 			tfEmail = new JTextField();
 			tfEmail.setEditable(false);
 			tfEmail.setColumns(10);
-			tfEmail.setBounds(219, 214, 130, 26);
+			tfEmail.setBounds(202, 206, 183, 26);
 		}
 		return tfEmail;
 	}
@@ -172,7 +164,7 @@ public class StudentProfile {
 		if (tfPhoneNumber == null) {
 			tfPhoneNumber = new JTextField();
 			tfPhoneNumber.setColumns(10);
-			tfPhoneNumber.setBounds(219, 242, 130, 26);
+			tfPhoneNumber.setBounds(202, 236, 183, 26);
 		}
 		return tfPhoneNumber;
 	}
@@ -196,7 +188,7 @@ public class StudentProfile {
 					changePassword();
 				}
 			});
-			btnChangePwd.setBounds(248, 439, 117, 29);
+			btnChangePwd.setBounds(202, 414, 183, 29);
 		}
 		return btnChangePwd;
 	}
@@ -210,37 +202,48 @@ public class StudentProfile {
 					loadProfile();
 				}
 			});
-			btnEdit.setBounds(232, 274, 117, 29);
+			btnEdit.setBounds(202, 275, 189, 29);
 		}
 		return btnEdit;
 	}
 	private JLabel getLblNewLabel_1_1_1_2_1() {
 		if (lblNewLabel_1_1_1_2_1 == null) {
 			lblNewLabel_1_1_1_2_1 = new JLabel("비밀번호");
-			lblNewLabel_1_1_1_2_1.setBounds(146, 353, 61, 16);
+			lblNewLabel_1_1_1_2_1.setBounds(134, 353, 61, 16);
 		}
 		return lblNewLabel_1_1_1_2_1;
 	}
 	private JLabel getLblNewLabel_1_1_1_2_1_1() {
 		if (lblNewLabel_1_1_1_2_1_1 == null) {
 			lblNewLabel_1_1_1_2_1_1 = new JLabel("비밀번호확인");
-			lblNewLabel_1_1_1_2_1_1.setBounds(146, 381, 73, 16);
+			lblNewLabel_1_1_1_2_1_1.setBounds(134, 381, 73, 16);
 		}
 		return lblNewLabel_1_1_1_2_1_1;
 	}
 	private JPasswordField getPwdF() {
 		if (pwdF == null) {
 			pwdF = new JPasswordField();
-			pwdF.setBounds(224, 348, 130, 26);
+			pwdF.setBounds(202, 348, 188, 26);
 		}
 		return pwdF;
 	}
 	private JPasswordField getPwdFCheck() {
 		if (pwdFCheck == null) {
 			pwdFCheck = new JPasswordField();
-			pwdFCheck.setBounds(219, 376, 130, 26);
+			pwdFCheck.setBounds(202, 376, 183, 26);
 		}
 		return pwdFCheck;
+	}
+	
+	public void setVisible_StudentProfile(boolean b) {
+		frame.setVisible(b);
+	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("당신의 손은 ");
+			lblNewLabel.setBounds(233, 89, 73, 16);
+		}
+		return lblNewLabel;
 	}
 	
 	// Method
@@ -249,7 +252,6 @@ public class StudentProfile {
 	private void loadProfile() {
 		DbProfileAction dbProfileAction = new DbProfileAction();
 		ProfileBean bean = dbProfileAction.loadProfile();
-		
 		tfName.setText(bean.getName());
 		tfNickName.setText(bean.getNickName());
 		tfPhoneNumber.setText(bean.getTelNo());
@@ -279,9 +281,10 @@ public class StudentProfile {
 		return passString;
 	}
 	private void changePassword() {
-		if (strPwd()==strPwdCheck()) {
-			DbProfileAction dbProfileAction = new DbProfileAction();
+		if (strPwd().equals(strPwdCheck()) && strPwd().isEmpty() == false) {
+			DbProfileAction dbProfileAction = new DbProfileAction(strPwdCheck());
 			dbProfileAction.changePwd();
+			JOptionPane.showMessageDialog(null, "비밀번호가 변경 되었습니다.");
 		} else {
 			JOptionPane.showMessageDialog(null, "비밀번호 확인이 다릅니다.");
 		}
@@ -302,8 +305,24 @@ public class StudentProfile {
 	}
 	
 	
-	public void setVisible_StudentProfile(boolean b) {
-		frame.setVisible(b);
+	// 등급구하기
+	private void level() {
+		DbProfileAction action = new DbProfileAction();
+		int res = action.countAttend();
+		
+		if (res < 1) {
+			lblLevel.setText("발!");
+		} 
+		else if (res < 12) {
+			lblLevel.setText("동손!");
+		}
+		else if (res < 36) {
+			lblLevel.setText("은손!");
+		} 
+		else {
+			lblLevel.setText("금손!");
+		}
+		
 	}
 	
 }
