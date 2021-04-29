@@ -9,9 +9,11 @@ import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.home.HomeView;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -112,7 +114,11 @@ public class SignIn {
 			btnSignIn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// 로그인
-					signInAction();
+					if (tfEmail.getText().trim().isEmpty()||strPwd().equals("")) {
+						JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 입력해주세요.");
+					} else {
+						signInAction();
+					}
 				}
 			});
 			btnSignIn.setBounds(201, 297, 117, 29);
@@ -196,16 +202,25 @@ public class SignIn {
 			dbAction.signInStudent();
 			if (dbAction.signInStudent() == true) {
 				ShareVar.currentuser = emailId;
-				System.out.println("Success" + ShareVar.currentuser);
+				segueToStu();
+				//System.out.println("Success" + ShareVar.currentuser);
 			} else {
-				System.out.println("Fail" + emailId);
+				JOptionPane.showMessageDialog(null, "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+				//System.out.println("Fail" + emailId);
 			}
 		} else {
 			dbAction.signInTeacher();
 			if (dbAction.signInTeacher() == true) {
 				ShareVar.currentuser = emailId;
-				System.out.println(ShareVar.currentuser);
+				// 강사페이지 열기
+				//System.out.println(ShareVar.currentuser);
 			}
 		}
+	}
+	
+	private void segueToStu() {
+		HomeView homeView = new HomeView();
+		homeView.setVisible_HomeView(true);
+		frame.dispose();
 	}
 }

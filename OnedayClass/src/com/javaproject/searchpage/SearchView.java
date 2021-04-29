@@ -7,11 +7,17 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+import com.javaproject.home.HomeView;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -54,7 +60,7 @@ public class SearchView {
 	private JComboBox getSelectBox() {
 		if (selectBox == null) {
 			selectBox = new JComboBox();
-			selectBox.setModel(new DefaultComboBoxModel(new String[] {"강의명", "강사", "장소", "날짜"}));
+			selectBox.setModel(new DefaultComboBoxModel(new String[] {"강의명", "카테고리", "장소", "날짜"}));
 			selectBox.setBounds(28, 39, 100, 27);
 		}
 		return selectBox;
@@ -73,6 +79,7 @@ public class SearchView {
 			btnSearch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//검색
+					conditionQuery();
 				}
 			});
 			btnSearch.setBounds(383, 38, 117, 29);
@@ -85,6 +92,9 @@ public class SearchView {
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//닫기
+					HomeView homeView = new HomeView();
+					homeView.setVisible_HomeView(true);
+					frame.dispose();
 				}
 			});
 			btnCancel.setBounds(396, 538, 117, 29);
@@ -157,7 +167,7 @@ public class SearchView {
 			conditonQueryColumn = "강의명";
 			break;
 		case 1:
-			conditonQueryColumn = "강사";
+			conditonQueryColumn = "장소";
 			break;
 		case 2:
 			conditonQueryColumn = "장소";
@@ -171,16 +181,28 @@ public class SearchView {
 		}
 
 		tableInit();
-		//conditionQueryAction(conditonQueryColumn);
+		conditionQueryAction(conditonQueryColumn);
 	}
 	
 	
 	
-	private void conditionQueryAction() {
+	private void conditionQueryAction(String ConditionQueryColumn) {
 		String conditionSearch = tfSearch.getText().trim();
 		
-		DbSearchAction dbSearchAction = new DbSearchAction(conditionSearch, condi);
-		dbSearchAction.conditionQueryColumn();
+		DbSearchAction dbSearchAction = new DbSearchAction(conditionSearch, ConditionQueryColumn);
+		ArrayList<SearchBean> beanList = dbSearchAction.conditionList();
+		
+		int listCount = beanList.size();
+		for(int i=0; i<listCount; i++) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = format.format(beanList.get(i).getDate());
+			
+			String[] qTxt = {beanList.get(i).getName(),beanList.get(i).getCategory(), beanList.get(i).getLacation(), strDate};
+			Outer_Table.addRow(qTxt);
+		}
 	}
 	
+	public void setVisible_SearchView(boolean b) {
+		frame.setVisible(b);
+	}
 }

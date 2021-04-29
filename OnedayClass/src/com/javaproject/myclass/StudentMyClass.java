@@ -150,17 +150,17 @@ import java.awt.event.ActionEvent;
 				btnReview = new JButton("후기 등록");
 				btnReview.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-//						Review review = new Review();
-//						review.setVisible_Review(true);
-//						frame.dispose();
-						
-//						DbAction.ccId = ReviewSub();
-						
-						RUDDbAction.dcId = ReviewSub();
-						
-						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
-						delete.setVisible_TeacherClassUpdateDelete(true);
+						Review review = new Review();
+						review.setVisible_Review(true);
 						frame.dispose();
+						
+						DbAction.ccId = ReviewSub();
+						
+//						RUDDbAction.dcId = ReviewSub();
+						
+//						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
+//						delete.setVisible_TeacherClassUpdateDelete(true);
+//						frame.dispose();
 
 //						TeacherClassRegister register = new TeacherClassRegister();
 //						register.setVisible_TeacherClassRegister(true);
@@ -330,9 +330,8 @@ import java.awt.event.ActionEvent;
 		 }
 		
 		 // 수강 신청 취소하기
-		  private void CancleClick() {
-			  
-			  int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강취소", JOptionPane.YES_NO_OPTION);
+		 private void CancleClick() {
+			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강취소", JOptionPane.YES_NO_OPTION);
 			  if(result==JOptionPane.YES_OPTION) {
 				  try {
 					  int i = Inner_Table_After.getSelectedRow();
@@ -352,21 +351,23 @@ import java.awt.event.ActionEvent;
 			  }catch (Exception e) {
 				// TODO: handle exception
 		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
-                            "Critical Error!", 
-                            JOptionPane.ERROR_MESSAGE); 
+                           "Critical Error!", 
+                           JOptionPane.ERROR_MESSAGE); 
 		            e.printStackTrace();
 			}
 
-		}			  
+		}	
+			  
+			  		  
     	}
-		  
-		  
-		  
-		  public int ReviewSub() {
-				int i = Inner_Table_Before.getSelectedRow();
-				String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
-				int inSequence = Integer.parseInt(wkSequence);
-				return inSequence;
+		 
+		 // 강의 id를 리뷰등록하는 클라스에서도 가져오게 하기 위해 메소드 생성
+		 public int ReviewSub() {
+			 int i = Inner_Table_Before.getSelectedRow();
+			 String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
+			 int inSequence = Integer.parseInt(wkSequence);
+			 return inSequence;
+
 		  }
 		  
 		  

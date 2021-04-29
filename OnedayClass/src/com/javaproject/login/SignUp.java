@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -202,6 +203,18 @@ public class SignUp {
 	private JButton getBtnCheck() {
 		if (btnCheck == null) {
 			btnCheck = new JButton("아이디 확인");
+			btnCheck.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//id check
+					if (checkInputId() == true) {
+						checking = true;
+						JOptionPane.showMessageDialog(null, "사용 가능한 이메일입니다.");
+					} else {
+						checking = false;
+						JOptionPane.showMessageDialog(null, "사용할 수 없는 이메일입니다.");
+					}
+				}
+			});
 			btnCheck.setBounds(401, 191, 117, 29);
 		}
 		return btnCheck;
@@ -245,17 +258,47 @@ public class SignUp {
 		return passString;
 	}
 	
-	private void signUpAction() {
-		String email = tfEmail.getText().trim();
+	private String strPwdCheck() {
+		char[] str = pwdFCheck.getPassword();
+		String passString = new String(str);
+		return passString;
+	}
+	
+	private void applyInfo() {
+		String email = tfEmail.getText().trim() + "@" + cbEmail.getSelectedItem();
 		String name = tfName.getText().trim();
 		String nickName = tfNickName.getText().trim();
-		String phone = tfPhone.getText().trim();
+		String phone = cbPhone.getSelectedItem() + tfPhone.getText().trim();
 		String password = strPwd();
 		DbSignAction dbSignAction = new DbSignAction(email, name, nickName, phone, password);
 		if (rdbtnCommon.isSelected()) {
 			dbSignAction.signUpStudent();
 		} else {
 			dbSignAction.signUpTeacher();
+		}
+	}
+	
+	boolean checking = false;
+	
+	private boolean checkInputId() {
+		String email = tfEmail.getText().trim() + "@" + cbEmail.getSelectedItem();
+		DbSignAction dbSignAction = new DbSignAction(email);
+		if (rdbtnCommon.isSelected()) {
+			return dbSignAction.checkingStudentId();
+		} else {
+			return dbSignAction.checkingTeacherId();
+		}
+	}
+	
+	private void signUpAction() {
+		if (checking = false) {
+			JOptionPane.showMessageDialog(null, "아이디 중복체크를 해주세요.");
+		} else if (tfName.getText().trim().isEmpty() || tfNickName.getText().trim().isEmpty() || tfPhone.getText().trim().isEmpty()){
+			JOptionPane.showMessageDialog(null, "정보를 전부 입력해주세요.");
+		} else if (strPwd() != strPwdCheck()) {
+			JOptionPane.showMessageDialog(null, "비밀번호가 확인과 다릅니다.");
+		} else {
+			applyInfo();
 		}
 	}
 }
