@@ -10,9 +10,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ReviewUpdateDelete {
 
@@ -34,7 +38,7 @@ public class ReviewUpdateDelete {
 	/**
 	 * Create the application.
 	 */
-	public ReviewUpdateDelete() {
+	public ReviewUpdateDelete() { // 2021.04.29 조혜지 view - 후기 수정 / 삭제하는 view
 		initialize();
 	}
 
@@ -43,6 +47,12 @@ public class ReviewUpdateDelete {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				ReviewData();
+			}
+		});
 		frame.setTitle("후기 수정 / 삭제");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,6 +97,7 @@ public class ReviewUpdateDelete {
 	private JRadioButton getRd2() {
 		if (rd2 == null) {
 			rd2 = new JRadioButton("★★");
+			buttonGroup.add(rd2);
 			rd2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			rd2.setForeground(Color.ORANGE);
 			rd2.setBounds(127, 472, 86, 23);
@@ -96,6 +107,7 @@ public class ReviewUpdateDelete {
 	private JRadioButton getRd3() {
 		if (rd3 == null) {
 			rd3 = new JRadioButton("★★★");
+			buttonGroup.add(rd3);
 			rd3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			rd3.setForeground(Color.ORANGE);
 			rd3.setBounds(220, 472, 95, 23);
@@ -105,6 +117,7 @@ public class ReviewUpdateDelete {
 	private JRadioButton getRd4() {
 		if (rd4 == null) {
 			rd4 = new JRadioButton("★★★★");
+			buttonGroup.add(rd4);
 			rd4.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			rd4.setForeground(Color.ORANGE);
 			rd4.setBounds(316, 472, 87, 23);
@@ -114,6 +127,7 @@ public class ReviewUpdateDelete {
 	private JRadioButton getRd5() {
 		if (rd5 == null) {
 			rd5 = new JRadioButton("★★★★★");
+			buttonGroup.add(rd5);
 			rd5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			rd5.setForeground(Color.ORANGE);
 			rd5.setBounds(426, 472, 105, 23);
@@ -139,7 +153,7 @@ public class ReviewUpdateDelete {
 			btnRegister = new JButton("삭제");
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					ReviewRegisterAction();
+					ReviewDeleteAction();
 				}
 			});
 			btnRegister.setBounds(373, 519, 75, 29);
@@ -157,6 +171,11 @@ public class ReviewUpdateDelete {
 	private JButton getBtnRegister_1() {
 		if (btnRegister_1 == null) {
 			btnRegister_1 = new JButton("수정");
+			btnRegister_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ReviewUpdateAction();
+				}
+			});
 			btnRegister_1.setBounds(286, 519, 75, 29);
 		}
 		return btnRegister_1;
@@ -170,5 +189,86 @@ public class ReviewUpdateDelete {
 	public void setVisible_ReviewUpdateDelete(boolean h) {
 		frame.setVisible(h);
 	}
+	
+	
+	 // mysql에 있는 데이터를 view에 불러오는 메소드
+	 private void ReviewData() {
+			int id = DbAction.rcId;
+
+			DbAction dbaction = new DbAction(id);
+	        Bean bean = dbaction.ReviewShowData();
+	        
+	        tReviewContents.setText(bean.getcReview());
+	        if(bean.getcScore()==1) {
+	        	rd1.setSelected(true);
+	        }else if(bean.getcScore()==2) {
+	        	rd2.setSelected(true);
+	        }else if(bean.getcScore()==3) {
+	        	rd3.setSelected(true);
+	        }else if(bean.getcScore()==4) {
+	        	rd4.setSelected(true);
+	        }else {
+	        	rd5.setSelected(true);
+	        }
+
+	   }
+	
+	 // Review를 삭제하는 메소드
+	 private void ReviewDeleteAction() {
+		 int id = DbAction.rcId;
+
+		 DbAction dbAction = new DbAction(id);
+		 boolean aaa = dbAction.reviewDelete();
+		 try {
+			 if(aaa==true) {
+				 JOptionPane.showMessageDialog(null, "후기 삭제가 완료되었습니다!", "삭제 완료!", JOptionPane.INFORMATION_MESSAGE); 
+				 
+			 }
+			 
+		 }catch (Exception e) {
+			// TODO: handle exception
+			 JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
+					 "Critical Error!", 
+					 JOptionPane.ERROR_MESSAGE); 
+		}
+		 
+			 
+		 
+
+		}
+	 
+	 // Review를 수정하는 메소드
+	 private void ReviewUpdateAction() {
+	        int id = DbAction.ccId;
+	        int reviewscore = 0;
+	        if(rd1.isSelected()==true) {
+	           reviewscore = 1;
+	        }else if(rd2.isSelected()==true) {
+	           reviewscore = 2;
+	        }else if(rd3.isSelected()==true) {
+	           reviewscore = 3;
+	        }else if(rd4.isSelected()==true) {
+	           reviewscore = 4;
+	        }else if(rd5.isSelected()==true) {
+	           reviewscore = 5;
+	        }
+	        
+	      DbAction dbAction = new DbAction(id, tReviewContents.getText().trim(), reviewscore);
+	      boolean msg = dbAction.reviewUpdate();
+	        try{
+
+	           if(msg == true) {
+	              
+	              JOptionPane.showMessageDialog(null, "후기 수정이 완료되었습니다!","수정 완료!", JOptionPane.INFORMATION_MESSAGE);
+
+	           }
+	        } catch (Exception e){
+	            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
+	                                         "Critical Error!", 
+	                                         JOptionPane.ERROR_MESSAGE);                    
+	            e.printStackTrace();
+	        }
+	      
+	 }
 	
 }

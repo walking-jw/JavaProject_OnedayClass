@@ -9,6 +9,8 @@ package com.javaproject.myclass;
 		 String cDate;
 		 String cLocation;
 		 int cPrice;
+		 String cReview;
+		 int cScore;
 		 
 		 // Constructor
 		 public Bean() {
@@ -24,69 +26,85 @@ package com.javaproject.myclass;
 		     this.cLocation = cLocation;
 		     this.cPrice = cPrice;
 		 }
-	
-	
-		 // Method
-		 public int getcId() {
-		     return cId;
-		 }
-	
-
-		 public void setcId(int cId) {
-		     this.cId = cId;
-		 }
-	
-	
-		 public String getcAttendDate() {
-		     return cAttendDate;
-		 }
-	
-	
-		 public void setcAttendDate(String cAttendDate) {
-		     this.cAttendDate = cAttendDate;
-		 }
-
-	
-		 public String getcName() {
-		     return cName;
-		 }
-	
-	
-		 public void setcName(String cName) {
-		     this.cName = cName;
-		 }
-	
-
+	 
+		 public Bean(int cId, String cDate, String cName, String cLocation) {
+			super();
+			this.cId = cId;
+			this.cDate = cDate;
+			this.cName = cName;
+			this.cLocation = cLocation;
+		}
 		 
-		 public String getcDate() {
-		     return cDate;
-		 }
-	
-	
-		 public void setcDate(String cDate) {
-		     this.cDate = cDate;
-		 }
-	
-	
-		 public String getcLocation() {
-		     return cLocation;
-		 }
-	
-	
-		 public void setcLocation(String cLocation) {
-		     this.cLocation = cLocation;
-		 }
-	
-	
-	
-		 public int getcPrice() {
-		     return cPrice;
-		 }
+		public Bean(String cReview, int cScore) {
+			super();
+			this.cReview = cReview;
+			this.cScore = cScore;
+		}
 
-	
-		 public void setcPrice(int cPrice) {
-		     this.cPrice = cPrice;
-		 }
-		 
+		// Method
+		public int getcId() {
+			return cId;
+		}
+
+		public void setcId(int cId) {
+			this.cId = cId;
+		}
+
+		public String getcAttendDate() {
+			return cAttendDate;
+		}
+
+		public void setcAttendDate(String cAttendDate) {
+			this.cAttendDate = cAttendDate;
+		}
+
+		public String getcName() {
+			return cName;
+		}
+
+		public void setcName(String cName) {
+			this.cName = cName;
+		}
+
+		public String getcDate() {
+			return cDate;
+		}
+
+		public void setcDate(String cDate) {
+			this.cDate = cDate;
+		}
+
+		public String getcLocation() {
+			return cLocation;
+		}
+
+		public void setcLocation(String cLocation) {
+			this.cLocation = cLocation;
+		}
+
+		public int getcPrice() {
+			return cPrice;
+		}
+
+		public void setcPrice(int cPrice) {
+			this.cPrice = cPrice;
+		}
+
+		public String getcReview() {
+			return cReview;
+		}
+
+		public void setcReview(String cReview) {
+			this.cReview = cReview;
+		}
+
+		public int getcScore() {
+			return cScore;
+		}
+
+		public void setcScore(int cScore) {
+			this.cScore = cScore;
+		}
+
 		 
 		}

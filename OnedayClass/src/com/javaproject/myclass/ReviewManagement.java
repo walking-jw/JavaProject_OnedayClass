@@ -54,8 +54,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				// 창 뜨자마자 불러온 데이터를 보이게 하기 위해 아래의 4개 메소드 삽입
 				TableInitAfter();
 				TableInitBefore();
-				SearchActionAfter();
-				SearchActionBefore();
+				SearchActionIncomplete();
+				SearchActionComplete();
 			}
 		});
 		frame.setTitle("후기관리");
@@ -108,6 +108,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 					ReviewRegister register = new ReviewRegister();
 					register.setVisible_ReviewRegister(true);
 					frame.dispose();
+					
+					DbAction.ucId = ReviewIncomplete();
 				}
 			});
 			btnRegister.setBounds(414, 265, 117, 29);
@@ -141,9 +143,12 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 			btnUpdateDelete = new JButton("수정 / 삭제");
 			btnUpdateDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					ReviewUpdateDelete updateDelete = new ReviewUpdateDelete();
 					updateDelete.setVisible_ReviewUpdateDelete(true);
 					frame.dispose();
+					
+					DbAction.rcId = ReviewComplete();
 					
 				}
 			});
@@ -179,12 +184,10 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	       int i = Outer_Table_Incomplete.getRowCount();
 	       
 	       Outer_Table_Incomplete.addColumn("강의ID");
-	       Outer_Table_Incomplete.addColumn("신청날짜");
-	       Outer_Table_Incomplete.addColumn("강의명");
 	       Outer_Table_Incomplete.addColumn("수강날짜");
+	       Outer_Table_Incomplete.addColumn("강의명");
 	       Outer_Table_Incomplete.addColumn("장소");
-	       Outer_Table_Incomplete.addColumn("가격");
-	       Outer_Table_Incomplete.setColumnCount(6);
+	       Outer_Table_Incomplete.setColumnCount(4);
 
 	       for(int j = 0 ; j < i ; j++){
 	           Outer_Table_Incomplete.removeRow(0);
@@ -205,25 +208,14 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	       
 	       vColIndex = 2;
 	       col = Inner_Table_Incomplete.getColumnModel().getColumn(vColIndex);
-	       width = 120;
+	       width = 200;
 	       col.setPreferredWidth(width);
 
 	       vColIndex = 3;
 	       col = Inner_Table_Incomplete.getColumnModel().getColumn(vColIndex);
 	       width = 100;
 	       col.setPreferredWidth(width);
-	       
-	       vColIndex = 4;
-	       col = Inner_Table_Incomplete.getColumnModel().getColumn(vColIndex);
-	       width = 70;
-	       col.setPreferredWidth(width);
-	     
-	       vColIndex = 5;
-	       col = Inner_Table_Incomplete.getColumnModel().getColumn(vColIndex);
-	       width = 50;
-	       col.setPreferredWidth(width);
-
-	 }
+	}
 	
 	// 후기 작성 완료 테이블 초기화
 	 private void TableInitBefore(){
@@ -233,10 +225,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	     Outer_Table_Complete.addColumn("강의ID");
 	     Outer_Table_Complete.addColumn("신청날짜");
 	     Outer_Table_Complete.addColumn("강의명");
-	     Outer_Table_Complete.addColumn("수강날짜");
 	     Outer_Table_Complete.addColumn("장소");
-	     Outer_Table_Complete.addColumn("가격");
-	     Outer_Table_Complete.setColumnCount(6);
+	     Outer_Table_Complete.setColumnCount(4);
 	     
 	     for(int j = 0 ; j < k ; j++){
 	       Outer_Table_Complete.removeRow(0);
@@ -256,37 +246,26 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	     
 	     vColIndex = 2;
 	     col = Inner_Table_Complete.getColumnModel().getColumn(vColIndex);
-	     width = 120;
+	     width = 200;
 	     col.setPreferredWidth(width);
 	     
 	     vColIndex = 3;
 	     col = Inner_Table_Complete.getColumnModel().getColumn(vColIndex);
 	     width = 100;
 	     col.setPreferredWidth(width);
-	     
-	     vColIndex = 4;
-	     col = Inner_Table_Complete.getColumnModel().getColumn(vColIndex);
-	     width = 70;
-	     col.setPreferredWidth(width);
-	     
-	     vColIndex = 5;
-	     col = Inner_Table_Complete.getColumnModel().getColumn(vColIndex);
-	     width = 50;
-	     col.setPreferredWidth(width);
-	     
 	 }
+	 
 
 	 // 후기 작성 미완료 데이터 불러오기
-	 private void SearchActionAfter(){
+	 private void SearchActionIncomplete(){
 
 	     DbAction dbAction = new DbAction();
-	     ArrayList<Bean> beanList = dbAction.selectListAfter();
+	     ArrayList<Bean> beanList = dbAction.selectListIncomplete();
 	     
 	     int listCount = beanList.size();
 	     for(int i=0; i<listCount; i++) {
 	       String temp1 = Integer.toString(beanList.get(i).getcId());
-	       String temp2 = Integer.toString(beanList.get(i).getcPrice());
-	       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
+	       String[] qTxt = {temp1, beanList.get(i).getcDate(), beanList.get(i).getcName(), beanList.get(i).getcLocation()};
 	       Outer_Table_Incomplete.addRow(qTxt);
 
 	     }
@@ -294,16 +273,15 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	 }
 	 
 	 // 후기 작성 완료 데이터 불러오기
-	 private void SearchActionBefore(){
+	 private void SearchActionComplete(){
 	     
 	     DbAction dbAction = new DbAction();
-	     ArrayList<Bean> beanList = dbAction.selectListBefore();
+	     ArrayList<Bean> beanList = dbAction.selectListComplete();
 	     
 	     int listCount = beanList.size();
 	     for(int i=0; i<listCount; i++) {
 	       String temp1 = Integer.toString(beanList.get(i).getcId());
-	       String temp2 = Integer.toString(beanList.get(i).getcPrice());
-	       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
+	       String[] qTxt = {temp1, beanList.get(i).getcDate(), beanList.get(i).getcName(), beanList.get(i).getcLocation()};
 	       Outer_Table_Complete.addRow(qTxt);
 
 	     }
@@ -312,4 +290,19 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	 }
 	
 
+	 public int ReviewComplete() {
+		 int i = Inner_Table_Complete.getSelectedRow();
+		 String wkSequence = (String)Inner_Table_Complete.getValueAt(i, 0);
+		 int inSequence = Integer.parseInt(wkSequence);
+		 return inSequence;
+
+	  }
+	 
+	 public int ReviewIncomplete() {
+		 int i = Inner_Table_Complete.getSelectedRow();
+		 String wkSequence = (String)Inner_Table_Complete.getValueAt(i, 0);
+		 int inSequence = Integer.parseInt(wkSequence);
+		 return inSequence;
+		 
+	 }
 }

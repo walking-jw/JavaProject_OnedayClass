@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
@@ -19,6 +20,9 @@ import com.javaproject.classlist.DbAction;
 
 public class Classinfo {
 
+
+	//-----------------------------Field
+	
 	private JFrame frame;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -35,9 +39,15 @@ public class Classinfo {
 	private JTextField tfcContents;
 	private JButton btnReview;
 	private JButton btnAttend;
-	private JLabel lblNewLabel_6;
+	private JLabel lblImage;
 	private JTextField tfcPrice;
+	private JLabel tfFilePath;
 
+	
+	//-----------------------------Constructor
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -67,7 +77,6 @@ public class Classinfo {
 	private void initialize() {
 		frame = new JFrame();
 		frame.addWindowListener(new WindowAdapter() {
-		
 			@Override
 			public void windowOpened(WindowEvent e) {
 				//window 시작시 정보를 불러와라!
@@ -78,7 +87,7 @@ public class Classinfo {
 		});
 		frame.setTitle("금손양성소");
 		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
+//		frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());
@@ -96,7 +105,7 @@ public class Classinfo {
 		frame.getContentPane().add(getTfcContents());
 		frame.getContentPane().add(getBtnReview());
 		frame.getContentPane().add(getBtnAttend());
-		frame.getContentPane().add(getLblNewLabel_6());
+		frame.getContentPane().add(getLblImage());
 		frame.getContentPane().add(getTfcPrice());
 	}
 	private JLabel getLblNewLabel() {
@@ -173,8 +182,6 @@ public class Classinfo {
 		if (btntName == null) {
 			btntName = new JButton("");
 			btntName.addActionListener(new ActionListener() {
-				
-			
 				public void actionPerformed(ActionEvent e) {
 					///강사 정보와 QnA창이 뜨게 하기
 					TeacherInfo_QnA tInfo_QnA = new TeacherInfo_QnA();
@@ -248,10 +255,33 @@ public class Classinfo {
 		return btnAttend;
 	}
 	
+	private JLabel getLblImage() {
+		if (lblImage == null) {
+			lblImage = new JLabel("");
+			lblImage.setIcon(new ImageIcon("/Users/hyoeunkwon/Downloads/frame전환.png"));
+			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+			lblImage.setBounds(30, 17, 505, 158);
+		}
+		return lblImage;
+	}
+	private JTextField getTfcPrice() {
+		if (tfcPrice == null) {
+			tfcPrice = new JTextField();
+			tfcPrice.setText("0");
+			tfcPrice.setHorizontalAlignment(SwingConstants.TRAILING);
+			tfcPrice.setEditable(false);
+			tfcPrice.setBounds(286, 558, 130, 26);
+			tfcPrice.setColumns(10);
+		}
+		return tfcPrice;
+	}
 	
-	/*/
-	 * 
-	 */
+	
+	
+	
+	
+	//--------------------------------Method
+	
 	public void setVisible_Classinfo(boolean h) {
 		frame.setVisible(h);
 		
@@ -274,28 +304,27 @@ public class Classinfo {
 		tfcContents.setText(bean2.getcContents());
 		tfcPrice.setText(Integer.toString(bean2.getcPrice()));
 		
+		/*/
+		 * 2021-04-29 (12:56)
+		 * img 불러오기 작업
+		 */
+	
+        // File name이 틀려야 즉각 보여주기가 가능하여   
+        // ShareVar에서 int값으로 정의하여 계속 증가하게 하여 file name으로 사용후 삭제
+        
+//	      String filePath = Integer.toString(DbActionInfo.filename);
+//	//      String filePath = Integer.toString(ShareVar.filename);
+//	      tfFilePath.setText(filePath);
+//	      
+//	      lblImage.setIcon(new ImageIcon(filePath));
+//	      lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+//	      
+//	      File file = new File(filePath);
+//	      file.delete();
+//	      tfFilePath.setText("");
+ 
 		
 	}//ClassInfo End
-	private JLabel getLblNewLabel_6() {
-		if (lblNewLabel_6 == null) {
-			lblNewLabel_6 = new JLabel("");
-			lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_6.setBounds(30, 17, 505, 158);
-		}
-		return lblNewLabel_6;
-	}
-	private JTextField getTfcPrice() {
-		if (tfcPrice == null) {
-			tfcPrice = new JTextField();
-			tfcPrice.setText("0");
-			tfcPrice.setHorizontalAlignment(SwingConstants.TRAILING);
-			tfcPrice.setEditable(false);
-			tfcPrice.setBounds(286, 558, 130, 26);
-			tfcPrice.setColumns(10);
-		}
-		return tfcPrice;
-	}
-	
-	// ------- 이미지 test
+
 
 }
