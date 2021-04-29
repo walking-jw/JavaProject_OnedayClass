@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -57,6 +58,19 @@ public class TeacherQnA {
 		frame.getContentPane().add(getTextField_2());
 		frame.getContentPane().add(getTextField_1_1());
 		frame.getContentPane().add(getLblNewLabel_1_2());
+		
+		JButton btn_Close = new JButton("닫기");
+		btn_Close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * *  
+				qna.setVisible_TeacherQnA_List(true);
+				frame.dispose();	
+				
+			}
+		});
+		btn_Close.setBounds(262, 530, 117, 29);
+		frame.getContentPane().add(btn_Close);
 	}
 
 	
@@ -88,6 +102,7 @@ public class TeacherQnA {
 	private JTextField getTf_QnA_qContents() {
 		if (tf_QnA_qContents == null) {
 			tf_QnA_qContents = new JTextField();
+			tf_QnA_qContents.setEditable(false);
 			tf_QnA_qContents.setBounds(42, 136, 466, 104);
 			tf_QnA_qContents.setColumns(10);
 		}
@@ -105,6 +120,12 @@ public class TeacherQnA {
 			btn_Answer = new JButton("답변하기");
 			btn_Answer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+				UpdateAction_QnA();
+					
+				TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * *  
+				qna.setVisible_TeacherQnA_List(true);
+				frame.dispose();		
+				
 				}
 			});
 			btn_Answer.setBounds(391, 530, 117, 29);
@@ -122,6 +143,7 @@ public class TeacherQnA {
 	private JTextField getTextField_2() {
 		if (tf_QnA_sEmail == null) {
 			tf_QnA_sEmail = new JTextField();
+			tf_QnA_sEmail.setEditable(false);
 			tf_QnA_sEmail.setBounds(92, 37, 179, 26);
 			tf_QnA_sEmail.setColumns(10);
 		}
@@ -130,6 +152,7 @@ public class TeacherQnA {
 	private JTextField getTextField_1_1() {
 		if (tf_QnA_qDate == null) {
 			tf_QnA_qDate = new JTextField();
+			tf_QnA_qDate.setEditable(false);
 			tf_QnA_qDate.setColumns(10);
 			tf_QnA_qDate.setBounds(92, 70, 179, 26);
 		}
@@ -167,9 +190,20 @@ public class TeacherQnA {
 		
 		
 	}
-//	 
-//	 // 수강 이력 데이터 불러오기
-
-	
-	
+private void UpdateAction_QnA() {
+		
+		String sEmail = tf_QnA_sEmail.getText().trim();
+		String qDate = tf_QnA_qDate.getText().trim();
+		String qContents = tf_QnA_qContents.getText();
+		String aContents = tf_QnA_aContents.getText();
+		
+		DbAction_List db = new DbAction_List(sEmail, qDate, qContents, aContents);
+		boolean msg = db.UpdateAction_QnA();
+		if (msg==true) {
+			JOptionPane.showMessageDialog(null, "답변을 달았습니다!");
+		}else {
+			JOptionPane.showInputDialog(this, "답변중 오류가 발생했습니다!");
+		}
+		
+	}
 }

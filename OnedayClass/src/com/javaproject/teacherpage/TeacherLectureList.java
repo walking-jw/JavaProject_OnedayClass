@@ -41,6 +41,7 @@ import java.awt.event.ActionEvent;
 		private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();
 		private JButton btnDetail;
 		private JButton btn_Update_n_Delete;
+		private JButton btn_ToMypage;
 
 
 		
@@ -84,6 +85,7 @@ import java.awt.event.ActionEvent;
 			frame.getContentPane().add(getBtnRegister());
 			frame.getContentPane().add(getBtnDetail());
 			frame.getContentPane().add(getBtn_Update_n_Delete());
+			frame.getContentPane().add(getBtn_ToMypage());
 		}
 		private JLabel getLblNewLabel() {
 			if (lblNewLabel == null) {
@@ -347,4 +349,21 @@ import java.awt.event.ActionEvent;
 		
 		
 		
+		private JButton getBtn_ToMypage() {
+			if (btn_ToMypage == null) {
+				btn_ToMypage = new JButton("닫기");
+				btn_ToMypage.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						TeacherMypage tm = new TeacherMypage();
+						tm.setVisible_TeacherMypage(true);
+						frame.dispose();
+						
+						
+					}
+				});
+				btn_ToMypage.setBounds(30, 548, 117, 29);
+			}
+			return btn_ToMypage;
+		}
 	} //

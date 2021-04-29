@@ -9,12 +9,18 @@ public class Bean_QnA {
 	String qContents;
 	String aContents;
 	
+	int countOfQnA;
 	//Constructor
 	
 	public Bean_QnA() {
 		
 	}
 	
+	public Bean_QnA(int countOfQnA) {
+		super();
+		this.countOfQnA = countOfQnA;
+	}
+
 	public Bean_QnA(String sEmail, String qDate, String qContents) {
 		super();
 		this.sEmail = sEmail;
@@ -63,6 +69,14 @@ public class Bean_QnA {
 
 	public void setaContents(String aContents) {
 		this.aContents = aContents;
+	}
+
+	public int getCountOfQnA() {
+		return countOfQnA;
+	}
+
+	public void setCountOfQnA(int countOfQnA) {
+		this.countOfQnA = countOfQnA;
 	}
 	
 	

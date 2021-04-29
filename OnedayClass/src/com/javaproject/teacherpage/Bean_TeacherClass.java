@@ -16,14 +16,55 @@ public class Bean_TeacherClass {
 	String tNickName;
 	String tEmail;
 	String tTelNo;
-	
-	
+	int Score;
+	int ClassCount;
 	
 	// Constructor
 	
 	
+	public int getScore() {
+		return Score;
+	}
+
+
+
+
+	public int getAttendCount() {
+		return attendCount;
+	}
+
+
+
+
+	public void setAttendCount(int attendCount) {
+		this.attendCount = attendCount;
+	}
+
+
+
+
+	public int getClassCount() {
+		return ClassCount;
+	}
+
+
+
+
+	public void setClassCount(int classCount) {
+		ClassCount = classCount;
+	}
+
+
+
+
+	public void setScore(int score) {
+		Score = score;
+	}
+
+
 	public Bean_TeacherClass() {
 	}
+
 
 	public Bean_TeacherClass(int cId, String cName, String cDate, String cLocation) {
 		super();

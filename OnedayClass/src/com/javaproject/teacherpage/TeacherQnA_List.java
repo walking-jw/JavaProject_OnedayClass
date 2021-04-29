@@ -32,6 +32,7 @@ public class TeacherQnA_List {
 	private JScrollPane scrollPane_1;
 	private JTable Inner_Table_AnswerOK;
 	private JLabel lblNewLabel_1;
+	private JButton btn_ToMypage;
 
 	/**
 	 * Create the application.
@@ -64,6 +65,7 @@ public class TeacherQnA_List {
 		frame.getContentPane().add(getScrollPane());
 		frame.getContentPane().add(getScrollPane_1());
 		frame.getContentPane().add(getLblNewLabel_1());
+		frame.getContentPane().add(getBtn_ToMypage());
 	}
 
 	
@@ -234,6 +236,20 @@ public class TeacherQnA_List {
 			String wkSequence = (String)Inner_Table_QnA.getValueAt(i, 0);
 			return wkSequence;
 	  }
-	
-			 
+	private JButton getBtn_ToMypage() {
+		if (btn_ToMypage == null) {
+			btn_ToMypage = new JButton("닫기");
+			btn_ToMypage.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					TeacherMypage tm = new TeacherMypage();
+					tm.setVisible_TeacherMypage(true);
+					frame.dispose();
+							
+				}
+			});
+			btn_ToMypage.setBounds(366, 562, 117, 29);
+		}
+		return btn_ToMypage;
+	}
 }

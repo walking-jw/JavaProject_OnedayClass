@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class TeacherMypage {
 
@@ -38,6 +40,7 @@ public class TeacherMypage {
 	private JButton btn_Out;
 	private JButton btn_Out_1;
 	private JLabel lbl_Logout;
+	private JLabel lbl_PassCheck;
 
 	public void setVisible_TeacherMypage(boolean i){
 		   	frame.setVisible(i);
@@ -58,6 +61,9 @@ public class TeacherMypage {
 			@Override()
 			public void windowOpened(WindowEvent e) {
 				DBtoClass();
+				Average();
+				CountOfClass();
+				CounfOfQnA();
 			}
 		});
 		frame.setBounds(100, 100, 560, 625);
@@ -84,6 +90,7 @@ public class TeacherMypage {
 		frame.getContentPane().add(getBtn_Out());
 		frame.getContentPane().add(getBtn_Out_1());
 		frame.getContentPane().add(getLbl_Logout());
+		frame.getContentPane().add(getLbl_PassCheck());
 	}
 	private JLabel getLbl_Name() {
 		if (lbl_Name == null) {
@@ -193,6 +200,7 @@ public class TeacherMypage {
 	private JTextField getTf_AveragePoint() {
 		if (tf_AveragePoint == null) {
 			tf_AveragePoint = new JTextField();
+			tf_AveragePoint.setHorizontalAlignment(SwingConstants.CENTER);
 			tf_AveragePoint.setColumns(10);
 			tf_AveragePoint.setBounds(151, 369, 49, 32);
 		}
@@ -228,7 +236,7 @@ public class TeacherMypage {
 					
 				}
 			});
-			btn_TeacherMyclass.setBounds(151, 413, 117, 29);
+			btn_TeacherMyclass.setBounds(151, 413, 159, 29);
 		}
 		return btn_TeacherMyclass;
 	}
@@ -246,7 +254,7 @@ public class TeacherMypage {
 					
 				}
 			});
-			btn_QnA.setBounds(151, 457, 117, 29);
+			btn_QnA.setBounds(151, 457, 159, 29);
 		}
 		return btn_QnA;
 	}
@@ -257,13 +265,30 @@ public class TeacherMypage {
 		}
 		return btn_Out;
 	}
+	private JLabel getLbl_PassCheck() {
+		if (lbl_PassCheck == null) {
+			lbl_PassCheck = new JLabel("");
+			lbl_PassCheck.setForeground(Color.RED);
+			lbl_PassCheck.setBounds(267, 355, 206, 16);
+		}
+		return lbl_PassCheck;
+	}
 	private JButton getBtn_Out_1() {
 		if (btn_Out_1 == null) {
 			btn_Out_1 = new JButton("정보변경");
 			btn_Out_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					UpdateAction_Mypage();
-					ClearColumn();
+					
+					if(tf_Password.getText().equals(tf_PasswordConfirm.getText())) {
+						UpdateAction_Mypage();
+						ClearColumn();
+						DBtoClass();
+						lbl_PassCheck.setText("");
+					}else{
+						lbl_PassCheck.setText("비밀번호가 일치하지 않습니다");
+					}
+//					
+					
 				}
 			});
 			btn_Out_1.setBounds(234, 527, 140, 29);
@@ -290,6 +315,30 @@ public class TeacherMypage {
 		
 	}
 	
+public void Average() {
+		
+		DbAction db = new DbAction();
+		Bean_TeacherClass bean = db.AverageScore();
+		
+		tf_AveragePoint.setText(Integer.toString(bean.getcId()));
+	}
+	
+public void CounfOfQnA() {
+	
+	DbAction db = new DbAction();
+	Bean_QnA bean = db.CountOfQnA();
+	
+	btn_QnA.setText(Integer.toString(bean.getCountOfQnA()) + " 개의 문의 확인");
+}
+
+
+
+public void CountOfClass() {
+	
+	DbAction db = new DbAction();
+	Bean_TeacherClass bean2 = db.CountOfClass();
+	btn_TeacherMyclass.setText(Integer.toString(bean2.getcId()) + " 개의 강의 확인");
+}
 	// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
 	private void ClearColumn() {
 		tf_Name.setText("");
@@ -313,16 +362,10 @@ public class TeacherMypage {
 		DbAction db = new DbAction(name, nickname, email, telno, password);
 		boolean msg = db.UpdateAction();
 		if (msg==true) {
-			JOptionPane.showMessageDialog(btn_Out, "Success");
+			JOptionPane.showMessageDialog(btn_Out, "정보가 수정되었습니다");
 		}else {
-			JOptionPane.showInputDialog(this, "자료 수정 중 에러가 발생하였습니다.");
+			JOptionPane.showInputDialog(this, "자료 수정 중 에러가 발생하였습니다");
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
 }
