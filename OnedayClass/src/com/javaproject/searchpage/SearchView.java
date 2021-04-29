@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -118,6 +119,8 @@ public class SearchView {
 					//Click
 				}
 			});
+			inner_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			inner_table.setModel(Outer_Table);
 		}
 		return inner_table;
 	}
@@ -163,17 +166,17 @@ public class SearchView {
 		
 		switch (i) {
 		case 0:
-			conditonQueryColumn = "강의명";
+			conditonQueryColumn = "cName";
 			break;
 		case 1:
-			conditonQueryColumn = "장소";
+			conditonQueryColumn = "cCategory";
 			break;
 		case 2:
-			conditonQueryColumn = "장소";
+			conditonQueryColumn = "concat(cLocation1, ' ',cLocation2)";
 			break;
 
 		case 3:
-			conditonQueryColumn = "날짜";
+			conditonQueryColumn = "cDateㄱ";
 			break;
 		default:
 			break;

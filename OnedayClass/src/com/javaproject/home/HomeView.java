@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import com.javaproject.searchpage.SearchView;
+import com.javaproject.studentpage.StudentProfile;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -153,6 +154,9 @@ public class HomeView {
 			btnNewButton_9_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//프로필
+					StudentProfile profile = new StudentProfile();
+					profile.setVisible_StudentProfile(true);
+					frame.dispose();
 				}
 			});
 			btnNewButton_9_2.setBounds(355, 533, 117, 29);

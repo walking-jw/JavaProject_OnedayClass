@@ -143,6 +143,13 @@ public class SignIn {
 	private JButton getBtnFind() {
 		if (btnFind == null) {
 			btnFind = new JButton("아이디 / 비밀번호 찾기");
+			btnFind.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FindIdAndPwd findView = new FindIdAndPwd();
+					findView.setVisible_FindView(true);
+					frame.dispose();
+				}
+			});
 			btnFind.setBounds(201, 479, 117, 29);
 		}
 		return btnFind;

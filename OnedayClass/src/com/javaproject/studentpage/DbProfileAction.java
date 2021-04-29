@@ -31,12 +31,18 @@ public class DbProfileAction {
 		this.telNo = telNo;
 	}
 
+	
+	public DbProfileAction(String password) {
+		super();
+		this.password = password;
+	}
+
 	// 프로필 가져오기
 	public ProfileBean loadProfile() {
 		
 		ProfileBean bean = null;
-
-		String WhereDefault = "select sName, sNickname, telNo from Student where sEmsil = "+ShareVar.currentuser;
+		
+		String WhereDefault = "select sName, sNickname, sTelNo from Student where sEmail = '"+ShareVar.currentuser + "'";
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
@@ -91,7 +97,7 @@ public class DbProfileAction {
 			Statement stmt_mysql = conn_mysql.createStatement();
 
 			String A = "update Student set sPassword = ?";
-			String B = " where sEmail = " + ShareVar.currentuser;
+			String B = " where sEmail = '" + ShareVar.currentuser + "'";
 
 			ps = conn_mysql.prepareStatement(A+B);
 			ps.setString(1, password);

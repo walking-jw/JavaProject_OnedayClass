@@ -38,21 +38,7 @@ public class StudentProfile {
 	private JPasswordField pwdF;
 	private JPasswordField pwdFCheck;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StudentProfile window = new StudentProfile();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
@@ -249,7 +235,6 @@ public class StudentProfile {
 	private void loadProfile() {
 		DbProfileAction dbProfileAction = new DbProfileAction();
 		ProfileBean bean = dbProfileAction.loadProfile();
-		
 		tfName.setText(bean.getName());
 		tfNickName.setText(bean.getNickName());
 		tfPhoneNumber.setText(bean.getTelNo());
@@ -279,9 +264,10 @@ public class StudentProfile {
 		return passString;
 	}
 	private void changePassword() {
-		if (strPwd()==strPwdCheck()) {
-			DbProfileAction dbProfileAction = new DbProfileAction();
+		if (strPwd().equals(strPwdCheck()) && strPwd().isEmpty() == false) {
+			DbProfileAction dbProfileAction = new DbProfileAction(strPwdCheck());
 			dbProfileAction.changePwd();
+			JOptionPane.showMessageDialog(null, "비밀번호가 변경 되었습니다.");
 		} else {
 			JOptionPane.showMessageDialog(null, "비밀번호 확인이 다릅니다.");
 		}

@@ -295,10 +295,10 @@ public class SignUp {
 			JOptionPane.showMessageDialog(null, "아이디 중복체크를 해주세요.");
 		} else if (tfName.getText().trim().isEmpty() || tfNickName.getText().trim().isEmpty() || tfPhone.getText().trim().isEmpty()){
 			JOptionPane.showMessageDialog(null, "정보를 전부 입력해주세요.");
-		} else if (strPwd() != strPwdCheck()) {
-			JOptionPane.showMessageDialog(null, "비밀번호가 확인과 다릅니다.");
-		} else {
+		} else if (strPwd().equals(strPwdCheck())) {
 			applyInfo();
+		} else {
+			JOptionPane.showMessageDialog(null, "비밀번호가 확인과 다릅니다.");
 		}
 	}
 }
