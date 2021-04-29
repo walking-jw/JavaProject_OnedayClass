@@ -11,18 +11,17 @@ import java.util.ArrayList;
 public class DbActionInfo {
 
 	//-----------------------Field
-		//ShareVar에 저장해둔 DataBase 환경 연결
+//		//ShareVar에 저장해둔 DataBase 환경 연결
 //		public final String url_mysql = ShareVar.url_mysql;
 //		public final String id_mysql = ShareVar.id_mysql;
 //		public final String pw_mysql = ShareVar.pw_mysql;
-	
 //		public static String currentuser ="'jaewon@naver.com'";  // 계속 바꿔주기
 //		
 //		//이미지 파일
 //		public static int filename = 0;
-		
-		//이미지를 넣어주기 
-		FileInputStream file;
+//		
+//		//이미지를 넣어주기 
+//		FileInputStream file;
 		
 		
 		
@@ -58,7 +57,6 @@ public class DbActionInfo {
 		
 		
 		
-		
 		//--------------------------------constructor
 		//기본 생성자
 		public DbActionInfo() {
@@ -69,6 +67,8 @@ public class DbActionInfo {
 		 * 2021-04-27 권효은
 		 *  cId 와 강의정보 6개 : Table Click을 위한 생성자
 		 */
+		
+		
 		// cId로 정보 불러오기
 		public DbActionInfo(int cId) {
 			super();
@@ -194,7 +194,6 @@ public class DbActionInfo {
 		 */
 		
 
-
 		public ArrayList<Bean2> ClassReview() {
 			
 			ArrayList<Bean2> beanList = new ArrayList<Bean2>();   		
@@ -229,10 +228,48 @@ public class DbActionInfo {
 			          e.printStackTrace();
 			      }
 					return beanList;
-		}
+		}//ClassReview End
 		
 		
+		/*/
+		 * 2021-04-29 18:10 권효은
+		 * 해당 강의에 대한 강의후기 숫자 구하기
+		 */
 
+		public Bean2 CountReview() {
+			
+			Bean2 bean2 = null;   
+			
+			String WhereDefault1 = " select count(cReview) from Attend where cId =";
+		
+			 
+			try{
+				 Class.forName("com.mysql.cj.jdbc.Driver");
+			     Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+			     Statement stmt_mysql = conn_mysql.createStatement();
+
+			     ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + cId); 
+			   
+				          
+				while(rs.next()){  
+					 int wkCountReview = rs.getInt(1);
+			
+					 bean2 = new Bean2(wkCountReview);
+					 
+				    }
+			          conn_mysql.close();
+		          
+		      	}catch (Exception e){
+		      		
+		          e.printStackTrace();
+		      }
+				return bean2;
+		
+		}//CountReview End 
+		
+		
+		
+		
 		
 
 		/*/
@@ -270,7 +307,8 @@ public class DbActionInfo {
 		          e.printStackTrace();
 		      }
 				return bean2;
-		}
+		}//teacherInfo End
+		
 
 		
 		
@@ -316,6 +354,7 @@ public class DbActionInfo {
 		 * 2021-04-29 15:46 권효은
 		 * 강의 수강신청 (버튼 클릭) 시 강의 날짜 , 학생이메일, 강의id - DB에 삽입 
 		 */
+		
 		public boolean AttendOk() {
 			 PreparedStatement ps = null;
 		     try{
@@ -344,5 +383,6 @@ public class DbActionInfo {
 		     }
 			
 		}//AttendOk End
+
 	
-}
+}//end
