@@ -58,8 +58,7 @@ import java.awt.event.WindowEvent;
 		private JTextField tfFilePath;
 		private JButton btnFilePath;
 		private JComboBox cbCategory;
-		private JTextField tfCount;
-		private JLabel lblNewLabel_8;
+		private JButton btnCount;
 	
 	
 	
@@ -112,8 +111,7 @@ import java.awt.event.WindowEvent;
 			frame.getContentPane().add(getTfFilePath());
 			frame.getContentPane().add(getBtnFilePath());
 			frame.getContentPane().add(getCbCategory());
-			frame.getContentPane().add(getTfCount());
-			frame.getContentPane().add(getLblNewLabel_8());
+			frame.getContentPane().add(getBtnCount());
 	
 		}
 		private JLabel getLblNewLabel() {
@@ -369,25 +367,21 @@ import java.awt.event.WindowEvent;
 			}
 			return cbCategory;
 		}
-		
-		private JTextField getTfCount() {
-			if (tfCount == null) {
-				tfCount = new JTextField();
-				tfCount.setHorizontalAlignment(SwingConstants.TRAILING);
-				tfCount.setBounds(37, 505, 43, 26);
-				tfCount.setColumns(10);
-			}
-			return tfCount;
-		}
-		private JLabel getLblNewLabel_8() {
-			if (lblNewLabel_8 == null) {
-				lblNewLabel_8 = new JLabel("명 신청");
-				lblNewLabel_8.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				lblNewLabel_8.setBounds(85, 510, 61, 16);
-			}
-			return lblNewLabel_8;
-		}
 	
+		private JButton getBtnCount() {
+			if (btnCount == null) {
+				btnCount = new JButton("");
+				btnCount.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						AttendStudentInfo studentInfo = new AttendStudentInfo();
+						studentInfo.setVisible_AttendStudentInfo(true);
+						frame.dispose();
+					}
+				});
+				btnCount.setBounds(37, 505, 140, 29);
+			}
+			return btnCount;
+		}
 		
 		// 메소드 시작 ***************************************************************
 		
@@ -541,8 +535,8 @@ import java.awt.event.WindowEvent;
 		        cbDay.setSelectedItem(str.substring(8,10));
 		        tContents.setText(bean.getcContents());
 		        tfPrice.setText(Integer.toString(bean.getcPrice()));
-		        tfCount.setText(Integer.toString(bean.getcCount()));
-		        
+		        btnCount.setText(Integer.toString(bean.getcCount()) + "명 신청");
+		        		        
 		        // Image처리
 		        // File name이 틀려야 즉각 보여주기가 가능하여   
 		        // ShareVar에서 int값으로 정의하여 계속 증가하게 하여 file name으로 사용후 삭제
@@ -560,5 +554,6 @@ import java.awt.event.WindowEvent;
 		      tfFilePath.setText("");
 		 
 		   }
+
 
 	}

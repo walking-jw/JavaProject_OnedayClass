@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 	public class MyClassDbAction { // 2021.04.26 조혜지 - 수강 예정과 수강 이력 데이터 테이블표에 불러오기 & 수강 예정 강의 mysql 연결해 수강 신청 취소하기
-		                    // 2021.04.29 조혜지 - 후기 미작성 내역과 작성 내역 데이터 테이블표에 불러오기
+		                           // 2021.04.29 조혜지 - 후기 미작성 내역과 작성 내역 데이터 테이블표에 불러오기
  
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
 	public static final String url_mysql = "jdbc:mysql://192.168.0.5/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";

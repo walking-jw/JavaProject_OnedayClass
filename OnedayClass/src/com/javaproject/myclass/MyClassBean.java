@@ -2,7 +2,7 @@ package com.javaproject.myclass;
 
 	public class MyClassBean { // 2021.04.27 조혜지 - selectListAfter와 selectListBefore의 Bean을 가진 ArrayList 만들기 위해 Bean 클라스 추가
 	
-		 // Field
+	    // Field*****************************************
 		 int cId;
 		 String cAttendDate;
 		 String cName;
@@ -12,7 +12,7 @@ package com.javaproject.myclass;
 		 String cReview;
 		 int cScore;
 		 
-		 // Constructor
+		 // Constructor*****************************************
 		 public MyClassBean() {
 		     // TODO Auto-generated constructor stub
 		 }
@@ -41,7 +41,8 @@ package com.javaproject.myclass;
 			this.cScore = cScore;
 		}
 
-		// Method
+		// Method*****************************************
+
 		public int getcId() {
 			return cId;
 		}

@@ -53,8 +53,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 			@Override
 			public void windowOpened(WindowEvent e) {
 				// 창 뜨자마자 불러온 데이터를 보이게 하기 위해 아래의 4개 메소드 삽입
-				TableInitAfter();
-				TableInitBefore();
+				TableInitIncomplete();
+				TableInitComplete();
 				SearchActionIncomplete();
 				SearchActionComplete();
 			}
@@ -96,7 +96,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				}
 			});
 			Inner_Table_Incomplete.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			// InnerTable과 OuterTable연결 (수강 예정)
+			// InnerTable과 OuterTable연결 (후기 미작성)
 			Inner_Table_Incomplete.setModel(Outer_Table_Incomplete);
 			
 		}
@@ -167,7 +167,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				}
 			});
 			Inner_Table_Complete.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			// InnerTable과 OuterTable연결 (수강 이력)
+			// InnerTable과 OuterTable연결 (후기 작성)
 			Inner_Table_Complete.setModel(Outer_Table_Complete);
 		}
 
@@ -197,7 +197,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	}
 	
 	// 후기 작성 미완료 테이블 초기화
-	private void TableInitAfter(){
+	private void TableInitIncomplete(){
 	       int i = Outer_Table_Incomplete.getRowCount();
 	       
 	       Outer_Table_Incomplete.addColumn("강의ID");
@@ -235,7 +235,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	}
 	
 	// 후기 작성 완료 테이블 초기화
-	 private void TableInitBefore(){
+	 private void TableInitComplete(){
 
 	     int k = Outer_Table_Complete.getRowCount();
 	     

@@ -2,7 +2,8 @@ package com.javaproject.teacherpage;
 
 public class RUDBean { // 2021.04.28 조혜지 - ShowData의 Bean을 가진 ArrayList 만들기 위해 Bean 클라스 추가
 	
-	// Field
+    // Field*****************************************
+	
 	String cName;
 	String cCategory;
 	String cLocation1;
@@ -13,7 +14,8 @@ public class RUDBean { // 2021.04.28 조혜지 - ShowData의 Bean을 가진 Arra
 	int cPrice;
 	int cCount;
 	
-	// Constructor
+	// Constructor*****************************************
+	
 	public RUDBean() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +35,8 @@ public class RUDBean { // 2021.04.28 조혜지 - ShowData의 Bean을 가진 Arra
 		this.cCount = cCount;
 	}
 
-	// Method
+	// Method*****************************************
+
 	public String getcName() {
 		return cName;
 	}
