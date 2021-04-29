@@ -22,7 +22,9 @@ import com.javaproject.classlist.DbAction;
 import javax.swing.JButton;
 
 public class TeacherInfo_QnA {
-
+	
+	//--------------------------------Field
+	
 	private JFrame frame;
 	private JLabel lbltName;
 	private JLabel lbltNickName;
@@ -36,7 +38,10 @@ public class TeacherInfo_QnA {
 	private JButton btnQnA;
 	private JScrollPane scrollPane;
 	private JTextPane tfqContents;
+	private JLabel lblNewLabel;
 
+	
+	//--------------------------------Constructor
 	/**
 	 * Launch the application.
 	 */
@@ -72,7 +77,7 @@ public class TeacherInfo_QnA {
 				
 				/*
 				 * 2021-04-27 권효은
-				 * 강사정보 창이 켜지면 해당 강사 정보 불러와 지는 메소드 적용
+				 * 강사정보 창이 켜지면 해당 강사 정보 불러오는 메소드 적용
 				 */
 				teacherInfo();
 				
@@ -94,6 +99,7 @@ public class TeacherInfo_QnA {
 		frame.getContentPane().add(getLblQnA());
 		frame.getContentPane().add(getBtnQnA());
 		frame.getContentPane().add(getScrollPane());
+		frame.getContentPane().add(getLblNewLabel());
 	}
 
 	
@@ -106,6 +112,7 @@ public class TeacherInfo_QnA {
 		}
 		return lbltName;
 	}
+	
 	private JLabel getLbltNickName() {
 		if (lbltNickName == null) {
 			lbltNickName = new JLabel("닉네임 :");
@@ -130,6 +137,7 @@ public class TeacherInfo_QnA {
 		}
 		return lbltEmail;
 	}
+	
 	private JTextField getTftName() {
 		if (tftName == null) {
 			tftName = new JTextField();
@@ -139,6 +147,7 @@ public class TeacherInfo_QnA {
 		}
 		return tftName;
 	}
+	
 	private JTextField getTftNickName() {
 		if (tftNickName == null) {
 			tftNickName = new JTextField();
@@ -157,6 +166,7 @@ public class TeacherInfo_QnA {
 		}
 		return tftTelNo;
 	}
+	
 	private JTextField getTftEmail() {
 		if (tftEmail == null) {
 			tftEmail = new JTextField();
@@ -166,6 +176,7 @@ public class TeacherInfo_QnA {
 		}
 		return tftEmail;
 	}
+	
 	private JLabel getLblQnA() {
 		if (lblQnA == null) {
 			lblQnA = new JLabel("QnA");
@@ -174,6 +185,7 @@ public class TeacherInfo_QnA {
 		}
 		return lblQnA;
 	}
+	
 	private JButton getBtnQnA() {
 		if (btnQnA == null) {
 			btnQnA = new JButton("작성");
@@ -201,16 +213,44 @@ public class TeacherInfo_QnA {
 		return btnQnA;
 	}
 	
-	//Method
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setBounds(40, 298, 470, 203);
+			scrollPane.setViewportView(getTfqContents());
+		}
+		return scrollPane;
+	}
+	
+	private JTextPane getTfqContents() {
+		if (tfqContents == null) {
+			tfqContents = new JTextPane();
+		}
+		return tfqContents;
+	}
+	
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("Img");
+			lblNewLabel.setBounds(56, 128, 61, 16);
+		}
+		return lblNewLabel;
+	}
+	
+	//--------------------------------Method
+	
+	//강사정보 및 QnA 프레임 보이기
 	public void setVisible_tInfo_QnA(boolean h) {
 		frame.setVisible(h);
 		
 	}//setVisible_tInfo_QnA End
 	
+	
 	/*/
 	 * 2021-04-28 오전 12:32 _권효은
+	 * 강사정보를 받아와서 강사정보 입력!
 	 */
-	// 강사정보를 받아와서 강사정보 입력!
+	
 	public void teacherInfo() {
 		
 		int cid = DbAction.classid;
@@ -225,7 +265,8 @@ public class TeacherInfo_QnA {
 	
 	}//teacherInfo End
 	
-	//QnA 	입력하기
+	
+	//QnA 입력하기
 	public void insertQnA() {
 		
 		String qcontents = tfqContents.getText().trim();
@@ -246,18 +287,6 @@ public class TeacherInfo_QnA {
 			
 		}
 	}//QnA End
-	private JScrollPane getScrollPane() {
-		if (scrollPane == null) {
-			scrollPane = new JScrollPane();
-			scrollPane.setBounds(40, 298, 470, 203);
-			scrollPane.setViewportView(getTfqContents());
-		}
-		return scrollPane;
-	}
-	private JTextPane getTfqContents() {
-		if (tfqContents == null) {
-			tfqContents = new JTextPane();
-		}
-		return tfqContents;
-	}
-}
+	
+	
+}//end
