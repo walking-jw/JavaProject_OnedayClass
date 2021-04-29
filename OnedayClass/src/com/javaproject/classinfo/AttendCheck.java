@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,9 +16,8 @@ public class AttendCheck {
 
 	private JFrame frame;
 	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JButton btnCancel;
+	private JButton btnOk;
 
 	/**
 	 * Launch the application.
@@ -49,41 +51,71 @@ public class AttendCheck {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getLblNewLabel_1());
-		frame.getContentPane().add(getBtnNewButton());
-		frame.getContentPane().add(getBtnNewButton_1());
+		frame.getContentPane().add(getBtnCancel());
+		frame.getContentPane().add(getBtnOk());
 	}
 
+	
+	
+	
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("강의를 신청 하시겠습니까?");
-			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel = new JLabel("참석하시겠습니까");
 			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-			lblNewLabel.setBounds(165, 109, 252, 25);
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setBounds(98, 81, 223, 37);
 		}
 		return lblNewLabel;
 	}
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_1.setIcon(new ImageIcon("/Users/hyoeunkwon/Downloads/warning-icon-2.png"));
-			lblNewLabel_1.setBounds(30, 60, 124, 132);
+	private JButton getBtnCancel() {
+		if (btnCancel == null) {
+			btnCancel = new JButton("취소");
+			btnCancel.addActionListener(new ActionListener() {
+				
+		
+				public void actionPerformed(ActionEvent e) {
+					/*
+					 *취소 버튼 누를시 ------> 홈으로 돌아가기 (도영님 부분)
+					 */
+					//일단은 강의 정보로 가게끔 
+					Classinfo classinfo = new Classinfo();
+					classinfo.setVisible_Classinfo(true);
+					frame.dispose();
+				}
+			});
+			btnCancel.setBounds(57, 176, 117, 29);
 		}
-		return lblNewLabel_1;
+		return btnCancel;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("취소");
-			btnNewButton.setBounds(165, 180, 117, 29);
+	private JButton getBtnOk() {
+		if (btnOk == null) {
+			btnOk = new JButton("확인");
+			btnOk.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					/*/
+					 * 
+					 */
+					
+					AttendOk attendOk = new AttendOk();
+					attendOk.setVisible_AttendOk(true);
+					frame.dispose();
+					
+					
+				}
+			});
+			btnOk.setBounds(244, 176, 117, 29);
 		}
-		return btnNewButton;
+		return btnOk;
 	}
-	private JButton getBtnNewButton_1() {
-		if (btnNewButton_1 == null) {
-			btnNewButton_1 = new JButton("신청");
-			btnNewButton_1.setBounds(300, 180, 117, 29);
-		}
-		return btnNewButton_1;
+	
+	
+	/*/
+	 * 
+	 */
+	public void setVisible_AttendCheck(boolean h) {
+		frame.setVisible(h);
+		
 	}
+
 }
