@@ -7,7 +7,7 @@ public class Bean_QnA {
 	String sEmail;
 	String qDate;
 	String qContents;
-
+	String aContents;
 	
 	//Constructor
 	
@@ -24,7 +24,14 @@ public class Bean_QnA {
 
 	
 	
-	
+	public Bean_QnA(String sEmail, String qDate, String qContents, String aContents) {
+		super();
+		this.sEmail = sEmail;
+		this.qDate = qDate;
+		this.qContents = qContents;
+		this.aContents = aContents;
+	}
+
 	//Method
 	public String getsEmail() {
 		return sEmail;
@@ -48,6 +55,14 @@ public class Bean_QnA {
 
 	public void setqContents(String qContents) {
 		this.qContents = qContents;
+	}
+
+	public String getaContents() {
+		return aContents;
+	}
+
+	public void setaContents(String aContents) {
+		this.aContents = aContents;
 	}
 	
 	

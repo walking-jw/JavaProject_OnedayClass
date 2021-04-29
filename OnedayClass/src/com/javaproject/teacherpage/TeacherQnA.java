@@ -8,19 +8,24 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TeacherQnA {
 
 	private JFrame frame;
 	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_1_1;
 	private JLabel lblNewLabel_2_1;
-	private JTextField textField;
+	private JTextField tf_QnA_qContents;
 	private JLabel lblNewLabel_2_1_1;
-	private JButton btnNewButton;
-	private JTextField textField_1;
+	private JButton btn_Answer;
+	private JTextField tf_QnA_aContents;
+	private JTextField tf_QnA_sEmail;
+	private JTextField tf_QnA_qDate;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Create the application.
@@ -34,18 +39,24 @@ public class TeacherQnA {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				ClassInfo();
+			}
+		});
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getLblNewLabel_1());
-		frame.getContentPane().add(getLblNewLabel_2());
-		frame.getContentPane().add(getLblNewLabel_1_1());
 		frame.getContentPane().add(getLblNewLabel_2_1());
-		frame.getContentPane().add(getTextField());
+		frame.getContentPane().add(getTf_QnA_qContents());
 		frame.getContentPane().add(getLblNewLabel_2_1_1());
-		frame.getContentPane().add(getBtnNewButton());
-		frame.getContentPane().add(getTextField_1());
+		frame.getContentPane().add(getBtn_Answer());
+		frame.getContentPane().add(getTf_QnA_aContents());
+		frame.getContentPane().add(getTextField_2());
+		frame.getContentPane().add(getTextField_1_1());
+		frame.getContentPane().add(getLblNewLabel_1_2());
 	}
 
 	
@@ -67,41 +78,20 @@ public class TeacherQnA {
 		}
 		return lblNewLabel;
 	}
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("김질문");
-			lblNewLabel_1.setBounds(131, 42, 61, 16);
-		}
-		return lblNewLabel_1;
-	}
-	private JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("강의명");
-			lblNewLabel_2.setBounds(42, 70, 61, 16);
-		}
-		return lblNewLabel_2;
-	}
-	private JLabel getLblNewLabel_1_1() {
-		if (lblNewLabel_1_1 == null) {
-			lblNewLabel_1_1 = new JLabel("유니의 비밀레시피");
-			lblNewLabel_1_1.setBounds(131, 70, 189, 16);
-		}
-		return lblNewLabel_1_1;
-	}
 	private JLabel getLblNewLabel_2_1() {
 		if (lblNewLabel_2_1 == null) {
 			lblNewLabel_2_1 = new JLabel("질문내용");
-			lblNewLabel_2_1.setBounds(42, 98, 61, 16);
+			lblNewLabel_2_1.setBounds(42, 108, 61, 16);
 		}
 		return lblNewLabel_2_1;
 	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setBounds(42, 126, 466, 104);
-			textField.setColumns(10);
+	private JTextField getTf_QnA_qContents() {
+		if (tf_QnA_qContents == null) {
+			tf_QnA_qContents = new JTextField();
+			tf_QnA_qContents.setBounds(42, 136, 466, 104);
+			tf_QnA_qContents.setColumns(10);
 		}
-		return textField;
+		return tf_QnA_qContents;
 	}
 	private JLabel getLblNewLabel_2_1_1() {
 		if (lblNewLabel_2_1_1 == null) {
@@ -110,19 +100,76 @@ public class TeacherQnA {
 		}
 		return lblNewLabel_2_1_1;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("작성");
-			btnNewButton.setBounds(391, 530, 117, 29);
+	private JButton getBtn_Answer() {
+		if (btn_Answer == null) {
+			btn_Answer = new JButton("답변하기");
+			btn_Answer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btn_Answer.setBounds(391, 530, 117, 29);
 		}
-		return btnNewButton;
+		return btn_Answer;
 	}
-	private JTextField getTextField_1() {
-		if (textField_1 == null) {
-			textField_1 = new JTextField();
-			textField_1.setBounds(42, 284, 466, 234);
-			textField_1.setColumns(10);
+	private JTextField getTf_QnA_aContents() {
+		if (tf_QnA_aContents == null) {
+			tf_QnA_aContents = new JTextField();
+			tf_QnA_aContents.setBounds(42, 284, 466, 234);
+			tf_QnA_aContents.setColumns(10);
 		}
-		return textField_1;
+		return tf_QnA_aContents;
 	}
+	private JTextField getTextField_2() {
+		if (tf_QnA_sEmail == null) {
+			tf_QnA_sEmail = new JTextField();
+			tf_QnA_sEmail.setBounds(92, 37, 179, 26);
+			tf_QnA_sEmail.setColumns(10);
+		}
+		return tf_QnA_sEmail;
+	}
+	private JTextField getTextField_1_1() {
+		if (tf_QnA_qDate == null) {
+			tf_QnA_qDate = new JTextField();
+			tf_QnA_qDate.setColumns(10);
+			tf_QnA_qDate.setBounds(92, 70, 179, 26);
+		}
+		return tf_QnA_qDate;
+	}
+	private JLabel getLblNewLabel_1_2() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("질문일자");
+			lblNewLabel_1.setBounds(42, 75, 61, 16);
+		}
+		return lblNewLabel_1;
+	}
+	
+	// * * * * * * MeThod * * * * * * //
+	
+	// 해당 창 띄우게 하기
+	public void setVisible_QnA(boolean i) {
+		frame.setVisible(true);
+		
+	}
+	
+	//
+	public void ClassInfo() {
+		
+		String cid = DbAction_List.sName;
+		
+		DbAction_List dbAction = new DbAction_List(cid);
+		
+		Bean_QnA bean2 = dbAction.selectList_QnA_Detail();
+		
+		tf_QnA_sEmail.setText(bean2.getsEmail());
+		tf_QnA_qDate.setText(bean2.getqDate());
+		tf_QnA_qContents.setText(bean2.getqContents());
+		tf_QnA_aContents.setText(bean2.getaContents());
+		
+		
+	}
+//	 
+//	 // 수강 이력 데이터 불러오기
+
+	
+	
 }
