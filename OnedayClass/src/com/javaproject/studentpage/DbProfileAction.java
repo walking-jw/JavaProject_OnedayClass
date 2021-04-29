@@ -138,4 +138,25 @@ public class DbProfileAction {
 		}
 	}
 	
+	// 등급구하기
+	public int countAttend() {
+		int attend = 0;
+		
+		String query = "SELECT COUNT(*) FROM Attend WHERE sEmail = '" + ShareVar.currentuser + "' and cCancelDate IS NULL";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			ResultSet rs = stmt_mysql.executeQuery(query);
+			
+			if(rs.next()) {
+				attend = rs.getInt(1);
+			}
+			conn_mysql.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return attend;
+	}
+	
 }
