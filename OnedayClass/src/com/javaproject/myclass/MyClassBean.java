@@ -1,6 +1,6 @@
 package com.javaproject.myclass;
 
-	public class Bean { // 2021.04.27 조혜지 - selectListAfter와 selectListBefore의 Bean을 가진 ArrayList 만들기 위해 Bean 클라스 추가
+	public class MyClassBean { // 2021.04.27 조혜지 - selectListAfter와 selectListBefore의 Bean을 가진 ArrayList 만들기 위해 Bean 클라스 추가
 	
 		 // Field
 		 int cId;
@@ -13,11 +13,11 @@ package com.javaproject.myclass;
 		 int cScore;
 		 
 		 // Constructor
-		 public Bean() {
+		 public MyClassBean() {
 		     // TODO Auto-generated constructor stub
 		 }
 
-		 public Bean(int cId, String cAttendDate, String cName, String cDate, String cLocation, int cPrice) {
+		 public MyClassBean(int cId, String cAttendDate, String cName, String cDate, String cLocation, int cPrice) {
 		     super();
 		     this.cId = cId;
 		     this.cAttendDate = cAttendDate;
@@ -27,7 +27,7 @@ package com.javaproject.myclass;
 		     this.cPrice = cPrice;
 		 }
 	 
-		 public Bean(int cId, String cDate, String cName, String cLocation) {
+		 public MyClassBean(int cId, String cDate, String cName, String cLocation) {
 			super();
 			this.cId = cId;
 			this.cDate = cDate;
@@ -35,7 +35,7 @@ package com.javaproject.myclass;
 			this.cLocation = cLocation;
 		}
 		 
-		public Bean(String cReview, int cScore) {
+		public MyClassBean(String cReview, int cScore) {
 			super();
 			this.cReview = cReview;
 			this.cScore = cScore;

@@ -93,6 +93,7 @@ import java.awt.event.WindowEvent;
 		private JRadioButton getRd2() {
 			if (rd2 == null) {
 				rd2 = new JRadioButton("★★");
+				buttonGroup.add(rd2);
 				rd2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 				rd2.setForeground(Color.ORANGE);
 				rd2.setBounds(127, 472, 86, 23);
@@ -102,6 +103,7 @@ import java.awt.event.WindowEvent;
 		private JRadioButton getRd3() {
 			if (rd3 == null) {
 				rd3 = new JRadioButton("★★★");
+				buttonGroup.add(rd3);
 				rd3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 				rd3.setForeground(Color.ORANGE);
 				rd3.setBounds(220, 472, 95, 23);
@@ -111,6 +113,7 @@ import java.awt.event.WindowEvent;
 		private JRadioButton getRd4() {
 			if (rd4 == null) {
 				rd4 = new JRadioButton("★★★★");
+				buttonGroup.add(rd4);
 				rd4.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 				rd4.setForeground(Color.ORANGE);
 				rd4.setBounds(316, 472, 87, 23);
@@ -120,6 +123,7 @@ import java.awt.event.WindowEvent;
 		private JRadioButton getRd5() {
 			if (rd5 == null) {
 				rd5 = new JRadioButton("★★★★★");
+				buttonGroup.add(rd5);
 				rd5.setSelected(true);
 				rd5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 				rd5.setForeground(Color.ORANGE);
@@ -169,10 +173,10 @@ import java.awt.event.WindowEvent;
 			frame.setVisible(h);
 		}
 		
-		
+		 // Review를 등록하는 메소드
 	    private void ReviewRegisterAction(){
 
-		        int id = DbAction.ucId;
+		        int id = MyClassDbAction.ucId;
 		        int reviewscore = 0;
 		        if(rd1.isSelected()==true) {
 		           reviewscore = 1;
@@ -186,7 +190,7 @@ import java.awt.event.WindowEvent;
 		           reviewscore = 5;
 		        }
 		        
-		      DbAction dbAction = new DbAction(id, tReviewContents.getText().trim(), reviewscore);
+		      MyClassDbAction dbAction = new MyClassDbAction(id, tReviewContents.getText().trim(), reviewscore);
 		      boolean msg = dbAction.reviewRegister();
 		        try{
 

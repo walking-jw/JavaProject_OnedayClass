@@ -198,6 +198,11 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 	private JButton getBtnCancle() {
 		if (btnCancle == null) {
 			btnCancle = new JButton("닫기");
+			btnCancle.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// 여기에서 재원님이랑 연결
+				}
+			});
 			btnCancle.setBounds(453, 543, 76, 29);
 		}
 		return btnCancle;

@@ -207,6 +207,11 @@ import java.awt.event.WindowEvent;
 		private JButton getBtnCancle() {
 			if (btnCancle == null) {
 				btnCancle = new JButton("닫기");
+				btnCancle.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// 여기에서 재원님이랑 연결
+					}
+				});
 				btnCancle.setBounds(453, 543, 76, 29);
 			}
 			return btnCancle;
@@ -411,13 +416,15 @@ import java.awt.event.WindowEvent;
 		        	JOptionPane.showMessageDialog(null, "수강 인원이 1명 이상이기 때문에 폐강할 수 없습니다!\n폐강을 원하시면 강의를 신청한 수강생에게 연락해\n수강 취소를 요청한 후, 다시 시도해주세요!" ,"폐강 불가!", 
 	        				   JOptionPane.INFORMATION_MESSAGE);
 		        }else {
-		        	
+		        	int result = JOptionPane.showConfirmDialog(null, "강의를 폐강하시겠습니까?\nYes버튼 클릭 시 강의가 폐강됩니다.", "강의 폐강", JOptionPane.YES_NO_OPTION);
+					if(result==JOptionPane.YES_OPTION) {
 		        	boolean aaa = dbaction.DeleteAction();
 				    if(aaa == true) {
 				    	JOptionPane.showMessageDialog(null, "강의 폐강이 완료되었습니다!","폐강 완료!", 
 		        				   JOptionPane.INFORMATION_MESSAGE);
-
-		        	   }
+				    }
+				    
+		        	}
 		           }
 		        } catch (Exception e){
 		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",

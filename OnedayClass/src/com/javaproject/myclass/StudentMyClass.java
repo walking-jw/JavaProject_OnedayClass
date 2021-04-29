@@ -25,6 +25,7 @@ import java.util.Date;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.Format;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,7 @@ import java.awt.event.ActionEvent;
 		// OuterTable 초기 설정
 		private final DefaultTableModel Outer_Table_After = new DefaultTableModel();
 		private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();
+		private JButton btnClose;
 
 	
 	
@@ -78,6 +80,7 @@ import java.awt.event.ActionEvent;
 			frame.getContentPane().add(getLblNewLabel_1());
 			frame.getContentPane().add(getScrollPane_1());
 			frame.getContentPane().add(getBtnReview());
+			frame.getContentPane().add(getBtnClose());
 		}
 		private JLabel getLblNewLabel() {
 			if (lblNewLabel == null) {
@@ -118,7 +121,7 @@ import java.awt.event.ActionEvent;
 						CancleClick();
 					}
 				});
-				btnCancle.setBounds(414, 265, 117, 29);
+				btnCancle.setBounds(445, 267, 86, 29);
 			}
 			return btnCancle;
 		}
@@ -149,14 +152,12 @@ import java.awt.event.ActionEvent;
 				btnReview = new JButton("후기 관리");
 				btnReview.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
 						
 						ReviewManagement management = new ReviewManagement();
 						management.setVisible_ReviewManagement(true);
 						frame.dispose();
-						
-						DbAction.ccId = ReviewSub();
-						
+									
+						MyClassDbAction.ccId = ReviewSub();
 //						RUDDbAction.dcId = ReviewSub();
 //						
 //						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
@@ -167,10 +168,9 @@ import java.awt.event.ActionEvent;
 //						register.setVisible_TeacherClassRegister(true);
 //						frame.dispose();
 						
-						
 					}
 				});
-				btnReview.setBounds(414, 546, 117, 29);
+				btnReview.setBounds(347, 548, 86, 29);
 			}
 			return btnReview;
 		}
@@ -188,6 +188,19 @@ import java.awt.event.ActionEvent;
 			}
 	
 			return Inner_Table_Before;
+		}
+		
+		private JButton getBtnClose() {
+			if (btnClose == null) {
+				btnClose = new JButton("닫기");
+				btnClose.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// 도영님과 연결하기
+					}
+				});
+				btnClose.setBounds(445, 548, 86, 29);
+			}
+			return btnClose;
 		}
 		
 		// 메소드 시작 ***************************************************************
@@ -243,7 +256,7 @@ import java.awt.event.ActionEvent;
 		     
 		       vColIndex = 5;
 		       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
-		       width = 50;
+		       width = 65;
 		       col.setPreferredWidth(width);
 
 		 }
@@ -294,7 +307,7 @@ import java.awt.event.ActionEvent;
 		     
 		     vColIndex = 5;
 		     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-		     width = 50;
+		     width = 65;
 		     col.setPreferredWidth(width);
 		     
 		 }
@@ -302,13 +315,14 @@ import java.awt.event.ActionEvent;
 		 // 수강 예정 데이터 불러오기
 		 private void SearchActionAfter(){
 
-		     DbAction dbAction = new DbAction();
-		     ArrayList<Bean> beanList = dbAction.selectListAfter();
+		     MyClassDbAction dbAction = new MyClassDbAction();
+		     ArrayList<MyClassBean> beanList = dbAction.selectListAfter();
 		     
 		     int listCount = beanList.size();
 		     for(int i=0; i<listCount; i++) {
 		       String temp1 = Integer.toString(beanList.get(i).getcId());
-		       String temp2 = Integer.toString(beanList.get(i).getcPrice());
+		       String temp2 = NumberFormat.getInstance().format(beanList.get(i).getcPrice()) + "원";
+		       
 		       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
 		       Outer_Table_After.addRow(qTxt);
 
@@ -319,13 +333,14 @@ import java.awt.event.ActionEvent;
 		 // 수강 이력 데이터 불러오기
 		 private void SearchActionBefore(){
 		     
-		     DbAction dbAction = new DbAction();
-		     ArrayList<Bean> beanList = dbAction.selectListBefore();
+		     MyClassDbAction dbAction = new MyClassDbAction();
+		     ArrayList<MyClassBean> beanList = dbAction.selectListBefore();
 		     
 		     int listCount = beanList.size();
 		     for(int i=0; i<listCount; i++) {
 		       String temp1 = Integer.toString(beanList.get(i).getcId());
-		       String temp2 = Integer.toString(beanList.get(i).getcPrice());
+		       String temp2 = NumberFormat.getInstance().format(beanList.get(i).getcPrice()) + "원";
+		       
 		       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
 		       Outer_Table_Before.addRow(qTxt);
 
@@ -339,35 +354,40 @@ import java.awt.event.ActionEvent;
 			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강취소", JOptionPane.YES_NO_OPTION);
 			  if(result==JOptionPane.YES_OPTION) {
 				  try {
-					  int i = Inner_Table_After.getSelectedRow();
-					  String wkSequence = (String)Inner_Table_After.getValueAt(i, 0);
-					  int inSequence = Integer.parseInt(wkSequence);
-					  
-					  DbAction dbAction = new DbAction(inSequence);
-					  boolean msg = dbAction.delete();
-					  if(msg == true) {
-//						  long calDate = 0;
-//						  
-//						  Date date = new Date();
-//						  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//						  String today = sdf.format(date);
-//						  int row = Inner_Table_After.getSelectedRow();
-//						  String classDate = (String)Inner_Table_After.getValueAt(row, 3);
-//						  
-//						  Date currentDate = sdf.parse(today);
-//						  Date AfterDate = sdf.parse(classDate);
-//						  
-//						  if(currentDate.compareTo(AfterDate)<=0) {
-//							  
-//						  }
+
+						  Date date = new Date();
+						  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						  String today = sdf.format(date);
+						  int row = Inner_Table_After.getSelectedRow();
+						  String classDate = (String)Inner_Table_After.getValueAt(row, 3);
 						  
-						  JOptionPane.showMessageDialog(null, "수강 취소 되었습니다.",
-								  "취소 완료!", 
-								  JOptionPane.INFORMATION_MESSAGE);
-						  TableInitAfter();
-						  SearchActionAfter();
+						  Date currentDate = sdf.parse(today);
+						  Date afterDate = sdf.parse(classDate);
+						  
+						  long diffDay = (afterDate.getTime() - currentDate.getTime()) / (24*60*60*1000);
+						  
+						  if(diffDay<=1) {
+							  JOptionPane.showMessageDialog(null, "강의가 시작하기 1일 전부터는 취소할 수 없습니다.\n강사님께 직접 문의 바랍니다.",
+			                           "취소 불가!", 
+			                           JOptionPane.ERROR_MESSAGE); 
+						  }else {
+							  int i = Inner_Table_After.getSelectedRow();
+							  String wkSequence = (String)Inner_Table_After.getValueAt(i, 0);
+							  int inSequence = Integer.parseInt(wkSequence);
+							  
+							  MyClassDbAction dbAction = new MyClassDbAction(inSequence);
+							  boolean msg = dbAction.Delete();
+							  if(msg == true) {
+								  JOptionPane.showMessageDialog(null, "수강 취소 되었습니다.",
+										  "취소 완료!", 
+										  JOptionPane.INFORMATION_MESSAGE);
+								  TableInitAfter();
+								  SearchActionAfter();
+							  }
+						  }
+						  
 					    
-				  }
+				  
 			  }catch (Exception e) {
 				// TODO: handle exception
 		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
@@ -381,7 +401,7 @@ import java.awt.event.ActionEvent;
 			  		  
     	}
 		 
-		 // 강의 id를 리뷰등록하는 클라스에서도 가져오게 하기 위해 메소드 생성
+		 // 강의 id를 리뷰 수정 / 삭제하는 클라스에서도 가져오게 하기 위해 메소드 생성
 		 public int ReviewSub() {
 			 int i = Inner_Table_Before.getSelectedRow();
 			 String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
@@ -389,4 +409,5 @@ import java.awt.event.ActionEvent;
 			 return inSequence;
 
 		  }
-	} // ————
+
+	} // -------
