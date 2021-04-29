@@ -154,8 +154,7 @@ public class SearchView {
 		vColIndex = 3;
 		col = inner_table.getColumnModel().getColumn(vColIndex);
 		width = 100;
-		col.setPreferredWidth(width);		
-		
+		col.setPreferredWidth(width);			
 	}
 	
 	private void conditionQuery() {
