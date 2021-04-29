@@ -17,7 +17,7 @@ import javax.swing.JTextPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 	
-	public class ReviewRegister {
+	public class ReviewRegister { // 2021.04.29 조혜지 view - 후기 등록하는 view
 	
 		private JFrame frame;
 		private JLabel lblNewLabel;
@@ -172,7 +172,7 @@ import java.awt.event.WindowEvent;
 		
 	    private void ReviewRegisterAction(){
 
-		        int id = DbAction.ccId;
+		        int id = DbAction.ucId;
 		        int reviewscore = 0;
 		        if(rd1.isSelected()==true) {
 		           reviewscore = 1;
@@ -204,5 +204,6 @@ import java.awt.event.WindowEvent;
 		        }
 		      
 		   }
+	    
 		
-	}
+	} // -------
