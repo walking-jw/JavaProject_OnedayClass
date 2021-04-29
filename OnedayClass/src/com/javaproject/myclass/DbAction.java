@@ -167,7 +167,7 @@ import java.util.ArrayList;
 	             @SuppressWarnings("unused")
 	            Statement stmt_mysql = conn_mysql.createStatement();
 
-	             String A = "update Attend set cReview = ?, cScore = ? where cId = ? ";
+	             String A = "update Attend set cReview = ?, cScore = ? where cId = ? and sEmail = " + currentuser;
 	             
 
 	             ps = conn_mysql.prepareStatement(A);

@@ -21,8 +21,11 @@ import com.javaproject.teacherpage.TeacherClassUpdateDelete;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -41,9 +44,6 @@ import java.awt.event.ActionEvent;
 		private final DefaultTableModel Outer_Table_After = new DefaultTableModel();
 		private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();
 
-//		public int i = Inner_Table_Before.getSelectedRow();
-//		public String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
-//		public int inSequence = Integer.parseInt(wkSequence);
 	
 	
 		/**
@@ -136,8 +136,7 @@ import java.awt.event.ActionEvent;
 				scrollPane_1.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-//						DbAction.i = ReviewSub();
-//						System.out.println(DbAction.i);
+
 					}
 				});
 				scrollPane_1.setBounds(30, 334, 501, 202);
@@ -147,17 +146,19 @@ import java.awt.event.ActionEvent;
 		}
 		private JButton getBtnReview() {
 			if (btnReview == null) {
-				btnReview = new JButton("후기 등록");
+				btnReview = new JButton("후기 관리");
 				btnReview.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Review review = new Review();
-						review.setVisible_Review(true);
+
+						
+						ReviewManagement management = new ReviewManagement();
+						management.setVisible_ReviewManagement(true);
 						frame.dispose();
 						
 						DbAction.ccId = ReviewSub();
 						
 //						RUDDbAction.dcId = ReviewSub();
-						
+//						
 //						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
 //						delete.setVisible_TeacherClassUpdateDelete(true);
 //						frame.dispose();
@@ -166,9 +167,10 @@ import java.awt.event.ActionEvent;
 //						register.setVisible_TeacherClassRegister(true);
 //						frame.dispose();
 						
+						
 					}
 				});
-				btnReview.setBounds(414, 546, 92, 29);
+				btnReview.setBounds(414, 546, 117, 29);
 			}
 			return btnReview;
 		}
@@ -299,7 +301,7 @@ import java.awt.event.ActionEvent;
 	
 		 // 수강 예정 데이터 불러오기
 		 private void SearchActionAfter(){
-		     
+
 		     DbAction dbAction = new DbAction();
 		     ArrayList<Bean> beanList = dbAction.selectListAfter();
 		     
@@ -309,6 +311,7 @@ import java.awt.event.ActionEvent;
 		       String temp2 = Integer.toString(beanList.get(i).getcPrice());
 		       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
 		       Outer_Table_After.addRow(qTxt);
+
 		     }
 
 		 }
@@ -325,7 +328,9 @@ import java.awt.event.ActionEvent;
 		       String temp2 = Integer.toString(beanList.get(i).getcPrice());
 		       String[] qTxt = {temp1, beanList.get(i).getcAttendDate(), beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation(), temp2};
 		       Outer_Table_Before.addRow(qTxt);
+
 		     }
+
 
 		 }
 		
@@ -341,6 +346,21 @@ import java.awt.event.ActionEvent;
 					  DbAction dbAction = new DbAction(inSequence);
 					  boolean msg = dbAction.delete();
 					  if(msg == true) {
+//						  long calDate = 0;
+//						  
+//						  Date date = new Date();
+//						  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//						  String today = sdf.format(date);
+//						  int row = Inner_Table_After.getSelectedRow();
+//						  String classDate = (String)Inner_Table_After.getValueAt(row, 3);
+//						  
+//						  Date currentDate = sdf.parse(today);
+//						  Date AfterDate = sdf.parse(classDate);
+//						  
+//						  if(currentDate.compareTo(AfterDate)<=0) {
+//							  
+//						  }
+						  
 						  JOptionPane.showMessageDialog(null, "수강 취소 되었습니다.",
 								  "취소 완료!", 
 								  JOptionPane.INFORMATION_MESSAGE);
@@ -350,7 +370,7 @@ import java.awt.event.ActionEvent;
 				  }
 			  }catch (Exception e) {
 				// TODO: handle exception
-		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
                            "Critical Error!", 
                            JOptionPane.ERROR_MESSAGE); 
 		            e.printStackTrace();
@@ -369,6 +389,4 @@ import java.awt.event.ActionEvent;
 			 return inSequence;
 
 		  }
-		  
-		  
 	} // ————

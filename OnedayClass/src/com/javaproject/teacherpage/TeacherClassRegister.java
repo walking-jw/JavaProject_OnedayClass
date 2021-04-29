@@ -184,8 +184,11 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 			btnRegister = new JButton("등록");
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					RegisterAction();
-					RelationRegisterAction();
+					int check_i = check();
+					if(check_i==0) {
+						RegisterAction();
+						RelationRegisterAction();
+					}
 				}
 			});
 			btnRegister.setBounds(374, 543, 76, 29);
@@ -360,11 +363,49 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		RUDDbAction dbaction = new RUDDbAction(input, cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice);
 		boolean aaa = dbaction.RegisterAction();
 		if(aaa == true){
-	          JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
+	          JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다!");                    
 		}else{
-	          JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!");                    
+	          JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!");                    
 		}
 	}
+	
+	// 사용자가 정보 입력 시 비어있는 값이 있는지 확인하는 메소드
+	private int check() {
+		int check = 0;
+		String message = "에 대해 추가로 입력해주세요!";
+		if(tfPrice.getText().trim().isEmpty()) {
+			message = "'강의 가격' " + message;
+			check++;
+			tfPrice.requestFocus();
+		}	
+		if(tContents.getText().trim().isEmpty()) {
+			message = "'강의 소개' " + message;
+			check++;
+			tContents.requestFocus();
+		}	
+		if(tfLocation.getText().trim().isEmpty()) {
+			message = "'장소' " + message;
+			check++;
+			tfLocation.requestFocus();
+		}
+		if(tfCname.getText().trim().isEmpty()) {
+			message = "'강의명' " + message;
+			check++;
+			tfCname.requestFocus();
+		}
+		if(tfFilePath.getText().trim().isEmpty()) {
+			message = "'이미지' " + message;
+			check++;
+			tfFilePath.requestFocus();
+		}
+		
+		if(check>0) {
+			JOptionPane.showMessageDialog(null, message);
+		}
+		
+		return check;
+	}
+	
 	
 	// 강의 등록일자 insert하는 메소드
 	private void RelationRegisterAction() {
@@ -380,9 +421,8 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		RUDDbAction dbaction = new RUDDbAction(cccId);
 		boolean aaa = dbaction.RegisterDateAction();
 		if(aaa == true){
-//			JOptionPane.showMessageDialog(null, "강의 등록이 완료되었습니다.!");                    
 		}else{
-			JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!");                    
+			JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!");                    
 		}
 		
 		

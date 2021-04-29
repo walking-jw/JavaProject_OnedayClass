@@ -17,7 +17,7 @@ import javax.swing.JTextPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 	
-	public class Review {
+	public class ReviewRegister {
 	
 		private JFrame frame;
 		private JLabel lblNewLabel;
@@ -37,7 +37,7 @@ import java.awt.event.WindowEvent;
 		/**
 		 * Create the application.
 		 */
-		public Review() {
+		public ReviewRegister() {
 			initialize();
 		}
 	
@@ -46,6 +46,7 @@ import java.awt.event.WindowEvent;
 		 */
 		private void initialize() {
 			frame = new JFrame();
+			frame.setTitle("후기 등록");
 			frame.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowOpened(WindowEvent e) {
@@ -119,6 +120,7 @@ import java.awt.event.WindowEvent;
 		private JRadioButton getRd5() {
 			if (rd5 == null) {
 				rd5 = new JRadioButton("★★★★★");
+				rd5.setSelected(true);
 				rd5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 				rd5.setForeground(Color.ORANGE);
 				rd5.setBounds(426, 472, 105, 23);
@@ -159,8 +161,11 @@ import java.awt.event.WindowEvent;
 			return tReviewContents;
 		}
 		
+		// 메소드 시작 ***************************************************************
+
+		
 		// 수강관리 페이지와 리뷰 등록 창을 연결하는 메소드
-		public void setVisible_Review(boolean h) {
+		public void setVisible_ReviewRegister(boolean h) {
 			frame.setVisible(h);
 		}
 		
@@ -192,7 +197,7 @@ import java.awt.event.WindowEvent;
 
 		           }
 		        } catch (Exception e){
-		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
 		                                         "Critical Error!", 
 		                                         JOptionPane.ERROR_MESSAGE);                    
 		            e.printStackTrace();

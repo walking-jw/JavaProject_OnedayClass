@@ -45,6 +45,7 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 		String cContents;
 		int cPrice;
 		int cId;
+		int cCount;
 
 		
 		// Constructor*****************************************
@@ -75,7 +76,7 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 			this.cId = cId;
 		}
 
-		// 깅의 수정버튼 눌렀을 때의 메소드인 DeleteAction에서 사용
+		// 깅의 수정버튼 눌렀을 때의 메소드인 UpdateAction에서 사용
 		public RUDDbAction(FileInputStream file, String cName, String cCategory, String cLocation1, String cLocation2,
 				String cTime, String cDate, String cContents, int cPrice, int cId) {
 			super();
@@ -91,7 +92,23 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 			this.cId = cId;
 		}
 
-		
+		// 깅의 수정/삭제버튼 눌렀을 때 sql에 있는 데이터를 불러오는 메소드인 ShowData에서 사용
+		public RUDDbAction(FileInputStream file, String cName, String cCategory, String cLocation1, String cLocation2,
+				String cTime, String cDate, String cContents, int cPrice, int cId, int cCount) {
+			super();
+			this.file = file;
+			this.cName = cName;
+			this.cCategory = cCategory;
+			this.cLocation1 = cLocation1;
+			this.cLocation2 = cLocation2;
+			this.cTime = cTime;
+			this.cDate = cDate;
+			this.cContents = cContents;
+			this.cPrice = cPrice;
+			this.cId = cId;
+			this.cCount = cCount;
+		}
+
 		// Method*****************************************
 
 		// 강의 등록하는 메소드로서 mysql에 insert해주는 메소드 생성
@@ -169,6 +186,8 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 		          conn_mysql.close();
 			}catch (Exception e) {
 				// TODO: handle exception
+				// 신규 강의 등록 시 제일 처음 강의 id 값을 1이라고 초기 설정
+				wkcId = 1;
 			}
 			return wkcId;
 		}
@@ -233,14 +252,16 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 		// mysql에 있는 강의 관련 정보를 view로 불러오기 위한 메소드
 		public RUDBean TableClick() {
 			RUDBean bean = null;
-			String WhereDefault = "select cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice, cImg from Class ";
-		    String WhereDefault2 = "where cId = " + cId;
+			String QueryA = "select cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice, cImg, ";
+			String QueryB = "(select count(a.cId) from attend as a, class as c where c.cId = a.cId and c.cId = " + cId;
+		    String QueryC = ") from Class where cId = " + cId;
+
 		    try{
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 	            Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 	            Statement stmt_mysql = conn_mysql.createStatement();
 	 
-	            ResultSet rs = stmt_mysql.executeQuery(WhereDefault + WhereDefault2);
+	            ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
 	            
 	            
 	 
@@ -254,6 +275,7 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 	               String cDate = rs.getString(6);
 	               String cContents = rs.getString(7);
 	               int cPrice = rs.getInt(8);
+	               int cCount = rs.getInt(10);
 	               
 	               // File
 	               filename = filename + 1;
@@ -267,7 +289,7 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 	                    output.write(buffer);
 	                }
 	               
-	            bean = new RUDBean(cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice);
+	            bean = new RUDBean(cName, cCategory, cLocation1, cLocation2, cTime, cDate, cContents, cPrice, cCount);
 	            }
 	            
 	            conn_mysql.close();
