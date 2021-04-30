@@ -173,7 +173,7 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 		// relation의 attribute 중 하나인 강의id를 가져오기 위해 메소드 하나를 추가로 생성
 		public int getClassId() {
 			int wkcId = 0;
-			String Query = "select cId +1 from register order by cId desc limit 1";
+			String Query = "select cId +1 from register order by cId desc limit 1 where cId is not null";
 			try {
 		          Class.forName("com.mysql.cj.jdbc.Driver");
 		          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
