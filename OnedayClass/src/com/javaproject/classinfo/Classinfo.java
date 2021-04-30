@@ -79,7 +79,7 @@ public class Classinfo {
 		});
 		frame.setTitle("금손양성소");
 		frame.setBounds(100, 100, 560, 625);
-//		frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
+		frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());

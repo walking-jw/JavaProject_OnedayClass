@@ -68,6 +68,7 @@ public class ClassReview {
 			});
 			frame.setTitle("금손양성소");
 			frame.setBounds(100, 100, 560, 625);
+			frame.setLocationRelativeTo(frame);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.getContentPane().setLayout(null);
 			frame.getContentPane().add(getLblNewLabel());

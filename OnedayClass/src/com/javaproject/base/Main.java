@@ -54,6 +54,7 @@ public class Main {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getBtnStart());
@@ -71,7 +72,7 @@ public class Main {
 					frame.dispose();
 				}
 			});
-			btnStart.setBounds(208, 484, 117, 29);
+			btnStart.setBounds(205, 473, 117, 29);
 		}
 		return btnStart;
 	}
@@ -80,7 +81,7 @@ public class Main {
 			lblNewLabel = new JLabel("금손양성소");
 			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 38));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setBounds(130, 378, 277, 67);
+			lblNewLabel.setBounds(139, 393, 277, 67);
 		}
 		return lblNewLabel;
 	}
@@ -89,7 +90,7 @@ public class Main {
 			lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_1.setIcon(new ImageIcon("/Users/hyoeunkwon/Desktop/Hand.png"));
-			lblNewLabel_1.setBounds(53, 82, 400, 284);
+			lblNewLabel_1.setBounds(53, 114, 445, 283);
 		}
 		return lblNewLabel_1;
 	}

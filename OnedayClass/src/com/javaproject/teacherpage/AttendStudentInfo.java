@@ -51,6 +51,7 @@ public class AttendStudentInfo {
 		});
 		frame.setTitle("수강 학생 정보");
 		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());

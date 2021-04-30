@@ -72,6 +72,7 @@ public class TeacherInfo_QnA {
 		frame.setTitle("마이페이지");
 		frame.getContentPane().setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLbltName());

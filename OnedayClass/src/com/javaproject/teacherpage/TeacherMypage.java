@@ -75,6 +75,7 @@ public class TeacherMypage {
 			}
 		});
 		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLbl_Name());

@@ -77,6 +77,7 @@ import java.awt.event.ActionEvent;
 			});
 			frame.setTitle("강의관리");
 			frame.setBounds(100, 100, 560, 625);
+			frame.setLocationRelativeTo(frame);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.getContentPane().setLayout(null);
 			frame.getContentPane().add(getLblNewLabel());

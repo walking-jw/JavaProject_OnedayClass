@@ -61,6 +61,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 		});
 		frame.setTitle("후기관리");
 		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());

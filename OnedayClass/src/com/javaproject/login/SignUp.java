@@ -54,6 +54,7 @@ public class SignUp {
 		frame = new JFrame();
 		frame.setTitle("회원가입");
 		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());
@@ -192,7 +193,7 @@ public class SignUp {
 	private JComboBox getCbEmail() {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
-			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "google.com"}));
+			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "gmail.com", "daum.net", "kakao.com", "icloud.com"}));
 			cbEmail.setBounds(274, 168, 143, 27);
 		}
 		return cbEmail;

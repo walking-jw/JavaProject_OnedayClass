@@ -55,6 +55,7 @@ public class FindIdAndPwd {
 		frame = new JFrame();
 		frame.setTitle("아이디/비밀번호 찾기");
 		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLblNewLabel());
