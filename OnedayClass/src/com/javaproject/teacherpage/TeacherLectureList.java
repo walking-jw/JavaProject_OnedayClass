@@ -146,7 +146,7 @@ import java.awt.event.ActionEvent;
 		
 		private JButton getBtnRegister() {
 			if (btnRegister == null) {
-				btnRegister = new JButton("신규 강의 등록");
+				btnRegister = new JButton("강의 추가");
 				btnRegister.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -155,7 +155,7 @@ import java.awt.event.ActionEvent;
 						frame.dispose();
 					}
 				});
-				btnRegister.setBounds(414, 546, 117, 29);
+				btnRegister.setBounds(345, 267, 86, 29);
 			}
 			return btnRegister;
 		}
@@ -191,7 +191,7 @@ import java.awt.event.ActionEvent;
 						
 					}
 				});
-				btnDetail.setBounds(290, 546, 117, 29);
+				btnDetail.setBounds(345, 548, 86, 29);
 			}
 			return btnDetail;
 		}
@@ -208,7 +208,7 @@ import java.awt.event.ActionEvent;
 						
 					}
 				});
-				btn_Update_n_Delete.setBounds(414, 267, 117, 29);
+				btn_Update_n_Delete.setBounds(445, 267, 86, 29);
 			}
 			return btn_Update_n_Delete;
 		}
@@ -357,7 +357,7 @@ import java.awt.event.ActionEvent;
 					
 				}
 			});
-			btn_ToMypage.setBounds(30, 548, 117, 29);
+			btn_ToMypage.setBounds(445, 548, 86, 29);
 		}
 		return btn_ToMypage;
 	}
