@@ -58,7 +58,7 @@ public class ShareVar {
 //	public static final String url_mysql = "jdbc:mysql://IP/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	
 	// 공용
-	public static final String url_mysql = "jdbc:mysql://172.20.10.2/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	
