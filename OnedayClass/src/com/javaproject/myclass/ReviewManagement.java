@@ -33,6 +33,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	// OuterTable 초기 설정
 	private final DefaultTableModel Outer_Table_Incomplete = new DefaultTableModel();
 	private final DefaultTableModel Outer_Table_Complete = new DefaultTableModel();
+	private JButton btnClose;
 
 
 
@@ -52,8 +53,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 			@Override
 			public void windowOpened(WindowEvent e) {
 				// 창 뜨자마자 불러온 데이터를 보이게 하기 위해 아래의 4개 메소드 삽입
-				TableInitAfter();
-				TableInitBefore();
+				TableInitIncomplete();
+				TableInitComplete();
 				SearchActionIncomplete();
 				SearchActionComplete();
 			}
@@ -68,6 +69,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 		frame.getContentPane().add(getLblNewLabel_1());
 		frame.getContentPane().add(getScrollPane_1());
 		frame.getContentPane().add(getBtnUpdateDelete());
+		frame.getContentPane().add(getBtnClose());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -94,7 +96,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				}
 			});
 			Inner_Table_Incomplete.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			// InnerTable과 OuterTable연결 (수강 예정)
+			// InnerTable과 OuterTable연결 (후기 미작성)
 			Inner_Table_Incomplete.setModel(Outer_Table_Incomplete);
 			
 		}
@@ -109,10 +111,10 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 					register.setVisible_ReviewRegister(true);
 					frame.dispose();
 					
-					DbAction.ucId = ReviewIncomplete();
+					MyClassDbAction.ccId = ReviewIncomplete();
 				}
 			});
-			btnRegister.setBounds(414, 265, 117, 29);
+			btnRegister.setBounds(445, 267, 86, 29);
 		}
 		return btnRegister;
 	}
@@ -148,11 +150,11 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 					updateDelete.setVisible_ReviewUpdateDelete(true);
 					frame.dispose();
 					
-					DbAction.rcId = ReviewComplete();
+					MyClassDbAction.ccId = ReviewComplete();
 					
 				}
 			});
-			btnUpdateDelete.setBounds(414, 546, 117, 29);
+			btnUpdateDelete.setBounds(347, 548, 86, 29);
 		}
 		return btnUpdateDelete;
 	}
@@ -165,11 +167,26 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				}
 			});
 			Inner_Table_Complete.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			// InnerTable과 OuterTable연결 (수강 이력)
+			// InnerTable과 OuterTable연결 (후기 작성)
 			Inner_Table_Complete.setModel(Outer_Table_Complete);
 		}
 
 		return Inner_Table_Complete;
+	}
+	
+	private JButton getBtnClose() {
+		if (btnClose == null) {
+			btnClose = new JButton("닫기");
+			btnClose.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					StudentMyClass myClass = new StudentMyClass();
+					myClass.setVisible_StudentMyClass(true);
+					frame.dispose();
+				}
+			});
+			btnClose.setBounds(445, 548, 86, 29);
+		}
+		return btnClose;
 	}
 	
 	// 메소드 시작 ***************************************************************
@@ -180,7 +197,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	}
 	
 	// 후기 작성 미완료 테이블 초기화
-	private void TableInitAfter(){
+	private void TableInitIncomplete(){
 	       int i = Outer_Table_Incomplete.getRowCount();
 	       
 	       Outer_Table_Incomplete.addColumn("강의ID");
@@ -218,12 +235,12 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	}
 	
 	// 후기 작성 완료 테이블 초기화
-	 private void TableInitBefore(){
+	 private void TableInitComplete(){
 
 	     int k = Outer_Table_Complete.getRowCount();
 	     
 	     Outer_Table_Complete.addColumn("강의ID");
-	     Outer_Table_Complete.addColumn("신청날짜");
+	     Outer_Table_Complete.addColumn("수강날짜");
 	     Outer_Table_Complete.addColumn("강의명");
 	     Outer_Table_Complete.addColumn("장소");
 	     Outer_Table_Complete.setColumnCount(4);
@@ -259,8 +276,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	 // 후기 작성 미완료 데이터 불러오기
 	 private void SearchActionIncomplete(){
 
-	     DbAction dbAction = new DbAction();
-	     ArrayList<Bean> beanList = dbAction.selectListIncomplete();
+	     MyClassDbAction dbAction = new MyClassDbAction();
+	     ArrayList<MyClassBean> beanList = dbAction.selectListIncomplete();
 	     
 	     int listCount = beanList.size();
 	     for(int i=0; i<listCount; i++) {
@@ -275,8 +292,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	 // 후기 작성 완료 데이터 불러오기
 	 private void SearchActionComplete(){
 	     
-	     DbAction dbAction = new DbAction();
-	     ArrayList<Bean> beanList = dbAction.selectListComplete();
+	     MyClassDbAction dbAction = new MyClassDbAction();
+	     ArrayList<MyClassBean> beanList = dbAction.selectListComplete();
 	     
 	     int listCount = beanList.size();
 	     for(int i=0; i<listCount; i++) {
@@ -289,7 +306,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 
 	 }
 	
-
+	 // 강의 id를 리뷰 수정 / 삭제하는 클라스에서도 가져오게 하기 위해 메소드 생성
 	 public int ReviewComplete() {
 		 int i = Inner_Table_Complete.getSelectedRow();
 		 String wkSequence = (String)Inner_Table_Complete.getValueAt(i, 0);
@@ -298,11 +315,13 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 
 	  }
 	 
+	 // 강의 id를 리뷰등록하는 클라스에서도 가져오게 하기 위해 메소드 생성
 	 public int ReviewIncomplete() {
-		 int i = Inner_Table_Complete.getSelectedRow();
-		 String wkSequence = (String)Inner_Table_Complete.getValueAt(i, 0);
+		 int i = Inner_Table_Incomplete.getSelectedRow();
+		 String wkSequence = (String)Inner_Table_Incomplete.getValueAt(i, 0);
 		 int inSequence = Integer.parseInt(wkSequence);
 		 return inSequence;
 		 
 	 }
+
 }

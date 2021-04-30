@@ -13,11 +13,11 @@ import java.sql.Statement;
 public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 강의 등록/수정/삭제할 때 뷰와 sql에 연결해주는 클라스
 
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.3/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String url_mysql = "jdbc:mysql://192.168.0.5/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyejji@gmail.com'";
-	public static int dcId = 0;
+	public static int ccId = 0;
 	public static int filename = 0;
 	
 

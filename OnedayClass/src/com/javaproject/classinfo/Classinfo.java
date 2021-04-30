@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import com.javaproject.classlist.ClassList;
 import com.javaproject.classlist.DbAction;
 
 public class Classinfo {
@@ -42,6 +43,7 @@ public class Classinfo {
 	private JLabel lblImage;
 	private JTextField tfcPrice;
 	private JLabel tfFilePath;
+	private JButton btnBackClasslist;
 
 	
 	//-----------------------------Constructor
@@ -107,39 +109,40 @@ public class Classinfo {
 		frame.getContentPane().add(getBtnAttend());
 		frame.getContentPane().add(getLblImage());
 		frame.getContentPane().add(getTfcPrice());
+		frame.getContentPane().add(getBtnBackClasslist());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("강의명");
-			lblNewLabel.setBounds(30, 206, 61, 16);
+			lblNewLabel.setBounds(30, 192, 61, 16);
 		}
 		return lblNewLabel;
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("강사");
-			lblNewLabel_1.setBounds(30, 243, 61, 16);
+			lblNewLabel_1.setBounds(30, 230, 61, 16);
 		}
 		return lblNewLabel_1;
 	}
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("장소");
-			lblNewLabel_2.setBounds(30, 284, 61, 16);
+			lblNewLabel_2.setBounds(30, 271, 61, 16);
 		}
 		return lblNewLabel_2;
 	}
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("강의시간");
-			lblNewLabel_3.setBounds(30, 324, 61, 16);
+			lblNewLabel_3.setBounds(30, 309, 61, 16);
 		}
 		return lblNewLabel_3;
 	}
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("날짜");
-			lblNewLabel_4.setBounds(30, 358, 61, 16);
+			lblNewLabel_4.setBounds(30, 346, 61, 16);
 		}
 		return lblNewLabel_4;
 	}
@@ -147,7 +150,7 @@ public class Classinfo {
 		if (tfcName == null) {
 			tfcName = new JTextField();
 			tfcName.setEditable(false);
-			tfcName.setBounds(103, 201, 394, 26);
+			tfcName.setBounds(103, 187, 394, 26);
 			tfcName.setColumns(10);
 		}
 		return tfcName;
@@ -157,7 +160,7 @@ public class Classinfo {
 			tfcLocation = new JTextField();
 			tfcLocation.setEditable(false);
 			tfcLocation.setColumns(10);
-			tfcLocation.setBounds(103, 274, 394, 26);
+			tfcLocation.setBounds(103, 266, 394, 26);
 		}
 		return tfcLocation;
 	}
@@ -166,14 +169,14 @@ public class Classinfo {
 			tfcDate = new JTextField();
 			tfcDate.setEditable(false);
 			tfcDate.setColumns(10);
-			tfcDate.setBounds(103, 353, 394, 26);
+			tfcDate.setBounds(101, 341, 150, 26);
 		}
 		return tfcDate;
 	}
 	private JTextField getTfcTime() {
 		if (tfcTime == null) {
 			tfcTime = new JTextField();
-			tfcTime.setBounds(103, 319, 39, 26);
+			tfcTime.setBounds(103, 304, 30, 26);
 			tfcTime.setColumns(10);
 		}
 		return tfcTime;
@@ -190,21 +193,21 @@ public class Classinfo {
 				}
 			});
 			btntName.setBackground(new Color(240, 230, 140));
-			btntName.setBounds(102, 238, 117, 29);
+			btntName.setBounds(103, 225, 117, 29);
 		}
 		return btntName;
 	}
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
 			lblNewLabel_5 = new JLabel("시간");
-			lblNewLabel_5.setBounds(145, 324, 30, 16);
+			lblNewLabel_5.setBounds(134, 309, 30, 16);
 		}
 		return lblNewLabel_5;
 	}
 	private JLabel getLblNewLabel_3_1() {
 		if (lblNewLabel_3_1 == null) {
 			lblNewLabel_3_1 = new JLabel("강의소개");
-			lblNewLabel_3_1.setBounds(30, 395, 61, 16);
+			lblNewLabel_3_1.setBounds(30, 374, 61, 16);
 		}
 		return lblNewLabel_3_1;
 	}
@@ -212,7 +215,7 @@ public class Classinfo {
 		if (tfcContents == null) {
 			tfcContents = new JTextField();
 			tfcContents.setEditable(false);
-			tfcContents.setBounds(30, 423, 505, 82);
+			tfcContents.setBounds(30, 395, 505, 82);
 			tfcContents.setColumns(10);
 		}
 		return tfcContents;
@@ -228,7 +231,7 @@ public class Classinfo {
 					frame.dispose();
 				}
 			});
-			btnReview.setBounds(418, 517, 117, 29);
+			btnReview.setBounds(418, 369, 117, 29);
 		}
 		return btnReview;
 	}
@@ -250,7 +253,7 @@ public class Classinfo {
 				}
 			});
 			btnAttend.setBackground(Color.BLUE);
-			btnAttend.setBounds(418, 558, 117, 29);
+			btnAttend.setBounds(418, 489, 117, 29);
 		}
 		return btnAttend;
 	}
@@ -270,12 +273,33 @@ public class Classinfo {
 			tfcPrice.setText("0");
 			tfcPrice.setHorizontalAlignment(SwingConstants.TRAILING);
 			tfcPrice.setEditable(false);
-			tfcPrice.setBounds(286, 558, 130, 26);
+			tfcPrice.setBounds(323, 489, 90, 26);
 			tfcPrice.setColumns(10);
 		}
 		return tfcPrice;
 	}
 	
+	private JButton getBtnBackClasslist() {
+		if (btnBackClasslist == null) {
+			btnBackClasslist = new JButton("다른 강의 보기");
+			btnBackClasslist.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					/*
+					 *  2021-04-30 12:08 권효은
+					 *  다른강의 리스트 보기위해 뒤로가기
+					 */
+					
+					ClassList classList = new ClassList();
+					classList.setVisible_Classinfo(true);
+					frame.dispose();
+					
+				}
+			});
+			btnBackClasslist.setBounds(418, 540, 117, 29);
+		}
+		return btnBackClasslist;
+	}
 	
 	
 	
@@ -325,6 +349,6 @@ public class Classinfo {
  
 		
 	}//ClassInfo End
-
-
-}
+	
+	
+}//end

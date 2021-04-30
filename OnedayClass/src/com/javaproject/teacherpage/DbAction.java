@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.javaproject.base.ShareVar;
-import com.javaproject.myclass.Bean;
+import com.javaproject.myclass.MyClassBean;
 
 public class DbAction {
 

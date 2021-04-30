@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import com.javaproject.classlist.DbAction;
 
@@ -23,8 +24,10 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 
 public class ClassReview {
-	//강의에 대한 후기!
 	
+	//--------------------------------------Field
+		//강의에 대한 후기!
+		
 		private JFrame frame;
 		private JLabel lblNewLabel;
 		private JTextField tfrCount;
@@ -37,7 +40,10 @@ public class ClassReview {
 	    * 강의 후기 테이블을 위한 작업	
 	    */
 		private final DefaultTableModel Outer_Table = new DefaultTableModel();
+		private JLabel lblCount;
 
+		
+		//--------------------------------------Constructor
 		
 		/**
 		 * Launch the application.
@@ -68,11 +74,11 @@ public class ClassReview {
 		private void initialize() {
 			frame = new JFrame();
 			frame.addWindowListener(new WindowAdapter() {
-			
 				@Override
 				public void windowOpened(WindowEvent e) {
 					TableInit();
 					ClassReviewInfo();
+					ValueCountReview();
 				}
 			});
 			frame.setTitle("금손양성소");
@@ -83,6 +89,7 @@ public class ClassReview {
 			frame.getContentPane().add(getTfrCount());
 			frame.getContentPane().add(getScrollPane());
 			frame.getContentPane().add(getBtnNewButton());
+			frame.getContentPane().add(getLblCount());
 		}
 
 		private JLabel getLblNewLabel() {
@@ -96,8 +103,9 @@ public class ClassReview {
 		private JTextField getTfrCount() {
 			if (tfrCount == null) {
 				tfrCount = new JTextField();
+				tfrCount.setEditable(false);
 				tfrCount.setHorizontalAlignment(SwingConstants.TRAILING);
-				tfrCount.setBounds(129, 25, 39, 35);
+				tfrCount.setBounds(129, 25, 28, 35);
 				tfrCount.setColumns(10);
 			}
 			return tfrCount;
@@ -115,8 +123,6 @@ public class ClassReview {
 			if (btnNewButton == null) {
 				btnNewButton = new JButton("닫기");
 				btnNewButton.addActionListener(new ActionListener() {
-					
-			
 					public void actionPerformed(ActionEvent e) {
 						//닫기버튼 클릭시 강의 정보 란으로 돌아가기
 						Classinfo classinfo = new Classinfo();
@@ -141,10 +147,7 @@ public class ClassReview {
 		}
 		
 		
-		/*/
-		 * Method
-		 * 
-		 */
+		//--------------------------------------Method
 		
 		// Frame 보이게 안보이게 설정
 		public void setVisible_ClassReview(boolean h) {
@@ -203,8 +206,7 @@ public class ClassReview {
 
 		
 		//강의 아이디를 통한 강의 후기 불러오기
-		
-		//ClassReview
+		//강의 후기 정보 불러오기
 			public void ClassReviewInfo() {
 				int cid = DbAction.classid;
 				
@@ -216,12 +218,30 @@ public class ClassReview {
 				for(int i=0; i<listCount; i++) {
 					
 					
-					
 				String[] qTxt = { Integer.toString(beanList.get(i).getcId()),beanList.get(i).getsName(), beanList.get(i).getcReview(),Integer.toString(beanList.get(i).getcScore())};
 				Outer_Table.addRow(qTxt);
 				
 				}
 		
 			} // ClassReviewInfo End
+			
+		
+		//해당 강의 후기 갯수 구하기
+			public void ValueCountReview() {
+				int cid = DbAction.classid;
+				
+				DbActionInfo dbActionInfo = new DbActionInfo(cid);
+				Bean2 valCountReview = dbActionInfo.CountReview();
+				
+				tfrCount.setText(Integer.toString(valCountReview.getrCount()));
+			}
+		private JLabel getLblCount() {
+			if (lblCount == null) {
+				lblCount = new JLabel("개");
+				lblCount.setBounds(157, 39, 18, 16);
+			}
+			return lblCount;
+		}
+
 
 }

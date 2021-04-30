@@ -7,17 +7,17 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-	public class DbAction { // 2021.04.26 조혜지 - 수강 예정과 수강 이력 데이터 테이블표에 불러오기 & 수강 예정 강의 mysql 연결해 수강 신청 취소하기
-		                    // 2021.04.29 조혜지 - 후기 미작성 내역과 작성 내역 데이터 테이블표에 불러오기
+	public class MyClassDbAction { // 2021.04.26 조혜지 - 수강 예정과 수강 이력 데이터 테이블표에 불러오기 & 수강 예정 강의 mysql 연결해 수강 신청 취소하기
+		                           // 2021.04.29 조혜지 - 후기 미작성 내역과 작성 내역 데이터 테이블표에 불러오기
  
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.3/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static final String url_mysql = "jdbc:mysql://192.168.0.5/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static final String id_mysql = "root";
 	public static final String pw_mysql = "qwer1234";
 	public static String currentuser = "'hyoeun@gmail.com'";
 	public static int ccId = 0;
-	public static int rcId = 0;
-	public static int ucId = 0;
+//	public static int rcId = 0;
+//	public static int ucId = 0;
 	// 여기까지 4줄은 완성되면 없애기 ***************************************************
 	// 여기부터 3줄은 완성되면 살리기 ***************************************************
 		// private final static String url_mysql = ShareVar.url_mysql;
@@ -39,18 +39,18 @@ import java.util.ArrayList;
 		 // Constructor*****************************************
 		 
 		 // 초기 Constructor 생성 - SearchActionAfter, SearchActionBefore에서 사용
-		 public DbAction() {
+		 public MyClassDbAction() {
 		     // TODO Auto-generated constructor stub
 		 }
 
 		 // 수강 신청 취소하는 CancelClick 에서 사용
-		 public DbAction(int cId) {
+		 public MyClassDbAction(int cId) {
 			super();
 			this.cId = cId;
 		}
 		 
 		// 리뷰 등록하는 reviewRegister 에서 사용
-		 public DbAction(int cId, String cReview, int cScore) {
+		 public MyClassDbAction(int cId, String cReview, int cScore) {
 		      super();
 		      this.cId = cId;
 		      this.cReview = cReview;
@@ -61,13 +61,13 @@ import java.util.ArrayList;
 		// Method*****************************************
 		 
 		 // 수강 예정인 데이터를 mysql에서 불러오는 메소드
-		 public ArrayList<Bean> selectListAfter() {
-		     ArrayList<Bean> beanList = new ArrayList<Bean>();
+		 public ArrayList<MyClassBean> selectListAfter() {
+		     ArrayList<MyClassBean> beanList = new ArrayList<MyClassBean>();
 		     
 		     String QueryA = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice ";
-		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName in (select cName from Class where cDate >= curdate()) ";
+		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cDate in (select cDate from Class where cDate >= curdate()) ";
 		     String QueryC = "and sEmail = " + currentuser;
-		     String QueryD = " and r.cCloseDate is null";
+		     String QueryD = " and r.cCloseDate is null and a.cCancelDate is null";
 		     try{
 		         Class.forName("com.mysql.cj.jdbc.Driver");
 		         Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
@@ -84,7 +84,7 @@ import java.util.ArrayList;
 		           String wkcLocation = rs.getString(5);
 		           int wkcPrice = rs.getInt(6);
 		           
-		           Bean bean = new Bean(wkcId, wkcAttendDate, wkcName, wkcDate, wkcLocation, wkcPrice);
+		           MyClassBean bean = new MyClassBean(wkcId, wkcAttendDate, wkcName, wkcDate, wkcLocation, wkcPrice);
 		           beanList.add(bean);
 		
 		         }
@@ -98,13 +98,13 @@ import java.util.ArrayList;
 		 }
 		 
 		 // 수강 이력인 데이터를 mysql에서 불러오는 메소드
-		 public ArrayList<Bean> selectListBefore() {
-		     ArrayList<Bean> beanList = new ArrayList<Bean>();
+		 public ArrayList<MyClassBean> selectListBefore() {
+		     ArrayList<MyClassBean> beanList = new ArrayList<MyClassBean>();
 		     
 		     String QueryA = "select c.cId, a.cAttendDate, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2), c.cPrice ";
-		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName not in (select cName from Class where cDate >= curdate()) ";
+		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cDate not in (select cDate from Class where cDate >= curdate()) ";
 		     String QueryC = "and sEmail = " + currentuser;
-		     String QueryD = " and r.cCloseDate is null";     
+		     String QueryD = " and r.cCloseDate is null and a.cCancelDate is null";     
 		     try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
 		       Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
@@ -121,7 +121,7 @@ import java.util.ArrayList;
 		               String wkcLocation = rs.getString(5);
 		               int wkcPrice = rs.getInt(6);
 		           
-		               Bean bean = new Bean(wkcId, wkcAttendDate, wkcName, wkcDate, wkcLocation, wkcPrice);
+		               MyClassBean bean = new MyClassBean(wkcId, wkcAttendDate, wkcName, wkcDate, wkcLocation, wkcPrice);
 		           beanList.add(bean);
 		           
 		       }
@@ -135,7 +135,7 @@ import java.util.ArrayList;
 		 }
 		 
 		 // 수강 예정 강의 중 mysql에서 수강 취소하는 메소드
-		 public boolean delete() {
+		 public boolean Delete() {
 		     
 		       PreparedStatement ps = null;
 		       try{
@@ -144,7 +144,7 @@ import java.util.ArrayList;
 		           @SuppressWarnings("unused")
 		           Statement stmt_mysql = conn_mysql.createStatement();
 		
-		           String A = "delete from Attend where cId = ? ";
+		           String A = "update Attend set cCancelDate = curdate() where cId = ?";
 		
 		           ps = conn_mysql.prepareStatement(A);
 		           ps.setInt(1, cId);
@@ -161,13 +161,13 @@ import java.util.ArrayList;
 		     }
 		     
 		 // 후기 미완료인 데이터를 mysql에서 불러오는 메소드
-		 public ArrayList<Bean> selectListIncomplete() {
-		     ArrayList<Bean> beanList = new ArrayList<Bean>();
+		 public ArrayList<MyClassBean> selectListIncomplete() {
+		     ArrayList<MyClassBean> beanList = new ArrayList<MyClassBean>();
 		     
 		     String QueryA = "select c.cId, c.cDate, c.cName, concat(cLocation1, ' ', cLocation2) ";
-		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName not in (select cName from Class where cDate >= curdate()) ";
+		     String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cDate not in (select cDate from Class where cDate >= curdate()) ";
 		     String QueryC = "and sEmail = " + currentuser;
-		     String QueryD = " and r.cCloseDate is null and a.cReview is null and a.cScore is null";
+		     String QueryD = " and r.cCloseDate is null and a.cReview is null and a.cScore is null and a.cCancelDate is null";
 		     try{
 		         Class.forName("com.mysql.cj.jdbc.Driver");
 		         Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
@@ -182,7 +182,7 @@ import java.util.ArrayList;
 		           String wkcName = rs.getString(3);
 		           String wkcLocation = rs.getString(4);
 	           
-		           Bean bean = new Bean(wkcId, wkcDate, wkcName, wkcLocation);
+		           MyClassBean bean = new MyClassBean(wkcId, wkcDate, wkcName, wkcLocation);
 		           beanList.add(bean);
 		
 		         }
@@ -196,11 +196,11 @@ import java.util.ArrayList;
 		 }
 		 
 		 // 후기 완료인 데이터를 mysql에서 불러오는 메소드
-		 public ArrayList<Bean> selectListComplete() {
-			 ArrayList<Bean> beanList = new ArrayList<Bean>();
+		 public ArrayList<MyClassBean> selectListComplete() {
+			 ArrayList<MyClassBean> beanList = new ArrayList<MyClassBean>();
 			 
 			 String QueryA = "select a.cId, c.cDate, c.cName, concat(cLocation1, ' ', cLocation2) ";
-			 String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cName not in (select cName from Class where cDate >= curdate()) ";
+			 String QueryB = "from Class as c, Attend as a, Register as r where c.cId = r.cId and c.cId = a.cId and cDate not in (select cDate from Class where cDate >= curdate()) ";
 			 String QueryC = "and sEmail = " + currentuser;
 			 String QueryD = " and r.cCloseDate is null and a.cScore is not null and a.cReviewDeleteDate is null";
 			 try{
@@ -217,7 +217,7 @@ import java.util.ArrayList;
 					 String wkcName = rs.getString(3);
 					 String wkcLocation = rs.getString(4);
 					 
-					 Bean bean = new Bean(wkcId, wkcDate, wkcName, wkcLocation);
+					 MyClassBean bean = new MyClassBean(wkcId, wkcDate, wkcName, wkcLocation);
 					 beanList.add(bean);
 					 
 				 }
@@ -241,7 +241,7 @@ import java.util.ArrayList;
 	             @SuppressWarnings("unused")
 	            Statement stmt_mysql = conn_mysql.createStatement();
 
-	             String A = "update Attend set cReviewRegisterDate = curdate(), cReview = ?, cScore = ? where cId = ? and sEmail = " + currentuser;
+	             String A = "update Attend set cReviewRegisterDate = curdate(), cReview = ?, cScore = ?, cReviewDeleteDate = null where cId = ? and sEmail = " + currentuser;
 	             
 
 	             ps = conn_mysql.prepareStatement(A);
@@ -249,8 +249,6 @@ import java.util.ArrayList;
 	             ps.setString(1, cReview.trim());
 	             ps.setInt(2, cScore);
 	             ps.setInt(3, cId);
-
-	             
 	             ps.executeUpdate();
 
 	             conn_mysql.close();
@@ -271,7 +269,7 @@ import java.util.ArrayList;
 	             @SuppressWarnings("unused")
 	            Statement stmt_mysql = conn_mysql.createStatement();
 
-	             String A = "update Attend set cReviewDeleteDate = curdate() where cId = ? and sEmail = " + currentuser;
+	             String A = "update Attend set cReviewDeleteDate = curdate(), cReview = null, cScore = null where cId = ? and sEmail = " + currentuser;
 	             
 
 	             ps = conn_mysql.prepareStatement(A);
@@ -318,8 +316,8 @@ import java.util.ArrayList;
 		 }
 		 
 	     // mysql에 있는 리뷰 관련 정보를 view로 불러오기 위한 메소드
-		 public Bean ReviewShowData() {
-				Bean bean = null;
+		 public MyClassBean ReviewShowData() {
+				MyClassBean bean = null;
 				String QueryA = "select a.cReview, a.cScore from Attend as a, Class as c ";
 				String QueryB = "where a.cId = c.cId and c.cId = " + cId;
 				String QueryC = " and sEmail = " + currentuser;
@@ -336,7 +334,7 @@ import java.util.ArrayList;
 		               String cReview = rs.getString(1);
 		               int cScore = rs.getInt(2);		               
 
-		               bean = new Bean(cReview, cScore);
+		               bean = new MyClassBean(cReview, cScore);
 		                }
 
 		            conn_mysql.close();

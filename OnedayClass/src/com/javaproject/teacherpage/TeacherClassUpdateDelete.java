@@ -21,6 +21,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.javaproject.myclass.StudentMyClass;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -55,8 +58,7 @@ import java.awt.event.WindowEvent;
 		private JTextField tfFilePath;
 		private JButton btnFilePath;
 		private JComboBox cbCategory;
-		private JTextField tfCount;
-		private JLabel lblNewLabel_8;
+		private JButton btnCount;
 	
 	
 	
@@ -109,8 +111,7 @@ import java.awt.event.WindowEvent;
 			frame.getContentPane().add(getTfFilePath());
 			frame.getContentPane().add(getBtnFilePath());
 			frame.getContentPane().add(getCbCategory());
-			frame.getContentPane().add(getTfCount());
-			frame.getContentPane().add(getLblNewLabel_8());
+			frame.getContentPane().add(getBtnCount());
 	
 		}
 		private JLabel getLblNewLabel() {
@@ -131,7 +132,7 @@ import java.awt.event.WindowEvent;
 		}
 		private JLabel getLblNewLabel_2() {
 			if (lblNewLabel_2 == null) {
-				lblNewLabel_2 = new JLabel("장소");
+				lblNewLabel_2 = new JLabel("강의 장소");
 				lblNewLabel_2.setBounds(47, 272, 61, 16);
 				lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			}
@@ -207,6 +208,14 @@ import java.awt.event.WindowEvent;
 		private JButton getBtnCancle() {
 			if (btnCancle == null) {
 				btnCancle = new JButton("닫기");
+				btnCancle.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// 여기에서 재원님이랑 연결
+						StudentMyClass myClass = new StudentMyClass();
+						myClass.setVisible_StudentMyClass(true);
+						frame.dispose();
+					}
+				});
 				btnCancle.setBounds(453, 543, 76, 29);
 			}
 			return btnCancle;
@@ -291,6 +300,10 @@ import java.awt.event.WindowEvent;
 						int check_i = check();
 						if(check_i==0) {
 							UpdateAction();
+							// 여기에서 재원님이랑 연결
+							StudentMyClass myClass = new StudentMyClass();
+							myClass.setVisible_StudentMyClass(true);
+							frame.dispose();
 						}
 					}
 				});
@@ -340,7 +353,7 @@ import java.awt.event.WindowEvent;
 			if (lblImage == null) {
 				lblImage = new JLabel("");
 				lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-				lblImage.setIcon(new ImageIcon("/Users/tj/Desktop/스크린샷 2021-04-28 오후 2.18.46.png"));
+				lblImage.setIcon(new ImageIcon("/Users/parksunghun/Desktop/KakaoTalk_Photo_2021-04-30-00-20-58.png"));
 				lblImage.setBounds(37, 20, 478, 152);
 			}
 			return lblImage;
@@ -354,25 +367,21 @@ import java.awt.event.WindowEvent;
 			}
 			return cbCategory;
 		}
-		
-		private JTextField getTfCount() {
-			if (tfCount == null) {
-				tfCount = new JTextField();
-				tfCount.setHorizontalAlignment(SwingConstants.TRAILING);
-				tfCount.setBounds(37, 505, 43, 26);
-				tfCount.setColumns(10);
-			}
-			return tfCount;
-		}
-		private JLabel getLblNewLabel_8() {
-			if (lblNewLabel_8 == null) {
-				lblNewLabel_8 = new JLabel("명 신청");
-				lblNewLabel_8.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				lblNewLabel_8.setBounds(85, 510, 61, 16);
-			}
-			return lblNewLabel_8;
-		}
 	
+		private JButton getBtnCount() {
+			if (btnCount == null) {
+				btnCount = new JButton("");
+				btnCount.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						AttendStudentInfo studentInfo = new AttendStudentInfo();
+						studentInfo.setVisible_AttendStudentInfo(true);
+						frame.dispose();
+					}
+				});
+				btnCount.setBounds(37, 505, 140, 29);
+			}
+			return btnCount;
+		}
 		
 		// 메소드 시작 ***************************************************************
 		
@@ -400,7 +409,7 @@ import java.awt.event.WindowEvent;
 		
 		// 강의 등록 취소하는 메소드
 		private void DeleteAction() {
-			int id = RUDDbAction.dcId;
+			int id = RUDDbAction.ccId;
 
 			RUDDbAction dbaction = new RUDDbAction(id);
 	        RUDBean bean = dbaction.TableClick();
@@ -411,13 +420,19 @@ import java.awt.event.WindowEvent;
 		        	JOptionPane.showMessageDialog(null, "수강 인원이 1명 이상이기 때문에 폐강할 수 없습니다!\n폐강을 원하시면 강의를 신청한 수강생에게 연락해\n수강 취소를 요청한 후, 다시 시도해주세요!" ,"폐강 불가!", 
 	        				   JOptionPane.INFORMATION_MESSAGE);
 		        }else {
-		        	
+		        	int result = JOptionPane.showConfirmDialog(null, "강의를 폐강하시겠습니까?\nYes버튼 클릭 시 강의가 폐강됩니다.", "강의 폐강", JOptionPane.YES_NO_OPTION);
+					if(result==JOptionPane.YES_OPTION) {
 		        	boolean aaa = dbaction.DeleteAction();
 				    if(aaa == true) {
 				    	JOptionPane.showMessageDialog(null, "강의 폐강이 완료되었습니다!","폐강 완료!", 
 		        				   JOptionPane.INFORMATION_MESSAGE);
-
-		        	   }
+						// 여기에서 재원님이랑 연결
+				    	StudentMyClass myClass = new StudentMyClass();
+						myClass.setVisible_StudentMyClass(true);
+						frame.dispose();
+				    }
+				    
+		        	}
 		           }
 		        } catch (Exception e){
 		            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
@@ -431,7 +446,7 @@ import java.awt.event.WindowEvent;
 		// 강의 등록 수정하는 메소드
 		 private void UpdateAction() {
 		      
-				int id = RUDDbAction.dcId;
+				int id = RUDDbAction.ccId;
 
 		        // Image File
 				String cName = tfCname.getText();
@@ -504,7 +519,7 @@ import java.awt.event.WindowEvent;
 
 		 // mysql에 있는 데이터를 view에 불러오는 메소드
 		 private void ShowData() {
-				int id = RUDDbAction.dcId;
+				int id = RUDDbAction.ccId;
 
 				RUDDbAction dbaction = new RUDDbAction(id);
 		        RUDBean bean = dbaction.TableClick();
@@ -520,8 +535,8 @@ import java.awt.event.WindowEvent;
 		        cbDay.setSelectedItem(str.substring(8,10));
 		        tContents.setText(bean.getcContents());
 		        tfPrice.setText(Integer.toString(bean.getcPrice()));
-		        tfCount.setText(Integer.toString(bean.getcCount()));
-		        
+		        btnCount.setText(Integer.toString(bean.getcCount()) + "명 신청");
+		        		        
 		        // Image처리
 		        // File name이 틀려야 즉각 보여주기가 가능하여   
 		        // ShareVar에서 int값으로 정의하여 계속 증가하게 하여 file name으로 사용후 삭제
@@ -539,5 +554,6 @@ import java.awt.event.WindowEvent;
 		      tfFilePath.setText("");
 		 
 		   }
+
 
 	}

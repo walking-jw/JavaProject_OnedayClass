@@ -136,11 +136,11 @@ public class ReviewUpdateDelete {
 	}
 	private JButton getBtnCancel() {
 		if (btnCancel == null) {
-			btnCancel = new JButton("취소");
+			btnCancel = new JButton("닫기");
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					StudentMyClass category = new StudentMyClass();
-					category.setVisible_StudentMyClass(true);
+					ReviewManagement reviewManagement = new ReviewManagement();
+					reviewManagement.setVisible_ReviewManagement(true);
 					frame.dispose();
 				}
 			});
@@ -193,10 +193,10 @@ public class ReviewUpdateDelete {
 	
 	 // mysql에 있는 데이터를 view에 불러오는 메소드
 	 private void ReviewData() {
-			int id = DbAction.rcId;
+			int id = MyClassDbAction.ccId;
 
-			DbAction dbaction = new DbAction(id);
-	        Bean bean = dbaction.ReviewShowData();
+			MyClassDbAction dbaction = new MyClassDbAction(id);
+	        MyClassBean bean = dbaction.ReviewShowData();
 	        
 	        tReviewContents.setText(bean.getcReview());
 	        if(bean.getcScore()==1) {
@@ -215,13 +215,19 @@ public class ReviewUpdateDelete {
 	
 	 // Review를 삭제하는 메소드
 	 private void ReviewDeleteAction() {
-		 int id = DbAction.rcId;
+		 
+		 int result = JOptionPane.showConfirmDialog(null, "후기를 삭제하시겠습니까?", "후기 삭제", JOptionPane.YES_NO_OPTION);
+		 if(result==JOptionPane.YES_OPTION) {
+		 int id = MyClassDbAction.ccId;
 
-		 DbAction dbAction = new DbAction(id);
+		 MyClassDbAction dbAction = new MyClassDbAction(id);
 		 boolean aaa = dbAction.reviewDelete();
 		 try {
 			 if(aaa==true) {
 				 JOptionPane.showMessageDialog(null, "후기 삭제가 완료되었습니다!", "삭제 완료!", JOptionPane.INFORMATION_MESSAGE); 
+					ReviewManagement reviewManagement = new ReviewManagement();
+					reviewManagement.setVisible_ReviewManagement(true);
+					frame.dispose();
 				 
 			 }
 			 
@@ -233,13 +239,13 @@ public class ReviewUpdateDelete {
 		}
 		 
 			 
-		 
+		 }
 
 		}
 	 
 	 // Review를 수정하는 메소드
 	 private void ReviewUpdateAction() {
-	        int id = DbAction.ccId;
+	        int id = MyClassDbAction.ccId;
 	        int reviewscore = 0;
 	        if(rd1.isSelected()==true) {
 	           reviewscore = 1;
@@ -253,13 +259,16 @@ public class ReviewUpdateDelete {
 	           reviewscore = 5;
 	        }
 	        
-	      DbAction dbAction = new DbAction(id, tReviewContents.getText().trim(), reviewscore);
+	      MyClassDbAction dbAction = new MyClassDbAction(id, tReviewContents.getText().trim(), reviewscore);
 	      boolean msg = dbAction.reviewUpdate();
 	        try{
 
 	           if(msg == true) {
 	              
 	              JOptionPane.showMessageDialog(null, "후기 수정이 완료되었습니다!","수정 완료!", JOptionPane.INFORMATION_MESSAGE);
+					ReviewManagement reviewManagement = new ReviewManagement();
+					reviewManagement.setVisible_ReviewManagement(true);
+					frame.dispose();
 
 	           }
 	        } catch (Exception e){
