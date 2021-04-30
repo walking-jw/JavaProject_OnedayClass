@@ -16,6 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.javaproject.myclass.StudentMyClass;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -119,7 +122,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 	}
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("장소");
+			lblNewLabel_2 = new JLabel("강의 장소");
 			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel_2.setBounds(47, 272, 61, 16);
 		}
@@ -188,6 +191,10 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 					if(check_i==0) {
 						RegisterAction();
 						RelationRegisterAction();
+						// 여기에서 재원님이랑 연결
+						StudentMyClass myClass = new StudentMyClass();
+						myClass.setVisible_StudentMyClass(true);
+						frame.dispose();
 					}
 				}
 			});
@@ -198,6 +205,14 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 	private JButton getBtnCancle() {
 		if (btnCancle == null) {
 			btnCancle = new JButton("닫기");
+			btnCancle.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// 여기에서 재원님이랑 연결
+					StudentMyClass myClass = new StudentMyClass();
+					myClass.setVisible_StudentMyClass(true);
+					frame.dispose();
+				}
+			});
 			btnCancle.setBounds(453, 543, 76, 29);
 		}
 		return btnCancle;
@@ -288,7 +303,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		if (lblImage == null) {
 			lblImage = new JLabel("");
 			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-			lblImage.setIcon(new ImageIcon("/Users/tj/Desktop/스크린샷 2021-04-28 오후 12.48.28.png"));
+			lblImage.setIcon(new ImageIcon("/Users/parksunghun/Desktop/KakaoTalk_Photo_2021-04-30-00-20-58.png"));
 			lblImage.setBounds(37, 20, 478, 152);
 		}
 		return lblImage;

@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class SignIn {
 
@@ -51,6 +52,7 @@ public class SignIn {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("로그인");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -73,7 +75,7 @@ public class SignIn {
 			rdbtnCommon = new JRadioButton("일반회원");
 			buttonGroup.add(rdbtnCommon);
 			rdbtnCommon.setSelected(true);
-			rdbtnCommon.setBounds(144, 120, 90, 23);
+			rdbtnCommon.setBounds(176, 120, 90, 23);
 		}
 		return rdbtnCommon;
 	}
@@ -81,14 +83,14 @@ public class SignIn {
 		if (rdbtnTeacher == null) {
 			rdbtnTeacher = new JRadioButton("강사회원");
 			buttonGroup.add(rdbtnTeacher);
-			rdbtnTeacher.setBounds(292, 120, 90, 23);
+			rdbtnTeacher.setBounds(277, 120, 90, 23);
 		}
 		return rdbtnTeacher;
 	}
 	private JTextField getTfEmail() {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
-			tfEmail.setBounds(212, 168, 130, 26);
+			tfEmail.setBounds(188, 168, 154, 26);
 			tfEmail.setColumns(10);
 		}
 		return tfEmail;
@@ -97,14 +99,14 @@ public class SignIn {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
 			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "google.com"}));
-			cbEmail.setBounds(354, 169, 90, 27);
+			cbEmail.setBounds(347, 169, 117, 27);
 		}
 		return cbEmail;
 	}
 	private JPasswordField getPwdF() {
 		if (pwdF == null) {
 			pwdF = new JPasswordField();
-			pwdF.setBounds(212, 221, 182, 26);
+			pwdF.setBounds(188, 203, 154, 26);
 		}
 		return pwdF;
 	}
@@ -121,7 +123,7 @@ public class SignIn {
 					}
 				}
 			});
-			btnSignIn.setBounds(201, 297, 117, 29);
+			btnSignIn.setBounds(142, 241, 241, 29);
 		}
 		return btnSignIn;
 	}
@@ -136,35 +138,43 @@ public class SignIn {
 					frame.dispose();
 				}
 			});
-			btnSignUp.setBounds(201, 393, 117, 29);
+			btnSignUp.setBounds(142, 324, 241, 29);
 		}
 		return btnSignUp;
 	}
 	private JButton getBtnFind() {
 		if (btnFind == null) {
 			btnFind = new JButton("아이디 / 비밀번호 찾기");
-			btnFind.setBounds(201, 479, 117, 29);
+			btnFind.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FindIdAndPwd findView = new FindIdAndPwd();
+					findView.setVisible_FindView(true);
+					frame.dispose();
+				}
+			});
+			btnFind.setBounds(152, 487, 225, 29);
 		}
 		return btnFind;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("반갑습니다!");
-			lblNewLabel.setBounds(240, 65, 61, 16);
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 21));
+			lblNewLabel.setBounds(221, 47, 97, 36);
 		}
 		return lblNewLabel;
 	}
 	private JLabel getLblId() {
 		if (lblId == null) {
 			lblId = new JLabel("아이디(이메일) :");
-			lblId.setBounds(125, 173, 61, 16);
+			lblId.setBounds(87, 173, 82, 16);
 		}
 		return lblId;
 	}
 	private JLabel getLblId_1() {
 		if (lblId_1 == null) {
 			lblId_1 = new JLabel("비밀번호 :");
-			lblId_1.setBounds(125, 226, 61, 16);
+			lblId_1.setBounds(115, 208, 61, 16);
 		}
 		return lblId_1;
 	}
@@ -172,14 +182,14 @@ public class SignIn {
 		if (lblId_1_1 == null) {
 			lblId_1_1 = new JLabel("또는");
 			lblId_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblId_1_1.setBounds(229, 351, 61, 16);
+			lblId_1_1.setBounds(231, 296, 61, 16);
 		}
 		return lblId_1_1;
 	}
 	private JLabel getLblId_1_2() {
 		if (lblId_1_2 == null) {
 			lblId_1_2 = new JLabel("아이디 혹은 비밀번호를 잊어버렸습니까?");
-			lblId_1_2.setBounds(161, 451, 206, 16);
+			lblId_1_2.setBounds(164, 444, 206, 16);
 		}
 		return lblId_1_2;
 	}

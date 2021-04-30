@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import com.javaproject.searchpage.SearchView;
+import com.javaproject.studentpage.StudentProfile;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -87,7 +88,7 @@ public class HomeView {
 					//수강목
 				}
 			});
-			btnShowClass.setBounds(49, 349, 456, 108);
+			btnShowClass.setBounds(49, 349, 456, 141);
 		}
 		return btnShowClass;
 	}
@@ -131,7 +132,7 @@ public class HomeView {
 					segueToSearch();
 				}
 			});
-			btnNewButton_9.setBounds(82, 533, 117, 29);
+			btnNewButton_9.setBounds(49, 516, 143, 29);
 		}
 		return btnNewButton_9;
 	}
@@ -143,7 +144,7 @@ public class HomeView {
 					//My class
 				}
 			});
-			btnNewButton_9_1.setBounds(221, 533, 117, 29);
+			btnNewButton_9_1.setBounds(204, 516, 145, 29);
 		}
 		return btnNewButton_9_1;
 	}
@@ -153,9 +154,12 @@ public class HomeView {
 			btnNewButton_9_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//프로필
+					StudentProfile profile = new StudentProfile();
+					profile.setVisible_StudentProfile(true);
+					frame.dispose();
 				}
 			});
-			btnNewButton_9_2.setBounds(355, 533, 117, 29);
+			btnNewButton_9_2.setBounds(355, 516, 151, 29);
 		}
 		return btnNewButton_9_2;
 	}
