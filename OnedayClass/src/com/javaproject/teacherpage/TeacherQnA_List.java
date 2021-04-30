@@ -19,10 +19,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class TeacherQnA_List {
 
-	private JFrame frame;
+	private JFrame frmQna;
 	private JButton btnAnswer;
 	private JLabel lblNewLabel;
 	private JScrollPane scrollPane;
@@ -45,8 +47,9 @@ public class TeacherQnA_List {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.addWindowListener(new WindowAdapter() {
+		frmQna = new JFrame();
+		frmQna.setTitle("QnA");
+		frmQna.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				
@@ -57,23 +60,23 @@ public class TeacherQnA_List {
 				
 			}
 		});
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getBtnAnswer());
-		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getScrollPane());
-		frame.getContentPane().add(getScrollPane_1());
-		frame.getContentPane().add(getLblNewLabel_1());
-		frame.getContentPane().add(getBtn_ToMypage());
+		frmQna.setBounds(100, 100, 560, 625);
+		frmQna.setLocationRelativeTo(frmQna);
+		frmQna.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmQna.getContentPane().setLayout(null);
+		frmQna.getContentPane().add(getBtnAnswer());
+		frmQna.getContentPane().add(getLblNewLabel());
+		frmQna.getContentPane().add(getScrollPane());
+		frmQna.getContentPane().add(getScrollPane_1());
+		frmQna.getContentPane().add(getLblNewLabel_1());
+		frmQna.getContentPane().add(getBtn_ToMypage());
 	}
 
 	
 	
 	// 해당 클라스 켜주기 
 	public void setVisible_TeacherQnA_List(boolean b) {
-		frame.setVisible(true);
+		frmQna.setVisible(true);
 	}
 	private JButton getBtnAnswer() {
 		if (btnAnswer == null) {
@@ -85,27 +88,28 @@ public class TeacherQnA_List {
 					
 					TeacherQnA go = new TeacherQnA();
 					go.setVisible_QnA(true);
-					frame.dispose();
+					frmQna.dispose();
 					
 					
 					
 				}
 			});
-			btnAnswer.setBounds(366, 260, 117, 29);
+			btnAnswer.setBounds(445, 267, 86, 29);
 		}
 		return btnAnswer;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("문의리스트");
-			lblNewLabel.setBounds(56, 59, 149, 16);
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel.setBounds(30, 25, 122, 16);
 		}
 		return lblNewLabel;
 	}
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(56, 98, 430, 150);
+			scrollPane.setBounds(30, 53, 501, 202);
 			scrollPane.setViewportView(getInner_Table_QnA());
 		}
 		return scrollPane;
@@ -122,7 +126,7 @@ public class TeacherQnA_List {
 	private JScrollPane getScrollPane_1() {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBounds(56, 371, 427, 155);
+			scrollPane_1.setBounds(30, 334, 501, 202);
 			scrollPane_1.setViewportView(getInner_Table_AnswerOK());
 		}
 		return scrollPane_1;
@@ -139,7 +143,8 @@ public class TeacherQnA_List {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("답변완료 리스트");
-			lblNewLabel_1.setBounds(56, 343, 216, 16);
+			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_1.setBounds(30, 306, 109, 16);
 		}
 		return lblNewLabel_1;
 	}
@@ -245,11 +250,11 @@ public class TeacherQnA_List {
 					
 					TeacherMypage tm = new TeacherMypage();
 					tm.setVisible_TeacherMypage(true);
-					frame.dispose();
+					frmQna.dispose();
 							
 				}
 			});
-			btn_ToMypage.setBounds(366, 562, 117, 29);
+			btn_ToMypage.setBounds(445, 548, 86, 29);
 		}
 		return btn_ToMypage;
 	}

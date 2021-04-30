@@ -72,7 +72,7 @@ public class Main {
 					frame.dispose();
 				}
 			});
-			btnStart.setBounds(205, 473, 117, 29);
+			btnStart.setBounds(221, 472, 117, 29);
 		}
 		return btnStart;
 	}

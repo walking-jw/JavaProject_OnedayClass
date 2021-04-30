@@ -65,6 +65,7 @@ public class TeacherMypage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("마이페이지");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override()
 			public void windowOpened(WindowEvent e) {
@@ -105,25 +106,25 @@ public class TeacherMypage {
 	}
 	private JLabel getLbl_Name() {
 		if (lbl_Name == null) {
-			lbl_Name = new JLabel("이     름");
+			lbl_Name = new JLabel("이름");
 			lbl_Name.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Name.setBounds(187, 95, 61, 16);
+			lbl_Name.setBounds(168, 68, 61, 16);
 		}
 		return lbl_Name;
 	}
 	private JTextField getTf_Name() {
 		if (tf_Name == null) {
 			tf_Name = new JTextField();
-			tf_Name.setBounds(267, 88, 206, 32);
+			tf_Name.setBounds(267, 64, 206, 26);
 			tf_Name.setColumns(10);
 		}
 		return tf_Name;
 	}
 	private JLabel getLbl_Name_1() {
 		if (lbl_Name_1 == null) {
-			lbl_Name_1 = new JLabel("닉 네 임");
+			lbl_Name_1 = new JLabel("닉네임");
 			lbl_Name_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Name_1.setBounds(187, 139, 61, 16);
+			lbl_Name_1.setBounds(168, 112, 61, 16);
 		}
 		return lbl_Name_1;
 	}
@@ -131,7 +132,7 @@ public class TeacherMypage {
 		if (tf_NickName == null) {
 			tf_NickName = new JTextField();
 			tf_NickName.setColumns(10);
-			tf_NickName.setBounds(267, 132, 206, 32);
+			tf_NickName.setBounds(267, 108, 206, 26);
 		}
 		return tf_NickName;
 	}
@@ -140,15 +141,15 @@ public class TeacherMypage {
 			tf_Email = new JTextField();
 			tf_Email.setEditable(false);
 			tf_Email.setColumns(10);
-			tf_Email.setBounds(267, 176, 206, 32);
+			tf_Email.setBounds(267, 152, 206, 26);
 		}
 		return tf_Email;
 	}
 	private JLabel getLbl_Email() {
 		if (lbl_Email == null) {
-			lbl_Email = new JLabel("E-mail");
+			lbl_Email = new JLabel("이메일");
 			lbl_Email.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Email.setBounds(187, 183, 61, 16);
+			lbl_Email.setBounds(168, 156, 61, 16);
 		}
 		return lbl_Email;
 	}
@@ -156,7 +157,7 @@ public class TeacherMypage {
 		if (lbl_Email_1 == null) {
 			lbl_Email_1 = new JLabel("전화번호");
 			lbl_Email_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Email_1.setBounds(187, 227, 61, 16);
+			lbl_Email_1.setBounds(168, 200, 61, 16);
 		}
 		return lbl_Email_1;
 	}
@@ -164,7 +165,7 @@ public class TeacherMypage {
 		if (tf_Telno == null) {
 			tf_Telno = new JTextField();
 			tf_Telno.setColumns(10);
-			tf_Telno.setBounds(267, 220, 206, 32);
+			tf_Telno.setBounds(267, 196, 206, 26);
 		}
 		return tf_Telno;
 	}
@@ -172,7 +173,7 @@ public class TeacherMypage {
 		if (lbl_Email_1_1 == null) {
 			lbl_Email_1_1 = new JLabel("비밀번호");
 			lbl_Email_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Email_1_1.setBounds(187, 288, 61, 16);
+			lbl_Email_1_1.setBounds(168, 248, 61, 16);
 		}
 		return lbl_Email_1_1;
 	}
@@ -180,15 +181,15 @@ public class TeacherMypage {
 		if (lbl_QnA == null) {
 			lbl_QnA = new JLabel("비밀번호확인");
 			lbl_QnA.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_QnA.setBounds(187, 332, 84, 16);
+			lbl_QnA.setBounds(168, 287, 84, 16);
 		}
 		return lbl_QnA;
 	}
 	private JLabel getLbl_Average() {
 		if (lbl_Average == null) {
-			lbl_Average = new JLabel("평    점");
+			lbl_Average = new JLabel("평점");
 			lbl_Average.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Average.setBounds(71, 376, 61, 16);
+			lbl_Average.setBounds(40, 370, 42, 16);
 		}
 		return lbl_Average;
 	}
@@ -198,15 +199,15 @@ public class TeacherMypage {
 			tf_AveragePoint.setEditable(false);
 			tf_AveragePoint.setHorizontalAlignment(SwingConstants.CENTER);
 			tf_AveragePoint.setColumns(10);
-			tf_AveragePoint.setBounds(151, 369, 49, 32);
+			tf_AveragePoint.setBounds(151, 366, 49, 26);
 		}
 		return tf_AveragePoint;
 	}
 	private JLabel getLbl_Myclass() {
 		if (lbl_Myclass == null) {
-			lbl_Myclass = new JLabel("내 강의");
+			lbl_Myclass = new JLabel("나의 강의");
 			lbl_Myclass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Myclass.setBounds(71, 418, 61, 16);
+			lbl_Myclass.setBounds(40, 410, 61, 16);
 		}
 		return lbl_Myclass;
 	}
@@ -214,7 +215,7 @@ public class TeacherMypage {
 		if (lbl_Average_1_1 == null) {
 			lbl_Average_1_1 = new JLabel("Q & A");
 			lbl_Average_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbl_Average_1_1.setBounds(71, 461, 61, 16);
+			lbl_Average_1_1.setBounds(40, 444, 61, 16);
 		}
 		return lbl_Average_1_1;
 	}
@@ -232,7 +233,7 @@ public class TeacherMypage {
 					
 				}
 			});
-			btn_TeacherMyclass.setBounds(151, 413, 159, 29);
+			btn_TeacherMyclass.setBounds(141, 406, 159, 29);
 		}
 		return btn_TeacherMyclass;
 	}
@@ -250,13 +251,13 @@ public class TeacherMypage {
 					
 				}
 			});
-			btn_QnA.setBounds(151, 457, 159, 29);
+			btn_QnA.setBounds(141, 440, 159, 29);
 		}
 		return btn_QnA;
 	}
 	private JButton getBtn_Out() {
 		if (btn_Out == null) {
-			btn_Out = new JButton("탈  퇴");
+			btn_Out = new JButton("탈퇴");
 			btn_Out.setForeground(Color.RED);
 			btn_Out.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -265,21 +266,21 @@ public class TeacherMypage {
 				
 				}
 			});
-			btn_Out.setBounds(386, 527, 140, 29);
+			btn_Out.setBounds(108, 515, 140, 29);
 		}
 		return btn_Out;
 	}
 	private JPasswordField getTf_Password() {
 		if (tf_Password == null) {
 			tf_Password = new JPasswordField();
-			tf_Password.setBounds(267, 284, 206, 26);
+			tf_Password.setBounds(267, 244, 206, 26);
 		}
 		return tf_Password;
 	}
 	private JPasswordField getTf_PasswordConfirm() {
 		if (tf_PasswordConfirm == null) {
 			tf_PasswordConfirm = new JPasswordField();
-			tf_PasswordConfirm.setBounds(267, 328, 206, 26);
+			tf_PasswordConfirm.setBounds(267, 283, 206, 26);
 		}
 		return tf_PasswordConfirm;
 	}
@@ -310,24 +311,15 @@ public class TeacherMypage {
 				}
 			});
 			btn_Logout.setForeground(Color.BLUE);
-			btn_Logout.setBounds(41, 227, 117, 29);
+			btn_Logout.setBounds(251, 515, 117, 29);
 		}
 		return btn_Logout;
-	}
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("마 이 페 이 지");
-			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
-			lblNewLabel_1.setBounds(115, 28, 306, 32);
-		}
-		return lblNewLabel_1;
 	}
 	private JLabel getLbl_PassCheck() {
 		if (lbl_PassCheck == null) {
 			lbl_PassCheck = new JLabel("");
 			lbl_PassCheck.setForeground(Color.RED);
-			lbl_PassCheck.setBounds(277, 355, 196, 16);
+			lbl_PassCheck.setBounds(267, 321, 196, 16);
 		}
 		return lbl_PassCheck;
 	}
@@ -349,7 +341,7 @@ public class TeacherMypage {
 					
 				}
 			});
-			btn_Out_1.setBounds(234, 527, 140, 29);
+			btn_Out_1.setBounds(373, 515, 140, 29);
 		}
 		return btn_Out_1;
 	}
@@ -432,5 +424,13 @@ public class TeacherMypage {
 			JOptionPane.showMessageDialog(null,"자료 수정 중 에러가 발생하였습니다");
 		}
 		
+	}
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("점");
+			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_1.setBounds(202, 370, 61, 16);
+		}
+		return lblNewLabel_1;
 	}
 }
