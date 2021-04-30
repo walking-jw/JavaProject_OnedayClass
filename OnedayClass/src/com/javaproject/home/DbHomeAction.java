@@ -74,7 +74,7 @@ public class DbHomeAction {
 				String wkName = rs.getString(2);
 				
 				// File
-				ShareVar.filename = ShareVar.filename + 1;
+				//ShareVar.filename = ShareVar.filename + 1;
 				File file = new File(Integer.toString(filename));
 				FileOutputStream output = new FileOutputStream(file);
 				InputStream input = rs.getBinaryStream(3);
