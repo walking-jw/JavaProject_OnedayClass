@@ -53,7 +53,6 @@ public class HomeView {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				applyFirstRecommnd();
-				//applyTwoRecommnd();
 			}
 		});
 		frame.setBounds(100, 100, 560, 625);
@@ -107,6 +106,7 @@ public class HomeView {
 			btnRecOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//추천1
+					applyFirstRecommnd();
 					ShareVar.cId = firstRecommndClassId;
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
