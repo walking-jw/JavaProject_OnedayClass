@@ -11,13 +11,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.classlist.ClassList;
 import com.javaproject.classlist.DbAction;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 public class Classinfo {
 
@@ -37,35 +41,21 @@ public class Classinfo {
 	private JButton btntName;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_3_1;
-	private JTextField tfcContents;
 	private JButton btnReview;
 	private JButton btnAttend;
 	private JLabel lblImage;
 	private JTextField tfcPrice;
 	private JLabel tfFilePath;
 	private JButton btnBackClasslist;
+	private JScrollPane scrollPane;
+	private JTextPane tfcContents;
 
 	
 	//-----------------------------Constructor
 	
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Classinfo window = new Classinfo();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -104,12 +94,12 @@ public class Classinfo {
 		frame.getContentPane().add(getBtntName());
 		frame.getContentPane().add(getLblNewLabel_5());
 		frame.getContentPane().add(getLblNewLabel_3_1());
-		frame.getContentPane().add(getTfcContents());
 		frame.getContentPane().add(getBtnReview());
 		frame.getContentPane().add(getBtnAttend());
 		frame.getContentPane().add(getLblImage());
 		frame.getContentPane().add(getTfcPrice());
 		frame.getContentPane().add(getBtnBackClasslist());
+		frame.getContentPane().add(getScrollPane());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -176,7 +166,9 @@ public class Classinfo {
 	private JTextField getTfcTime() {
 		if (tfcTime == null) {
 			tfcTime = new JTextField();
-			tfcTime.setBounds(103, 304, 30, 26);
+			tfcTime.setEditable(false);
+			tfcTime.setHorizontalAlignment(SwingConstants.TRAILING);
+			tfcTime.setBounds(103, 304, 49, 26);
 			tfcTime.setColumns(10);
 		}
 		return tfcTime;
@@ -192,7 +184,7 @@ public class Classinfo {
 					frame.dispose();
 				}
 			});
-			btntName.setBackground(new Color(240, 230, 140));
+			btntName.setBackground(Color.BLUE);
 			btntName.setBounds(103, 225, 117, 29);
 		}
 		return btntName;
@@ -200,7 +192,7 @@ public class Classinfo {
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
 			lblNewLabel_5 = new JLabel("시간");
-			lblNewLabel_5.setBounds(134, 309, 30, 16);
+			lblNewLabel_5.setBounds(152, 309, 30, 16);
 		}
 		return lblNewLabel_5;
 	}
@@ -210,15 +202,6 @@ public class Classinfo {
 			lblNewLabel_3_1.setBounds(30, 374, 61, 16);
 		}
 		return lblNewLabel_3_1;
-	}
-	private JTextField getTfcContents() {
-		if (tfcContents == null) {
-			tfcContents = new JTextField();
-			tfcContents.setEditable(false);
-			tfcContents.setBounds(30, 395, 505, 82);
-			tfcContents.setColumns(10);
-		}
-		return tfcContents;
 	}
 	private JButton getBtnReview() {
 		if (btnReview == null) {
@@ -253,7 +236,7 @@ public class Classinfo {
 				}
 			});
 			btnAttend.setBackground(Color.BLUE);
-			btnAttend.setBounds(418, 489, 117, 29);
+			btnAttend.setBounds(418, 499, 117, 29);
 		}
 		return btnAttend;
 	}
@@ -273,7 +256,7 @@ public class Classinfo {
 			tfcPrice.setText("0");
 			tfcPrice.setHorizontalAlignment(SwingConstants.TRAILING);
 			tfcPrice.setEditable(false);
-			tfcPrice.setBounds(323, 489, 90, 26);
+			tfcPrice.setBounds(323, 499, 90, 26);
 			tfcPrice.setColumns(10);
 		}
 		return tfcPrice;
@@ -336,19 +319,30 @@ public class Classinfo {
         // File name이 틀려야 즉각 보여주기가 가능하여   
         // ShareVar에서 int값으로 정의하여 계속 증가하게 하여 file name으로 사용후 삭제
         
-//	      String filePath = Integer.toString(DbActionInfo.filename);
-//	//      String filePath = Integer.toString(ShareVar.filename);
+	      String filePath = Integer.toString(ShareVar.filename);
 //	      tfFilePath.setText(filePath);
-//	      
-//	      lblImage.setIcon(new ImageIcon(filePath));
-//	      lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-//	      
-//	      File file = new File(filePath);
+	      
+	      lblImage.setIcon(new ImageIcon(filePath));
+	      lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+	      
+	      File file = new File(filePath);
 //	      file.delete();
 //	      tfFilePath.setText("");
  
 		
 	}//ClassInfo End
-	
-	
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setBounds(30, 402, 494, 85);
+			scrollPane.setViewportView(getTfcContents());
+		}
+		return scrollPane;
+	}
+	private JTextPane getTfcContents() {
+		if (tfcContents == null) {
+			tfcContents = new JTextPane();
+		}
+		return tfcContents;
+	}
 }//end

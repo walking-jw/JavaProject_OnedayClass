@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.myclass.StudentMyClass;
 
 import java.awt.event.WindowAdapter;
@@ -542,8 +543,7 @@ import java.awt.event.WindowEvent;
 		        // File name이 틀려야 즉각 보여주기가 가능하여   
 		        // ShareVar에서 int값으로 정의하여 계속 증가하게 하여 file name으로 사용후 삭제
 		        
-		      String filePath = Integer.toString(dbaction.filename);
-//		      String filePath = Integer.toString(ShareVar.filename);
+		      String filePath = Integer.toString(ShareVar.filename);
 		      tfFilePath.setText(filePath);
 		      
 		      lblImage.setIcon(new ImageIcon(filePath));

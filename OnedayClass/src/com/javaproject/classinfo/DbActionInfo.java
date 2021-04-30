@@ -1,6 +1,9 @@
 package com.javaproject.classinfo;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,9 +22,10 @@ public class DbActionInfo {
 		public static final String pw_mysql = ShareVar.pw_mysql;
 		public static String currentuser = ShareVar.currentuser;
 		public static int classid = ShareVar.cId;
-
+		public static int filename = ShareVar.filename;
+		
 //이미지를 넣어주기 
-//		FileInputStream file;
+		FileInputStream file;
 		
 		
 		
@@ -162,18 +166,17 @@ public class DbActionInfo {
 		        	int wkcPrice =(rs.getInt(8));
 		        	
 		        	
-//		        	// File 이미지 불러오기
-//		               filename = filename + 1;
-////		               ShareVar.filename = ShareVar.filename + 1;
-//		               File file = new File(Integer.toString(filename));
-////		               File file = new File(Integer.toString(ShareVar.filename));
-//		               FileOutputStream output = new FileOutputStream(file);
-//		               InputStream input = rs.getBinaryStream(9);
-//		                byte[] buffer = new byte[1024];
-//		                while (input.read(buffer) > 0) {
-//		                    output.write(buffer);
-//		                }
-
+		        	// File 이미지 불러오기
+		               ShareVar.filename = ShareVar.filename + 1;
+		               File file = new File(Integer.toString(ShareVar.filename));
+		               FileOutputStream output = new FileOutputStream(file);
+		               InputStream input = rs.getBinaryStream(9);
+		                byte[] buffer = new byte[1024];
+		                while (input.read(buffer) > 0) {
+		                    output.write(buffer);
+		                }
+		                
+//		                output.close();
 		        
 		          	bean2 = new Bean2( wkcId, wkcName, wktName, wkcLocation, wkcTime, wkcDate, wkcContents, wkcPrice);
 
