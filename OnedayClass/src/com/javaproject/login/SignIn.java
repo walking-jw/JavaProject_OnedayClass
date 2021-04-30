@@ -228,8 +228,8 @@ public class SignIn {
 				tc.setVisible_TeacherMypage(true);
 				frame.dispose();
 				// 강사페이지 열기
-				
-				//System.out.println(ShareVar.currentuser);
+			} else {
+				JOptionPane.showMessageDialog(null, "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 			}
 		}
 	}

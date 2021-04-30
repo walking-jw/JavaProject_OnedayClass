@@ -204,13 +204,13 @@ public class HomeView {
 		String filePath2 = Integer.toString(ShareVar.filename);
 		btnRecOne.setIcon(new ImageIcon(filePath1));;
 		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
-		File file1 = new File(filePath1);
-		file1.delete();
+//		File file1 = new File(filePath1);
+//		file1.delete();
 		
 		btnRecTwo.setIcon(new ImageIcon(filePath2));
 		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
-		File file2 = new File(filePath2);
-		file2.delete();
+//		File file2 = new File(filePath2);
+//		file2.delete();
 	}
 	
 	public void setVisible_HomeView(boolean b) {

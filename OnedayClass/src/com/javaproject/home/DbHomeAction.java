@@ -27,7 +27,7 @@ public class DbHomeAction {
 	//Method
 	public ArrayList<HomeBean> recommandClass() {
 		ArrayList<HomeBean> beanList = new ArrayList<HomeBean>();
-		String WhereDefault = "select cId,cName, cImg from class order by rand() limit 2";
+		String WhereDefault = "select cId,cName,cImg from class order by rand() limit 2";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);

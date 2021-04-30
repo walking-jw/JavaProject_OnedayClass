@@ -310,6 +310,7 @@ public class StudentProfile {
 	}
 	//로그아웃
 	private void signOutAction() {
+		JOptionPane.showMessageDialog(null, "로그아웃이 되었습니다.");
 		ShareVar.currentuser = "";
 		SignIn signIn = new SignIn();
 		signIn.setVisible_SignIn(true);
@@ -318,9 +319,16 @@ public class StudentProfile {
 	
 	// 탈퇴하기
 	private void withdrawAction() {
-		DbProfileAction dbProfileAction = new DbProfileAction();
-		dbProfileAction.deleteAction();
-		signOutAction();
+		int result = JOptionPane.showConfirmDialog(null, "탈퇴하시겠습니까?", "예 아니오", JOptionPane.YES_NO_OPTION);
+		if(result==JOptionPane.YES_OPTION) {
+			try {
+			DbProfileAction dbProfileAction = new DbProfileAction();
+			dbProfileAction.deleteAction();
+			signOutAction();
+			} catch (Exception e) {
+				System.out.println("error!");
+			}
+		}
 	}
 	
 	
