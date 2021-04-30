@@ -4,19 +4,23 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.classinfo.Classinfo;
 import com.javaproject.classlist.ClassList;
 import com.javaproject.myclass.StudentMyClass;
 import com.javaproject.searchpage.SearchView;
 import com.javaproject.studentpage.StudentProfile;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class HomeView {
 
@@ -25,8 +29,8 @@ public class HomeView {
 	private JLabel lblNewLabel_1;
 	private JButton btnShowClass;
 	private JLabel lblNewLabel_2;
-	private JButton btnNewButton_8;
-	private JButton btnNewButton_8_1;
+	private JButton btnRecOne;
+	private JButton btnRecTwo;
 	private JButton btnNewButton_9;
 	private JButton btnNewButton_9_1;
 	private JButton btnNewButton_9_2;
@@ -60,8 +64,8 @@ public class HomeView {
 		frame.getContentPane().add(getLblNewLabel_1());
 		frame.getContentPane().add(getBtnShowClass());
 		frame.getContentPane().add(getLblNewLabel_2());
-		frame.getContentPane().add(getBtnNewButton_8());
-		frame.getContentPane().add(getBtnNewButton_8_1());
+		frame.getContentPane().add(getBtnRecOne());
+		frame.getContentPane().add(getBtnRecTwo());
 		frame.getContentPane().add(getBtnNewButton_9());
 		frame.getContentPane().add(getBtnNewButton_9_1());
 		frame.getContentPane().add(getBtnNewButton_9_2());
@@ -107,27 +111,26 @@ public class HomeView {
 		}
 		return lblNewLabel_2;
 	}
-	private JButton getBtnNewButton_8() {
-		if (btnNewButton_8 == null) {
-			btnNewButton_8 = new JButton("추천1");
-			btnNewButton_8.addActionListener(new ActionListener() {
+	private JButton getBtnRecOne() {
+		if (btnRecOne == null) {
+			btnRecOne = new JButton("");
+			btnRecOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//추천1
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
 					frame.dispose();
-					
-					
+	
 				}
 			});
-			btnNewButton_8.setBounds(49, 103, 222, 185);
+			btnRecOne.setBounds(49, 103, 222, 185);
 		}
-		return btnNewButton_8;
+		return btnRecOne;
 	}
-	private JButton getBtnNewButton_8_1() {
-		if (btnNewButton_8_1 == null) {
-			btnNewButton_8_1 = new JButton("추천2");
-			btnNewButton_8_1.addActionListener(new ActionListener() {
+	private JButton getBtnRecTwo() {
+		if (btnRecTwo == null) {
+			btnRecTwo = new JButton("");
+			btnRecTwo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//추천2
 					Classinfo classinfo = new Classinfo();
@@ -135,9 +138,9 @@ public class HomeView {
 					frame.dispose();
 				}
 			});
-			btnNewButton_8_1.setBounds(283, 103, 222, 185);
+			btnRecTwo.setBounds(283, 103, 222, 185);
 		}
-		return btnNewButton_8_1;
+		return btnRecTwo;
 	}
 	private JButton getBtnNewButton_9() {
 		if (btnNewButton_9 == null) {
@@ -196,6 +199,18 @@ public class HomeView {
 		secondRecommandClassId = beanList.get(1).getId();
 		lblFirstRecClassName.setText(beanList.get(0).getName());
 		lblSecondRecClassName.setText(beanList.get(1).getName());
+
+		String filePath1 = Integer.toString(ShareVar.filename - 1);
+		String filePath2 = Integer.toString(ShareVar.filename);
+		btnRecOne.setIcon(new ImageIcon(filePath1));;
+		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
+		File file1 = new File(filePath1);
+		file1.delete();
+		
+		btnRecTwo.setIcon(new ImageIcon(filePath2));
+		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
+		File file2 = new File(filePath2);
+		file2.delete();
 	}
 	
 	public void setVisible_HomeView(boolean b) {
