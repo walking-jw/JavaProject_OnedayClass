@@ -30,7 +30,7 @@ public class ClassList {
 	private JTable Inner_Table;
 	private final DefaultTableModel Outer_Table = new DefaultTableModel();
 	private JButton btnNewButton;
-	private JButton btnCancel;
+	private JButton btnClose;
 
 
 	/**
@@ -60,7 +60,7 @@ public class ClassList {
 		frame.getContentPane().add(getCbSelection());
 		frame.getContentPane().add(getScrollPane());
 		frame.getContentPane().add(getBtnNewButton());
-		frame.getContentPane().add(getBtnCancel());
+		frame.getContentPane().add(getBtnClose());
 	}
 
 	private JComboBox getCbSelection() {
@@ -260,18 +260,18 @@ public class ClassList {
 
 	
 	
-	private JButton getBtnCancel() {
-		if (btnCancel == null) {
-			btnCancel = new JButton("취소");
-			btnCancel.addActionListener(new ActionListener() {
+	private JButton getBtnClose() {
+		if (btnClose == null) {
+			btnClose = new JButton("닫기");
+			btnClose.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					HomeView homeView = new HomeView();
 					homeView.setVisible_HomeView(true);
 					frame.dispose();
 				}
 			});
-			btnCancel.setBounds(302, 518, 117, 29);
+			btnClose.setBounds(302, 518, 117, 29);
 		}
-		return btnCancel;
+		return btnClose;
 	}
 }//end

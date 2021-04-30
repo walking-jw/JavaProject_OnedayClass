@@ -66,13 +66,14 @@ import com.javaproject.base.ShareVar;
 	     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
 	     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate <= curdate()) ";
 	     String QueryC = "and tEmail = " + ShareVar.currentuser;		
+	     String QueryD = " and r.cCloseDate is null ";
 	     
 	     try{
 	         Class.forName("com.mysql.cj.jdbc.Driver");
 	         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 	         Statement stmt_mysql = conn_mysql.createStatement();
 	
-	         ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
+	         ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC +QueryD);
 	
 	         while(rs.next()){
 	
@@ -139,14 +140,13 @@ import com.javaproject.base.ShareVar;
 		     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
 		     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cDate not in (select cDate from Class where cDate >= curdate()) ";
 		     String QueryC = "and c.cId = " + cId;
-		     String QueryD = " and r.cCloseDate is null ";
 		  
 		     try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
 		       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		       Statement stmt_mysql = conn_mysql.createStatement();
 		       
-		       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC + QueryD);
+		       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC );
 		       
 		       while(rs.next()){
 		           

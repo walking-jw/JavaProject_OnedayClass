@@ -27,21 +27,6 @@ public class AttendCheck {
 		
 		//-------------------------------------------Constructor
 
-		/**
-		 * Launch the application.
-		 */
-		public static void main(String[] args) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						AttendCheck window = new AttendCheck();
-						window.frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
 
 		/**
 		 * Create the application.
