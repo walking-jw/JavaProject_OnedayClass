@@ -154,13 +154,9 @@ public class AttendStudentInfo {
 
 	 // 수강 신청한 학생 정보 불러오기
 	 private void SearchActionIncomplete(){
-
-		 int id = StudentInfoDbAction.ccId;
-		 StudentInfoDbAction dbAction1 = new StudentInfoDbAction(id);
-//		 dbAction1.selectListStudentInfo();
 		 
-//	     StudentInfoDbAction dbAction2 = new StudentInfoDbAction();
-	     ArrayList<StudentInfoBean> beanList = dbAction1.selectListStudentInfo();
+	     StudentInfoDbAction dbAction = new StudentInfoDbAction();
+	     ArrayList<StudentInfoBean> beanList = dbAction.selectListStudentInfo();
 	     
 	     int listCount = beanList.size();
 	     for(int i=0; i<listCount; i++) {
