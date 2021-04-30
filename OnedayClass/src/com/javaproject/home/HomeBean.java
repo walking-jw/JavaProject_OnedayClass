@@ -5,7 +5,6 @@ public class HomeBean {
 	int id;
 	String name;
 	
-	
 	public HomeBean() {
 		// TODO Auto-generated constructor stub
 	}
@@ -37,4 +36,5 @@ public class HomeBean {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 }
