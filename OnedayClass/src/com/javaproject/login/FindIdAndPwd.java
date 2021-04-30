@@ -213,7 +213,7 @@ public class FindIdAndPwd {
 	// Find ID
 	private void findId() {
 		String name = tfNameId.getText().trim();
-		String phoneNo = cbTelNo.getSelectedItem() + "-" +tfTelNo.getText().trim();
+		String phoneNo = cbTelNo.getSelectedItem() +tfTelNo.getText().trim();
 		DbSignAction action = new DbSignAction();
 		if (rdbtnCommon.isSelected()) {
 			String res = action.findCommonId(name, phoneNo);
