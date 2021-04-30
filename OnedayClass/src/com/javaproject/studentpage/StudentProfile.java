@@ -39,6 +39,7 @@ public class StudentProfile {
 	private JPasswordField pwdF;
 	private JPasswordField pwdFCheck;
 	private JLabel lblNewLabel;
+	private JButton btnCancel;
 
 	
 
@@ -84,13 +85,14 @@ public class StudentProfile {
 		frame.getContentPane().add(getPwdF());
 		frame.getContentPane().add(getPwdFCheck());
 		frame.getContentPane().add(getLblNewLabel());
+		frame.getContentPane().add(getBtnCancel());
 	}
 
 	private JLabel getLblLevel() {
 		if (lblLevel == null) {
 			lblLevel = new JLabel("발!");
 			lblLevel.setFont(new Font("Lucida Grande", Font.PLAIN, 21));
-			lblLevel.setBounds(303, 86, 27, 16);
+			lblLevel.setBounds(303, 86, 91, 16);
 		}
 		return lblLevel;
 	}
@@ -147,7 +149,7 @@ public class StudentProfile {
 					signOutAction();
 				}
 			});
-			btnSignOut.setBounds(399, 508, 117, 29);
+			btnSignOut.setBounds(409, 459, 117, 29);
 		}
 		return btnSignOut;
 	}
@@ -176,7 +178,7 @@ public class StudentProfile {
 					withdrawAction();
 				}
 			});
-			btnWithdraw.setBounds(399, 549, 117, 29);
+			btnWithdraw.setBounds(409, 500, 117, 29);
 		}
 		return btnWithdraw;
 	}
@@ -244,6 +246,19 @@ public class StudentProfile {
 			lblNewLabel.setBounds(233, 89, 73, 16);
 		}
 		return lblNewLabel;
+	}
+	
+	private JButton getBtnCancel() {
+		if (btnCancel == null) {
+			btnCancel = new JButton("닫기");
+			btnCancel.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// Home View
+				}
+			});
+			btnCancel.setBounds(409, 541, 117, 29);
+		}
+		return btnCancel;
 	}
 	
 	// Method
@@ -324,6 +339,7 @@ public class StudentProfile {
 		}
 		
 	}
+	
 	
 }
 
