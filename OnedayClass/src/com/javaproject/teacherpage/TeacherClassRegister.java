@@ -169,6 +169,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 	private JTextField getTfPrice() {
 		if (tfPrice == null) {
 			tfPrice = new JTextField();
+			tfPrice.setHorizontalAlignment(SwingConstants.TRAILING);
 			tfPrice.setBounds(364, 505, 124, 26);
 			tfPrice.setColumns(10);
 		}
