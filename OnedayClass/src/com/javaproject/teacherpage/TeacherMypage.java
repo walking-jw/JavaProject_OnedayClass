@@ -48,6 +48,7 @@ public class TeacherMypage {
 	private JPasswordField tf_PasswordConfirm;
 	private JLabel lblNewLabel;
 	private JButton btn_Logout;
+	private JLabel lblNewLabel_1;
 
 	public void setVisible_TeacherMypage(boolean i){
 		   	frame.setVisible(i);
@@ -99,6 +100,7 @@ public class TeacherMypage {
 		frame.getContentPane().add(getTf_PasswordConfirm());
 		frame.getContentPane().add(getLblNewLabel());
 		frame.getContentPane().add(getBtn_Logout());
+		frame.getContentPane().add(getLblNewLabel_1());
 	}
 	private JLabel getLbl_Name() {
 		if (lbl_Name == null) {
@@ -253,7 +255,8 @@ public class TeacherMypage {
 	}
 	private JButton getBtn_Out() {
 		if (btn_Out == null) {
-			btn_Out = new JButton("탈퇴");
+			btn_Out = new JButton("탈  퇴");
+			btn_Out.setForeground(Color.RED);
 			btn_Out.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					DbAction db = new DbAction();
@@ -269,7 +272,7 @@ public class TeacherMypage {
 		if (lbl_PassCheck == null) {
 			lbl_PassCheck = new JLabel("");
 			lbl_PassCheck.setForeground(Color.RED);
-			lbl_PassCheck.setBounds(267, 355, 206, 16);
+			lbl_PassCheck.setBounds(277, 355, 196, 16);
 		}
 		return lbl_PassCheck;
 	}
@@ -389,9 +392,9 @@ public void CountOfClass() {
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("사진");
+			lblNewLabel = new JLabel("");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setIcon(new ImageIcon("/Users/parkjw/Documents/Screen_Shot/스크린샷 2021-04-30 오후 12.30.31.png"));
+			lblNewLabel.setIcon(new ImageIcon("/Users/parkjw/Desktop/스크린샷 2021-04-30 오후 2.54.40.png"));
 			lblNewLabel.setBounds(20, 83, 155, 131);
 		}
 		return lblNewLabel;
@@ -416,5 +419,14 @@ public void CountOfClass() {
 			btn_Logout.setBounds(41, 227, 117, 29);
 		}
 		return btn_Logout;
+	}
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("마 이 페 이 지");
+			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
+			lblNewLabel_1.setBounds(115, 28, 306, 32);
+		}
+		return lblNewLabel_1;
 	}
 }

@@ -119,8 +119,8 @@ public class DbAction {
 				
 			ArrayList<Bean> beanList = new ArrayList<Bean>();   		
 			String whereDefault1 = "select c.cId,c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cDate from Class as c, Teacher as t , Register as r ";  
-		    String whereDefault2 = "where c.cId = r.cId and t.tEmail = r.tEmail and ";
-			String whereDefault3 = " cCategory = '";
+		    String whereDefault2 = "where c.cId = r.cId and t.tEmail = r.tEmail and c.cDate in (select cDate from Class where cDate >= curdate())";
+			String whereDefault3 = " and r.cCloseDate is null and cCategory = '";
 			String whereDefault4 = "'";
 			
 		
