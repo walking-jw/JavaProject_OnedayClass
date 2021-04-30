@@ -106,12 +106,10 @@ public class HomeView {
 			btnRecOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//추천1
-					applyFirstRecommnd();
 					ShareVar.cId = firstRecommndClassId;
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
 					frame.dispose();
-	
 				}
 			});
 			btnRecOne.setBounds(49, 103, 456, 137);
@@ -171,8 +169,10 @@ public class HomeView {
 	public void applyFirstRecommnd() {
 		DbHomeAction dbHomeAction = new DbHomeAction();
 		HomeBean bean = dbHomeAction.recommandClassOne();
+		
 		firstRecommndClassId = bean.getId();
 		lblFirstRecClassName.setText(bean.getName());
+		
 		String filePath = Integer.toString(ShareVar.filename);
 		btnRecOne.setIcon(new ImageIcon(filePath));;
 		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
