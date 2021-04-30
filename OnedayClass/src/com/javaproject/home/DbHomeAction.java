@@ -25,20 +25,54 @@ public class DbHomeAction {
 	FileInputStream file;
 	
 	//Method
-	public ArrayList<HomeBean> recommandClass() {
-		ArrayList<HomeBean> beanList = new ArrayList<HomeBean>();
-		String WhereDefault = "select cId,cName,cImg from class order by rand() limit 2";
+//	public ArrayList<HomeBean> recommandClass() {
+//		ArrayList<HomeBean> beanList = new ArrayList<HomeBean>();
+//		String WhereDefault = "select cId,cName,cImg from class order by rand() limit 2";
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+//			Statement stmt_mysql = conn_mysql.createStatement();
+//			ResultSet rs = stmt_mysql.executeQuery(WhereDefault);
+//
+//			while(rs.next()) {
+//				int wkId = rs.getInt(1);
+//				String wkName = rs.getString(2);
+//				int wkImg = rs.getInt(3);
+//
+//				// File
+//				ShareVar.filename = ShareVar.filename + 1;
+//				File file = new File(Integer.toString(filename));
+//				FileOutputStream output = new FileOutputStream(file);
+//				InputStream input = rs.getBinaryStream(3);
+//				byte[] buffer = new byte[1024];
+//				while (input.read(buffer) > 0) {
+//					output.write(buffer);
+//				}
+//				
+//				HomeBean bean = new HomeBean(wkId, wkName);
+//				wkId = bean.getId();
+//				wkName = bean.getName();
+//				beanList.add(bean);
+//			}
+//			conn_mysql.close();
+//		} catch (Exception e){
+//			e.printStackTrace();
+//		}
+//		return beanList;
+//	}
+	public HomeBean recommandClassOne() {
+		HomeBean bean = null;
+		String WhereDefault = "select cId,cName,cImg from class order by rand() limit 1";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 			ResultSet rs = stmt_mysql.executeQuery(WhereDefault);
-
-			while(rs.next()) {
+			
+			if(rs.next()) {
 				int wkId = rs.getInt(1);
 				String wkName = rs.getString(2);
-				int wkImg = rs.getInt(3);
-
+				
 				// File
 				ShareVar.filename = ShareVar.filename + 1;
 				File file = new File(Integer.toString(filename));
@@ -48,17 +82,48 @@ public class DbHomeAction {
 				while (input.read(buffer) > 0) {
 					output.write(buffer);
 				}
-				
-				HomeBean bean = new HomeBean(wkId, wkName);
+				bean = new HomeBean(wkId, wkName);
 				wkId = bean.getId();
 				wkName = bean.getName();
-				beanList.add(bean);
 			}
 			conn_mysql.close();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		return beanList;
+		return bean;
+	}
+	
+	public HomeBean recommandClassTwo() {
+		HomeBean bean = null;
+		String WhereDefault = "select cId,cName,cImg from class order by rand() limit 1";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			ResultSet rs = stmt_mysql.executeQuery(WhereDefault);
+			
+			if(rs.next()) {
+				int wkId = rs.getInt(1);
+				String wkName = rs.getString(2);
+				
+				// File
+				ShareVar.filename = ShareVar.filename + 1;
+				File file = new File(Integer.toString(filename));
+				FileOutputStream output = new FileOutputStream(file);
+				InputStream input = rs.getBinaryStream(3);
+				byte[] buffer = new byte[1024];
+				while (input.read(buffer) > 0) {
+					output.write(buffer);
+				}
+				bean = new HomeBean(wkId, wkName);
+				wkId = bean.getId();
+				wkName = bean.getName();
+			}
+			conn_mysql.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return bean;
 	}
 	
 }
