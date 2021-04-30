@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -234,15 +236,13 @@ public class Classinfo {
 			btnAttend = new JButton("수강신청");
 			btnAttend.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					/*/
-					 * 2021-04-27 권효은
-					 * 수강신청 버튼 누르면 '신청하겠습니까?'창 나오기
-					 *  
-					 */
-					
-					AttendCheck attendCheck = new AttendCheck();
-					attendCheck.setVisible_AttendCheck(true);
-					frame.dispose();
+//					/*/
+//					 * 2021-04-27 권효은
+//					 * 수강신청 버튼 누르면 '신청하겠습니까?'창 나오기
+//					 *  
+//					 */
+//					
+					ClassAttendAction();
 					
 				}
 			});
@@ -369,9 +369,51 @@ public class Classinfo {
 	      lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 	      
 	      File file = new File(filePath);
-//	      file.delete();
+	      file.delete();
 //	      tfFilePath.setText("");
  
 		
 	}//ClassInfo End
+	
+	
+	/*
+	 * 2021-04-29 권효은
+	 * 강의 수강신청 insert하는 메소드
+	 */
+	
+		private void ClassAttendAction() {
+			int result = JOptionPane.showConfirmDialog(null, "수강을 신청하시겠습니까?", "수강신청", JOptionPane.YES_NO_OPTION);
+			
+			if(result==JOptionPane.YES_OPTION) {
+				  try {
+			
+			int cId = DbAction.classid;  // 화면을 계속 연결하기 위해 cid값 가져오기
+			DbActionInfo dbActioninfo = new DbActionInfo(cId);
+			
+			boolean msg = dbActioninfo.AttendOk(); 
+			if(msg== true) {
+				
+				JOptionPane.showMessageDialog(null,"수강 신청되었습니다!" , 
+						"신청 완료!", 
+						JOptionPane.INFORMATION_MESSAGE);  
+				}
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+	            JOptionPane.showMessageDialog(null, "DB에 자료 입력중 에러가 발생했습니다!\n시스템관리자에 문의하세요!",
+                       "Critical Error!", 
+                       JOptionPane.ERROR_MESSAGE); 
+	            e.printStackTrace();
+			}
+
+			}
+		  
+
+			
+		}//ClassAttendAction End
+	
+	
+	
+	
+	
 }//end
