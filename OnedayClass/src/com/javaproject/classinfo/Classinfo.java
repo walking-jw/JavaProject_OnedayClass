@@ -11,11 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.classlist.ClassList;
 import com.javaproject.classlist.DbAction;
 
@@ -336,15 +338,14 @@ public class Classinfo {
         // File name이 틀려야 즉각 보여주기가 가능하여   
         // ShareVar에서 int값으로 정의하여 계속 증가하게 하여 file name으로 사용후 삭제
         
-//	      String filePath = Integer.toString(DbActionInfo.filename);
-//	//      String filePath = Integer.toString(ShareVar.filename);
+	      String filePath = Integer.toString(ShareVar.filename);
 //	      tfFilePath.setText(filePath);
-//	      
-//	      lblImage.setIcon(new ImageIcon(filePath));
-//	      lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-//	      
-//	      File file = new File(filePath);
-//	      file.delete();
+	      
+	      lblImage.setIcon(new ImageIcon(filePath));
+	      lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+	      
+	      File file = new File(filePath);
+	      file.delete();
 //	      tfFilePath.setText("");
  
 		
