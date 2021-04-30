@@ -280,10 +280,8 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 	               int cCount = rs.getInt(10);
 	               
 	               // File
-	               filename = filename + 1;
-//	               ShareVar.filename = ShareVar.filename + 1;
-	               File file = new File(Integer.toString(filename));
-//	               File file = new File(Integer.toString(ShareVar.filename));
+	               ShareVar.filename = ShareVar.filename + 1;
+	               File file = new File(Integer.toString(ShareVar.filename));
 	               FileOutputStream output = new FileOutputStream(file);
 	               InputStream input = rs.getBinaryStream(9);
 	                byte[] buffer = new byte[1024];
