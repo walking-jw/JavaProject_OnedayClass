@@ -143,7 +143,7 @@ public class ClassList {
 	        Outer_Table.addColumn("강의명");
 	        Outer_Table.addColumn("강사");
 	        Outer_Table.addColumn("장소");
-	        Outer_Table.addColumn("날짜");
+	        Outer_Table.addColumn("수강날짜");
 	        Outer_Table.setColumnCount(5);
 
 	        for(int j = 0 ; j < i ; j++){

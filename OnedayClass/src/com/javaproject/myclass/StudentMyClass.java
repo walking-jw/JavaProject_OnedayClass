@@ -210,7 +210,7 @@ import java.awt.event.ActionEvent;
 		private void TableInitAfter(){
 		       int i = Outer_Table_After.getRowCount();
 		       
-		       Outer_Table_After.addColumn("강의ID");
+		       Outer_Table_After.addColumn("No.");
 		       Outer_Table_After.addColumn("신청날짜");
 		       Outer_Table_After.addColumn("강의명");
 		       Outer_Table_After.addColumn("수강날짜");
@@ -262,7 +262,7 @@ import java.awt.event.ActionEvent;
 	
 		     int k = Outer_Table_Before.getRowCount();
 		     
-		     Outer_Table_Before.addColumn("강의ID");
+		     Outer_Table_Before.addColumn("No.");
 		     Outer_Table_Before.addColumn("신청날짜");
 		     Outer_Table_Before.addColumn("강의명");
 		     Outer_Table_Before.addColumn("수강날짜");

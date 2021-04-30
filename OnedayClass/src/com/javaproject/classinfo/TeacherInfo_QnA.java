@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import com.javaproject.classlist.DbAction;
 
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class TeacherInfo_QnA {
 	
@@ -94,34 +95,34 @@ public class TeacherInfo_QnA {
 	
 	private JLabel getLbltName() {
 		if (lbltName == null) {
-			lbltName = new JLabel("이름 :");
+			lbltName = new JLabel("이름 ");
 			lbltName.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbltName.setBounds(162, 75, 51, 16);
+			lbltName.setBounds(197, 75, 51, 16);
 		}
 		return lbltName;
 	}
 	
 	private JLabel getLbltNickName() {
 		if (lbltNickName == null) {
-			lbltNickName = new JLabel("닉네임 :");
+			lbltNickName = new JLabel("닉네임 ");
 			lbltNickName.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbltNickName.setBounds(162, 116, 51, 16);
+			lbltNickName.setBounds(197, 116, 51, 16);
 		}
 		return lbltNickName;
 	}
 	private JLabel getLbltTelNo() {
 		if (lbltTelNo == null) {
-			lbltTelNo = new JLabel("전화번호 :");
+			lbltTelNo = new JLabel("전화번호 ");
 			lbltTelNo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbltTelNo.setBounds(162, 155, 66, 16);
+			lbltTelNo.setBounds(197, 155, 66, 16);
 		}
 		return lbltTelNo;
 	}
 	private JLabel getLbltEmail() {
 		if (lbltEmail == null) {
-			lbltEmail = new JLabel("이메일 :");
+			lbltEmail = new JLabel("이메일 ");
 			lbltEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lbltEmail.setBounds(162, 195, 66, 16);
+			lbltEmail.setBounds(197, 195, 66, 16);
 		}
 		return lbltEmail;
 	}
@@ -130,7 +131,7 @@ public class TeacherInfo_QnA {
 		if (tftName == null) {
 			tftName = new JTextField();
 			tftName.setEditable(false);
-			tftName.setBounds(225, 70, 130, 26);
+			tftName.setBounds(260, 70, 130, 26);
 			tftName.setColumns(10);
 		}
 		return tftName;
@@ -141,7 +142,7 @@ public class TeacherInfo_QnA {
 			tftNickName = new JTextField();
 			tftNickName.setEditable(false);
 			tftNickName.setColumns(10);
-			tftNickName.setBounds(225, 111, 130, 26);
+			tftNickName.setBounds(260, 111, 130, 26);
 		}
 		return tftNickName;
 	}
@@ -150,7 +151,7 @@ public class TeacherInfo_QnA {
 			tftTelNo = new JTextField();
 			tftTelNo.setEditable(false);
 			tftTelNo.setColumns(10);
-			tftTelNo.setBounds(225, 150, 219, 26);
+			tftTelNo.setBounds(260, 150, 219, 26);
 		}
 		return tftTelNo;
 	}
@@ -160,7 +161,7 @@ public class TeacherInfo_QnA {
 			tftEmail = new JTextField();
 			tftEmail.setEditable(false);
 			tftEmail.setColumns(10);
-			tftEmail.setBounds(225, 190, 219, 26);
+			tftEmail.setBounds(260, 190, 219, 26);
 		}
 		return tftEmail;
 	}
@@ -219,8 +220,10 @@ public class TeacherInfo_QnA {
 	
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("Img");
-			lblNewLabel.setBounds(56, 128, 61, 16);
+			lblNewLabel = new JLabel("");
+			lblNewLabel.setIcon(new ImageIcon("/Users/hyoeunkwon/Desktop/KakaoTalk_Photo_2021-04-30-17-30-13.png"));
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setBounds(22, 64, 163, 152);
 		}
 		return lblNewLabel;
 	}

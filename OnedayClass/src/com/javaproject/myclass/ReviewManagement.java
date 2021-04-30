@@ -201,7 +201,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	private void TableInitIncomplete(){
 	       int i = Outer_Table_Incomplete.getRowCount();
 	       
-	       Outer_Table_Incomplete.addColumn("강의ID");
+	       Outer_Table_Incomplete.addColumn("No.");
 	       Outer_Table_Incomplete.addColumn("수강날짜");
 	       Outer_Table_Incomplete.addColumn("강의명");
 	       Outer_Table_Incomplete.addColumn("장소");
@@ -240,7 +240,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 
 	     int k = Outer_Table_Complete.getRowCount();
 	     
-	     Outer_Table_Complete.addColumn("강의ID");
+	     Outer_Table_Complete.addColumn("No.");
 	     Outer_Table_Complete.addColumn("수강날짜");
 	     Outer_Table_Complete.addColumn("강의명");
 	     Outer_Table_Complete.addColumn("장소");

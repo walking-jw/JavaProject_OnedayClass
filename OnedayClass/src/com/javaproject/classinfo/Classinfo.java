@@ -49,6 +49,8 @@ public class Classinfo {
 	private JButton btnBackClasslist;
 	private JScrollPane scrollPane;
 	private JTextPane tfcContents;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
 
 	
 	//-----------------------------Constructor
@@ -100,10 +102,13 @@ public class Classinfo {
 		frame.getContentPane().add(getTfcPrice());
 		frame.getContentPane().add(getBtnBackClasslist());
 		frame.getContentPane().add(getScrollPane());
+		frame.getContentPane().add(getLblNewLabel_6());
+		frame.getContentPane().add(getLblNewLabel_7());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("강의명");
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel.setBounds(30, 192, 61, 16);
 		}
 		return lblNewLabel;
@@ -111,6 +116,7 @@ public class Classinfo {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("강사");
+			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel_1.setBounds(30, 230, 61, 16);
 		}
 		return lblNewLabel_1;
@@ -118,6 +124,7 @@ public class Classinfo {
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("장소");
+			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel_2.setBounds(30, 271, 61, 16);
 		}
 		return lblNewLabel_2;
@@ -125,6 +132,7 @@ public class Classinfo {
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("강의시간");
+			lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel_3.setBounds(30, 309, 61, 16);
 		}
 		return lblNewLabel_3;
@@ -132,6 +140,7 @@ public class Classinfo {
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("날짜");
+			lblNewLabel_4.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel_4.setBounds(30, 346, 61, 16);
 		}
 		return lblNewLabel_4;
@@ -150,7 +159,7 @@ public class Classinfo {
 			tfcLocation = new JTextField();
 			tfcLocation.setEditable(false);
 			tfcLocation.setColumns(10);
-			tfcLocation.setBounds(103, 266, 394, 26);
+			tfcLocation.setBounds(103, 266, 196, 26);
 		}
 		return tfcLocation;
 	}
@@ -192,6 +201,7 @@ public class Classinfo {
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
 			lblNewLabel_5 = new JLabel("시간");
+			lblNewLabel_5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel_5.setBounds(152, 309, 30, 16);
 		}
 		return lblNewLabel_5;
@@ -199,7 +209,8 @@ public class Classinfo {
 	private JLabel getLblNewLabel_3_1() {
 		if (lblNewLabel_3_1 == null) {
 			lblNewLabel_3_1 = new JLabel("강의소개");
-			lblNewLabel_3_1.setBounds(30, 374, 61, 16);
+			lblNewLabel_3_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_3_1.setBounds(30, 388, 61, 16);
 		}
 		return lblNewLabel_3_1;
 	}
@@ -214,7 +225,7 @@ public class Classinfo {
 					frame.dispose();
 				}
 			});
-			btnReview.setBounds(418, 369, 117, 29);
+			btnReview.setBounds(408, 384, 117, 29);
 		}
 		return btnReview;
 	}
@@ -236,7 +247,7 @@ public class Classinfo {
 				}
 			});
 			btnAttend.setBackground(Color.BLUE);
-			btnAttend.setBounds(418, 499, 117, 29);
+			btnAttend.setBounds(408, 550, 117, 29);
 		}
 		return btnAttend;
 	}
@@ -256,7 +267,7 @@ public class Classinfo {
 			tfcPrice.setText("0");
 			tfcPrice.setHorizontalAlignment(SwingConstants.TRAILING);
 			tfcPrice.setEditable(false);
-			tfcPrice.setBounds(323, 499, 90, 26);
+			tfcPrice.setBounds(407, 512, 90, 26);
 			tfcPrice.setColumns(10);
 		}
 		return tfcPrice;
@@ -279,11 +290,42 @@ public class Classinfo {
 					
 				}
 			});
-			btnBackClasslist.setBounds(418, 540, 117, 29);
+			btnBackClasslist.setBounds(279, 550, 117, 29);
 		}
 		return btnBackClasslist;
 	}
 	
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setBounds(30, 416, 495, 83);
+			scrollPane.setViewportView(getTfcContents());
+		}
+		return scrollPane;
+	}
+	private JTextPane getTfcContents() {
+		if (tfcContents == null) {
+			tfcContents = new JTextPane();
+		}
+		return tfcContents;
+	}
+	private JLabel getLblNewLabel_6() {
+		if (lblNewLabel_6 == null) {
+			lblNewLabel_6 = new JLabel("원");
+			lblNewLabel_6.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_6.setBounds(498, 517, 30, 16);
+		}
+		return lblNewLabel_6;
+	}
+	private JLabel getLblNewLabel_7() {
+		if (lblNewLabel_7 == null) {
+			lblNewLabel_7 = new JLabel("<- 클릭해서 강사 정보를 확인해 보세요 :)");
+			lblNewLabel_7.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			lblNewLabel_7.setForeground(Color.GRAY);
+			lblNewLabel_7.setBounds(238, 231, 259, 16);
+		}
+		return lblNewLabel_7;
+	}
 	
 	
 	
@@ -331,18 +373,4 @@ public class Classinfo {
  
 		
 	}//ClassInfo End
-	private JScrollPane getScrollPane() {
-		if (scrollPane == null) {
-			scrollPane = new JScrollPane();
-			scrollPane.setBounds(30, 402, 494, 85);
-			scrollPane.setViewportView(getTfcContents());
-		}
-		return scrollPane;
-	}
-	private JTextPane getTfcContents() {
-		if (tfcContents == null) {
-			tfcContents = new JTextPane();
-		}
-		return tfcContents;
-	}
 }//end
