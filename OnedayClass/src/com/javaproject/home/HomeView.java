@@ -29,7 +29,6 @@ public class HomeView {
 	private JButton btnShowClass;
 	private JLabel lblNewLabel_2;
 	private JButton btnRecOne;
-	private JButton btnRecTwo;
 	private JButton btnNewButton_9;
 	private JButton btnNewButton_9_1;
 	private JButton btnNewButton_9_2;
@@ -54,7 +53,7 @@ public class HomeView {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				applyFirstRecommnd();
-				applyTwoRecommnd();
+				//applyTwoRecommnd();
 			}
 		});
 		frame.setBounds(100, 100, 560, 625);
@@ -65,13 +64,11 @@ public class HomeView {
 		frame.getContentPane().add(getBtnShowClass());
 		frame.getContentPane().add(getLblNewLabel_2());
 		frame.getContentPane().add(getBtnRecOne());
-		frame.getContentPane().add(getBtnRecTwo());
 		frame.getContentPane().add(getBtnNewButton_9());
 		frame.getContentPane().add(getBtnNewButton_9_1());
 		frame.getContentPane().add(getBtnNewButton_9_2());
 		frame.getContentPane().add(getLblFirstRecClassName());
 		frame.getContentPane().add(getLblSecondRecClassName());
-		frame.getContentPane().add(getLblNewLabel_2_1());
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
@@ -120,22 +117,6 @@ public class HomeView {
 			btnRecOne.setBounds(49, 103, 456, 137);
 		}
 		return btnRecOne;
-	}
-	private JButton getBtnRecTwo() {
-		if (btnRecTwo == null) {
-			btnRecTwo = new JButton("");
-			btnRecTwo.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					//추천2
-					ShareVar.cId = secondRecommandClassId;
-					Classinfo classinfo = new Classinfo();
-					classinfo.setVisible_Classinfo(true);
-					frame.dispose();
-				}
-			});
-			btnRecTwo.setBounds(49, 299, 456, 119);
-		}
-		return btnRecTwo;
 	}
 	private JButton getBtnNewButton_9() {
 		if (btnNewButton_9 == null) {
@@ -186,31 +167,30 @@ public class HomeView {
 	//Method
 	int firstRecommndClassId;
 	int secondRecommandClassId;
-	private JLabel lblNewLabel_2_1;
 	
 	public void applyFirstRecommnd() {
 		DbHomeAction dbHomeAction = new DbHomeAction();
 		HomeBean bean = dbHomeAction.recommandClassOne();
 		firstRecommndClassId = bean.getId();
 		lblFirstRecClassName.setText(bean.getName());
-		String filePath = Integer.toString(ShareVar.filename-1);
+		String filePath = Integer.toString(ShareVar.filename);
 		btnRecOne.setIcon(new ImageIcon(filePath));;
 		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
 		File file = new File(filePath);
 		file.delete();
 	}
 	
-	public void applyTwoRecommnd() {
-		DbHomeAction dbHomeAction = new DbHomeAction();
-		HomeBean bean = dbHomeAction.recommandClassTwo();
-		secondRecommandClassId = bean.getId();
-		lblSecondRecClassName.setText(bean.getName());
-		String filePath = Integer.toString(ShareVar.filename);
-		btnRecTwo.setIcon(new ImageIcon(filePath));;
-		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
-		File file = new File(filePath);
-		file.delete();
-	}
+//	public void applyTwoRecommnd() {
+//		DbHomeAction dbHomeAction = new DbHomeAction();
+//		HomeBean bean = dbHomeAction.recommandClassTwo();
+//		secondRecommandClassId = bean.getId();
+//		lblSecondRecClassName.setText(bean.getName());
+//		String filePath = Integer.toString(ShareVar.filename);
+//		btnRecTwo.setIcon(new ImageIcon(filePath));;
+//		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
+//		File file = new File(filePath);
+//		file.delete();
+//	}
 	
 	public void setVisible_HomeView(boolean b) {
 		frame.setVisible(b);
@@ -248,12 +228,5 @@ public class HomeView {
 			lblSecondRecClassName.setBounds(59, 430, 446, 16);
 		}
 		return lblSecondRecClassName;
-	}
-	private JLabel getLblNewLabel_2_1() {
-		if (lblNewLabel_2_1 == null) {
-			lblNewLabel_2_1 = new JLabel("두번째 추천!");
-			lblNewLabel_2_1.setBounds(49, 280, 86, 16);
-		}
-		return lblNewLabel_2_1;
 	}
 }
