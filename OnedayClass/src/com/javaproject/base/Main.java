@@ -6,6 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+//import com.javaproject.classlist.Category;
+import com.javaproject.login.SignInView;
+import com.javaproject.myclass.StudentMyClass;
+import com.javaproject.teacherpage.TeacherMypage;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -86,8 +92,8 @@ public class Main {
 			btnDoyoung.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					Signin category = new Signin();
-					category.setVisible_Signin();
+					SignInView category = new SignInView();
+					category.setVisible_SigninView(true);
 					frame.dispose();
 					
 				}
@@ -102,8 +108,8 @@ public class Main {
 			btnHyeji.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					StudentMylecture category = new StudentMylecture();
-					category.setVisible_StudentMylecture();
+					StudentMyClass category = new StudentMyClass();
+					category.setVisible_StudentMyClass(true);
 					frame.dispose();
 		
 				}
@@ -118,9 +124,9 @@ public class Main {
 			btnHyoeun.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					Category category = new Category();
-					category.setVisible_Category();
-					frame.dispose();
+//					Category category = new Category();
+//					category.setVisible_Category(true);
+//					frame.dispose();
 					
 					
 				}
@@ -136,7 +142,7 @@ public class Main {
 				public void actionPerformed(ActionEvent e) {
 					
 					TeacherMypage category = new TeacherMypage();
-					category.setVisible_TeacherMypage();
+					category.setVisible_TeacherMypage(true);
 					frame.dispose();
 					
 				}
