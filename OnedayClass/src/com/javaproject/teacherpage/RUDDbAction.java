@@ -10,15 +10,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.javaproject.base.ShareVar;
+
 public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 강의 등록/수정/삭제할 때 뷰와 sql에 연결해주는 클라스
 
 	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
-	public static final String id_mysql = "root";
-	public static final String pw_mysql = "qwer1234";
-	public static String currentuser = "'hyejji@gmail.com'";
-	public static int ccId = 0;
-	public static int filename = 0;
+	private final String url_mysql = ShareVar.url_mysql;
+	private final String id_mysql = ShareVar.id_mysql;
+	private final String pw_mysql = ShareVar.pw_mysql;
+	public static String currentuser = ShareVar.currentuser;
+	public static int classId = ShareVar.cId;
+	public static int filename = ShareVar.filename;
 	
 
 	

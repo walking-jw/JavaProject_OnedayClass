@@ -210,10 +210,11 @@ import java.awt.event.WindowEvent;
 				btnCancle = new JButton("닫기");
 				btnCancle.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						// 여기에서 재원님이랑 연결
-						StudentMyClass myClass = new StudentMyClass();
-						myClass.setVisible_StudentMyClass(true);
+						
+						TeacherLectureList myClass = new TeacherLectureList();
+						myClass.setVisible_LectureList(true);
 						frame.dispose();
+						
 					}
 				});
 				btnCancle.setBounds(453, 543, 76, 29);
@@ -300,9 +301,9 @@ import java.awt.event.WindowEvent;
 						int check_i = check();
 						if(check_i==0) {
 							UpdateAction();
-							// 여기에서 재원님이랑 연결
-							StudentMyClass myClass = new StudentMyClass();
-							myClass.setVisible_StudentMyClass(true);
+							
+							TeacherLectureList myClass = new TeacherLectureList();
+							myClass.setVisible_LectureList(true);
 							frame.dispose();
 						}
 					}
@@ -409,7 +410,7 @@ import java.awt.event.WindowEvent;
 		
 		// 강의 등록 취소하는 메소드
 		private void DeleteAction() {
-			int id = RUDDbAction.ccId;
+			int id = RUDDbAction.classId;
 
 			RUDDbAction dbaction = new RUDDbAction(id);
 	        RUDBean bean = dbaction.TableClick();
@@ -426,9 +427,9 @@ import java.awt.event.WindowEvent;
 				    if(aaa == true) {
 				    	JOptionPane.showMessageDialog(null, "강의 폐강이 완료되었습니다!","폐강 완료!", 
 		        				   JOptionPane.INFORMATION_MESSAGE);
-						// 여기에서 재원님이랑 연결
-				    	StudentMyClass myClass = new StudentMyClass();
-						myClass.setVisible_StudentMyClass(true);
+				    
+				    	TeacherLectureList myClass = new TeacherLectureList();
+						myClass.setVisible_LectureList(true);
 						frame.dispose();
 				    }
 				    
@@ -446,7 +447,7 @@ import java.awt.event.WindowEvent;
 		// 강의 등록 수정하는 메소드
 		 private void UpdateAction() {
 		      
-				int id = RUDDbAction.ccId;
+				int id = RUDDbAction.classId;
 
 		        // Image File
 				String cName = tfCname.getText();
@@ -519,7 +520,7 @@ import java.awt.event.WindowEvent;
 
 		 // mysql에 있는 데이터를 view에 불러오는 메소드
 		 private void ShowData() {
-				int id = RUDDbAction.ccId;
+				int id = RUDDbAction.classId;
 
 				RUDDbAction dbaction = new RUDDbAction(id);
 		        RUDBean bean = dbaction.TableClick();

@@ -53,10 +53,10 @@ public class DbAction {
 		Bean_TeacherClass bean = null;
 		
 		String Query00 = "select tName, tNickName, tEmail, tTelNo from Teacher where tEmail = ";
-		String Query01 = "'" + ShareVarTest.currentuser + "'";
+		String Query01 = ShareVar.currentuser;
 		  try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
-		       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+		       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		       Statement stmt_mysql = conn_mysql.createStatement();
 		       														// url 지금 주석처리되어있어서 그럼!!
 		
@@ -86,11 +86,11 @@ public class DbAction {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		    Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+		    Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		    Statement stmt_mysql = conn_mysql.createStatement();
 		    
 		    String Query00 = "UPDATE Teacher set tName = ?, tNickName = ?, tTelNo = ?, tPassword = ? ";
-		    String Query01 = "WHERE tEmail = '" + ShareVarTest.currentuser + "'";
+		    String Query01 = "WHERE tEmail = " + ShareVar.currentuser;
 		    
 		    ps = conn_mysql.prepareStatement(Query00+Query01);
 		    
@@ -117,10 +117,10 @@ public class DbAction {
 		
 		String Query00 = "SELECT avg(cScore) FROM Attend, Class, Register, Teacher ";
 		String Query01 = "WHERE Attend.cId = Class.cId and Class.cId = Register.cId and Register.tEmail = Teacher.tEmail ";
-		String Query02 = "And Register.tEmail ='" + ShareVarTest.currentuser + "'";
+		String Query02 = "And Register.tEmail = " + ShareVar.currentuser;
 		  try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
-		       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+		       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		       Statement stmt_mysql = conn_mysql.createStatement();
 		       														// url 지금 주석처리되어있어서 그럼!!
 		
@@ -147,10 +147,10 @@ public class DbAction {
 			Bean_TeacherClass bean = null;
 			
 			String Query00 = "SELECT count(Class.cId) FROM Class, Register ";
-			String Query01 = "WHERE Register.cId = Class.cId AND Register.tEmail = '" + ShareVarTest.currentuser + "'";
+			String Query01 = "WHERE Register.cId = Class.cId AND Register.tEmail = " + ShareVar.currentuser;
 			try{
 			       Class.forName("com.mysql.cj.jdbc.Driver");
-			       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+			       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 			       Statement stmt_mysql = conn_mysql.createStatement();
 			       														// url 지금 주석처리되어있어서 그럼!!
 			
@@ -175,11 +175,11 @@ public class DbAction {
 		Bean_QnA bean = null;   
 	
 		 String Query00 = "SELECT count(qContents) FROM QnA ";
-	     String Query01 = "WHERE aContents is null AND tEmail = '" + ShareVarTest.currentuser + "' ";	
+	     String Query01 = "WHERE aContents is null AND tEmail = " + ShareVar.currentuser;	
 		      
 			try{
 				Class.forName("com.mysql.cj.jdbc.Driver");
-		        Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+		        Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		        Statement stmt_mysql = conn_mysql.createStatement();
 	
 		        ResultSet rs = stmt_mysql.executeQuery(Query00+Query01);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
@@ -200,6 +200,34 @@ public class DbAction {
 				return bean;
 		}
 		
+	public void deleteAction() {
+		PreparedStatement ps = null;
+
+		try{
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+
+			@SuppressWarnings("unused")
+
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+
+			String A = "delete from Student where sEmail = "+ ShareVar.currentuser;
+
+			ps = conn_mysql.prepareStatement(A);
+
+			ps.executeUpdate();
+
+			conn_mysql.close();
+
+		} catch (Exception e){
+
+			e.printStackTrace();
+
+		}
+	}
 	
 	
 }

@@ -7,24 +7,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.javaproject.base.ShareVar;
+
 public class StudentInfoDbAction { // 2021.04.30 조혜지  - 강사의 강의를 신청한 학생의 정보 알려주는 뷰와 연결해주는 클라스
 	
-	// 여기부터 4줄은 완성되면 없애기 ***************************************************
-	public static final String url_mysql = "jdbc:mysql://192.168.0.128/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
-	public static final String id_mysql = "root";
-	public static final String pw_mysql = "qwer1234";
-	public static String currentuser = "'hyejji@gmail.com'";
-	public static int ccId = 0;
+	public static final String url_mysql = ShareVar.url_mysql;
+	public static final String id_mysql = ShareVar.id_mysql;
+	public static final String pw_mysql = ShareVar.pw_mysql;
+	public static String currentuser = ShareVar.currentuser;
+	public static int classId = ShareVar.cId;
 		
-	// 여기까지 4줄은 완성되면 없애기 ***************************************************
-
-	// 여기부터 3줄은 완성되면 살리기 ***************************************************
-		// private final static String url_mysql = ShareVar.url_mysql;
-		// private final static String id_mysql = ShareVar.id_mysql;
-		// private final static String pw_mysql = ShareVar.pw_mysql;
-	// 여기까지 3줄은 완성되면 살리기 ***************************************************
-		 
-	
     // Field*****************************************
 	
 	String sEmail;
@@ -57,7 +49,7 @@ public class StudentInfoDbAction { // 2021.04.30 조혜지  - 강사의 강의�
 	     
 	     String QueryA = "select s.sEmail, s.sName, s.sNickName, s.sTelNo ";
 	     String QueryB = "from Student as s, Attend as a where s.sEmail = a.sEmail and ";
-	     String QueryC = " a.cId = " + RUDDbAction.ccId;
+	     String QueryC = " a.cId = " + RUDDbAction.classId;
 	     try{
 	         Class.forName("com.mysql.cj.jdbc.Driver");
 	         Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);

@@ -10,7 +10,7 @@ import com.javaproject.base.ShareVar;
 
 public class DbHomeAction {
 
-	private final String url_mysql = "jdbc:mysql://192.168.0.6/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	private final String url_mysql = ShareVar.url_mysql;
 	private final String id_mysql = ShareVar.id_mysql;
 	private final String pwd_mysql = ShareVar.pw_mysql;
 	

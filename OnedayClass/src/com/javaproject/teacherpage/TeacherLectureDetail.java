@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TeacherLectureDetail {
 
@@ -32,6 +34,7 @@ public class TeacherLectureDetail {
 	private JLabel lblNewLabel_2;
 	private JTable Inner_Table_Before;
 	private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();     // * * * * * [0428, 14:51]
+	private JButton btnNewButton;
 	
 	public void setVisible_LectureListDetail(boolean i) {
 		frame.setVisible(true);
@@ -73,6 +76,7 @@ public class TeacherLectureDetail {
 		frame.getContentPane().add(getTf_cDate());
 		frame.getContentPane().add(getScrollPane());
 		frame.getContentPane().add(getLblNewLabel_2());
+		frame.getContentPane().add(getBtnNewButton());
 		
 	}
 	private JLabel getLblNewLabel() {
@@ -247,4 +251,20 @@ public class TeacherLectureDetail {
 
 	 }
 	 
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("닫기");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					TeacherLectureList myClass = new TeacherLectureList();
+					myClass.setVisible_LectureList(true);
+					frame.dispose();
+					
+				}
+			});
+			btnNewButton.setBounds(395, 552, 117, 29);
+		}
+		return btnNewButton;
+	}
 }

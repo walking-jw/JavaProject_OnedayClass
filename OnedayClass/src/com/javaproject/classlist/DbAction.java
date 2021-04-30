@@ -6,20 +6,17 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.javaproject.base.ShareVar;
+
 public class DbAction {
 
 //	
 //	//ShareVar에 저장해둔 DataBase 환경 연결
-//		public final String url_mysql = ShareVar.url_mysql;
-//		public final String id_mysql = ShareVar.id_mysql;
-//		public final String pw_mysql = ShareVar.pw_mysql;
-//
-	
-	/*/
-	 * static 이므로 -----> (금 작업)
-	 */
-//		//강의 아이디 가져오기
-//		public static int classid = 0;  
+	public static final String url_mysql = ShareVar.url_mysql;
+	public static final String id_mysql = ShareVar.id_mysql;
+	public static final String pw_mysql = ShareVar.pw_mysql;
+	public static String currentuser = ShareVar.currentuser;
+	public static int classid = ShareVar.cId;
 		
 		
 		

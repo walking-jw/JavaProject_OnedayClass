@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.javaproject.home.HomeView;
 import com.javaproject.teacherpage.RUDDbAction;
 import com.javaproject.teacherpage.TeacherClassRegister;
 import com.javaproject.teacherpage.TeacherClassUpdateDelete;
@@ -153,20 +154,9 @@ import java.awt.event.ActionEvent;
 				btnReview.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-//						ReviewManagement management = new ReviewManagement();
-//						management.setVisible_ReviewManagement(true);
-//						frame.dispose();
-						
-						// 아래 7줄은 재원님꺼와 연결 시 바로 삭제하기
-						RUDDbAction.ccId = ReviewSub();
-//						
-						TeacherClassUpdateDelete delete = new TeacherClassUpdateDelete();
-						delete.setVisible_TeacherClassUpdateDelete(true);
+						ReviewManagement management = new ReviewManagement();
+						management.setVisible_ReviewManagement(true);
 						frame.dispose();
-
-//						TeacherClassRegister register = new TeacherClassRegister();
-//						register.setVisible_TeacherClassRegister(true);
-//						frame.dispose();
 						
 					}
 				});
@@ -177,6 +167,7 @@ import java.awt.event.ActionEvent;
 		private JTable getInner_Table_Before() {
 			if (Inner_Table_Before == null) {
 				Inner_Table_Before = new JTable();
+				Inner_Table_Before.setEnabled(false);
 				Inner_Table_Before.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -195,7 +186,11 @@ import java.awt.event.ActionEvent;
 				btnClose = new JButton("닫기");
 				btnClose.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						// 도영님과 연결하기
+						
+						HomeView hv = new HomeView();
+						hv.setVisible_HomeView(true);
+						frame.dispose();
+						
 					}
 				});
 				btnClose.setBounds(445, 548, 86, 29);

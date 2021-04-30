@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import com.javaproject.classinfo.Classinfo;
+import com.javaproject.classlist.ClassList;
+import com.javaproject.myclass.StudentMyClass;
 import com.javaproject.searchpage.SearchView;
 import com.javaproject.studentpage.StudentProfile;
 
@@ -85,6 +88,11 @@ public class HomeView {
 			btnShowClass = new JButton("수강중");
 			btnShowClass.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					ClassList classlist = new ClassList();
+					classlist.setVisible_Classinfo(true);
+					frame.dispose();
+					
 					//수강목
 				}
 			});
@@ -105,6 +113,11 @@ public class HomeView {
 			btnNewButton_8.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//추천1
+					Classinfo classinfo = new Classinfo();
+					classinfo.setVisible_Classinfo(true);
+					frame.dispose();
+					
+					
 				}
 			});
 			btnNewButton_8.setBounds(49, 103, 222, 185);
@@ -117,6 +130,9 @@ public class HomeView {
 			btnNewButton_8_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//추천2
+					Classinfo classinfo = new Classinfo();
+					classinfo.setVisible_Classinfo(true);
+					frame.dispose();
 				}
 			});
 			btnNewButton_8_1.setBounds(283, 103, 222, 185);
@@ -141,6 +157,11 @@ public class HomeView {
 			btnNewButton_9_1 = new JButton("My class");
 			btnNewButton_9_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					StudentMyClass stumyclass = new StudentMyClass();
+					stumyclass.setVisible_StudentMyClass(true);
+					frame.dispose();
+					
 					//My class
 				}
 			});

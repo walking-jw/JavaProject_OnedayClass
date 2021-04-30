@@ -8,19 +8,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.javaproject.base.ShareVar;
+
 public class DbActionInfo {
 
 	//-----------------------Field
 //		//ShareVar에 저장해둔 DataBase 환경 연결
-//		public final String url_mysql = ShareVar.url_mysql;
-//		public final String id_mysql = ShareVar.id_mysql;
-//		public final String pw_mysql = ShareVar.pw_mysql;
-//		public static String currentuser ="'jaewon@naver.com'";  // 계속 바꿔주기
-//		
-//		//이미지 파일
-//		public static int filename = 0;
-//		
-//		//이미지를 넣어주기 
+		public static final String url_mysql = ShareVar.url_mysql;
+		public static final String id_mysql = ShareVar.id_mysql;
+		public static final String pw_mysql = ShareVar.pw_mysql;
+		public static String currentuser = ShareVar.currentuser;
+		public static int classid = ShareVar.cId;
+
+//이미지를 넣어주기 
 //		FileInputStream file;
 		
 		
@@ -91,7 +91,7 @@ public class DbActionInfo {
 		public DbActionInfo(FileInputStream file, int cPrice, String tName, String cName, String cLocation, String cDate,
 				String cTime, String cContents) {
 			super();
-			this.file = file;
+//			this.file = file;
 			this.cPrice = cPrice;
 			this.tName = tName;
 			this.cName = cName;
@@ -329,7 +329,7 @@ public class DbActionInfo {
 				Statement stmt_mysql = conn_mysql.createStatement();//여기선 안쓰는 애
 
 	            String A = "insert into QnA(qContents, qDate, sEmail, tEmail";
-	            String B = ") values (?,curdate(),"+currentuser+",?)";
+	            String B = ") values (?,curdate(),"+ShareVar.currentuser+",?)";
 	            
 	            ps = conn_mysql.prepareStatement(A+B);
 	           
@@ -364,7 +364,7 @@ public class DbActionInfo {
 					Statement stmt_mysql = conn_mysql.createStatement();//여기선 안쓰는 애
 		
 		         String A = "insert into Attend(cAttendDate, sEmail, cId";
-		         String B = ") values(curdate(),"+ currentuser+", ?)";
+		         String B = ") values(curdate(),"+ ShareVar.currentuser+", ?)";
 		         
 		         ps = conn_mysql.prepareStatement(A+B);
 		        

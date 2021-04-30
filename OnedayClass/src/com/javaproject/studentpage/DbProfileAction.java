@@ -10,7 +10,7 @@ import com.javaproject.base.ShareVar;
 
 public class DbProfileAction {
 
-	private final String url_mysql = "jdbc:mysql://192.168.0.6/OnedayClass?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	private final String url_mysql = ShareVar.url_mysql;
 	private final String id_mysql = ShareVar.id_mysql;
 	private final String pwd_mysql = ShareVar.pw_mysql;
 	
@@ -42,7 +42,7 @@ public class DbProfileAction {
 		
 		ProfileBean bean = null;
 		
-		String WhereDefault = "select sName, sNickname, sTelNo from Student where sEmail = '"+ShareVar.currentuser + "'";
+		String WhereDefault = "select sName, sNickname, sTelNo from Student where sEmail = "+ShareVar.currentuser;
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
@@ -123,7 +123,7 @@ public class DbProfileAction {
 			Statement stmt_mysql = conn_mysql.createStatement();
 
 
-			String A = "delete from Student where sEmail = '"+ ShareVar.currentuser + "'";
+			String A = "delete from Student where sEmail = "+ ShareVar.currentuser;
 
 			ps = conn_mysql.prepareStatement(A);
 

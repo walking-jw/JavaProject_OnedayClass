@@ -200,8 +200,7 @@ import java.awt.event.ActionEvent;
 				btn_Update_n_Delete = new JButton("수정 / 삭제");
 				btn_Update_n_Delete.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						
+						RUDDbAction.classId = Review();
 						// 혜지님 파트로 넘기기!! --> 강의 
 						TeacherClassUpdateDelete teUnD = new TeacherClassUpdateDelete(); // * * * * * * 강의 수정 페이지로 이동
 						teUnD.setVisible_TeacherClassUpdateDelete(true);
@@ -329,6 +328,14 @@ import java.awt.event.ActionEvent;
 
 	 }
 	
+	// 강의 아이디 불러오기
+	public int Review() {
+			int i = Inner_Table_After.getSelectedRow();
+			String wkSequence = (String)Inner_Table_After.getValueAt(i, 0);
+			int inSequence = Integer.parseInt(wkSequence);
+			return inSequence;
+	  }
+
 	// 강의 아이디 불러오기
 	public int ReviewSub() {
 			int i = Inner_Table_Before.getSelectedRow();

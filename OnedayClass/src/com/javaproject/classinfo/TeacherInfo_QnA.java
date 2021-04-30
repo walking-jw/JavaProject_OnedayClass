@@ -39,6 +39,7 @@ public class TeacherInfo_QnA {
 	private JScrollPane scrollPane;
 	private JTextPane tfqContents;
 	private JLabel lblNewLabel;
+	private JButton btnCancel;
 
 	
 	//--------------------------------Constructor
@@ -100,6 +101,7 @@ public class TeacherInfo_QnA {
 		frame.getContentPane().add(getBtnQnA());
 		frame.getContentPane().add(getScrollPane());
 		frame.getContentPane().add(getLblNewLabel());
+		frame.getContentPane().add(getBtnCancel());
 	}
 
 	
@@ -287,6 +289,18 @@ public class TeacherInfo_QnA {
 			
 		}
 	}//QnA End
-	
-	
+	private JButton getBtnCancel() {
+		if (btnCancel == null) {
+			btnCancel = new JButton("취소");
+			btnCancel.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Classinfo classinfo = new Classinfo();
+					classinfo.setVisible_Classinfo(true);
+					frame.dispose();
+				}
+			});
+			btnCancel.setBounds(281, 531, 117, 29);
+		}
+		return btnCancel;
+	}
 }//end

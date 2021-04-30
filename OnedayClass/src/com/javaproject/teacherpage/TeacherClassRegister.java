@@ -191,9 +191,9 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 					if(check_i==0) {
 						RegisterAction();
 						RelationRegisterAction();
-						// 여기에서 재원님이랑 연결
-						StudentMyClass myClass = new StudentMyClass();
-						myClass.setVisible_StudentMyClass(true);
+
+						TeacherLectureList myClass = new TeacherLectureList();
+						myClass.setVisible_LectureList(true);
 						frame.dispose();
 					}
 				}
@@ -207,9 +207,9 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 			btnCancle = new JButton("닫기");
 			btnCancle.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// 여기에서 재원님이랑 연결
-					StudentMyClass myClass = new StudentMyClass();
-					myClass.setVisible_StudentMyClass(true);
+					
+					TeacherLectureList myClass = new TeacherLectureList();
+					myClass.setVisible_LectureList(true);
 					frame.dispose();
 				}
 			});

@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.home.HomeView;
+import com.javaproject.teacherpage.TeacherMypage;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -211,7 +212,7 @@ public class SignIn {
 		if (rdbtnCommon.isSelected()) {
 			dbAction.signInStudent();
 			if (dbAction.signInStudent() == true) {
-				ShareVar.currentuser = emailId;
+				ShareVar.currentuser = "'" + emailId + "'";
 				segueToStu();
 				//System.out.println("Success" + ShareVar.currentuser);
 			} else {
@@ -221,8 +222,13 @@ public class SignIn {
 		} else {
 			dbAction.signInTeacher();
 			if (dbAction.signInTeacher() == true) {
-				ShareVar.currentuser = emailId;
+				ShareVar.currentuser =  "'" + emailId + "'";
+				
+				TeacherMypage tc = new TeacherMypage();
+				tc.setVisible_TeacherMypage(true);
+				frame.dispose();
 				// 강사페이지 열기
+				
 				//System.out.println(ShareVar.currentuser);
 			}
 		}

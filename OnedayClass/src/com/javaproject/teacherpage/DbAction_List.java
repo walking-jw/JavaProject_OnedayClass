@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.javaproject.base.ShareVar;
+
 	public class DbAction_List { 
  
 	 // Field*****************************************
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 	 int cPrice;
 	 String cReview;
 	 int cScore;
-	 public static int classid = 0;
+	 public static int classid = ShareVar.cId;
 	 public static String sName = "";
 	 
 	 // Field - QnAnswer 용 * * * * * *
@@ -63,11 +65,11 @@ import java.util.ArrayList;
 	     
 	     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
 	     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate <= curdate()) ";
-	     String QueryC = "and tEmail = '" + ShareVarTest.currentuser + "'";		
+	     String QueryC = "and tEmail = " + ShareVar.currentuser;		
 	     
 	     try{
 	         Class.forName("com.mysql.cj.jdbc.Driver");
-	         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+	         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 	         Statement stmt_mysql = conn_mysql.createStatement();
 	
 	         ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
@@ -99,11 +101,11 @@ import java.util.ArrayList;
 	     
 	     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
 	     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate >= curdate()) ";
-	     String QueryC = "and tEmail = '" + ShareVarTest.currentuser + "'";		     
+	     String QueryC = "and tEmail = " + ShareVar.currentuser;		     
 	   
 	     try{
 	       Class.forName("com.mysql.cj.jdbc.Driver");
-	       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+	       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 	       Statement stmt_mysql = conn_mysql.createStatement();
 	       
 	       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
@@ -139,7 +141,7 @@ import java.util.ArrayList;
 		  
 		     try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
-		       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+		       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		       Statement stmt_mysql = conn_mysql.createStatement();
 		       
 		       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
@@ -173,7 +175,7 @@ import java.util.ArrayList;
 				      
 					try{
 						Class.forName("com.mysql.cj.jdbc.Driver");
-				        Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+				        Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 				        Statement stmt_mysql = conn_mysql.createStatement();
 
 				        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 + WhereDefault3+ cId);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
@@ -206,10 +208,10 @@ import java.util.ArrayList;
 				     
 				     
 				     String Query00 = "SELECT sEmail, qDate, qContents FROM QnA ";
-				     String Query01 = "WHERE aContents is null AND tEmail = '" + ShareVarTest.currentuser + "'";		
+				     String Query01 = "WHERE aContents is null AND tEmail = " + ShareVar.currentuser;		
 				     try{
 				         Class.forName("com.mysql.cj.jdbc.Driver");
-				         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+				         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 				         Statement stmt_mysql = conn_mysql.createStatement();
 				
 				         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
@@ -239,10 +241,10 @@ import java.util.ArrayList;
 			 ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
 		     
 		     String Query00 = "SELECT sEmail, qDate, qContents FROM QnA ";
-		     String Query01 = "WHERE aContents is not null AND tEmail = '" + ShareVarTest.currentuser + "'";		
+		     String Query01 = "WHERE aContents is not null AND tEmail = " + ShareVar.currentuser;		
 		     try{
 		         Class.forName("com.mysql.cj.jdbc.Driver");
-		         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+		         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		         Statement stmt_mysql = conn_mysql.createStatement();
 		
 		         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
@@ -271,12 +273,12 @@ import java.util.ArrayList;
 				Bean_QnA bean2 = null;   
 	
 				 String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
-			     String Query01 = "WHERE aContents is null AND tEmail = '" + ShareVarTest.currentuser + "' ";	
+			     String Query01 = "WHERE aContents is null AND tEmail = " + ShareVar.currentuser;	
 			     String Query02 = "AND sEmail like '" + sName + "'";
 				      
 					try{
 						Class.forName("com.mysql.cj.jdbc.Driver");
-				        Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+				        Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 				        Statement stmt_mysql = conn_mysql.createStatement();
 
 				        ResultSet rs = stmt_mysql.executeQuery(Query00+Query01+Query02);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
@@ -307,18 +309,17 @@ import java.util.ArrayList;
 				
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-			    Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+			    Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 			    Statement stmt_mysql = conn_mysql.createStatement();
 			    
-			    String Query00 = "UPDATE QnA set aContents = ?, aDate = ?";
+			    String Query00 = "UPDATE QnA set aContents = ?, aDate = curdate() ";
 			    String Query01 = "WHERE sEmail = ? And qDate = ? ";
 			    
 			    ps = conn_mysql.prepareStatement(Query00+Query01);
 			    
 			    ps.setString(1, QnA_aContents);
-			    ps.setString(2, "curdate()");
-			    ps.setString(3, QnA_sEmail.trim());
-			    ps.setString(4, QnA_qDate.trim());
+			    ps.setString(2, QnA_sEmail.trim());
+			    ps.setString(3, QnA_qDate.trim());
 			    ps.executeUpdate();
 			    
 			    

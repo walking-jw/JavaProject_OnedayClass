@@ -16,6 +16,12 @@ import java.awt.event.WindowEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
+import com.javaproject.base.ShareVar;
+import com.javaproject.login.SignIn;
+
+import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
+
 public class TeacherMypage {
 
 	private JFrame frame;
@@ -28,8 +34,6 @@ public class TeacherMypage {
 	private JLabel lbl_Email_1;
 	private JTextField tf_Telno;
 	private JLabel lbl_Email_1_1;
-	private JTextField tf_Password;
-	private JTextField tf_PasswordConfirm;
 	private JLabel lbl_QnA;
 	private JLabel lbl_Average;
 	private JTextField tf_AveragePoint;
@@ -39,8 +43,11 @@ public class TeacherMypage {
 	private JButton btn_QnA;
 	private JButton btn_Out;
 	private JButton btn_Out_1;
-	private JLabel lbl_Logout;
 	private JLabel lbl_PassCheck;
+	private JPasswordField tf_Password;
+	private JPasswordField tf_PasswordConfirm;
+	private JLabel lblNewLabel;
+	private JButton btn_Logout;
 
 	public void setVisible_TeacherMypage(boolean i){
 		   	frame.setVisible(i);
@@ -78,8 +85,6 @@ public class TeacherMypage {
 		frame.getContentPane().add(getLbl_Email_1());
 		frame.getContentPane().add(getTf_Telno());
 		frame.getContentPane().add(getLbl_Email_1_1());
-		frame.getContentPane().add(getTf_Password());
-		frame.getContentPane().add(getTf_PasswordConfirm());
 		frame.getContentPane().add(getLbl_QnA());
 		frame.getContentPane().add(getLbl_Average());
 		frame.getContentPane().add(getTf_AveragePoint());
@@ -89,8 +94,11 @@ public class TeacherMypage {
 		frame.getContentPane().add(getBtn_QnA());
 		frame.getContentPane().add(getBtn_Out());
 		frame.getContentPane().add(getBtn_Out_1());
-		frame.getContentPane().add(getLbl_Logout());
 		frame.getContentPane().add(getLbl_PassCheck());
+		frame.getContentPane().add(getTf_Password());
+		frame.getContentPane().add(getTf_PasswordConfirm());
+		frame.getContentPane().add(getLblNewLabel());
+		frame.getContentPane().add(getBtn_Logout());
 	}
 	private JLabel getLbl_Name() {
 		if (lbl_Name == null) {
@@ -165,22 +173,6 @@ public class TeacherMypage {
 		}
 		return lbl_Email_1_1;
 	}
-	private JTextField getTf_Password() {
-		if (tf_Password == null) {
-			tf_Password = new JTextField();
-			tf_Password.setColumns(10);
-			tf_Password.setBounds(267, 281, 206, 32);
-		}
-		return tf_Password;
-	}
-	private JTextField getTf_PasswordConfirm() {
-		if (tf_PasswordConfirm == null) {
-			tf_PasswordConfirm = new JTextField();
-			tf_PasswordConfirm.setColumns(10);
-			tf_PasswordConfirm.setBounds(267, 325, 206, 32);
-		}
-		return tf_PasswordConfirm;
-	}
 	private JLabel getLbl_QnA() {
 		if (lbl_QnA == null) {
 			lbl_QnA = new JLabel("비밀번호확인");
@@ -200,6 +192,7 @@ public class TeacherMypage {
 	private JTextField getTf_AveragePoint() {
 		if (tf_AveragePoint == null) {
 			tf_AveragePoint = new JTextField();
+			tf_AveragePoint.setEditable(false);
 			tf_AveragePoint.setHorizontalAlignment(SwingConstants.CENTER);
 			tf_AveragePoint.setColumns(10);
 			tf_AveragePoint.setBounds(151, 369, 49, 32);
@@ -261,6 +254,13 @@ public class TeacherMypage {
 	private JButton getBtn_Out() {
 		if (btn_Out == null) {
 			btn_Out = new JButton("탈퇴");
+			btn_Out.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DbAction db = new DbAction();
+					db.deleteAction();
+				
+				}
+			});
 			btn_Out.setBounds(386, 527, 140, 29);
 		}
 		return btn_Out;
@@ -279,7 +279,7 @@ public class TeacherMypage {
 			btn_Out_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					if(tf_Password.getText().equals(tf_PasswordConfirm.getText())) {
+					if(strPwdCheck().equals(strPwdCheck_Confirm())) {
 						UpdateAction_Mypage();
 						ClearColumn();
 						DBtoClass();
@@ -295,12 +295,17 @@ public class TeacherMypage {
 		}
 		return btn_Out_1;
 	}
-	private JLabel getLbl_Logout() {
-		if (lbl_Logout == null) {
-			lbl_Logout = new JLabel("로그아웃");
-			lbl_Logout.setBounds(71, 228, 61, 16);
-		}
-		return lbl_Logout;
+	
+	private String strPwdCheck() {
+		char[] str = tf_Password.getPassword();
+		String passString = new String(str);
+		return passString;
+	}
+	
+	private String strPwdCheck_Confirm() {
+		char[] str = tf_PasswordConfirm.getPassword();
+		String passString = new String(str);
+		return passString;
 	}
 	
 	public void DBtoClass() {
@@ -367,5 +372,49 @@ public void CountOfClass() {
 			JOptionPane.showInputDialog(this, "자료 수정 중 에러가 발생하였습니다");
 		}
 		
+	}
+	private JPasswordField getTf_Password() {
+		if (tf_Password == null) {
+			tf_Password = new JPasswordField();
+			tf_Password.setBounds(267, 284, 206, 26);
+		}
+		return tf_Password;
+	}
+	private JPasswordField getTf_PasswordConfirm() {
+		if (tf_PasswordConfirm == null) {
+			tf_PasswordConfirm = new JPasswordField();
+			tf_PasswordConfirm.setBounds(267, 328, 206, 26);
+		}
+		return tf_PasswordConfirm;
+	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("사진");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setIcon(new ImageIcon("/Users/parkjw/Documents/Screen_Shot/스크린샷 2021-04-30 오후 12.30.31.png"));
+			lblNewLabel.setBounds(20, 83, 155, 131);
+		}
+		return lblNewLabel;
+	}
+	private JButton getBtn_Logout() {
+		if (btn_Logout == null) {
+			btn_Logout = new JButton("로그아웃");
+			btn_Logout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ShareVar.currentuser = "";
+					JOptionPane.showMessageDialog(null, "로그아웃 되었습니다");
+					SignIn signin = new SignIn();
+					signin.setVisible_SignIn(true);
+					frame.dispose();
+							
+					
+					
+					
+				}
+			});
+			btn_Logout.setForeground(Color.BLUE);
+			btn_Logout.setBounds(41, 227, 117, 29);
+		}
+		return btn_Logout;
 	}
 }

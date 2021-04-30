@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.home.HomeView;
 import com.javaproject.login.SignIn;
 
 import javax.swing.JButton;
@@ -200,6 +201,7 @@ public class StudentProfile {
 			btnEdit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// 정보수정
+					JOptionPane.showMessageDialog(null, "정보가 수정되었습니다.");
 					updateProfile();
 					loadProfile();
 				}
@@ -253,7 +255,9 @@ public class StudentProfile {
 			btnCancel = new JButton("닫기");
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// Home View
+					HomeView hv = new HomeView();
+					hv.setVisible_HomeView(true);
+					frame.dispose();
 				}
 			});
 			btnCancel.setBounds(409, 541, 117, 29);
@@ -328,10 +332,10 @@ public class StudentProfile {
 		if (res < 1) {
 			lblLevel.setText("발!");
 		} 
-		else if (res < 12) {
+		else if (res < 5) {
 			lblLevel.setText("동손!");
 		}
-		else if (res < 36) {
+		else if (res < 12) {
 			lblLevel.setText("은손!");
 		} 
 		else {
