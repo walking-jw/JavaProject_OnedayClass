@@ -25,7 +25,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-	public class TeacherLectureList { // 혜지 view - 수강 예정과 수강 이력 데이터 테이블표에 불러오기 & 수강 예정 강의 수강 신청 취소하기
+	public class TeacherLectureList { 
 	
 		private JFrame frame;
 		private JLabel lblNewLabel;
@@ -36,6 +36,7 @@ import java.awt.event.ActionEvent;
 		private JScrollPane scrollPane_1;
 		private JButton btnRegister;
 		private JTable Inner_Table_Before;
+		
 		// OuterTable 초기 설정
 		private final DefaultTableModel Outer_Table_After = new DefaultTableModel();
 		private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();
@@ -142,13 +143,14 @@ import java.awt.event.ActionEvent;
 			}
 			return scrollPane_1;
 		}
+		
 		private JButton getBtnRegister() {
 			if (btnRegister == null) {
 				btnRegister = new JButton("신규 강의 등록");
 				btnRegister.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						TeacherClassRegister register = new TeacherClassRegister();
+						TeacherClassRegister register = new TeacherClassRegister(); // * * * * * * 강의 신규 등록페이지로 이동
 						register.setVisible_TeacherClassRegister(true);
 						frame.dispose();
 					}
@@ -157,6 +159,7 @@ import java.awt.event.ActionEvent;
 			}
 			return btnRegister;
 		}
+		
 		private JTable getInner_Table_Before() {
 			if (Inner_Table_Before == null) {
 				Inner_Table_Before = new JTable();
@@ -170,7 +173,6 @@ import java.awt.event.ActionEvent;
 				// InnerTable과 OuterTable연결 (수강 이력)
 				Inner_Table_Before.setModel(Outer_Table_Before);
 			}
-	
 			return Inner_Table_Before;
 		}
 		
@@ -182,7 +184,7 @@ import java.awt.event.ActionEvent;
 						
 						DbAction_List.classid = ReviewSub();
 						
-						TeacherLectureDetail go = new TeacherLectureDetail();
+						TeacherLectureDetail go = new TeacherLectureDetail(); // * * * * * * * * * * 강의 세부사항으로 이동
 						go.setVisible_LectureListDetail(true);
 						frame.dispose();
 						
@@ -201,7 +203,7 @@ import java.awt.event.ActionEvent;
 						
 						
 						// 혜지님 파트로 넘기기!! --> 강의 
-						TeacherClassUpdateDelete teUnD = new TeacherClassUpdateDelete();
+						TeacherClassUpdateDelete teUnD = new TeacherClassUpdateDelete(); // * * * * * * 강의 수정 페이지로 이동
 						teUnD.setVisible_TeacherClassUpdateDelete(true);
 						frame.dispose();
 						
@@ -211,159 +213,145 @@ import java.awt.event.ActionEvent;
 			}
 			return btn_Update_n_Delete;
 		}
-		// 메소드 시작 ***************************************************************
 		
-		// 메인과 해당 창을 연결하는 메소드
-		public void setVisible_StudentMyClass(boolean j) {
-			frame.setVisible(j);
-		}
-		
-		// 수강 예정 테이블 초기화
-		private void TableInitAfter(){
-		       int i = Outer_Table_After.getRowCount();
-		       
-		       Outer_Table_After.addColumn("강의ID");
-		       Outer_Table_After.addColumn("강의명");
-		       Outer_Table_After.addColumn("수강날짜");
-		       Outer_Table_After.addColumn("장소");
-		       Outer_Table_After.setColumnCount(4);
+	// MeThod ***************************************************************
 	
+	// 메인과 해당 창을 연결하는 메소드
+	public void setVisible_StudentMyClass(boolean j) {
+		frame.setVisible(j);
+	}
+	
+	 // 수강 예정 테이블 초기화
+	 private void TableInitAfter(){
+	       int i = Outer_Table_After.getRowCount();
+	       
+	       Outer_Table_After.addColumn("강의ID");
+	       Outer_Table_After.addColumn("강의명");
+	       Outer_Table_After.addColumn("수강날짜");
+	       Outer_Table_After.addColumn("장소");
+	       Outer_Table_After.setColumnCount(4);
+
 		       for(int j = 0 ; j < i ; j++){
 		           Outer_Table_After.removeRow(0);
 		       }
-	
-		       Inner_Table_After.setAutoResizeMode(Inner_Table_After.AUTO_RESIZE_OFF);
-		       
-	
-		       int vColIndex = 0;
-		       TableColumn col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
-		       int width = 40;
-		       col.setPreferredWidth(width);
-	
-		       vColIndex = 1;
-		       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
-		       width = 200;
-		       col.setPreferredWidth(width);
-		       
-		       vColIndex = 2;
-		       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
-		       width = 120;
-		       col.setPreferredWidth(width);
-	
-		       vColIndex = 3;
-		       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
-		       width = 150;
-		       col.setPreferredWidth(width);
 
-		 }
-		
-		// 수강 이력 테이블 초기화
-		 private void TableInitBefore(){
-	
-		     int k = Outer_Table_Before.getRowCount();
-		     
-		     Outer_Table_Before.addColumn("강의ID");
-		     Outer_Table_Before.addColumn("강의명");
-		     Outer_Table_Before.addColumn("수강날짜");
-		     Outer_Table_Before.addColumn("장소");
-		     Outer_Table_Before.setColumnCount(4);
-		     
-		     for(int j = 0 ; j < k ; j++){
-		       Outer_Table_Before.removeRow(0);
-		       }
-	
-		     Inner_Table_Before.setAutoResizeMode(Inner_Table_Before.AUTO_RESIZE_OFF);
-	
-		     int vColIndex = 0;
-		     TableColumn col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-		     int width = 40;
-		     col.setPreferredWidth(width);
-		 
-		     vColIndex = 1;
-		     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-		     width = 200;
-		     col.setPreferredWidth(width);
-		     
-		     vColIndex = 2;
-		     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-		     width = 120;
-		     col.setPreferredWidth(width);
-		     
-		     vColIndex = 3;
-		     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-		     width = 150;
-		     col.setPreferredWidth(width);
-		     
-		 }
-	
-		 // 수강 예정 데이터 불러오기
-		 private void SearchActionAfter(){
-		     
-		     DbAction_List dbAction = new DbAction_List();
-		     ArrayList<Bean_TeacherClass> beanList = dbAction.selectListAfter();
-		     int listCount = beanList.size();
-		     for(int i=0; i<listCount; i++) {
-		       String temp1 = Integer.toString(beanList.get(i).getcId());
-		       String[] qTxt = {temp1, beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation()};
-		       Outer_Table_After.addRow(qTxt);
-		     }
+	       Inner_Table_After.setAutoResizeMode(Inner_Table_After.AUTO_RESIZE_OFF);
+	       
 
-		 }
-		 
-		 // 수강 이력 데이터 불러오기
-		 private void SearchActionBefore(){
-		     
-		     DbAction_List dbAction = new DbAction_List();
-		     ArrayList<Bean_TeacherClass> beanList = dbAction.selectListBefore();
-		     int listCount = beanList.size();
-		     for(int i=0; i<listCount; i++) {
-		       String temp1 = Integer.toString(beanList.get(i).getcId());
-		       String[] qTxt = {temp1, beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation()};
-		       Outer_Table_Before.addRow(qTxt);
-		     }
+	       int vColIndex = 0;
+	       TableColumn col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       int width = 40;
+	       col.setPreferredWidth(width);
 
-		 }
-		
-		// Table Click 해서 ShareVar에 cId 남겨두기
-		
-//		private void TableClick() {
-//			
-//			int i = Inner_Table_After.getSelectedRow();
-//			String tmp = (String)Inner_Table_After.getValueAt(i, 0);
-//			
-//			DbAction_List db = new DbAction_List(tmp);
-//			Bean_TeacherClass bean = db.TableClick();
-//			 
-//			ShareVarTest.cId = Integer.toString(bean.getcId());
-//			
-//			
-//			
-//		}
-		 // 강의 아이디 불러오기
-		  public int ReviewSub() {
-				int i = Inner_Table_Before.getSelectedRow();
-				String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
-				int inSequence = Integer.parseInt(wkSequence);
-				return inSequence;
-		  }
-		
-		
-		
-		private JButton getBtn_ToMypage() {
-			if (btn_ToMypage == null) {
-				btn_ToMypage = new JButton("닫기");
-				btn_ToMypage.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						TeacherMypage tm = new TeacherMypage();
-						tm.setVisible_TeacherMypage(true);
-						frame.dispose();
-						
-						
-					}
-				});
-				btn_ToMypage.setBounds(30, 548, 117, 29);
-			}
-			return btn_ToMypage;
+	       vColIndex = 1;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 200;
+	       col.setPreferredWidth(width);
+	       
+	       vColIndex = 2;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 120;
+	       col.setPreferredWidth(width);
+
+	       vColIndex = 3;
+	       col = Inner_Table_After.getColumnModel().getColumn(vColIndex);
+	       width = 150;
+	       col.setPreferredWidth(width);
+
+	 }
+	
+	// 수강 이력 테이블 초기화
+	 private void TableInitBefore(){
+
+	     int k = Outer_Table_Before.getRowCount();
+	     
+	     Outer_Table_Before.addColumn("강의ID");
+	     Outer_Table_Before.addColumn("강의명");
+	     Outer_Table_Before.addColumn("수강날짜");
+	     Outer_Table_Before.addColumn("장소");
+	     Outer_Table_Before.setColumnCount(4);
+	     
+	     for(int j = 0 ; j < k ; j++){
+	       Outer_Table_Before.removeRow(0);
+	       }
+
+	     Inner_Table_Before.setAutoResizeMode(Inner_Table_Before.AUTO_RESIZE_OFF);
+
+	     int vColIndex = 0;
+	     TableColumn col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     int width = 40;
+	     col.setPreferredWidth(width);
+	 
+	     vColIndex = 1;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 200;
+	     col.setPreferredWidth(width);
+	     
+	     vColIndex = 2;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 120;
+	     col.setPreferredWidth(width);
+	     
+	     vColIndex = 3;
+	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
+	     width = 150;
+	     col.setPreferredWidth(width);
+	     
+	 }
+
+	 // 수강 예정 데이터 불러오기 (상단 테이블)
+	 private void SearchActionAfter(){
+	     
+	     DbAction_List dbAction = new DbAction_List();
+	     ArrayList<Bean_TeacherClass> beanList = dbAction.selectListAfter();
+	     int listCount = beanList.size();
+	   
+	     for(int i=0; i<listCount; i++) {
+	       String temp1 = Integer.toString(beanList.get(i).getcId());
+	       String[] qTxt = {temp1, beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation()};
+	       Outer_Table_After.addRow(qTxt);
+	     }
+
+	 }
+	 
+	 // 수강 이력 데이터 불러오기 (하단 테이블)
+	 private void SearchActionBefore(){
+	     
+	     DbAction_List dbAction = new DbAction_List();
+	     ArrayList<Bean_TeacherClass> beanList = dbAction.selectListBefore();
+	     int listCount = beanList.size();
+	   
+	     for(int i=0; i<listCount; i++) {
+	       String temp1 = Integer.toString(beanList.get(i).getcId());
+	       String[] qTxt = {temp1, beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation()};
+	       Outer_Table_Before.addRow(qTxt);
+	     }
+
+	 }
+	
+	// 강의 아이디 불러오기
+	public int ReviewSub() {
+			int i = Inner_Table_Before.getSelectedRow();
+			String wkSequence = (String)Inner_Table_Before.getValueAt(i, 0);
+			int inSequence = Integer.parseInt(wkSequence);
+			return inSequence;
+	  }
+	
+	// 이전 페이지로 돌아가기
+	private JButton getBtn_ToMypage() {
+		if (btn_ToMypage == null) {
+			btn_ToMypage = new JButton("닫기");
+			btn_ToMypage.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					TeacherMypage tm = new TeacherMypage();
+					tm.setVisible_TeacherMypage(true);
+					frame.dispose();
+					
+				}
+			});
+			btn_ToMypage.setBounds(30, 548, 117, 29);
 		}
-	} //
+		return btn_ToMypage;
+	}
+} //

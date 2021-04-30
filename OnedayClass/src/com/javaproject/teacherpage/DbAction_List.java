@@ -9,171 +9,134 @@ import java.util.ArrayList;
 
 	public class DbAction_List { 
  
-		 // Field*****************************************
-		 int cId;
-		 String cName;
-		 String cDate;
-		 String cLocation;
-		 String cTime;
-		 int cPrice;
-		 String cReview;
-		 int cScore;
-		 public static int classid = 0;
-		 public static String sName = "";
+	 // Field*****************************************
+	 int cId;
+	 String cName;
+	 String cDate;
+	 String cLocation;
+	 String cTime;
+	 int cPrice;
+	 String cReview;
+	 int cScore;
+	 public static int classid = 0;
+	 public static String sName = "";
+	 
+	 // Field - QnAnswer 용 * * * * * *
+	 String QnA_sEmail;
+	 String QnA_qDate;
+	 String QnA_qContents;
+	 String QnA_aContents;
+ 
+	 
+	 // Constructor*****************************************
+	 // QnA 답변 등록시 시용
+	 public DbAction_List(String qnA_sEmail, String qnA_qDate, String qnA_qContents, String qnA_aContents) {
+		 super();
+		 QnA_sEmail = qnA_sEmail;
+		 QnA_qDate = qnA_qDate;
+		 QnA_qContents = qnA_qContents;
+		 QnA_aContents = qnA_aContents;
+	 }
 		 
-		 // Field - QnAnswer 용 * * * * 
-		 String QnA_sEmail;
-		 String QnA_qDate;
-		 String QnA_qContents;
-		 String QnA_aContents;
+	 // 초기 Constructor 생성 - SearchActionAfter, SearchActionBefore에서 사용
+	 public DbAction_List() {
+	     // TODO Auto-generated constructor stub
+	 }
 		 
+	 public DbAction_List(String cName) {
+		super();
+		this.cName = cName;
+	}
+
+	public DbAction_List(int cId) {
+		 super();
+		 this.cId = cId;
+	}
+	
+	// Method * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 
 
-
-
-		// Constructor*****************************************
-		 // QnA 답변 등록시 시용
-		 public DbAction_List(String qnA_sEmail, String qnA_qDate, String qnA_qContents, String qnA_aContents) {
-			 super();
-			 QnA_sEmail = qnA_sEmail;
-			 QnA_qDate = qnA_qDate;
-			 QnA_qContents = qnA_qContents;
-			 QnA_aContents = qnA_aContents;
-		 }
+	// 수강 예정인 데이터를 TeacherLectureList 상단 테이블로 mysql에서 불러오는 메소드
+	 public ArrayList<Bean_TeacherClass> selectListAfter() {
+	    
+		 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
+	     
+	     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
+	     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate <= curdate()) ";
+	     String QueryC = "and tEmail = '" + ShareVarTest.currentuser + "'";		
+	     
+	     try{
+	         Class.forName("com.mysql.cj.jdbc.Driver");
+	         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+	         Statement stmt_mysql = conn_mysql.createStatement();
+	
+	         ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
+	
+	         while(rs.next()){
+	
+	           int wkcId = rs.getInt(1);
+	           String wkcName = rs.getString(2);
+	           String wktcDate = rs.getString(3);
+	           String wkcLocation = rs.getString(4);
+	           
+	           Bean_TeacherClass bean = new Bean_TeacherClass(wkcId, wkcName, wktcDate, wkcLocation);
+	           beanList.add(bean);
+	
+	         }
+	         conn_mysql.close();
+	         
+	     }
+	     catch (Exception e){
+	         e.printStackTrace();
+	     }
+	     return beanList;
+	 }
 		 
+	 // 수강 이력인 데이터를 TeacherLectureList 하단 테이블로 mysql에서 불러오는 메소드
+	 public ArrayList<Bean_TeacherClass> selectListBefore() {
+	    
+		 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
+	     
+	     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
+	     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate >= curdate()) ";
+	     String QueryC = "and tEmail = '" + ShareVarTest.currentuser + "'";		     
+	   
+	     try{
+	       Class.forName("com.mysql.cj.jdbc.Driver");
+	       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+	       Statement stmt_mysql = conn_mysql.createStatement();
+	       
+	       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
+	       
+	       while(rs.next()){
+	           
+	               int wkcId = rs.getInt(1);
+	               String wkcName = rs.getString(2);
+	               String wktcDate = rs.getString(3);
+	               String wkcLocation = rs.getString(4);
+	           
+	               Bean_TeacherClass bean = new Bean_TeacherClass(wkcId, wkcName, wktcDate, wkcLocation);
+	           beanList.add(bean);
+	           
+	       }
+	       conn_mysql.close();
+	       
+	     }
+	     catch (Exception e){
+	       e.printStackTrace();
+	     }
+	     return beanList;
+	 }
 		 
-		 // 초기 Constructor 생성 - SearchActionAfter, SearchActionBefore에서 사용
-		 public DbAction_List() {
-		     // TODO Auto-generated constructor stub
-		 }
-
-		 
-		 
-		 
-		 public DbAction_List(String cName) {
-			super();
-			this.cName = cName;
-		}
-
-
-
-
-		public DbAction_List(int cId) {
-			 super();
-			 this.cId = cId;
-		 }
-		 
-		 
-		// Method*****************************************
-		 
-
-		// 수강 예정인 데이터를 mysql에서 불러오는 메소드
-		 public ArrayList<Bean_TeacherClass> selectListAfter() {
-		     ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
-		     
-		     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
-		     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate <= curdate()) ";
-		     String QueryC = "and tEmail = '" + ShareVarTest.currentuser + "'";		
-		     try{
-		         Class.forName("com.mysql.cj.jdbc.Driver");
-		         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
-		         Statement stmt_mysql = conn_mysql.createStatement();
-		
-		         ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
-		
-		         while(rs.next()){
-		
-		           int wkcId = rs.getInt(1);
-		           String wkcName = rs.getString(2);
-		           String wktcDate = rs.getString(3);
-		           String wkcLocation = rs.getString(4);
-		           
-		           Bean_TeacherClass bean = new Bean_TeacherClass(wkcId, wkcName, wktcDate, wkcLocation);
-		           beanList.add(bean);
-		
-		         }
-		         conn_mysql.close();
-		         
-		     }
-		     catch (Exception e){
-		         e.printStackTrace();
-		     }
-		     return beanList;
-		 }
-		 
-		 // 수강 이력인 데이터를 mysql에서 불러오는 메소드
-		 public ArrayList<Bean_TeacherClass> selectListBefore() {
-		     ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
-		     
-		     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
-		     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate >= curdate()) ";
-		     String QueryC = "and tEmail = '" + ShareVarTest.currentuser + "'";		     
-		     try{
-		       Class.forName("com.mysql.cj.jdbc.Driver");
-		       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
-		       Statement stmt_mysql = conn_mysql.createStatement();
-		       
-		       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
-		       
-		       while(rs.next()){
-		           
-		               int wkcId = rs.getInt(1);
-		               String wkcName = rs.getString(2);
-		               String wktcDate = rs.getString(3);
-		               String wkcLocation = rs.getString(4);
-		           
-		               Bean_TeacherClass bean = new Bean_TeacherClass(wkcId, wkcName, wktcDate, wkcLocation);
-		           beanList.add(bean);
-		           
-		       }
-		       conn_mysql.close();
-		       
-		     }
-		     catch (Exception e){
-		       e.printStackTrace();
-		     }
-		     return beanList;
-		 }
-		 
-		 
-		 // Table Click 하면 cId 보관하게 하기 * * * * * * * * * * * * * * * * [2021.04.28,11:47]
-		 
-//		 public Bean_TeacherClass TableClick() {
-//			 
-//			 Bean_TeacherClass bean = null;
-//			 
-//			 String QueryA = "select c.cId";
-//		     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate <= curdate()) ";
-//		     String QueryC = "and tEmail = '" + ShareVarTest.currentuser + "'";		
-//		     
-//		     try{
-//			       Class.forName("com.mysql.cj.jdbc.Driver");
-//			       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
-//			       Statement stmt_mysql = conn_mysql.createStatement();
-//			       
-//			       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC);
-//			       
-//			       if(rs.next()) {
-//			    	   String wkId = Integer.toString(rs.getInt(1));
-//			    	   
-//			    	   bean = new Bean_TeacherClass(wkId);
-//			       }
-//			     conn_mysql.close();
-//			 }catch (Exception e) {
-//				 e.printStackTrace();
-//			 }
-//			     return bean;
-		 
-//		 }//TableClick
-		 
-		 
-		 // 수강 세부사항에서 불러오기(테이블로)
+		 // 수강 세부사항에서 불러오기 (테이블로) - TeacherLectureDetail
 		 public ArrayList<Bean_TeacherClass> selectListBefore_Detail() {
-		     ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
+		   
+			 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
 		     
 		     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
 		     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate >= curdate()) ";
 		     String QueryC = "and c.cId = " + cId;		     
+		  
 		     try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
 		       Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
@@ -270,145 +233,104 @@ import java.util.ArrayList;
 				     return beanList;
 				 }
 				 
-					// QnA 리스트 불러오는 메소드 ( 답변 완료한 리스트)
-				 public ArrayList<Bean_QnA> selectList_QnA_OK() {
-				     ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
-				     
-				     
-				     
-				     String Query00 = "SELECT sEmail, qDate, qContents FROM QnA ";
-				     String Query01 = "WHERE aContents is not null AND tEmail = '" + ShareVarTest.currentuser + "'";		
-				     try{
-				         Class.forName("com.mysql.cj.jdbc.Driver");
-				         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
-				         Statement stmt_mysql = conn_mysql.createStatement();
-				
-				         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
-				
-				         while(rs.next()){
-				
+		 // QnA 리스트 불러오는 메소드 ( 답변 완료한 리스트)
+		 public ArrayList<Bean_QnA> selectList_QnA_OK() {
+		
+			 ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
+		     
+		     String Query00 = "SELECT sEmail, qDate, qContents FROM QnA ";
+		     String Query01 = "WHERE aContents is not null AND tEmail = '" + ShareVarTest.currentuser + "'";		
+		     try{
+		         Class.forName("com.mysql.cj.jdbc.Driver");
+		         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+		         Statement stmt_mysql = conn_mysql.createStatement();
+		
+		         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
+		
+		         while(rs.next()){
+		
+		           String wksEmail = rs.getString(1);
+		           String wkqDate = rs.getString(2);
+		           String wkqContents = rs.getString(3);
+		           
+		           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents);
+		           beanList.add(bean);
+		
+		         }
+		         conn_mysql.close();
+		         
+		     }
+		     catch (Exception e){
+		         e.printStackTrace();
+		     }
+		     return beanList;
+		 }
+		 
+		 // * * * * * * * * * * *
+		 public Bean_QnA selectList_QnA_Detail() {
+				Bean_QnA bean2 = null;   
+	
+				 String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
+			     String Query01 = "WHERE aContents is null AND tEmail = '" + ShareVarTest.currentuser + "' ";	
+			     String Query02 = "AND sEmail like '" + sName + "'";
+				      
+					try{
+						Class.forName("com.mysql.cj.jdbc.Driver");
+				        Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
+				        Statement stmt_mysql = conn_mysql.createStatement();
+
+				        ResultSet rs = stmt_mysql.executeQuery(Query00+Query01+Query02);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
+
+				        while(rs.next()){
+				    
 				           String wksEmail = rs.getString(1);
 				           String wkqDate = rs.getString(2);
 				           String wkqContents = rs.getString(3);
-				           
-				           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents);
-				           beanList.add(bean);
-				
-				         }
-				         conn_mysql.close();
-				         
-				     }
-				     catch (Exception e){
-				         e.printStackTrace();
-				     }
-				     return beanList;
-				 }
-				 
-		 // Teacher QnA 부분에서 사용할 메소드
-//				 public ArrayList<Bean_QnA> selectList_QnA_Detail() {
-//				     ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
-//				     
-//				     
-//				     
-//				     String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
-//				     String Query01 = "WHERE aContents is null AND tEmail = '" + ShareVarTest.currentuser + "' ";	
-//				     String Query02 = "AND sName = '" + sName + "'";
-//				     try{
-//				         Class.forName("com.mysql.cj.jdbc.Driver");
-//				         Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
-//				         Statement stmt_mysql = conn_mysql.createStatement();
-//				
-//				         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01+ Query02);
-//				
-//				         while(rs.next()){
-//				
-//				           String wksEmail = rs.getString(1);
-//				           String wkqDate = rs.getString(2);
-//				           String wkqContents = rs.getString(3);
-//				           String wkaContents = rs.getString(4);
-//				           
-//				           
-//				           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
-//				           beanList.add(bean);
-//				
-//				         }
-//				         conn_mysql.close();
-//				         
-//				     }
-//				     catch (Exception e){
-//				         e.printStackTrace();
-//				     }
-//				     return beanList;
-//				 }
-//		 
-		 
-		 
-				 public Bean_QnA selectList_QnA_Detail() {
-						Bean_QnA bean2 = null;   
+				           String wkaContents = rs.getString(4);
+				        
+				           bean2 = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
 
-						 String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
-					     String Query01 = "WHERE aContents is null AND tEmail = '" + ShareVarTest.currentuser + "' ";	
-					     String Query02 = "AND sEmail like '" + sName + "'";
-						      
-							try{
-								Class.forName("com.mysql.cj.jdbc.Driver");
-						        Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql,ShareVarTest.id_mysql,ShareVarTest.pw_mysql);
-						        Statement stmt_mysql = conn_mysql.createStatement();
-
-						        ResultSet rs = stmt_mysql.executeQuery(Query00+Query01+Query02);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
-
-						        while(rs.next()){
-						    
-						        	 String wksEmail = rs.getString(1);
-							           String wkqDate = rs.getString(2);
-							           String wkqContents = rs.getString(3);
-							           String wkaContents = rs.getString(4);
-						        
-						          	bean2 = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
-
-						        }
-						          conn_mysql.close();
-						          
-						      	}catch (Exception e){
-						      		
-						          e.printStackTrace();
-						      }
-								return bean2;
-				 }
+				        }
+				          conn_mysql.close();
+				          
+				      	}catch (Exception e){
+				      		
+				          e.printStackTrace();
+				      }
+						return bean2;
+		 }
+	
 		// QnA 답변달기용 
-		 public boolean UpdateAction_QnA() {
+		public boolean UpdateAction_QnA() {
 				
 		PreparedStatement ps = null;
 				
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-				    Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
-				    Statement stmt_mysql = conn_mysql.createStatement();
-				    
-				    String Query00 = "UPDATE QnA set aContents = ?, aDate = ?";
-				    String Query01 = "WHERE sEmail = ? And qDate = ? ";
-				    
-				    ps = conn_mysql.prepareStatement(Query00+Query01);
-				    
-				    ps.setString(1, QnA_aContents);
-				    ps.setString(2, "curdate()");
-				    ps.setString(3, QnA_sEmail.trim());
-				    ps.setString(4, QnA_qDate.trim());
-				    ps.executeUpdate();
-				    
-				    
-				    conn_mysql.close();
-				    
-				    
-				} catch (Exception e) {
-					e.printStackTrace();
-					return false;
-				}
-				return true;
-			}//
-				 
- 
-		 
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			    Connection conn_mysql = DriverManager.getConnection(ShareVarTest.url_mysql, ShareVarTest.id_mysql, ShareVarTest.pw_mysql);
+			    Statement stmt_mysql = conn_mysql.createStatement();
+			    
+			    String Query00 = "UPDATE QnA set aContents = ?, aDate = ?";
+			    String Query01 = "WHERE sEmail = ? And qDate = ? ";
+			    
+			    ps = conn_mysql.prepareStatement(Query00+Query01);
+			    
+			    ps.setString(1, QnA_aContents);
+			    ps.setString(2, "curdate()");
+			    ps.setString(3, QnA_sEmail.trim());
+			    ps.setString(4, QnA_qDate.trim());
+			    ps.executeUpdate();
+			    
+			    
+			    conn_mysql.close();
+			    
+			    
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			return true;
+		}//
 		 
 		 
 	}

@@ -3,7 +3,7 @@ package com.javaproject.teacherpage;
 public class Bean_TeacherClass {
 
 	
-	// Field
+	// Field * * * * * *
 
 	int cId;
 	String cName;
@@ -11,6 +11,7 @@ public class Bean_TeacherClass {
 	String cLocation;
 	int attendCount;
 	String cTime;
+	
 	// Mypage 사용하기 위한 bean 값
 	String tName;
 	String tNickName;
@@ -19,53 +20,10 @@ public class Bean_TeacherClass {
 	int Score;
 	int ClassCount;
 	
-	// Constructor
+	// Constructor * * * * * *
 	
-	
-	public int getScore() {
-		return Score;
-	}
-
-
-
-
-	public int getAttendCount() {
-		return attendCount;
-	}
-
-
-
-
-	public void setAttendCount(int attendCount) {
-		this.attendCount = attendCount;
-	}
-
-
-
-
-	public int getClassCount() {
-		return ClassCount;
-	}
-
-
-
-
-	public void setClassCount(int classCount) {
-		ClassCount = classCount;
-	}
-
-
-
-
-	public void setScore(int score) {
-		Score = score;
-	}
-
-
 	public Bean_TeacherClass() {
 	}
-
-
 	public Bean_TeacherClass(int cId, String cName, String cDate, String cLocation) {
 		super();
 		this.cId = cId;
@@ -82,12 +40,6 @@ public class Bean_TeacherClass {
 		this.tTelNo = tTelNo;
 	}
 	
-	
-	
-	
-	
-	
-	
 	public Bean_TeacherClass(String cName, String cDate, String cLocation, String cTime, String tName) {
 		super();
 		this.cName = cName;
@@ -97,54 +49,60 @@ public class Bean_TeacherClass {
 		this.tName = tName;
 	}
 
-	// Method
-	
-	public String getcTime() {
-		return cTime;
-	}
-	
-	public void setcTime(String cTime) {
-		this.cTime = cTime;
-	}
-
-
 	public Bean_TeacherClass(int cId) {
 		super();
 		this.cId = cId;
 	}
-
+	
+	// Method * * * * * * *
+	public int getScore() {
+		return Score;
+	}
+	public int getAttendCount() {
+		return attendCount;
+	}
+	public void setAttendCount(int attendCount) {
+		this.attendCount = attendCount;
+	}
+	public int getClassCount() {
+		return ClassCount;
+	}
+	public void setClassCount(int classCount) {
+		ClassCount = classCount;
+	}
+	public void setScore(int score) {
+		Score = score;
+	}
+	public String getcTime() {
+		return cTime;
+	}
+	public void setcTime(String cTime) {
+		this.cTime = cTime;
+	}
 	public String gettName() {
 		return tName;
 	}
-
 	public void settName(String tName) {
 		this.tName = tName;
 	}
-
 	public String gettNickName() {
 		return tNickName;
 	}
-
 	public void settNickName(String tNickName) {
 		this.tNickName = tNickName;
 	}
-
 	public String gettEmail() {
 		return tEmail;
 	}
-
 	public void settEmail(String tEmail) {
 		this.tEmail = tEmail;
 	}
-
 	public String gettTelNo() {
 		return tTelNo;
 	}
-
 	public void settTelNo(String tTelNo) {
 		this.tTelNo = tTelNo;
 	}
-
 	public int getcId() {
 		return cId;
 	}

@@ -169,14 +169,14 @@ public class TeacherLectureDetail {
 		if (Inner_Table_Before == null) {
 			Inner_Table_Before = new JTable();
 			Inner_Table_Before.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			Inner_Table_Before.setModel(Outer_Table_Before);
+			Inner_Table_Before.setModel(Outer_Table_Before); // * * * * * * * * * * * * * * 하단 테이블 세팅
 		}
 		return Inner_Table_Before;
 	}
 	
 	// 수강 이력 테이블 초기화
 	 private void TableInitBefore(){
-
+	
 	     int k = Outer_Table_Before.getRowCount();
 	     
 	     Outer_Table_Before.addColumn("강의ID");
@@ -185,12 +185,12 @@ public class TeacherLectureDetail {
 	     Outer_Table_Before.addColumn("장소");
 	     Outer_Table_Before.setColumnCount(4);
 	     
-	     for(int j = 0 ; j < k ; j++){
-	       Outer_Table_Before.removeRow(0);
-	       }
-
-	     Inner_Table_Before.setAutoResizeMode(Inner_Table_Before.AUTO_RESIZE_OFF);
-
+		     for(int j = 0 ; j < k ; j++){
+		       Outer_Table_Before.removeRow(0);
+		       }
+	
+		     Inner_Table_Before.setAutoResizeMode(Inner_Table_Before.AUTO_RESIZE_OFF);
+	
 	     int vColIndex = 0;
 	     TableColumn col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
 	     int width = 40;
@@ -229,8 +229,9 @@ public class TeacherLectureDetail {
 		
 		
 	}
-//	 
-//	 // 수강 이력 데이터 불러오기
+
+	
+	 // 수강 이력 데이터 불러오기
 	 private void SearchActionBefore(){
 	     
 		 int cid = DbAction_List.classid;
@@ -238,12 +239,12 @@ public class TeacherLectureDetail {
 	     DbAction_List dbAction = new DbAction_List(cid);
 	     ArrayList<Bean_TeacherClass> beanList = dbAction.selectListBefore_Detail();
 	     int listCount = beanList.size();
-	     for(int i=0; i<listCount; i++) {
-	       String temp1 = Integer.toString(beanList.get(i).getcId());
-	       String[] qTxt = {temp1, beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation()};
-	       Outer_Table_Before.addRow(qTxt);
+		     for(int i=0; i<listCount; i++) {
+		       String temp1 = Integer.toString(beanList.get(i).getcId());
+		       String[] qTxt = {temp1, beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation()};
+		       Outer_Table_Before.addRow(qTxt);
 	     }
 
 	 }
-//	
+	 
 }
