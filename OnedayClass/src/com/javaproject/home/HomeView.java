@@ -93,6 +93,7 @@ public class HomeView {
 		}
 		return btnShowClass;
 	}
+	
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("첫번째 추천!");
@@ -106,7 +107,9 @@ public class HomeView {
 			btnRecOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//추천1
+					System.out.println(firstRecommndClassId);
 					ShareVar.cId = firstRecommndClassId;
+					System.out.println(ShareVar.cId);
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
 					frame.dispose();
@@ -129,6 +132,7 @@ public class HomeView {
 		}
 		return btnNewButton_9;
 	}
+	
 	private JButton getBtnNewButton_9_1() {
 		if (btnNewButton_9_1 == null) {
 			btnNewButton_9_1 = new JButton("My class");
@@ -138,14 +142,13 @@ public class HomeView {
 					StudentMyClass stumyclass = new StudentMyClass();
 					stumyclass.setVisible_StudentMyClass(true);
 					frame.dispose();
-					
-					//My class
 				}
 			});
 			btnNewButton_9_1.setBounds(49, 544, 222, 35);
 		}
 		return btnNewButton_9_1;
 	}
+	
 	private JButton getBtnNewButton_9_2() {
 		if (btnNewButton_9_2 == null) {
 			btnNewButton_9_2 = new JButton("Profile");
@@ -164,7 +167,6 @@ public class HomeView {
 	
 	//Method
 	int firstRecommndClassId;
-	int secondRecommandClassId;
 	
 	public void applyFirstRecommnd() {
 		DbHomeAction dbHomeAction = new DbHomeAction();
@@ -179,19 +181,7 @@ public class HomeView {
 		File file = new File(filePath);
 		file.delete();
 	}
-	
-//	public void applyTwoRecommnd() {
-//		DbHomeAction dbHomeAction = new DbHomeAction();
-//		HomeBean bean = dbHomeAction.recommandClassTwo();
-//		secondRecommandClassId = bean.getId();
-//		lblSecondRecClassName.setText(bean.getName());
-//		String filePath = Integer.toString(ShareVar.filename);
-//		btnRecTwo.setIcon(new ImageIcon(filePath));;
-//		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
-//		File file = new File(filePath);
-//		file.delete();
-//	}
-	
+		
 	public void setVisible_HomeView(boolean b) {
 		frame.setVisible(b);
 	}
@@ -201,18 +191,7 @@ public class HomeView {
 		searchView.setVisible_SearchView(true);
 		frame.dispose();
 	}
-//	public void segueMyClass() {
-//		SearchView searchView = new SearchView();
-//		searchView.setVisible_SearchView(true);
-//		frame.dispose();
-//	}
-	
-//	public void segueToProfile() {
-//		SearchView searchView = new SearchView();
-//		searchView.setVisible_SearchView(true);
-//		frame.dispose();
-//	}
-	
+
 	private JLabel getLblFirstRecClassName() {
 		if (lblFirstRecClassName == null) {
 			lblFirstRecClassName = new JLabel("New label");

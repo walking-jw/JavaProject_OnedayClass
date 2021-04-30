@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.classlist.DbAction;
 
 import javax.swing.ImageIcon;
@@ -119,7 +120,7 @@ public class AttendCheck {
 		 */
 		
 			private void ClassAttendAction() {
-				int cId = DbAction.classid;  // 화면을 계속 연결하기 위해 cid값 가져오기
+				int cId = ShareVar.cId;//int cId = DbAction.classid;  // 화면을 계속 연결하기 위해 cid값 가져오기
 				DbActionInfo dbActioninfo = new DbActionInfo(cId);
 				
 				boolean msg = dbActioninfo.AttendOk(); 

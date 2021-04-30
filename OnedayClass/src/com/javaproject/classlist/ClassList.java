@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.classinfo.Classinfo;
 import com.javaproject.home.HomeView;
 
@@ -109,8 +110,8 @@ public class ClassList {
 					/*/
 					 * 자세히보기
 					 */
-					DbAction.classid = ClassId();
-					
+					//DbAction.classid = ClassId();
+					ShareVar.cId = ClassId();
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
 					frame.dispose();

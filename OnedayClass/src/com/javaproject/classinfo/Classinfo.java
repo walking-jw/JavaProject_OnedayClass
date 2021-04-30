@@ -340,7 +340,8 @@ public class Classinfo {
 	// -> 해당 강의에 대한 세부정보 가져오기
 	public void ClassInfo() {
 		
-		int cid = DbAction.classid;
+//		int cid = DbAction.classid;
+		int cid = ShareVar.cId;
 		
 		DbActionInfo dbActioninfo = new DbActionInfo(cid);
 		Bean2 bean2 = dbActioninfo.ButtonClassInfo();

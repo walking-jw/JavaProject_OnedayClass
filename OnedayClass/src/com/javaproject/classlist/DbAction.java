@@ -16,7 +16,7 @@ public class DbAction {
 	public static final String id_mysql = ShareVar.id_mysql;
 	public static final String pw_mysql = ShareVar.pw_mysql;
 	public static String currentuser = ShareVar.currentuser;
-	public static int classid = ShareVar.cId;
+	//public static int classid = ShareVar.cId;
 		
 		
 		

@@ -17,6 +17,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.SwingConstants;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.classlist.DbAction;
 
 import javax.swing.JButton;
@@ -244,8 +245,8 @@ public class TeacherInfo_QnA {
 	
 	public void teacherInfo() {
 		
-		int cid = DbAction.classid;
-
+		//int cid = DbAction.classid;
+		int cid = ShareVar.cId;
 		DbActionInfo dbActioninfo = new DbActionInfo(cid);
 		Bean2 bean2 = dbActioninfo.teacherInfo();
 		

@@ -48,8 +48,6 @@ public class DbHomeAction {
 				while (input.read(buffer) > 0) {
 					output.write(buffer);
 				}
-				wkId = bean.getId();
-				wkName = bean.getName();
 				bean = new HomeBean(wkId, wkName);
 			}
 			conn_mysql.close();

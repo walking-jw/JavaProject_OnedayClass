@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.javaproject.base.ShareVar;
 import com.javaproject.classlist.DbAction;
 
 import javax.swing.JScrollPane;
@@ -194,8 +195,8 @@ public class ClassReview {
 		//강의 아이디를 통한 강의 후기 불러오기
 		//강의 후기 정보 불러오기
 			public void ClassReviewInfo() {
-				int cid = DbAction.classid;
-				
+				//int cid = DbAction.classid;
+				int cid = ShareVar.cId;
 				DbActionInfo dbActionInfo = new DbActionInfo(cid);
 				ArrayList<Bean2>  beanList =  dbActionInfo.ClassReview();
 
@@ -214,8 +215,8 @@ public class ClassReview {
 		
 		//해당 강의 후기 갯수 구하기
 			public void ValueCountReview() {
-				int cid = DbAction.classid;
-				
+				//int cid = DbAction.classid;
+				int cid = ShareVar.cId;
 				DbActionInfo dbActionInfo = new DbActionInfo(cid);
 				Bean2 valCountReview = dbActionInfo.CountReview();
 				
