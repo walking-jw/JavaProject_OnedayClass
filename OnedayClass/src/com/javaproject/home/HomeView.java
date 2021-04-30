@@ -193,9 +193,11 @@ public class HomeView {
 		HomeBean bean = dbHomeAction.recommandClassOne();
 		firstRecommndClassId = bean.getId();
 		lblFirstRecClassName.setText(bean.getName());
-		String filePath = Integer.toString(ShareVar.filename);
+		String filePath = Integer.toString(ShareVar.filename-1);
 		btnRecOne.setIcon(new ImageIcon(filePath));;
 		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
+		File file = new File(filePath);
+		file.delete();
 	}
 	
 	public void applyTwoRecommnd() {
@@ -206,6 +208,8 @@ public class HomeView {
 		String filePath = Integer.toString(ShareVar.filename);
 		btnRecTwo.setIcon(new ImageIcon(filePath));;
 		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
+		File file = new File(filePath);
+		file.delete();
 	}
 	
 	public void setVisible_HomeView(boolean b) {
