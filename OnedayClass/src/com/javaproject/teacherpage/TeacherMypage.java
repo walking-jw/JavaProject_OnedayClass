@@ -269,6 +269,60 @@ public class TeacherMypage {
 		}
 		return btn_Out;
 	}
+	private JPasswordField getTf_Password() {
+		if (tf_Password == null) {
+			tf_Password = new JPasswordField();
+			tf_Password.setBounds(267, 284, 206, 26);
+		}
+		return tf_Password;
+	}
+	private JPasswordField getTf_PasswordConfirm() {
+		if (tf_PasswordConfirm == null) {
+			tf_PasswordConfirm = new JPasswordField();
+			tf_PasswordConfirm.setBounds(267, 328, 206, 26);
+		}
+		return tf_PasswordConfirm;
+	}
+	
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setIcon(new ImageIcon("/Users/parkjw/Desktop/스크린샷 2021-04-30 오후 2.54.40.png"));
+			lblNewLabel.setBounds(20, 83, 155, 131);
+		}
+		return lblNewLabel;
+	}
+	private JButton getBtn_Logout() {
+		if (btn_Logout == null) {
+			btn_Logout = new JButton("로그아웃");
+			btn_Logout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ShareVar.currentuser = "";
+					JOptionPane.showMessageDialog(null, "로그아웃 되었습니다");
+					SignIn signin = new SignIn();
+					signin.setVisible_SignIn(true);
+					frame.dispose();
+					
+					
+					
+					
+				}
+			});
+			btn_Logout.setForeground(Color.BLUE);
+			btn_Logout.setBounds(41, 227, 117, 29);
+		}
+		return btn_Logout;
+	}
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("마 이 페 이 지");
+			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
+			lblNewLabel_1.setBounds(115, 28, 306, 32);
+		}
+		return lblNewLabel_1;
+	}
 	private JLabel getLbl_PassCheck() {
 		if (lbl_PassCheck == null) {
 			lbl_PassCheck = new JLabel("");
@@ -279,7 +333,7 @@ public class TeacherMypage {
 	}
 	private JButton getBtn_Out_1() {
 		if (btn_Out_1 == null) {
-			btn_Out_1 = new JButton("정보변경");
+			btn_Out_1 = new JButton("정보수정");
 			btn_Out_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -300,6 +354,8 @@ public class TeacherMypage {
 		return btn_Out_1;
 	}
 	
+	
+	//-----------------------------------Method
 	private String strPwdCheck() {
 		char[] str = tf_Password.getPassword();
 		String passString = new String(str);
@@ -324,39 +380,39 @@ public class TeacherMypage {
 		
 	}
 	
-public void Average() {
+	public void Average() {
+			
+			DbAction db = new DbAction();
+			Bean_TeacherClass bean = db.AverageScore();
+			
+			tf_AveragePoint.setText(Integer.toString(bean.getcId()));
+		}
+		
+	public void CounfOfQnA() {
 		
 		DbAction db = new DbAction();
-		Bean_TeacherClass bean = db.AverageScore();
+		Bean_QnA bean = db.CountOfQnA();
 		
-		tf_AveragePoint.setText(Integer.toString(bean.getcId()));
+		btn_QnA.setText(Integer.toString(bean.getCountOfQnA()) + " 개의 문의 확인");
 	}
 	
-public void CounfOfQnA() {
 	
-	DbAction db = new DbAction();
-	Bean_QnA bean = db.CountOfQnA();
 	
-	btn_QnA.setText(Integer.toString(bean.getCountOfQnA()) + " 개의 문의 확인");
-}
-
-
-
-public void CountOfClass() {
-	
-	DbAction db = new DbAction();
-	Bean_TeacherClass bean2 = db.CountOfClass();
-	btn_TeacherMyclass.setText(Integer.toString(bean2.getcId()) + " 개의 강의 확인");
-}
-	// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
-	private void ClearColumn() {
-		tf_Name.setText("");
-		tf_NickName.setText("");
-		tf_Email.setText("");
-		tf_Telno.setText("");
-		tf_Password.setText("");
-		tf_PasswordConfirm.setText("");
+	public void CountOfClass() {
+		
+		DbAction db = new DbAction();
+		Bean_TeacherClass bean2 = db.CountOfClass();
+		btn_TeacherMyclass.setText(Integer.toString(bean2.getcId()) + " 개의 강의 확인");
 	}
+		// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
+		private void ClearColumn() {
+			tf_Name.setText("");
+			tf_NickName.setText("");
+			tf_Email.setText("");
+			tf_Telno.setText("");
+			tf_Password.setText("");
+			tf_PasswordConfirm.setText("");
+		}
 
 	
 	// * * * * * * * * * * * * * * *마이페이지 수정 메소드 [2021.04.28, 00:44]
@@ -366,68 +422,15 @@ public void CountOfClass() {
 		String nickname = tf_NickName.getText().trim();
 		String email = tf_Email.getText().trim();
 		String telno = tf_Telno.getText().trim();
-		String password = tf_Password.getText().trim();
+		String password = strPwdCheck_Confirm();
 		
 		DbAction db = new DbAction(name, nickname, email, telno, password);
 		boolean msg = db.UpdateAction();
 		if (msg==true) {
-			JOptionPane.showMessageDialog(btn_Out, "정보가 수정되었습니다");
+			JOptionPane.showMessageDialog(null, "정보가 수정되었습니다");
 		}else {
-			JOptionPane.showInputDialog(this, "자료 수정 중 에러가 발생하였습니다");
+			JOptionPane.showMessageDialog(null,"자료 수정 중 에러가 발생하였습니다");
 		}
 		
-	}
-	private JPasswordField getTf_Password() {
-		if (tf_Password == null) {
-			tf_Password = new JPasswordField();
-			tf_Password.setBounds(267, 284, 206, 26);
-		}
-		return tf_Password;
-	}
-	private JPasswordField getTf_PasswordConfirm() {
-		if (tf_PasswordConfirm == null) {
-			tf_PasswordConfirm = new JPasswordField();
-			tf_PasswordConfirm.setBounds(267, 328, 206, 26);
-		}
-		return tf_PasswordConfirm;
-	}
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("");
-			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setIcon(new ImageIcon("/Users/parkjw/Desktop/스크린샷 2021-04-30 오후 2.54.40.png"));
-			lblNewLabel.setBounds(20, 83, 155, 131);
-		}
-		return lblNewLabel;
-	}
-	private JButton getBtn_Logout() {
-		if (btn_Logout == null) {
-			btn_Logout = new JButton("로그아웃");
-			btn_Logout.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					ShareVar.currentuser = "";
-					JOptionPane.showMessageDialog(null, "로그아웃 되었습니다");
-					SignIn signin = new SignIn();
-					signin.setVisible_SignIn(true);
-					frame.dispose();
-							
-					
-					
-					
-				}
-			});
-			btn_Logout.setForeground(Color.BLUE);
-			btn_Logout.setBounds(41, 227, 117, 29);
-		}
-		return btn_Logout;
-	}
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("마 이 페 이 지");
-			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
-			lblNewLabel_1.setBounds(115, 28, 306, 32);
-		}
-		return lblNewLabel_1;
 	}
 }

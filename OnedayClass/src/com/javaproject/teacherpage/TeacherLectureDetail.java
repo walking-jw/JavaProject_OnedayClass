@@ -16,6 +16,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class TeacherLectureDetail {
 
@@ -35,6 +37,7 @@ public class TeacherLectureDetail {
 	private JTable Inner_Table_Before;
 	private final DefaultTableModel Outer_Table_Before = new DefaultTableModel();     // * * * * * [0428, 14:51]
 	private JButton btnNewButton;
+	private JLabel lblNewLabel_3;
 	
 	public void setVisible_LectureListDetail(boolean i) {
 		frame.setVisible(true);
@@ -53,6 +56,7 @@ public class TeacherLectureDetail {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("금손양성소");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -78,19 +82,22 @@ public class TeacherLectureDetail {
 		frame.getContentPane().add(getScrollPane());
 		frame.getContentPane().add(getLblNewLabel_2());
 		frame.getContentPane().add(getBtnNewButton());
+		frame.getContentPane().add(getLblNewLabel_3());
 		
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("강의명");
-			lblNewLabel.setBounds(91, 122, 61, 16);
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel.setBounds(113, 72, 61, 16);
 		}
 		return lblNewLabel;
 	}
 	private JTextField getTf_cName() {
 		if (tf_cName == null) {
 			tf_cName = new JTextField();
-			tf_cName.setBounds(164, 117, 224, 26);
+			tf_cName.setEditable(false);
+			tf_cName.setBounds(186, 67, 224, 26);
 			tf_cName.setColumns(10);
 		}
 		return tf_cName;
@@ -98,67 +105,75 @@ public class TeacherLectureDetail {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("강사");
-			lblNewLabel_1.setBounds(91, 165, 61, 16);
+			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_1.setBounds(113, 124, 61, 16);
 		}
 		return lblNewLabel_1;
 	}
 	private JTextField getTf_tName() {
 		if (tf_tName == null) {
 			tf_tName = new JTextField();
+			tf_tName.setEditable(false);
 			tf_tName.setColumns(10);
-			tf_tName.setBounds(164, 160, 224, 26);
+			tf_tName.setBounds(186, 119, 138, 26);
 		}
 		return tf_tName;
 	}
 	private JLabel getLblNewLabel_1_1() {
 		if (lblNewLabel_1_1 == null) {
 			lblNewLabel_1_1 = new JLabel("장소");
-			lblNewLabel_1_1.setBounds(91, 215, 61, 16);
+			lblNewLabel_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_1_1.setBounds(113, 173, 61, 16);
 		}
 		return lblNewLabel_1_1;
 	}
 	private JTextField getTf_cLocation() {
 		if (tf_cLocation == null) {
 			tf_cLocation = new JTextField();
+			tf_cLocation.setEditable(false);
 			tf_cLocation.setColumns(10);
-			tf_cLocation.setBounds(164, 210, 224, 26);
+			tf_cLocation.setBounds(186, 168, 138, 26);
 		}
 		return tf_cLocation;
 	}
 	private JLabel getLblNewLabel_1_1_1() {
 		if (lblNewLabel_1_1_1 == null) {
 			lblNewLabel_1_1_1 = new JLabel("강의시간");
-			lblNewLabel_1_1_1.setBounds(91, 269, 61, 16);
+			lblNewLabel_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_1_1_1.setBounds(113, 227, 61, 16);
 		}
 		return lblNewLabel_1_1_1;
 	}
 	private JTextField getTf_cTime() {
 		if (tf_cTime == null) {
 			tf_cTime = new JTextField();
+			tf_cTime.setEditable(false);
 			tf_cTime.setColumns(10);
-			tf_cTime.setBounds(164, 264, 224, 26);
+			tf_cTime.setBounds(186, 222, 61, 26);
 		}
 		return tf_cTime;
 	}
 	private JLabel getLblNewLabel_1_1_1_1() {
 		if (lblNewLabel_1_1_1_1 == null) {
 			lblNewLabel_1_1_1_1 = new JLabel("날짜");
-			lblNewLabel_1_1_1_1.setBounds(91, 320, 61, 16);
+			lblNewLabel_1_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_1_1_1_1.setBounds(113, 280, 61, 16);
 		}
 		return lblNewLabel_1_1_1_1;
 	}
 	private JTextField getTf_cDate() {
 		if (tf_cDate == null) {
 			tf_cDate = new JTextField();
+			tf_cDate.setEditable(false);
 			tf_cDate.setColumns(10);
-			tf_cDate.setBounds(164, 315, 224, 26);
+			tf_cDate.setBounds(186, 275, 192, 26);
 		}
 		return tf_cDate;
 	}
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(43, 395, 469, 145);
+			scrollPane.setBounds(45, 385, 469, 145);
 			scrollPane.setViewportView(getInner_Table_Before());
 		}
 		return scrollPane;
@@ -166,7 +181,9 @@ public class TeacherLectureDetail {
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("후기");
-			lblNewLabel_2.setBounds(43, 367, 61, 16);
+			lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_2.setBounds(45, 357, 61, 16);
 		}
 		return lblNewLabel_2;
 	}
@@ -178,15 +195,38 @@ public class TeacherLectureDetail {
 		}
 		return Inner_Table_Before;
 	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("닫기");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					TeacherLectureList myClass = new TeacherLectureList();
+					myClass.setVisible_LectureList(true);
+					frame.dispose();
+					
+				}
+			});
+			btnNewButton.setBounds(395, 552, 117, 29);
+		}
+		return btnNewButton;
+	}
+	private JLabel getLblNewLabel_3() {
+		if (lblNewLabel_3 == null) {
+			lblNewLabel_3 = new JLabel("시간");
+			lblNewLabel_3.setBounds(247, 228, 35, 16);
+		}
+		return lblNewLabel_3;
+	}
 	
 	// 수강 이력 테이블 초기화
 	 private void TableInitBefore(){
 	
 	     int k = Outer_Table_Before.getRowCount();
 	     
-	     Outer_Table_Before.addColumn("강의ID");
+	     Outer_Table_Before.addColumn("No.");
 	     Outer_Table_Before.addColumn("강의명");
-	     Outer_Table_Before.addColumn("수강날짜");
+	     Outer_Table_Before.addColumn("강의날짜");
 	     Outer_Table_Before.addColumn("장소");
 	     Outer_Table_Before.setColumnCount(4);
 	     
@@ -252,20 +292,4 @@ public class TeacherLectureDetail {
 
 	 }
 	 
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("닫기");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					TeacherLectureList myClass = new TeacherLectureList();
-					myClass.setVisible_LectureList(true);
-					frame.dispose();
-					
-				}
-			});
-			btnNewButton.setBounds(395, 552, 117, 29);
-		}
-		return btnNewButton;
-	}
 }
