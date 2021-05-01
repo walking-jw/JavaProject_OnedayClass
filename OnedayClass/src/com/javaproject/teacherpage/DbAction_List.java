@@ -242,7 +242,7 @@ import com.javaproject.base.ShareVar;
 		
 			 ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
 		     
-		     String Query00 = "SELECT sEmail, qDate, qContents FROM QnA ";
+		     String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
 		     String Query01 = "WHERE aContents is not null AND tEmail = " + ShareVar.currentuser;		
 		     try{
 		         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -256,8 +256,9 @@ import com.javaproject.base.ShareVar;
 		           String wksEmail = rs.getString(1);
 		           String wkqDate = rs.getString(2);
 		           String wkqContents = rs.getString(3);
+		           String wkaContents = rs.getString(4);
 		           
-		           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents);
+		           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
 		           beanList.add(bean);
 		
 		         }

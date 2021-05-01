@@ -201,7 +201,8 @@ public class TeacherQnA_List {
 			     Outer_Table_AnswerOK.addColumn("질문자");
 			     Outer_Table_AnswerOK.addColumn("질문날짜");
 			     Outer_Table_AnswerOK.addColumn("질문내용");
-			     Outer_Table_AnswerOK.setColumnCount(3);
+			     Outer_Table_AnswerOK.addColumn("답변내용");
+			     Outer_Table_AnswerOK.setColumnCount(4);
 
 				       for(int j = 0 ; j < i ; j++){
 				           Outer_Table_AnswerOK.removeRow(0);
@@ -222,6 +223,11 @@ public class TeacherQnA_List {
 					       
 					       vColIndex = 2;
 					       col = Inner_Table_AnswerOK.getColumnModel().getColumn(vColIndex);
+					       width = 200;
+					       col.setPreferredWidth(width);
+					       
+					       vColIndex = 3;
+					       col = Inner_Table_AnswerOK.getColumnModel().getColumn(vColIndex);
 					       width = 300;
 					       col.setPreferredWidth(width);
 			 }
@@ -232,7 +238,7 @@ public class TeacherQnA_List {
 		     ArrayList<Bean_QnA> beanList = dbAction_List.selectList_QnA_OK();
 		     int listCount = beanList.size();
 		     for(int i=0; i<listCount; i++) {
-		       String[] qTxt = {beanList.get(i).getsEmail(), beanList.get(i).getqDate(), beanList.get(i).getqContents()};
+		       String[] qTxt = {beanList.get(i).getsEmail(), beanList.get(i).getqDate(), beanList.get(i).getqContents(), beanList.get(i).getaContents()};
 		       Outer_Table_AnswerOK.addRow(qTxt);
 		     }
 	 }

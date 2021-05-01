@@ -329,16 +329,19 @@ public class TeacherMypage {
 			btn_Out_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					if(strPwdCheck().equals(strPwdCheck_Confirm())) {
+					int trigger = EmptyCheck();
+					
+					if(strPwdCheck().equals(strPwdCheck_Confirm()) && trigger == 0 ) {
 						UpdateAction_Mypage();
 						ClearColumn();
 						DBtoClass();
 						lbl_PassCheck.setText("");
-					}else{
+					}else if(trigger>=1) {
+						lbl_PassCheck.setText("정보를 확인해주세요");
+					}
+					else{
 						lbl_PassCheck.setText("비밀번호가 일치하지 않습니다");
 					}
-//					
-					
 				}
 			});
 			btn_Out_1.setBounds(373, 515, 140, 29);
@@ -396,15 +399,16 @@ public class TeacherMypage {
 		Bean_TeacherClass bean2 = db.CountOfClass();
 		btn_TeacherMyclass.setText(Integer.toString(bean2.getcId()) + " 개의 강의 확인");
 	}
-		// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
-		private void ClearColumn() {
-			tf_Name.setText("");
-			tf_NickName.setText("");
-			tf_Email.setText("");
-			tf_Telno.setText("");
-			tf_Password.setText("");
-			tf_PasswordConfirm.setText("");
-		}
+	
+	// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
+	private void ClearColumn() {
+		tf_Name.setText("");
+		tf_NickName.setText("");
+		tf_Email.setText("");
+		tf_Telno.setText("");
+		tf_Password.setText("");
+		tf_PasswordConfirm.setText("");
+	}
 
 	
 	// * * * * * * * * * * * * * * *마이페이지 수정 메소드 [2021.04.28, 00:44]
@@ -433,4 +437,40 @@ public class TeacherMypage {
 		}
 		return lblNewLabel_1;
 	}
+	
+	private int EmptyCheck() {
+		
+			int trigger = 0;
+			
+			String message = "를 확인해주세요!";
+			if(tf_Password.getText().trim().isEmpty()) {
+				message = "'비밀번호' " + message;
+				trigger++;
+				tf_Password.requestFocus();
+			}	
+			if(tf_Telno.getText().trim().isEmpty()) {
+				message = "'전화번호' " + message;
+				trigger++;
+				tf_Telno.requestFocus();
+			}	
+			if(tf_NickName.getText().trim().isEmpty()) {
+				message = "'닉네임' " + message;
+				trigger++;
+				tf_NickName.requestFocus();
+			}
+			if(tf_Name.getText().trim().isEmpty()) {
+				message = "'이름' " + message;
+				trigger++;
+				tf_Name.requestFocus();
+			}
+			
+			if(trigger>0) {
+				JOptionPane.showMessageDialog(null, message);
+			}
+			return trigger;
+	}
+	
+	
+	
+	
 }
