@@ -53,8 +53,9 @@ public class HomeView {
 		금손양성소.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				applyFirstRecommnd();
-				applySecondRecommnd();
+				//applyFirstRecommnd();
+				//applySecondRecommnd();
+				applyRecommend();
 			}
 		});
 		금손양성소.setBounds(100, 100, 560, 625);
@@ -215,34 +216,55 @@ public class HomeView {
 	private JButton btnRecTwo;
 	private JLabel lblNewLabel;
 	
-	public void applyFirstRecommnd() {
-		DbHomeAction dbHomeAction = new DbHomeAction();
-		HomeBean bean = dbHomeAction.recommandClassOne();
-		
-		firstRecommendClassId = bean.getId();
-		lblFirstRecClassName.setText(bean.getName());
-		
-		String filePath = Integer.toString(ShareVar.filename);
-		btnRecOne.setIcon(new ImageIcon(filePath));;
-		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
-		File file = new File(filePath);
-		file.delete();
-	}
+//	public void applyFirstRecommnd() {
+//		DbHomeAction dbHomeAction = new DbHomeAction();
+//		HomeBean bean = dbHomeAction.recommandClassOne();
+//		
+//		firstRecommendClassId = bean.getId();
+//		lblFirstRecClassName.setText(bean.getName());
+//		
+//		String filePath = Integer.toString(ShareVar.filename);
+//		btnRecOne.setIcon(new ImageIcon(filePath));;
+//		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
+//		File file = new File(filePath);
+//		file.delete();
+//	}
 	
-	public void applySecondRecommnd() {
+//	public void applySecondRecommnd() {
+//		DbHomeAction dbHomeAction = new DbHomeAction();
+//		HomeBean bean = dbHomeAction.recommandClassOne();
+//		
+//		secondRecommendClassId = bean.getId();
+//		lblSecondRecClassName.setText(bean.getName());
+//		
+//		String filePath = Integer.toString(ShareVar.filename);
+//		btnRecTwo.setIcon(new ImageIcon(filePath));;
+//		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
+//		File file = new File(filePath);
+//		file.delete();
+//	}
+		
+	public void applyRecommend() {
 		DbHomeAction dbHomeAction = new DbHomeAction();
-		HomeBean bean = dbHomeAction.recommandClassOne();
+		ArrayList<HomeBean> beanList = dbHomeAction.recommendClass();
+		firstRecommendClassId = beanList.get(0).getId();
+		secondRecommendClassId = beanList.get(1).getId();
 		
-		secondRecommendClassId = bean.getId();
-		lblSecondRecClassName.setText(bean.getName());
+		lblFirstRecClassName.setText(beanList.get(0).getName());
+		lblSecondRecClassName.setText(beanList.get(1).getName());
 		
-		String filePath = Integer.toString(ShareVar.filename);
-		btnRecTwo.setIcon(new ImageIcon(filePath));;
+		String filePath1 = Integer.toString(ShareVar.filename - 1);
+		btnRecOne.setIcon(new ImageIcon(filePath1));;
+		btnRecOne.setHorizontalAlignment(SwingConstants.CENTER);
+		File file1 = new File(filePath1);
+		file1.delete();
+		
+		String filePath2 = Integer.toString(ShareVar.filename);
+		btnRecTwo.setIcon(new ImageIcon(filePath2));;
 		btnRecTwo.setHorizontalAlignment(SwingConstants.CENTER);
-		File file = new File(filePath);
-		file.delete();
+		File file2 = new File(filePath2);
+		file2.delete();
 	}
-		
 	public void setVisible_HomeView(boolean b) {
 		금손양성소.setVisible(b);
 	}
