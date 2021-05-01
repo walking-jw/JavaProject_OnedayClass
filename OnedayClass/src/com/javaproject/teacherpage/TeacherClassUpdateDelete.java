@@ -365,7 +365,7 @@ import java.awt.event.WindowEvent;
 		private JComboBox getCbCategory() {
 			if (cbCategory == null) {
 				cbCategory = new JComboBox();
-				cbCategory.setModel(new DefaultComboBoxModel(new String[] {"요리", "베이킹", "미술", "코딩", "사진", "어학", "상식", "공예"}));
+				cbCategory.setModel(new DefaultComboBoxModel(new String[] {"요리", "베이킹", "수공예", "프로그래밍", "사진", "플라워", "뷰티", "미술"}));
 				cbCategory.setBounds(140, 239, 148, 27);
 			}
 			return cbCategory;
