@@ -64,7 +64,7 @@ import com.javaproject.base.ShareVar;
 		 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
 	     
 	     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
-	     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cName not in (select cName from Class where cDate <= curdate()) ";
+	     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cDate not in (select cDate from Class where cDate <= curdate()) ";
 	     String QueryC = "and tEmail = " + ShareVar.currentuser;		
 	     String QueryD = " and r.cCloseDate is null ";
 	     
@@ -132,14 +132,14 @@ import com.javaproject.base.ShareVar;
 	     return beanList;
 	 }
 		 
-		 // 수강 세부사항에서 불러오기 (테이블로) - TeacherLectureDetail
+		 // 후기내용 불러오기 (테이블로) - TeacherLectureDetail
 		 public ArrayList<Bean_TeacherClass> selectListBefore_Detail() {
 		   
 			 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
 		     
-		     String QueryA = "select c.cId, c.cName, c.cDate, concat(cLocation1, ' ', cLocation2) ";
-		     String QueryB = "from Class as c, Register as r where c.cId = r.cId and cDate not in (select cDate from Class where cDate >= curdate()) ";
-		     String QueryC = "and c.cId = " + cId;
+		     String QueryA = "SELECT cReviewRegisterDate, cScore, cReview FROM Attend, Class WHERE Class.cId = Attend.cId ";
+		     String QueryB = "AND Attend.cReviewRegisterDate is not null AND Attend.cReviewDeleteDate is null ";
+		     String QueryC = "and Class.cId = " + cId;
 		  
 		     try{
 		       Class.forName("com.mysql.cj.jdbc.Driver");
@@ -150,12 +150,11 @@ import com.javaproject.base.ShareVar;
 		       
 		       while(rs.next()){
 		           
-		               int wkcId = rs.getInt(1);
-		               String wkcName = rs.getString(2);
-		               String wktcDate = rs.getString(3);
-		               String wkcLocation = rs.getString(4);
+		               String wkcReviewRegisterDate= rs.getString(1);
+		               int wkcScore = rs.getInt(2);
+		               String wkcReview = rs.getString(3);
 		           
-		               Bean_TeacherClass bean = new Bean_TeacherClass(wkcId, wkcName, wktcDate, wkcLocation);
+		               Bean_TeacherClass bean = new Bean_TeacherClass(wkcReviewRegisterDate, wkcScore, wkcReview);
 		           beanList.add(bean);
 		           
 		       }
