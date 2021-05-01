@@ -56,7 +56,7 @@ public class TeacherLectureDetail {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("금손양성소");
+		frame.setTitle("강의정보");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -181,7 +181,6 @@ public class TeacherLectureDetail {
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("후기");
-			lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			lblNewLabel_2.setBounds(45, 357, 61, 16);
 		}
@@ -207,7 +206,7 @@ public class TeacherLectureDetail {
 					
 				}
 			});
-			btnNewButton.setBounds(395, 552, 117, 29);
+			btnNewButton.setBounds(395, 542, 117, 29);
 		}
 		return btnNewButton;
 	}
