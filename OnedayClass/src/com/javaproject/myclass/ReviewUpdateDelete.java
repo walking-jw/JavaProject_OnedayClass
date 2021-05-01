@@ -217,7 +217,7 @@ public class ReviewUpdateDelete {
 	 // Review를 삭제하는 메소드
 	 private void ReviewDeleteAction() {
 		 
-		 int result = JOptionPane.showConfirmDialog(null, "후기를 삭제하시겠습니까?", "후기 삭제", JOptionPane.YES_NO_OPTION);
+		 int result = JOptionPane.showConfirmDialog(null, "후기를 삭제하시겠습니까?", "후기 삭제", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		 if(result==JOptionPane.YES_OPTION) {
 		 int id = MyClassDbAction.ccId;
 

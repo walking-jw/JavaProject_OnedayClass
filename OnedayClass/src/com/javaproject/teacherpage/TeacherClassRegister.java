@@ -417,7 +417,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		}
 		
 		if(check>0) {
-			JOptionPane.showMessageDialog(null, message);
+			JOptionPane.showMessageDialog(null, message, "추가 정보 기입", JOptionPane.WARNING_MESSAGE);
 		}
 		
 		return check;

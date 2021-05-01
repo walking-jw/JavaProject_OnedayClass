@@ -421,9 +421,9 @@ import java.awt.event.WindowEvent;
 	        	
 		        if(bean.getcCount()>0) {
 		        	JOptionPane.showMessageDialog(null, "수강 인원이 1명 이상이기 때문에 폐강할 수 없습니다!\n폐강을 원하시면 강의를 신청한 수강생에게 연락해\n수강 취소를 요청한 후, 다시 시도해주세요!" ,"폐강 불가!", 
-	        				   JOptionPane.INFORMATION_MESSAGE);
+	        				   JOptionPane.ERROR_MESSAGE);
 		        }else {
-		        	int result = JOptionPane.showConfirmDialog(null, "강의를 폐강하시겠습니까?\nYes버튼 클릭 시 강의가 폐강됩니다.", "강의 폐강", JOptionPane.YES_NO_OPTION);
+		        	int result = JOptionPane.showConfirmDialog(null, "강의를 폐강하시겠습니까?\nYes버튼 클릭 시 강의가 폐강됩니다.", "강의 폐강", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if(result==JOptionPane.YES_OPTION) {
 		        	boolean aaa = dbaction.DeleteAction();
 				    if(aaa == true) {
@@ -514,7 +514,7 @@ import java.awt.event.WindowEvent;
 				}
 				
 				if(check>0) {
-					JOptionPane.showMessageDialog(null, message);
+					JOptionPane.showMessageDialog(null, message, "추가 정보 기입", JOptionPane.WARNING_MESSAGE);
 				}
 				
 				return check;

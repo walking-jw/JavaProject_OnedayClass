@@ -347,7 +347,7 @@ import java.awt.event.ActionEvent;
 		
 		 // 수강 신청 취소하기
 		 private void CancleClick() {
-			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강 취소", JOptionPane.YES_NO_OPTION);
+			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강 취소", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			  if(result==JOptionPane.YES_OPTION) {
 				  try {
 
