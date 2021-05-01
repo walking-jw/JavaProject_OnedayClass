@@ -40,7 +40,7 @@ public class DbSearchAction {
  
 		String WhereDefault = "select cName, cCategory, concat(cLocation1, ' ',cLocation2), cDate from Class where " + conditionQueryColumn;
 		String WhereDefault2 = " like '%" + searching + "%'";
-		String WhereDefault3 = "and cDate >= curdate()";
+		String WhereDefault3 = " and cid in (select cid from Register where cCloseDate is null) and cDate >= curdate()";
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);

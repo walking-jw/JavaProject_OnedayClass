@@ -28,7 +28,7 @@ public class DbHomeAction {
 
 	public HomeBean recommandClassOne() {
 		HomeBean bean = null;
-		String WhereDefault = "SELECT cId,cName,cImg FROM class WHERE cDate >= curdate() ORDER BY rand() LIMIT 1";
+		String WhereDefault = "SELECT cId,cName,cImg FROM class WHERE cDate >= curdate() AND cid in (select cid from Register where cCloseDate is null) ORDER BY rand() LIMIT 1";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
