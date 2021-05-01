@@ -43,15 +43,10 @@ import java.awt.event.ActionEvent;
 		private JButton btnDetail;
 		private JButton btn_Update_n_Delete;
 		private JButton btn_ToMypage;
-
-
 		
 		public void setVisible_LectureList(boolean i) {
 			frame.setVisible(true);
-			
 		}
-		
-		
 	
 		/**
 		 * Create the application.
@@ -214,7 +209,24 @@ import java.awt.event.ActionEvent;
 			return btn_Update_n_Delete;
 		}
 		
-	// MeThod ***************************************************************
+		// 이전 페이지로 돌아가기
+		private JButton getBtn_ToMypage() {
+			if (btn_ToMypage == null) {
+				btn_ToMypage = new JButton("닫기");
+				btn_ToMypage.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						TeacherMypage tm = new TeacherMypage();
+						tm.setVisible_TeacherMypage(true);
+						frame.dispose();
+						
+					}
+				});
+				btn_ToMypage.setBounds(445, 548, 86, 29);
+			}
+			return btn_ToMypage;
+		}
+	// Method * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 	
 	// 메인과 해당 창을 연결하는 메소드
 	public void setVisible_StudentMyClass(boolean j) {
@@ -345,21 +357,4 @@ import java.awt.event.ActionEvent;
 			return inSequence;
 	  }
 	
-	// 이전 페이지로 돌아가기
-	private JButton getBtn_ToMypage() {
-		if (btn_ToMypage == null) {
-			btn_ToMypage = new JButton("닫기");
-			btn_ToMypage.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					TeacherMypage tm = new TeacherMypage();
-					tm.setVisible_TeacherMypage(true);
-					frame.dispose();
-					
-				}
-			});
-			btn_ToMypage.setBounds(445, 548, 86, 29);
-		}
-		return btn_ToMypage;
-	}
 } //

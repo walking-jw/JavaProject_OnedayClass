@@ -219,6 +219,7 @@ public class TeacherLectureDetail {
 		return lblNewLabel_3;
 	}
 	
+	// Method * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 	// 수강 이력 테이블 초기화
 	 private void TableInitBefore(){
 	
@@ -269,7 +270,6 @@ public class TeacherLectureDetail {
 		
 	}
 
-	
 	 // 후기 데이터 불러오기
 	 private void SearchActionBefore(){
 	     

@@ -48,17 +48,17 @@ import com.javaproject.base.ShareVar;
 	 public DbAction_List(String cName) {
 		super();
 		this.cName = cName;
-	}
+	 }
 
-	public DbAction_List(int cId) {
+	 public DbAction_List(int cId) {
 		 super();
 		 this.cId = cId;
-	}
+	 }
 	
-	// Method * * * * * * * * * * * * * * * * * * * * * * * * * *
+	 // Method * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 
 
-	// 수강 예정인 데이터를 TeacherLectureList 상단 테이블로 mysql에서 불러오는 메소드
+	 // 수강 예정인 데이터를 TeacherLectureList 상단 테이블로 mysql에서 불러오는 메소드
 	 public ArrayList<Bean_TeacherClass> selectListAfter() {
 	    
 		 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
@@ -132,208 +132,203 @@ import com.javaproject.base.ShareVar;
 	     return beanList;
 	 }
 		 
-		 // 후기내용 불러오기 (테이블로) - TeacherLectureDetail
-		 public ArrayList<Bean_TeacherClass> selectListBefore_Detail() {
-		   
-			 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
-		     
-		     String QueryA = "SELECT cReviewRegisterDate, cScore, cReview FROM Attend, Class WHERE Class.cId = Attend.cId ";
-		     String QueryB = "AND Attend.cReviewRegisterDate is not null AND Attend.cReviewDeleteDate is null ";
-		     String QueryC = "and Class.cId = " + cId;
-		  
-		     try{
-		       Class.forName("com.mysql.cj.jdbc.Driver");
-		       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-		       Statement stmt_mysql = conn_mysql.createStatement();
-		       
-		       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC );
-		       
-		       while(rs.next()){
-		           
-		               String wkcReviewRegisterDate= rs.getString(1);
-		               int wkcScore = rs.getInt(2);
-		               String wkcReview = rs.getString(3);
-		           
-		               Bean_TeacherClass bean = new Bean_TeacherClass(wkcReviewRegisterDate, wkcScore, wkcReview);
-		           beanList.add(bean);
-		           
-		       }
-		       conn_mysql.close();
-		       
-		     }
-		     catch (Exception e){
-		       e.printStackTrace();
-		     }
-		     return beanList;
-		 }
+	 // 후기내용 불러오기 (테이블로) - TeacherLectureDetail
+	 public ArrayList<Bean_TeacherClass> selectListBefore_Detail() {
+	   
+		 ArrayList<Bean_TeacherClass> beanList = new ArrayList<Bean_TeacherClass>();
+	     
+	     String QueryA = "SELECT cReviewRegisterDate, cScore, cReview FROM Attend, Class WHERE Class.cId = Attend.cId ";
+	     String QueryB = "AND Attend.cReviewRegisterDate is not null AND Attend.cReviewDeleteDate is null ";
+	     String QueryC = "and Class.cId = " + cId;
+	  
+	     try{
+	       Class.forName("com.mysql.cj.jdbc.Driver");
+	       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+	       Statement stmt_mysql = conn_mysql.createStatement();
+	       
+	       ResultSet rs = stmt_mysql.executeQuery(QueryA + QueryB + QueryC );
+	       
+	       while(rs.next()){
+	           
+	               String wkcReviewRegisterDate= rs.getString(1);
+	               int wkcScore = rs.getInt(2);
+	               String wkcReview = rs.getString(3);
+	           
+	               Bean_TeacherClass bean = new Bean_TeacherClass(wkcReviewRegisterDate, wkcScore, wkcReview);
+	           beanList.add(bean);
+	           
+	       }
+	       conn_mysql.close();
+	       
+	     }
+	     catch (Exception e){
+	       e.printStackTrace();
+	     }
+	     return beanList;
+	 }
 		 
-		 public Bean_TeacherClass ButtonClassInfo() {
-				Bean_TeacherClass bean2 = null;   
+	 public Bean_TeacherClass ButtonClassInfo() {
+			Bean_TeacherClass bean2 = null;   
 
-				String WhereDefault1 = "select c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cTime, c.cDate ";
-				String WhereDefault2 = "from Class as c, Teacher as t , Register as r "; 
-				String WhereDefault3 = " where c.cId = r.cId and t.tEmail = r.tEmail and c.cId = " ;
-				      
-					try{
-						Class.forName("com.mysql.cj.jdbc.Driver");
-				        Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-				        Statement stmt_mysql = conn_mysql.createStatement();
+			String WhereDefault1 = "select c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cTime, c.cDate ";
+			String WhereDefault2 = "from Class as c, Teacher as t , Register as r "; 
+			String WhereDefault3 = " where c.cId = r.cId and t.tEmail = r.tEmail and c.cId = " ;
+			      
+				try{
+					Class.forName("com.mysql.cj.jdbc.Driver");
+			        Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+			        Statement stmt_mysql = conn_mysql.createStatement();
 
-				        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 + WhereDefault3+ cId);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
+			        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 + WhereDefault3+ cId);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
 
-				        while(rs.next()){
-				    
-				        	String wkcName =(rs.getString(1));
-				        	String wktName =(rs.getString(2));
-				        	String wkcLocation =(rs.getString(3));
-				        	String wkcTime =(rs.getString(4));
-				        	String wkcDate =(rs.getString(5));
-				        
-				          	bean2 = new Bean_TeacherClass(wkcName, wktName, wkcLocation, wkcTime, wkcDate);
+			        while(rs.next()){
+			    
+			        	String wkcName =(rs.getString(1));
+			        	String wktName =(rs.getString(2));
+			        	String wkcLocation =(rs.getString(3));
+			        	String wkcTime =(rs.getString(4));
+			        	String wkcDate =(rs.getString(5));
+			        
+			          	bean2 = new Bean_TeacherClass(wkcName, wktName, wkcLocation, wkcTime, wkcDate);
 
-				        }
-				          conn_mysql.close();
-				          
-				      	}catch (Exception e){
-				      		
-				          e.printStackTrace();
-				      }
-						return bean2;
-		 }
+			        }
+			          conn_mysql.close();
+			          
+			      	}catch (Exception e){
+			      		
+			          e.printStackTrace();
+			      }
+					return bean2;
+	 }
 		 
 		 
-		// QnA 리스트 불러오는 메소드 ( 답변을 아직 달지 않은 리스트만 조회하기)
-				 public ArrayList<Bean_QnA> selectList_QnA() {
-				     ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
-				     
-				     
-				     
-				     String Query00 = "SELECT sEmail, qDate, qContents FROM QnA ";
-				     String Query01 = "WHERE aContents is null AND tEmail = " + ShareVar.currentuser;		
-				     try{
-				         Class.forName("com.mysql.cj.jdbc.Driver");
-				         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-				         Statement stmt_mysql = conn_mysql.createStatement();
-				
-				         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
-				
-				         while(rs.next()){
-				
-				           String wksEmail = rs.getString(1);
-				           String wkqDate = rs.getString(2);
-				           String wkqContents = rs.getString(3);
-				           
-				           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents);
-				           beanList.add(bean);
-				
-				         }
-				         conn_mysql.close();
-				         
-				     }
-				     catch (Exception e){
-				         e.printStackTrace();
-				     }
-				     return beanList;
-				 }
-				 
-		 // QnA 리스트 불러오는 메소드 ( 답변 완료한 리스트)
-		 public ArrayList<Bean_QnA> selectList_QnA_OK() {
-		
-			 ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
-		     
-		     String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
-		     String Query01 = "WHERE aContents is not null AND tEmail = " + ShareVar.currentuser;		
-		     try{
-		         Class.forName("com.mysql.cj.jdbc.Driver");
-		         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-		         Statement stmt_mysql = conn_mysql.createStatement();
-		
-		         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
-		
-		         while(rs.next()){
-		
-		           String wksEmail = rs.getString(1);
-		           String wkqDate = rs.getString(2);
-		           String wkqContents = rs.getString(3);
-		           String wkaContents = rs.getString(4);
-		           
-		           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
-		           beanList.add(bean);
-		
-		         }
-		         conn_mysql.close();
-		         
-		     }
-		     catch (Exception e){
-		         e.printStackTrace();
-		     }
-		     return beanList;
-		 }
-		 
-		 // * * * * * * * * * * *
-		 public Bean_QnA selectList_QnA_Detail() {
-				Bean_QnA bean2 = null;   
+     // QnA 리스트 불러오는 메소드 ( 답변을 아직 달지 않은 리스트만 조회하기)
+	 public ArrayList<Bean_QnA> selectList_QnA() {
+	     ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
+	     
+	     String Query00 = "SELECT sEmail, qDate, qContents FROM QnA ";
+	     String Query01 = "WHERE aContents is null AND tEmail = " + ShareVar.currentuser;		
+	     try{
+	         Class.forName("com.mysql.cj.jdbc.Driver");
+	         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+	         Statement stmt_mysql = conn_mysql.createStatement();
 	
-				 String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
-			     String Query01 = "WHERE aContents is null AND tEmail = " + ShareVar.currentuser;	
-			     String Query02 = "AND sEmail like '" + sName + "'";
-				      
-					try{
-						Class.forName("com.mysql.cj.jdbc.Driver");
-				        Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-				        Statement stmt_mysql = conn_mysql.createStatement();
-
-				        ResultSet rs = stmt_mysql.executeQuery(Query00+Query01+Query02);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
-
-				        while(rs.next()){
-				    
-				           String wksEmail = rs.getString(1);
-				           String wkqDate = rs.getString(2);
-				           String wkqContents = rs.getString(3);
-				           String wkaContents = rs.getString(4);
-				        
-				           bean2 = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
-
-				        }
-				          conn_mysql.close();
-				          
-				      	}catch (Exception e){
-				      		
-				          e.printStackTrace();
-				      }
-						return bean2;
-		 }
+	         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
 	
-		// QnA 답변달기용 
-		public boolean UpdateAction_QnA() {
-				
-		PreparedStatement ps = null;
-				
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-			    Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-			    Statement stmt_mysql = conn_mysql.createStatement();
+	         while(rs.next()){
+	
+	           String wksEmail = rs.getString(1);
+	           String wkqDate = rs.getString(2);
+	           String wkqContents = rs.getString(3);
+	           
+	           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents);
+	           beanList.add(bean);
+	
+	         }
+	         conn_mysql.close();
+	         
+	     }
+	     catch (Exception e){
+	         e.printStackTrace();
+	     }
+	     return beanList;
+	 }
+			 
+	 // QnA 리스트 불러오는 메소드 ( 답변 완료한 리스트)
+	 public ArrayList<Bean_QnA> selectList_QnA_OK() {
+	
+		 ArrayList<Bean_QnA> beanList = new ArrayList<Bean_QnA>();
+	     
+	     String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
+	     String Query01 = "WHERE aContents is not null AND tEmail = " + ShareVar.currentuser;		
+	     try{
+	         Class.forName("com.mysql.cj.jdbc.Driver");
+	         Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+	         Statement stmt_mysql = conn_mysql.createStatement();
+	
+	         ResultSet rs = stmt_mysql.executeQuery(Query00 + Query01);
+	
+	         while(rs.next()){
+	
+	           String wksEmail = rs.getString(1);
+	           String wkqDate = rs.getString(2);
+	           String wkqContents = rs.getString(3);
+	           String wkaContents = rs.getString(4);
+	           
+	           Bean_QnA bean = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
+	           beanList.add(bean);
+	
+	         }
+	         conn_mysql.close();
+	         
+	     }
+	     catch (Exception e){
+	         e.printStackTrace();
+	     }
+	     return beanList;
+	 }
+	 
+	 // 답변을 달기 위해 질문 내용을 가져오는 메소드 --> TeacherQnA 에서 활용
+	 public Bean_QnA selectList_QnA_Detail() {
+			Bean_QnA bean2 = null;   
+
+			 String Query00 = "SELECT sEmail, qDate, qContents, aContents FROM QnA ";
+		     String Query01 = "WHERE aContents is null AND tEmail = " + ShareVar.currentuser;	
+		     String Query02 = "AND sEmail like '" + sName + "'";
+			      
+				try{
+					Class.forName("com.mysql.cj.jdbc.Driver");
+			        Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+			        Statement stmt_mysql = conn_mysql.createStatement();
+
+			        ResultSet rs = stmt_mysql.executeQuery(Query00+Query01+Query02);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
+
+			        while(rs.next()){
 			    
-			    String Query00 = "UPDATE QnA set aContents = ?, aDate = curdate() ";
-			    String Query01 = "WHERE sEmail = ? And qDate = ? ";
-			    
-			    ps = conn_mysql.prepareStatement(Query00+Query01);
-			    
-			    ps.setString(1, QnA_aContents);
-			    ps.setString(2, QnA_sEmail.trim());
-			    ps.setString(3, QnA_qDate.trim());
-			    ps.executeUpdate();
-			    
-			    
-			    conn_mysql.close();
-			    
-			    
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-			return true;
-		}//
-		 
-		 
-	}
+			           String wksEmail = rs.getString(1);
+			           String wkqDate = rs.getString(2);
+			           String wkqContents = rs.getString(3);
+			           String wkaContents = rs.getString(4);
+			        
+			           bean2 = new Bean_QnA(wksEmail, wkqDate, wkqContents, wkaContents);
+
+			        }
+			          conn_mysql.close();
+			          
+			      	}catch (Exception e){
+			      		
+			          e.printStackTrace();
+			      }
+					return bean2;
+	 }
+
+	// QnA 답변달기용 
+	public boolean UpdateAction_QnA() {
+			
+	PreparedStatement ps = null;
+			
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		    Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+		    Statement stmt_mysql = conn_mysql.createStatement();
+		    
+		    String Query00 = "UPDATE QnA set aContents = ?, aDate = curdate() ";
+		    String Query01 = "WHERE sEmail = ? And qDate = ? ";
+		    
+		    ps = conn_mysql.prepareStatement(Query00+Query01);
+		    
+		    ps.setString(1, QnA_aContents);
+		    ps.setString(2, QnA_sEmail.trim());
+		    ps.setString(3, QnA_qDate.trim());
+		    ps.executeUpdate();
+		    
+		    conn_mysql.close();
+		    
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}//
+	 
+}
