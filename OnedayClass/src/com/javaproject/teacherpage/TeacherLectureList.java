@@ -70,7 +70,7 @@ import java.awt.event.ActionEvent;
 					SearchActionBefore();
 				}
 			});
-			frame.setTitle("강의관리");
+			frame.setTitle("나의 강의");
 			frame.setBounds(100, 100, 560, 625);
 			frame.setLocationRelativeTo(frame);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
