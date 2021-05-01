@@ -147,6 +147,7 @@ public class TeacherLectureDetail {
 	private JTextField getTf_cTime() {
 		if (tf_cTime == null) {
 			tf_cTime = new JTextField();
+			tf_cTime.setHorizontalAlignment(SwingConstants.TRAILING);
 			tf_cTime.setEditable(false);
 			tf_cTime.setColumns(10);
 			tf_cTime.setBounds(186, 222, 61, 26);
@@ -223,11 +224,10 @@ public class TeacherLectureDetail {
 	
 	     int k = Outer_Table_Before.getRowCount();
 	     
-	     Outer_Table_Before.addColumn("No.");
-	     Outer_Table_Before.addColumn("강의명");
-	     Outer_Table_Before.addColumn("강의날짜");
-	     Outer_Table_Before.addColumn("장소");
-	     Outer_Table_Before.setColumnCount(4);
+	     Outer_Table_Before.addColumn("후기등록날짜");
+	     Outer_Table_Before.addColumn("별점");
+	     Outer_Table_Before.addColumn("후기내용");
+	     Outer_Table_Before.setColumnCount(3);
 	     
 		     for(int j = 0 ; j < k ; j++){
 		       Outer_Table_Before.removeRow(0);
@@ -237,22 +237,17 @@ public class TeacherLectureDetail {
 	
 	     int vColIndex = 0;
 	     TableColumn col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-	     int width = 40;
+	     int width = 120;
 	     col.setPreferredWidth(width);
 	 
 	     vColIndex = 1;
 	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-	     width = 200;
+	     width = 50;
 	     col.setPreferredWidth(width);
 	     
 	     vColIndex = 2;
 	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-	     width = 120;
-	     col.setPreferredWidth(width);
-	     
-	     vColIndex = 3;
-	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
-	     width = 150;
+	     width = 300;
 	     col.setPreferredWidth(width);
 	     
 	 }
@@ -275,7 +270,7 @@ public class TeacherLectureDetail {
 	}
 
 	
-	 // 수강 이력 데이터 불러오기
+	 // 후기 데이터 불러오기
 	 private void SearchActionBefore(){
 	     
 		 int cid = DbAction_List.classid;
@@ -284,8 +279,8 @@ public class TeacherLectureDetail {
 	     ArrayList<Bean_TeacherClass> beanList = dbAction.selectListBefore_Detail();
 	     int listCount = beanList.size();
 		     for(int i=0; i<listCount; i++) {
-		       String temp1 = Integer.toString(beanList.get(i).getcId());
-		       String[] qTxt = {temp1, beanList.get(i).getcName(), beanList.get(i).getcDate(), beanList.get(i).getcLocation()};
+		       String temp1 = Integer.toString(beanList.get(i).getcScore());
+		       String[] qTxt = {beanList.get(i).getcReviewRegisterDate(), temp1, beanList.get(i).getcReview()};
 		       Outer_Table_Before.addRow(qTxt);
 	     }
 
