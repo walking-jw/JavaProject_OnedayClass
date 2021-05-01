@@ -128,10 +128,10 @@ public class SearchView {
 	}
 	
 	private void tableInit() {
-		Outer_Table.addColumn("Order");
-		Outer_Table.addColumn("Name");
-		Outer_Table.addColumn("Phone");
-		Outer_Table.addColumn("Relation");
+		Outer_Table.addColumn("강의명");
+		Outer_Table.addColumn("카테고리");
+		Outer_Table.addColumn("장소");
+		Outer_Table.addColumn("날짜");
 		Outer_Table.setColumnCount(4);
 		int i = Outer_Table.getRowCount();
 		
