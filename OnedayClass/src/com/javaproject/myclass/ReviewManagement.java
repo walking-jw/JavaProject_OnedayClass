@@ -226,12 +226,12 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	       
 	       vColIndex = 2;
 	       col = Inner_Table_Incomplete.getColumnModel().getColumn(vColIndex);
-	       width = 200;
+	       width = 230;
 	       col.setPreferredWidth(width);
 
 	       vColIndex = 3;
 	       col = Inner_Table_Incomplete.getColumnModel().getColumn(vColIndex);
-	       width = 100;
+	       width = 125;
 	       col.setPreferredWidth(width);
 	}
 	
@@ -264,12 +264,12 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	     
 	     vColIndex = 2;
 	     col = Inner_Table_Complete.getColumnModel().getColumn(vColIndex);
-	     width = 200;
+	     width = 230;
 	     col.setPreferredWidth(width);
 	     
 	     vColIndex = 3;
 	     col = Inner_Table_Complete.getColumnModel().getColumn(vColIndex);
-	     width = 100;
+	     width = 125;
 	     col.setPreferredWidth(width);
 	 }
 	 
