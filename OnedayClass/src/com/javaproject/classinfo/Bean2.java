@@ -11,7 +11,7 @@ public class Bean2 {
 		String tTelNo;
 		String tEmail;
 		String qContents;
-		
+		String sName;
 		
 		//강의대한 세부정보
 		int cId;
@@ -26,9 +26,9 @@ public class Bean2 {
 		//이미지
 
 		
-		//강의 후기 sName  , cReview , cScore
+		//강의 후기 sEmail  , cReview , cScore
 		int cScore;
-		String sName;
+		String sEmail;
 		String cReview;
 		
 		////-----------------------------Constructor
@@ -79,11 +79,11 @@ public class Bean2 {
 		
 		
 		// 강의 후기 테이블
-		public Bean2(int cId,String cName, String cContents, int cScore) {
+		public Bean2(int cId,String sEmail, String cReview, int cScore) {
 			super();
 			this.cId = cId;
-			this.cName = cName;
-			this.cContents = cContents;
+			this.sEmail = sEmail;
+			this.cReview = cReview;
 			this.cScore = cScore;
 		}
 		
@@ -247,5 +247,21 @@ public class Bean2 {
 			this.cPrice = cPrice;
 		}
 
+
+
+
+		public String getsEmail() {
+			return sEmail;
+		}
+
+
+
+
+		public void setsEmail(String sEmail) {
+			this.sEmail = sEmail;
+		}
+
+		
+		
 
 }//end

@@ -47,8 +47,7 @@ public class DbActionInfo {
 		
 		
 		
-		// 학생 이름 , 강의 후기  후기 테이블 위해 추가
-		String sName;
+		//  강의 후기  후기 테이블 위해 추가
 		String cReview;
 		
 		
@@ -118,12 +117,12 @@ public class DbActionInfo {
 		
 
 		//강의 후기 불러오기
-		public DbActionInfo(int cId, int cScore, String sName, String cReview) {
+		public DbActionInfo(int cId, String sEmail, String cReview,int cScore) {
 			super();
 			this.cId = cId;
-			this.cScore = cScore;
-			this.sName = sName;
+			this.sEmail = sEmail;
 			this.cReview = cReview;
+			this.cScore = cScore;
 		}
 		
 		
@@ -202,7 +201,7 @@ public class DbActionInfo {
 			ArrayList<Bean2> beanList = new ArrayList<Bean2>();   		
 
 			
-			String WhereDefault1 = "select c.cId, s.sName, a.cReview, a.cScore from Student as s , Class as c, Attend as a ";
+			String WhereDefault1 = "select c.cId, s.sEmail, a.cReview, a.cScore from Student as s , Class as c, Attend as a ";
 			String WhereDefault2 = " where s.sEmail = a.sEmail and a.cId = c.cId and c.cId = " ;
 			      
 				try{
@@ -215,13 +214,13 @@ public class DbActionInfo {
 			        while(rs.next()){
 			        	
 			        	Integer wkcId =(rs.getInt(1));
-			        	String wksName =(rs.getString(2));
+			        	String wksEmail =(rs.getString(2));
 			        	String wkcReview =(rs.getString(3));
 			        	Integer wkcScore =(rs.getInt(4));
 			        
 			     
 			        
-			        Bean2 bean2 = new Bean2(wkcId,wksName, wkcReview,wkcScore);
+			        Bean2 bean2 = new Bean2(wkcId,wksEmail, wkcReview,wkcScore);
 			        beanList.add(bean2);
 			        }
 			          conn_mysql.close();
