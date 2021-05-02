@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.UIManager;
+import javax.swing.ButtonGroup;
 
 public class SignUp {
 
@@ -90,6 +91,7 @@ public class SignUp {
 	private JRadioButton getRdbtnCommon() {
 		if (rdbtnCommon == null) {
 			rdbtnCommon = new JRadioButton("일반회원");
+			buttonGroup.add(rdbtnCommon);
 			rdbtnCommon.setSelected(true);
 			rdbtnCommon.setBounds(39, 117, 111, 23);
 		}
@@ -98,6 +100,7 @@ public class SignUp {
 	private JRadioButton getRdbtnTeacher() {
 		if (rdbtnTeacher == null) {
 			rdbtnTeacher = new JRadioButton("강사회원");
+			buttonGroup.add(rdbtnTeacher);
 			rdbtnTeacher.setBounds(144, 117, 141, 23);
 		}
 		return rdbtnTeacher;
@@ -287,6 +290,7 @@ public class SignUp {
 	}
 	
 	boolean checking = false;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 	private boolean checkInputId() {
 		String email = tfEmail.getText().trim() + "@" + cbEmail.getSelectedItem();

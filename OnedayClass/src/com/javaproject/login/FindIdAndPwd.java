@@ -219,7 +219,7 @@ public class FindIdAndPwd {
 		if (rdbtnCommon.isSelected()) {
 			String res = action.findCommonId(name, phoneNo);
 			if (res == null) {
-				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 존재하지 않거나 정보를 다시 입력해주세.");
+				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 존재하지 않거나 정보를 다시 입력해주세요.");
 			} else {
 				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 "+ res + " 입니다.");
 			}

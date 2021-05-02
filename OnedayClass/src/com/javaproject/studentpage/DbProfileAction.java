@@ -42,7 +42,7 @@ public class DbProfileAction {
 		
 		ProfileBean bean = null;
 		
-		String WhereDefault = "select sName, sNickname, sTelNo from Student where sEmail = "+ShareVar.currentuser;
+		String WhereDefault = "select sName, sNickname, sEmail, sTelNo from Student where sEmail = "+ShareVar.currentuser;
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
@@ -53,8 +53,9 @@ public class DbProfileAction {
 
 				String wkName = rs.getString(1);
 				String wkNickName = rs.getString(2);
-				String wkTelno = rs.getString(3);
-				bean = new ProfileBean(wkName, wkNickName, wkTelno);
+				String wkEmail = rs.getString(3);
+				String wkTelno = rs.getString(4);
+				bean = new ProfileBean(wkName, wkNickName, wkEmail, wkTelno);
 			}
 			conn_mysql.close();
 		} catch (Exception e){
@@ -142,7 +143,7 @@ public class DbProfileAction {
 	public int countAttend() {
 		int attend = 0;
 		
-		String query = "SELECT COUNT(*) FROM Attend WHERE sEmail = '" + ShareVar.currentuser + "' and cCancelDate IS NULL";
+		String query = "SELECT COUNT(*) FROM Attend WHERE sEmail = " + ShareVar.currentuser + " and cCancelDate IS NULL";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
