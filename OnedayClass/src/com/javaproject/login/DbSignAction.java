@@ -173,7 +173,7 @@ public class DbSignAction {
 	// 중복된 학생아이디 체크
 	public boolean checkingTeacherId() {
 		PreparedStatement ps = null;
-		String query = "SELECT tEmail FROM Student WHERE tEmail = ?";
+		String query = "SELECT tEmail FROM Teacher WHERE tEmail = ?";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
