@@ -296,6 +296,11 @@ public class TeacherInfo_QnA {
 						"입력 완료!", 
 						JOptionPane.INFORMATION_MESSAGE);  
 				
+				//QnA등록 후 강의정보란으로 돌아가기
+				Classinfo classinfo = new Classinfo();
+				classinfo.setVisible_Classinfo(true);
+				frmQna.dispose();
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "등록 중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
 						"Critical Error!", 
