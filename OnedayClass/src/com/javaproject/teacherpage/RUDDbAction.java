@@ -183,13 +183,10 @@ public class RUDDbAction { // 2021.04.27~28 조혜지  - 강사 페이지 중 �
 		          
 		          while(rs.next()) {
 		        	  wkcId = rs.getInt(1);
-		        	  
 		          }
 		          conn_mysql.close();
 			}catch (Exception e) {
 				// TODO: handle exception
-				// 신규 강의 등록 시 제일 처음 강의 id 값을 1이라고 초기 설정
-				wkcId = 1;
 			}
 			return wkcId;
 		}
