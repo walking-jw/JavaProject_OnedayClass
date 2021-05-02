@@ -60,9 +60,9 @@ public class TeacherLectureDetail {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				TableInitBefore();
-				ClassInfo();
-				SearchActionBefore();
+				TableInitBefore();						// 1. 테이블 Column 세팅
+				ClassInfo();							// 2. 상단 TextField부분 DB에서 데이터 불러오기
+				SearchActionBefore();					// 3. 하단 후기 Table부분 DB에서 데이터 불러오기
 			}
 		});
 		frame.setBounds(100, 100, 560, 625);
@@ -201,7 +201,7 @@ public class TeacherLectureDetail {
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					TeacherLectureList myClass = new TeacherLectureList();
+					TeacherLectureList myClass = new TeacherLectureList();  // * * * * * * * 강의 리스트로 돌아가기
 					myClass.setVisible_LectureList(true);
 					frame.dispose();
 					
@@ -236,16 +236,19 @@ public class TeacherLectureDetail {
 	
 		     Inner_Table_Before.setAutoResizeMode(Inner_Table_Before.AUTO_RESIZE_OFF);
 	
+		 //후기등록날짜    
 	     int vColIndex = 0;
 	     TableColumn col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
 	     int width = 120;
 	     col.setPreferredWidth(width);
 	 
+	     //별점
 	     vColIndex = 1;
 	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
 	     width = 50;
 	     col.setPreferredWidth(width);
 	     
+	     //후기내용
 	     vColIndex = 2;
 	     col = Inner_Table_Before.getColumnModel().getColumn(vColIndex);
 	     width = 300;
@@ -253,6 +256,7 @@ public class TeacherLectureDetail {
 	     
 	 }
 	 
+	// TextField에 강의 정보 가져오기
 	public void ClassInfo() {
 		
 		int cid = DbAction_List.classid;
@@ -266,7 +270,6 @@ public class TeacherLectureDetail {
 		tf_cLocation.setText(bean2.getcLocation());
 		tf_cTime.setText(bean2.getcTime());
 		tf_cDate.setText(bean2.getcDate());
-		
 		
 	}
 
