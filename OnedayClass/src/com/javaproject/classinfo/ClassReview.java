@@ -184,7 +184,7 @@ public class ClassReview {
 	        
 	        vColIndex = 1;
 	        col = Inner_Table.getColumnModel().getColumn(vColIndex);
-	        width = 100;
+	        width = 150;
 	        col.setPreferredWidth(width);
 	        
 	        vColIndex = 2;
@@ -214,7 +214,7 @@ public class ClassReview {
 			for(int i=0; i<listCount; i++) {
 				
 				
-			String[] qTxt = { Integer.toString(beanList.get(i).getcId()),beanList.get(i).getsName(), beanList.get(i).getcReview(),Integer.toString(beanList.get(i).getcScore())};
+			String[] qTxt = { Integer.toString(beanList.get(i).getcId()),beanList.get(i).getsEmail(), beanList.get(i).getcReview(),Integer.toString(beanList.get(i).getcScore())};
 			Outer_Table.addRow(qTxt);
 			
 			}
