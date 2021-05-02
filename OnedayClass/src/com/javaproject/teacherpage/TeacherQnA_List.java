@@ -86,12 +86,9 @@ public class TeacherQnA_List {
 					
 					DbAction_List.sName = ReviewSub();
 					
-					TeacherQnA go = new TeacherQnA();
+					TeacherQnA go = new TeacherQnA();  // * * * * * * * * * * * * 답변달기로 이동 ( TeacherQnA )
 					go.setVisible_QnA(true);
 					frmQna.dispose();
-					
-					
-					
 				}
 			});
 			btnAnswer.setBounds(445, 267, 86, 29);
@@ -201,7 +198,8 @@ public class TeacherQnA_List {
 			     Outer_Table_AnswerOK.addColumn("질문자");
 			     Outer_Table_AnswerOK.addColumn("질문날짜");
 			     Outer_Table_AnswerOK.addColumn("질문내용");
-			     Outer_Table_AnswerOK.setColumnCount(3);
+			     Outer_Table_AnswerOK.addColumn("답변내용");
+			     Outer_Table_AnswerOK.setColumnCount(4);
 
 				       for(int j = 0 ; j < i ; j++){
 				           Outer_Table_AnswerOK.removeRow(0);
@@ -222,9 +220,15 @@ public class TeacherQnA_List {
 					       
 					       vColIndex = 2;
 					       col = Inner_Table_AnswerOK.getColumnModel().getColumn(vColIndex);
+					       width = 200;
+					       col.setPreferredWidth(width);
+					       
+					       vColIndex = 3;
+					       col = Inner_Table_AnswerOK.getColumnModel().getColumn(vColIndex);
 					       width = 300;
 					       col.setPreferredWidth(width);
 			 }
+	 
 	 // Teacher - QnA (답변 완료한 리스트 DB에서 불러오기) * * * * * * * * * * * * [2021.04.29, 12:55]		 
 	 private void SearchActionAfter_OK(){
 		     
@@ -232,17 +236,20 @@ public class TeacherQnA_List {
 		     ArrayList<Bean_QnA> beanList = dbAction_List.selectList_QnA_OK();
 		     int listCount = beanList.size();
 		     for(int i=0; i<listCount; i++) {
-		       String[] qTxt = {beanList.get(i).getsEmail(), beanList.get(i).getqDate(), beanList.get(i).getqContents()};
+		       String[] qTxt = {beanList.get(i).getsEmail(), beanList.get(i).getqDate(), beanList.get(i).getqContents(), beanList.get(i).getaContents()};
 		       Outer_Table_AnswerOK.addRow(qTxt);
 		     }
 	 }
 			 
-	  public String ReviewSub() {
+	 // Class.cId ShareVar에 저장하기
+	 public String ReviewSub() {
 			int i = Inner_Table_QnA.getSelectedRow();
 			String wkSequence = (String)Inner_Table_QnA.getValueAt(i, 0);
 			return wkSequence;
-	  }
-	private JButton getBtn_ToMypage() {
+	 }
+	 
+	 // 마이페이지로 돌아가기
+	 private JButton getBtn_ToMypage() {
 		if (btn_ToMypage == null) {
 			btn_ToMypage = new JButton("닫기");
 			btn_ToMypage.addActionListener(new ActionListener() {

@@ -67,7 +67,7 @@ public class TeacherQnA {
 		btn_Close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * *  
+				TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * 이전페이지로 돌아가기
 				qna.setVisible_TeacherQnA_List(true);
 				frmQna.dispose();	
 				
@@ -78,13 +78,6 @@ public class TeacherQnA {
 		frmQna.getContentPane().add(getScrollPane());
 		frmQna.getContentPane().add(getScrollPane_1());
 	}
-
-	
-	
-	
-	
-	
-	
 	
 	// 해당 화면 보이게 하기
 	public void setVisible_TeacherQnA(boolean a) {
@@ -122,7 +115,7 @@ public class TeacherQnA {
 				public void actionPerformed(ActionEvent e) {
 				UpdateAction_QnA();
 					
-				TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * *  
+				TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * 답변달면 이전페이지로 돌아가기
 				qna.setVisible_TeacherQnA_List(true);
 				frmQna.dispose();		
 				
@@ -159,46 +152,6 @@ public class TeacherQnA {
 		return lblNewLabel_1;
 	}
 	
-	// * * * * * * MeThod * * * * * * //
-	
-	// 해당 창 띄우게 하기
-	public void setVisible_QnA(boolean i) {
-		frmQna.setVisible(true);
-		
-	}
-	
-	//
-	public void ClassInfo() {
-		
-		String cid = DbAction_List.sName;
-		
-		DbAction_List dbAction = new DbAction_List(cid);
-		
-		Bean_QnA bean2 = dbAction.selectList_QnA_Detail();
-		
-		tf_QnA_sEmail.setText(bean2.getsEmail());
-		tf_QnA_qDate.setText(bean2.getqDate());
-		tf_QnA_qContents.setText(bean2.getqContents());
-		tf_QnA_aContents.setText(bean2.getaContents());
-		
-		
-	}
-private void UpdateAction_QnA() {
-		
-		String sEmail = tf_QnA_sEmail.getText().trim();
-		String qDate = tf_QnA_qDate.getText().trim();
-		String qContents = tf_QnA_qContents.getText();
-		String aContents = tf_QnA_aContents.getText();
-		
-		DbAction_List db = new DbAction_List(sEmail, qDate, qContents, aContents);
-		boolean msg = db.UpdateAction_QnA();
-		if (msg==true) {
-			JOptionPane.showMessageDialog(null, "답변을 달았습니다!");
-		}else {
-			JOptionPane.showInputDialog(this, "답변중 오류가 발생했습니다!");
-		}
-		
-	}
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
@@ -227,5 +180,48 @@ private void UpdateAction_QnA() {
 			tf_QnA_aContents = new JTextPane();
 		}
 		return tf_QnA_aContents;
+	}
+	
+	// MeThod * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	
+	// 해당 창 띄우게 하기
+	public void setVisible_QnA(boolean i) {
+		frmQna.setVisible(true);
+		
+	}
+	
+	// 질문 내용 가져오기
+	public void ClassInfo() {
+		
+		String cid = DbAction_List.sName;
+		
+		DbAction_List dbAction = new DbAction_List(cid);
+		
+		Bean_QnA bean2 = dbAction.selectList_QnA_Detail();
+		
+		tf_QnA_sEmail.setText(bean2.getsEmail());
+		tf_QnA_qDate.setText(bean2.getqDate());
+		tf_QnA_qContents.setText(bean2.getqContents());
+		tf_QnA_aContents.setText(bean2.getaContents());
+		
+		
+	}
+	
+	// aContents 채우고 Update하기
+	private void UpdateAction_QnA() {
+		
+		String sEmail = tf_QnA_sEmail.getText().trim();
+		String qDate = tf_QnA_qDate.getText().trim();
+		String qContents = tf_QnA_qContents.getText();
+		String aContents = tf_QnA_aContents.getText();
+		
+		DbAction_List db = new DbAction_List(sEmail, qDate, qContents, aContents);
+		boolean msg = db.UpdateAction_QnA();
+		if (msg==true) {
+			JOptionPane.showMessageDialog(null, "답변을 달았습니다!");
+		}else {
+			JOptionPane.showInputDialog(this, "답변중 오류가 발생했습니다!");
+		}
+		
 	}
 }

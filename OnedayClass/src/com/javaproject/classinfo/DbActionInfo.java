@@ -15,8 +15,9 @@ import com.javaproject.base.ShareVar;
 
 public class DbActionInfo {
 
-	//-----------------------Field
-//		//ShareVar에 저장해둔 DataBase 환경 연결
+	//----------------------------Field
+	
+		//ShareVar에 저장해둔 DataBase 환경 연결
 		public static final String url_mysql = ShareVar.url_mysql;
 		public static final String id_mysql = ShareVar.id_mysql;
 		public static final String pw_mysql = ShareVar.pw_mysql;
@@ -24,7 +25,7 @@ public class DbActionInfo {
 		public static int classid = ShareVar.cId;
 		public static int filename = ShareVar.filename;
 		
-//이미지를 넣어주기 
+		//이미지를 넣어주기 
 		FileInputStream file;
 		
 		
@@ -141,7 +142,7 @@ public class DbActionInfo {
 		//Button Click -> 강의 세부정보 
 		public Bean2 ButtonClassInfo() {
 		Bean2 bean2 = null;   
-		//cImg?
+		
 		String WhereDefault1 = "select c.cId, c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cTime, c.cDate, c.cContents, cPrice, cImg ";
 		String WhereDefault2 = "from Class as c, Teacher as t , Register as r "; 
 		String WhereDefault3 = " where c.cId = r.cId and t.tEmail = r.tEmail and c.cId = " ;
@@ -151,10 +152,9 @@ public class DbActionInfo {
 		        Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 		        Statement stmt_mysql = conn_mysql.createStatement();
 
-		        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 + WhereDefault3 + cId);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
+		        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 + WhereDefault3 + cId); 
 
 		        while(rs.next()){
-//		        	FileInputStream wkcImg=(rs.get);??
 		        	
 		        	int wkcId =(rs.getInt(1));
 		        	String wkcName =(rs.getString(2));
@@ -210,7 +210,7 @@ public class DbActionInfo {
 			        Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 			        Statement stmt_mysql = conn_mysql.createStatement();
 
-			        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 +  cId);  // 생성자에서 만들어 놓은 시퀀넘을 가져옴
+			        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1 + WhereDefault2 +  cId);  
 
 			        while(rs.next()){
 			        	
@@ -272,8 +272,6 @@ public class DbActionInfo {
 		
 		
 		
-		
-		
 
 		/*/
 		 * 2021-04-27 권효은
@@ -315,8 +313,7 @@ public class DbActionInfo {
 
 		
 		
-		
-		
+
 		/*/
 		 * 2021-04-28 오전 12:35_권효은
 		 * QnA insert를 위한 메소드 
@@ -343,11 +340,13 @@ public class DbActionInfo {
 
 	            conn_mysql.close();
 	            return true;   // 잘됐어!
+	            
 	        } catch (Exception e){
 
 	            e.printStackTrace();
 	            return false;  // 오류 걸렸다!
 	        }
+	        
 		}//insertQnA End
 		
 

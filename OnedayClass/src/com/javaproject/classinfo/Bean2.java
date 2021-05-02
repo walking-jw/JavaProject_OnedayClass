@@ -4,7 +4,8 @@ public class Bean2 {
 
 	
 	//----------------------------------Field
-		//////???? 필요한지 만들어본 Bean
+	
+		//ClassList에서 사용했던 정보들 (예비)
 		String tName;
 		String tNickName;
 		String tTelNo;
@@ -12,7 +13,7 @@ public class Bean2 {
 		String qContents;
 		
 		
-		//////강의대한 세부정보
+		//강의대한 세부정보
 		int cId;
 		int cPrice;
 		
@@ -23,7 +24,7 @@ public class Bean2 {
 		String cContents;
 		
 		//이미지
-//		FileInputStream cImg;
+
 		
 		//강의 후기 sName  , cReview , cScore
 		int cScore;
@@ -40,20 +41,6 @@ public class Bean2 {
 		//후기 갯수를 알기위함 : 04-29
 		int rCount;
 		
-		
-		
-//		//강의 정보 전체 가져오기
-//		public Bean2( String cName, String tName, String cLocation, String cTime, String cDate,  String cContents ,int cPrice) {
-//			super();
-////			this.cImg = cImg;
-//			this.cName = cName;
-//			this.tName = tName;
-//			this.cLocation = cLocation;
-//			this.cTime = cTime;
-//			this.cDate = cDate;
-//			this.cContents = cContents;
-//			this.cPrice = cPrice;
-//		}
 		
 
 

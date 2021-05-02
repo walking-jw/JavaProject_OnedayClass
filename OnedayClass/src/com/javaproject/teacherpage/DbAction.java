@@ -29,6 +29,7 @@ public class DbAction {
 		this.tEmail = tEmail;
 	}
 	
+	// 마이페이지(선생님) 정보 조회용
 	public DbAction(String tName, String tNickName, String tEmail, String tTelNo) {
 		super();
 		this.tName = tName;
@@ -47,7 +48,9 @@ public class DbAction {
 		this.tPassword = tPassword;
 	}
 
-	// Constructor * * * * * * * * * * * * * * * * * * 
+	// Method * * * * * * * * * * * * * * * * * * 
+	
+	// 마이페이지에 정보 표시하기
 	public Bean_TeacherClass DBtoMypage(){
 	
 		Bean_TeacherClass bean = null;
@@ -58,7 +61,6 @@ public class DbAction {
 		       Class.forName("com.mysql.cj.jdbc.Driver");
 		       Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
 		       Statement stmt_mysql = conn_mysql.createStatement();
-		       														// url 지금 주석처리되어있어서 그럼!!
 		
 		       ResultSet rs = stmt_mysql.executeQuery(Query00+Query01);
 		       
@@ -111,6 +113,7 @@ public class DbAction {
 		return true;
 	}//
 	
+	// 마이페이지(선생님) 평점 조회용
 	public Bean_TeacherClass AverageScore(){
 		
 		Bean_TeacherClass bean = null;
@@ -170,7 +173,7 @@ public class DbAction {
 				return bean;
 			}	
 		
-		
+	// 마이페이지 문의 수량 조회용
 	public Bean_QnA CountOfQnA() {
 		Bean_QnA bean = null;   
 	
@@ -200,34 +203,25 @@ public class DbAction {
 				return bean;
 		}
 		
+	// 마이페이지에서 회원 탈퇴용
 	public void deleteAction() {
 		PreparedStatement ps = null;
 
 		try{
-
 			Class.forName("com.mysql.cj.jdbc.Driver");
-
 			Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-
 			@SuppressWarnings("unused")
-
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-
-			String A = "delete from Student where sEmail = "+ ShareVar.currentuser;
+			String A = "delete from Teacher where sEmail = "+ ShareVar.currentuser;
 
 			ps = conn_mysql.prepareStatement(A);
-
 			ps.executeUpdate();
-
 			conn_mysql.close();
 
 		} catch (Exception e){
-
 			e.printStackTrace();
-
 		}
 	}
 	
-	
-}
+}// End of Class

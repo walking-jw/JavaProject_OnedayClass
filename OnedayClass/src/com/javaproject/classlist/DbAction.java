@@ -10,16 +10,17 @@ import com.javaproject.base.ShareVar;
 
 public class DbAction {
 
-//	
-//	//ShareVar에 저장해둔 DataBase 환경 연결
-	public static final String url_mysql = ShareVar.url_mysql;
-	public static final String id_mysql = ShareVar.id_mysql;
-	public static final String pw_mysql = ShareVar.pw_mysql;
-	public static String currentuser = ShareVar.currentuser;
-	//public static int classid = ShareVar.cId;
+		//-----------------------------------Field
 		
+		//ShareVar에 저장해둔 DataBase 환경 연결
+		public static final String url_mysql = ShareVar.url_mysql;
+		public static final String id_mysql = ShareVar.id_mysql;
+		public static final String pw_mysql = ShareVar.pw_mysql;
+		public static String currentuser = ShareVar.currentuser;
 		
-		
+			
+			
+			
 		//Field
 		int cId;
 		String tName;
@@ -29,10 +30,10 @@ public class DbAction {
 		String cTime;
 		String cContents;
 		String ComboxColumn;
-
-
+	
+	
 		
-		//Constructor
+		//-----------------------------------constructor
 		
 		public DbAction() {
 			// TODO Auto-generated constructor stub
@@ -48,7 +49,7 @@ public class DbAction {
 			this.cDate = cDate;
 		}
 		
-
+	
 		
 			
 		//콤보박스를 위해 하나만 (생성자)
@@ -58,8 +59,8 @@ public class DbAction {
 		ComboxColumn = comboxColumn;
 		}
 			
-
-	// 전체
+	
+		// 전체 (--예비)
 		public DbAction(int cId, String cName, String tName, String cLocation, String cDate, String cContents,
 				String comboxColumn) {
 			super();
@@ -73,7 +74,7 @@ public class DbAction {
 		}
 		
 		
-
+	
 		
 		
 		//Search (콤보박스에 대한)
@@ -85,10 +86,10 @@ public class DbAction {
 		this.cLocation = cLocation;
 		this.cDate = cDate;
 		ComboxColumn = comboxColumn;
-	}
+		}
 		
 		
-
+	
 		
 		//cId활용
 		public DbAction(int cId) {
@@ -96,7 +97,7 @@ public class DbAction {
 			this.cId = cId;
 		}
 		
-		// 테이블 목록 불러오기
+		//테이블 목록 불러오기
 		
 		public DbAction(int cId,  String cName, String tName,String cLocation, String cDate) {
 			super();
@@ -111,51 +112,49 @@ public class DbAction {
 		
 		
 		
-
-		//Method
-
+	
+		//-----------------------------------Method
+	
 		//콤보상자에 있는 카테고리별 강의명, 강사, 장소, 날짜 정보를 테이블로 불러오기
-			public ArrayList<Bean> selectList(){
-				
-			ArrayList<Bean> beanList = new ArrayList<Bean>();   		
-			String whereDefault1 = "select c.cId,c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cDate from Class as c, Teacher as t , Register as r ";  
-		    String whereDefault2 = "where c.cId = r.cId and t.tEmail = r.tEmail and c.cDate in (select cDate from Class where cDate >= curdate())";
-			String whereDefault3 = " and r.cCloseDate is null and cCategory = '";
-			String whereDefault4 = "'";
+		public ArrayList<Bean> selectList(){
 			
+		ArrayList<Bean> beanList = new ArrayList<Bean>();   		
+		String whereDefault1 = "select c.cId,c.cName, t.tName, concat(c.cLocation1,' ',c.cLocation2) as cLocation, c.cDate from Class as c, Teacher as t , Register as r ";  
+	    String whereDefault2 = "where c.cId = r.cId and t.tEmail = r.tEmail and c.cDate in (select cDate from Class where cDate >= curdate())";
+		String whereDefault3 = " and r.cCloseDate is null and cCategory = '";
+		String whereDefault4 = "'";
 		
-				 
-				try{ 
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
-				Statement stmt_mysql = conn_mysql.createStatement();
-						
-				ResultSet rs = stmt_mysql.executeQuery(whereDefault1 + whereDefault2 + whereDefault3 + ComboxColumn + whereDefault4);  
-					          
-					 while(rs.next()){  
-					 int wkClassId = rs.getInt(1);
-					 String wkClassName = rs.getString(2);
-					 String wkTeacherName = rs.getString(3);
-					 String wkClassLocation = rs.getString(4);
-					 String wkClassDate = rs.getString(5);
+		 
+			try{ 
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+					
+			ResultSet rs = stmt_mysql.executeQuery(whereDefault1 + whereDefault2 + whereDefault3 + ComboxColumn + whereDefault4);  
+				          
+				while(rs.next()){  
+				int wkClassId = rs.getInt(1);
+				String wkClassName = rs.getString(2);
+				String wkTeacherName = rs.getString(3);
+				String wkClassLocation = rs.getString(4);
+				String wkClassDate = rs.getString(5);
 
 				Bean bean = new Bean(wkClassId,wkClassName, wkTeacherName, wkClassLocation, wkClassDate);
 				beanList.add(bean);
 					
 					 }
 				conn_mysql.close();
-				
-				}catch (Exception e){
-					e.printStackTrace();
-				}
-				return beanList;
-						
-			} //selectList 	End
+			
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			return beanList;
+					
+		} //selectList 	End
 
+	
+		
+	
 
 	
-	
-	
-	
-	
-}
+}//end

@@ -230,7 +230,6 @@ public class TeacherMypage {
 					myclass.setVisible_LectureList(true);
 					frame.dispose();		
 					
-					
 				}
 			});
 			btn_TeacherMyclass.setBounds(141, 406, 159, 29);
@@ -247,7 +246,6 @@ public class TeacherMypage {
 					TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * *  
 					qna.setVisible_TeacherQnA_List(true);
 					frame.dispose();		
-					
 					
 				}
 			});
@@ -304,10 +302,6 @@ public class TeacherMypage {
 					SignIn signin = new SignIn();
 					signin.setVisible_SignIn(true);
 					frame.dispose();
-					
-					
-					
-					
 				}
 			});
 			btn_Logout.setForeground(Color.BLUE);
@@ -329,16 +323,19 @@ public class TeacherMypage {
 			btn_Out_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					if(strPwdCheck().equals(strPwdCheck_Confirm())) {
+					int trigger = EmptyCheck();
+					
+					if(strPwdCheck().equals(strPwdCheck_Confirm()) && trigger == 0 ) {
 						UpdateAction_Mypage();
 						ClearColumn();
 						DBtoClass();
 						lbl_PassCheck.setText("");
-					}else{
+					}else if(trigger>=1) {
+						lbl_PassCheck.setText("정보를 확인해주세요");
+					}
+					else{
 						lbl_PassCheck.setText("비밀번호가 일치하지 않습니다");
 					}
-//					
-					
 				}
 			});
 			btn_Out_1.setBounds(373, 515, 140, 29);
@@ -346,20 +343,18 @@ public class TeacherMypage {
 		return btn_Out_1;
 	}
 	
-	
-	//-----------------------------------Method
-	private String strPwdCheck() {
-		char[] str = tf_Password.getPassword();
-		String passString = new String(str);
-		return passString;
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("점");
+			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			lblNewLabel_1.setBounds(202, 370, 61, 16);
+		}
+		return lblNewLabel_1;
 	}
 	
-	private String strPwdCheck_Confirm() {
-		char[] str = tf_PasswordConfirm.getPassword();
-		String passString = new String(str);
-		return passString;
-	}
-	
+	// Method * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+	// 마이페이지로 최초 정보 가져오기
 	public void DBtoClass() {
 		
 		DbAction db = new DbAction();
@@ -372,6 +367,21 @@ public class TeacherMypage {
 		
 	}
 	
+	// 비밀번호 칸 세팅
+	private String strPwdCheck() {
+		char[] str = tf_Password.getPassword();
+		String passString = new String(str);
+		return passString;
+	}
+	
+	// 비밀번호 확인칸 세팅
+	private String strPwdCheck_Confirm() {
+		char[] str = tf_PasswordConfirm.getPassword();
+		String passString = new String(str);
+		return passString;
+	}
+	
+	// 마이페이지 강사 평점 메소드
 	public void Average() {
 			
 			DbAction db = new DbAction();
@@ -380,6 +390,7 @@ public class TeacherMypage {
 			tf_AveragePoint.setText(Integer.toString(bean.getcId()));
 		}
 		
+	// 마이페이지 문의 갯수 확인 메소드
 	public void CounfOfQnA() {
 		
 		DbAction db = new DbAction();
@@ -388,24 +399,23 @@ public class TeacherMypage {
 		btn_QnA.setText(Integer.toString(bean.getCountOfQnA()) + " 개의 문의 확인");
 	}
 	
-	
-	
+	// 마이페이지 내 강의 갯수 확인 메소드
 	public void CountOfClass() {
 		
 		DbAction db = new DbAction();
 		Bean_TeacherClass bean2 = db.CountOfClass();
 		btn_TeacherMyclass.setText(Integer.toString(bean2.getcId()) + " 개의 강의 확인");
 	}
-		// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
-		private void ClearColumn() {
-			tf_Name.setText("");
-			tf_NickName.setText("");
-			tf_Email.setText("");
-			tf_Telno.setText("");
-			tf_Password.setText("");
-			tf_PasswordConfirm.setText("");
-		}
-
+	
+	// * * * * * * * * * * * * * * *마이페이지 필드값 초기화 [2021.04.28, 00:31]
+	private void ClearColumn() {
+		tf_Name.setText("");
+		tf_NickName.setText("");
+		tf_Email.setText("");
+		tf_Telno.setText("");
+		tf_Password.setText("");
+		tf_PasswordConfirm.setText("");
+	}
 	
 	// * * * * * * * * * * * * * * *마이페이지 수정 메소드 [2021.04.28, 00:44]
 	private void UpdateAction_Mypage() {
@@ -423,14 +433,39 @@ public class TeacherMypage {
 		}else {
 			JOptionPane.showMessageDialog(null,"자료 수정 중 에러가 발생하였습니다");
 		}
+	}
+	
+	// 마이페이지 정보 수정 중, 공란이 있으며 수정이 되지않게 하기 위한 메소드
+	private int EmptyCheck() {
 		
+			int trigger = 0;
+			
+			String message = "를 확인해주세요!";
+			if(tf_Password.getText().trim().isEmpty()) {
+				message = "'비밀번호' " + message;
+				trigger++;
+				tf_Password.requestFocus();
+			}	
+			if(tf_Telno.getText().trim().isEmpty()) {
+				message = "'전화번호' " + message;
+				trigger++;
+				tf_Telno.requestFocus();
+			}	
+			if(tf_NickName.getText().trim().isEmpty()) {
+				message = "'닉네임' " + message;
+				trigger++;
+				tf_NickName.requestFocus();
+			}
+			if(tf_Name.getText().trim().isEmpty()) {
+				message = "'이름' " + message;
+				trigger++;
+				tf_Name.requestFocus();
+			}
+			
+			if(trigger>0) {
+				JOptionPane.showMessageDialog(null, message);
+			}
+			return trigger;
 	}
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("점");
-			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			lblNewLabel_1.setBounds(202, 370, 61, 16);
-		}
-		return lblNewLabel_1;
-	}
+	
 }

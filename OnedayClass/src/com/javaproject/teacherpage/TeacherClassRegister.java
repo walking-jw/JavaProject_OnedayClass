@@ -314,7 +314,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 	private JComboBox getCbCategory() {
 		if (cbCategory == null) {
 			cbCategory = new JComboBox();
-			cbCategory.setModel(new DefaultComboBoxModel(new String[] {"요리", "베이킹", "미술", "코딩", "사진", "어학", "상식", "공예"}));
+			cbCategory.setModel(new DefaultComboBoxModel(new String[] {"요리", "베이킹", "수공예", "프로그래밍", "사진", "플라워", "뷰티", "미술"}));
 			cbCategory.setBounds(140, 239, 148, 27);
 		}
 		return cbCategory;
@@ -417,7 +417,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		}
 		
 		if(check>0) {
-			JOptionPane.showMessageDialog(null, message);
+			JOptionPane.showMessageDialog(null, message, "추가 정보 기입", JOptionPane.WARNING_MESSAGE);
 		}
 		
 		return check;

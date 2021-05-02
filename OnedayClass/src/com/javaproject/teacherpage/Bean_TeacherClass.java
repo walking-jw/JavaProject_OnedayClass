@@ -20,6 +20,11 @@ public class Bean_TeacherClass {
 	int Score;
 	int ClassCount;
 	
+	// 후기 자세히 보기용 bean 값
+	String cReviewRegisterDate;
+	int cScore;
+	String cReview;
+	
 	// Constructor * * * * * *
 	
 	public Bean_TeacherClass() {
@@ -40,15 +45,21 @@ public class Bean_TeacherClass {
 		this.tTelNo = tTelNo;
 	}
 	
-	public Bean_TeacherClass(String cName, String cDate, String cLocation, String cTime, String tName) {
+	public Bean_TeacherClass(String cName, String tName, String cLocation, String cTime, String cDate) {
 		super();
 		this.cName = cName;
-		this.cDate = cDate;
+		this.tName = tName;
 		this.cLocation = cLocation;
 		this.cTime = cTime;
-		this.tName = tName;
+		this.cDate = cDate;
 	}
 
+	public Bean_TeacherClass(String cReviewRegisterDate, int cScore, String cReview) {
+		super();
+		this.cReviewRegisterDate = cReviewRegisterDate;
+		this.cScore = cScore;
+		this.cReview = cReview;
+	}
 	public Bean_TeacherClass(int cId) {
 		super();
 		this.cId = cId;
@@ -126,5 +137,23 @@ public class Bean_TeacherClass {
 	}
 	public void setcLocation(String cLocation) {
 		this.cLocation = cLocation;
+	}
+	public String getcReviewRegisterDate() {
+		return cReviewRegisterDate;
+	}
+	public void setcReviewRegisterDate(String cReviewRegisterDate) {
+		this.cReviewRegisterDate = cReviewRegisterDate;
+	}
+	public int getcScore() {
+		return cScore;
+	}
+	public void setcScore(int cScore) {
+		this.cScore = cScore;
+	}
+	public String getcReview() {
+		return cReview;
+	}
+	public void setcReview(String cReview) {
+		this.cReview = cReview;
 	}
 }

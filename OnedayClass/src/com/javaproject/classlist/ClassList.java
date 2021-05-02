@@ -25,118 +25,150 @@ import javax.swing.ListSelectionModel;
 
 public class ClassList {
 
-	private JFrame frame;
-	private JComboBox cbSelection;
-	private JScrollPane scrollPane;
-	private JTable Inner_Table;
-	private final DefaultTableModel Outer_Table = new DefaultTableModel();
-	private JButton btnNewButton;
-	private JButton btnClose;
-
-
-	/**
-	 * Create the application.
-	 */
-	public ClassList() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.addWindowListener(new WindowAdapter() {
+		//-----------------------------------Field
+	
+		private JFrame frame;
+		private JComboBox cbSelection;
+		private JScrollPane scrollPane;
+		private JTable Inner_Table;
+		private final DefaultTableModel Outer_Table = new DefaultTableModel();
+		private JButton btnNewButton;
+		private JButton btnClose;
+	
 		
-			@Override
-			public void windowOpened(WindowEvent e) {
-				TableInit();
-				ComboxClick();
-			}
-		});
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getCbSelection());
-		frame.getContentPane().add(getScrollPane());
-		frame.getContentPane().add(getBtnNewButton());
-		frame.getContentPane().add(getBtnClose());
-	}
-
-	private JComboBox getCbSelection() {
-		if (cbSelection == null) {
-			cbSelection = new JComboBox();
-			cbSelection.addActionListener(new ActionListener() {
-				
-		 
-				public void actionPerformed(ActionEvent e) {
-					ComboxClick();
-					
-				}
-			});
-			cbSelection.setModel(new DefaultComboBoxModel(new String[] {"요리", "베이킹", "수공예", "프로그래밍", "사진", "플라워", "뷰티", "미술"}));
-			cbSelection.setBounds(6, 6, 95, 27);
+		
+		
+		//-----------------------------------Constructor
+		
+		/**
+		 * Create the application.
+		 */
+		public ClassList() {
+			initialize();
 		}
-		return cbSelection;
-	}
-	private JScrollPane getScrollPane() {
-		if (scrollPane == null) {
-			scrollPane = new JScrollPane();
-			scrollPane.setBounds(16, 45, 525, 446);
-			scrollPane.setViewportView(getInner_Table());
-		}
-		return scrollPane;
-	}
-	private JTable getInner_Table() {
-		if (Inner_Table == null) {
-			Inner_Table = new JTable();
-			Inner_Table.addMouseListener(new MouseAdapter() {
-
-			});
-			Inner_Table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			Inner_Table.setModel(Outer_Table);// ******** 설정 꼭 해주기!
+	
+		/**
+		 * Initialize the contents of the frame.
+		 */
+		private void initialize() {
+			frame = new JFrame();
+			frame.setTitle("강의목록");
+			frame.addWindowListener(new WindowAdapter() {
 			
-
-		}
-		return Inner_Table;
-	}
-	
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("자세히 보기");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					/*/
-					 * 자세히보기
-					 */
-					//DbAction.classid = ClassId();
-					ShareVar.cId = ClassId();
-					Classinfo classinfo = new Classinfo();
-					classinfo.setVisible_Classinfo(true);
-					frame.dispose();
-					
-					
+				@Override
+				public void windowOpened(WindowEvent e) {
+					TableInit();
+					ComboxClick();
 				}
 			});
-			btnNewButton.setBounds(424, 518, 117, 29);
+			frame.setBounds(100, 100, 560, 625);
+			frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.getContentPane().setLayout(null);
+			frame.getContentPane().add(getCbSelection());
+			frame.getContentPane().add(getScrollPane());
+			frame.getContentPane().add(getBtnNewButton());
+			frame.getContentPane().add(getBtnClose());
 		}
-		return btnNewButton;
-	}
 	
-	/*
-	 * 2021-04-26 권효은 : 첫번째 페이지 작업 
-	 */
+		private JComboBox getCbSelection() {
+			if (cbSelection == null) {
+				cbSelection = new JComboBox();
+				cbSelection.addActionListener(new ActionListener() {
+					
+			 
+					public void actionPerformed(ActionEvent e) {
+						ComboxClick();
+						
+					}
+				});
+				cbSelection.setModel(new DefaultComboBoxModel(new String[] {"요리", "베이킹", "수공예", "프로그래밍", "사진", "플라워", "뷰티", "미술"}));
+				cbSelection.setBounds(6, 6, 95, 27);
+			}
+			return cbSelection;
+		}
+		
+		private JScrollPane getScrollPane() {
+			if (scrollPane == null) {
+				scrollPane = new JScrollPane();
+				scrollPane.setBounds(16, 45, 525, 446);
+				scrollPane.setViewportView(getInner_Table());
+			}
+			return scrollPane;
+		}
+		private JTable getInner_Table() {
+			if (Inner_Table == null) {
+				Inner_Table = new JTable();
+				Inner_Table.addMouseListener(new MouseAdapter() {
 	
-	//frame이 보이게 하는 메소드 만들기 (열고 닫기위해 boolean으로 타입을 정한다!)
-	public void setVisible_Classinfo (boolean l) {
-		frame.setVisible(l);
-	}
+				});
+				Inner_Table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				Inner_Table.setModel(Outer_Table);// ******** 설정 꼭 해주기!
+				
 	
+			}
+			return Inner_Table;
+		}
+		
+		private JButton getBtnNewButton() {
+			if (btnNewButton == null) {
+				btnNewButton = new JButton("자세히 보기");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						/*/
+						 * 자세히보기
+						 */
+						//강의 Id를 통해, 강의정보 불러오는 창 보이고 현재 창 닫기
+						ShareVar.cId = ClassId();
+						Classinfo classinfo = new Classinfo();
+						classinfo.setVisible_Classinfo(true);
+						frame.dispose();
+						
+						
+					}
+				});
+				btnNewButton.setBounds(424, 518, 117, 29);
+			}
+			return btnNewButton;
+		}
+		
+		
+		private JButton getBtnClose() {
+			if (btnClose == null) {
+				btnClose = new JButton("닫기");
+				btnClose.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						// 닫기 클릭시 홈으로 돌아가기
+						HomeView homeView = new HomeView();
+						homeView.setVisible_HomeView(true);
+						frame.dispose();
+					}
+				});
+				btnClose.setBounds(302, 518, 117, 29);
+			}
+			return btnClose;
+		}
+		
+		
+		
+		
+		//-----------------------------------Method
+		
+		/*
+		 * 2021-04-26 권효은 : 첫번째 페이지 작업 
+		 */
+		
+		//frame이 보이게 하는 메소드 만들기 (열고 닫기위해 boolean으로 타입을 정한다!)
+		public void setVisible_Classinfo (boolean l) {
+			frame.setVisible(l);
+		}//setVisible_Classinfo End
+		
 	
-	//1. Table Init 설정
-		@SuppressWarnings("static-access")    // warning Message 안보이게
-	public void TableInit(){
+		//1. Table Init 설정
+			@SuppressWarnings("static-access")    
+		public void TableInit(){
 			int i = Outer_Table.getRowCount();
 	        
 	        //강의명, 강사, 장소, 날짜 이름으로 테이블 열 이름 설정
@@ -179,8 +211,7 @@ public class ClassList {
 	        col = Inner_Table.getColumnModel().getColumn(vColIndex);
 	        width = 150;
 	        col.setPreferredWidth(width);
-	        
-	        
+	            
 		}//Table Init End
 
 		
@@ -225,6 +256,7 @@ public class ClassList {
 			
 		TableInit();
 		searchAction(ComboxColumn);
+		
 		}//comboxClick End
 
 	
@@ -246,33 +278,23 @@ public class ClassList {
 			Outer_Table.addRow(qTxt);
 					
 			}
+			
 		}//searchAction End
 	
+		
 	
-	// 아이디 전달
-	public int ClassId() {
-		
-		 int i = Inner_Table.getSelectedRow();
-		 String tmpSequence = (String)Inner_Table.getValueAt(i, 0);      
-		 int wkSequence = Integer.parseInt(tmpSequence); 
-		
-		 return wkSequence;
-	}
+		// 아이디 전달---> Classinfo package로 
+		public int ClassId() {
+			
+			 int i = Inner_Table.getSelectedRow();
+			 String tmpSequence = (String)Inner_Table.getValueAt(i, 0);      
+			 int wkSequence = Integer.parseInt(tmpSequence); 
+			
+			 return wkSequence;
+			 
+		}//ClassId End
 
 	
 	
-	private JButton getBtnClose() {
-		if (btnClose == null) {
-			btnClose = new JButton("닫기");
-			btnClose.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					HomeView homeView = new HomeView();
-					homeView.setVisible_HomeView(true);
-					frame.dispose();
-				}
-			});
-			btnClose.setBounds(302, 518, 117, 29);
-		}
-		return btnClose;
-	}
+		
 }//end

@@ -33,7 +33,7 @@ import java.awt.event.ActionEvent;
 
 	public class StudentMyClass { // 2021.04.26 조혜지 view - 수강 예정과 수강 이력 데이터 테이블표에 불러오기 & 수강 예정 강의 수강 신청 취소하기
 	
-		private JFrame frame;
+		private JFrame frmMyClass;
 		private JLabel lblNewLabel;
 		private JScrollPane scrollPane;
 		private JTable Inner_Table_After;
@@ -60,8 +60,8 @@ import java.awt.event.ActionEvent;
 		 * Initialize the contents of the frame.
 		 */
 		private void initialize() {
-			frame = new JFrame();
-			frame.addWindowListener(new WindowAdapter() {
+			frmMyClass = new JFrame();
+			frmMyClass.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowOpened(WindowEvent e) {
 					// 창 뜨자마자 불러온 데이터를 보이게 하기 위해 아래의 4개 메소드 삽입
@@ -71,18 +71,18 @@ import java.awt.event.ActionEvent;
 					SearchActionBefore();
 				}
 			});
-			frame.setTitle("수강관리");
-			frame.setBounds(100, 100, 560, 625);
-			frame.setLocationRelativeTo(frame);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.getContentPane().setLayout(null);
-			frame.getContentPane().add(getLblNewLabel());
-			frame.getContentPane().add(getScrollPane());
-			frame.getContentPane().add(getBtnCancle());
-			frame.getContentPane().add(getLblNewLabel_1());
-			frame.getContentPane().add(getScrollPane_1());
-			frame.getContentPane().add(getBtnReview());
-			frame.getContentPane().add(getBtnClose());
+			frmMyClass.setTitle("My Class");
+			frmMyClass.setBounds(100, 100, 560, 625);
+			frmMyClass.setLocationRelativeTo(frmMyClass);
+			frmMyClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frmMyClass.getContentPane().setLayout(null);
+			frmMyClass.getContentPane().add(getLblNewLabel());
+			frmMyClass.getContentPane().add(getScrollPane());
+			frmMyClass.getContentPane().add(getBtnCancle());
+			frmMyClass.getContentPane().add(getLblNewLabel_1());
+			frmMyClass.getContentPane().add(getScrollPane_1());
+			frmMyClass.getContentPane().add(getBtnReview());
+			frmMyClass.getContentPane().add(getBtnClose());
 		}
 		private JLabel getLblNewLabel() {
 			if (lblNewLabel == null) {
@@ -157,7 +157,7 @@ import java.awt.event.ActionEvent;
 						
 						ReviewManagement management = new ReviewManagement();
 						management.setVisible_ReviewManagement(true);
-						frame.dispose();
+						frmMyClass.dispose();
 						
 					}
 				});
@@ -190,7 +190,7 @@ import java.awt.event.ActionEvent;
 						
 						HomeView hv = new HomeView();
 						hv.setVisible_HomeView(true);
-						frame.dispose();
+						frmMyClass.dispose();
 						
 					}
 				});
@@ -203,7 +203,7 @@ import java.awt.event.ActionEvent;
 		
 		// 메인과 해당 창을 연결하는 메소드
 		public void setVisible_StudentMyClass(boolean j) {
-			frame.setVisible(j);
+			frmMyClass.setVisible(j);
 		}
 		
 		// 수강 예정 테이블 초기화
@@ -347,7 +347,7 @@ import java.awt.event.ActionEvent;
 		
 		 // 수강 신청 취소하기
 		 private void CancleClick() {
-			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강 취소", JOptionPane.YES_NO_OPTION);
+			 int result = JOptionPane.showConfirmDialog(null, "수강을 취소하시겠습니까?", "수강 취소", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			  if(result==JOptionPane.YES_OPTION) {
 				  try {
 

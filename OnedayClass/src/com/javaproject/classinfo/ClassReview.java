@@ -60,6 +60,8 @@ public class ClassReview {
 		private void initialize() {
 			frame = new JFrame();
 			frame.addWindowListener(new WindowAdapter() {
+				
+				//윈도우 오픈시 : 테이블 초기값 불러오기, 강의후기 및 후기갯수 불러오기
 				@Override
 				public void windowOpened(WindowEvent e) {
 					TableInit();
@@ -67,7 +69,7 @@ public class ClassReview {
 					ValueCountReview();
 				}
 			});
-			frame.setTitle("금손양성소");
+			frame.setTitle("강의후기");
 			frame.setBounds(100, 100, 560, 625);
 			frame.setLocationRelativeTo(frame);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,8 +84,8 @@ public class ClassReview {
 		private JLabel getLblNewLabel() {
 			if (lblNewLabel == null) {
 				lblNewLabel = new JLabel("강의후기");
-				lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-				lblNewLabel.setBounds(33, 25, 103, 34);
+				lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
+				lblNewLabel.setBounds(33, 25, 88, 34);
 			}
 			return lblNewLabel;
 		}
@@ -92,7 +94,7 @@ public class ClassReview {
 				tfrCount = new JTextField();
 				tfrCount.setEditable(false);
 				tfrCount.setHorizontalAlignment(SwingConstants.TRAILING);
-				tfrCount.setBounds(129, 25, 28, 35);
+				tfrCount.setBounds(116, 25, 28, 35);
 				tfrCount.setColumns(10);
 			}
 			return tfrCount;
@@ -111,6 +113,7 @@ public class ClassReview {
 				btnNewButton = new JButton("닫기");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
 						//닫기버튼 클릭시 강의 정보 란으로 돌아가기
 						Classinfo classinfo = new Classinfo();
 						classinfo.setVisible_Classinfo(true);
@@ -133,6 +136,13 @@ public class ClassReview {
 			return Inner_Table;
 		}
 		
+		private JLabel getLblCount() {
+			if (lblCount == null) {
+				lblCount = new JLabel("개");
+				lblCount.setBounds(142, 38, 18, 16);
+			}
+			return lblCount;
+		}
 		
 		//--------------------------------------Method
 		
@@ -145,90 +155,83 @@ public class ClassReview {
 		
 		
 		//후기 Table init 설정
-				@SuppressWarnings("static-access")   
-			public void TableInit(){
-					int i = Outer_Table.getRowCount();
-			        
-			        //작성자, 내용 , 평점으로 테이블 열 이름 설정
-					
-					
-					Outer_Table.addColumn("No.");   //강의 Id
-					Outer_Table.addColumn("작성자");
-			        Outer_Table.addColumn("내용");
-			        Outer_Table.addColumn("평점");
-			   
-			        Outer_Table.setColumnCount(4);
-
-			        for(int j = 0 ; j < i ; j++){
-			            Outer_Table.removeRow(0);
-			        }
-			        
-			        //Table 안쪽 Size 바꾸지 못하게 하기
-			        Inner_Table.setAutoResizeMode(Inner_Table.AUTO_RESIZE_OFF);
-			        
-
-			        int vColIndex = 0;
-			        TableColumn col = Inner_Table.getColumnModel().getColumn(vColIndex);
-			        int width = 50;
-			        col.setPreferredWidth(width);
-			        
-			        vColIndex = 1;
-			        col = Inner_Table.getColumnModel().getColumn(vColIndex);
-			        width = 100;
-			        col.setPreferredWidth(width);
-			        
-			        vColIndex = 2;
-			        col = Inner_Table.getColumnModel().getColumn(vColIndex);
-			        width = 200;
-			        col.setPreferredWidth(width);
-			        
-			        vColIndex = 3;
-			        col = Inner_Table.getColumnModel().getColumn(vColIndex);
-			        width = 100;
-			        col.setPreferredWidth(width);
-			        
-			        
-				}//Table Init End
-		
-
-		
-		//강의 아이디를 통한 강의 후기 불러오기
-		//강의 후기 정보 불러오기
-			public void ClassReviewInfo() {
-				//int cid = DbAction.classid;
-				int cid = ShareVar.cId;
-				DbActionInfo dbActionInfo = new DbActionInfo(cid);
-				ArrayList<Bean2>  beanList =  dbActionInfo.ClassReview();
-
-				int listCount = beanList.size();
-				
-				for(int i=0; i<listCount; i++) {
-					
-					
-				String[] qTxt = { Integer.toString(beanList.get(i).getcId()),beanList.get(i).getsName(), beanList.get(i).getcReview(),Integer.toString(beanList.get(i).getcScore())};
-				Outer_Table.addRow(qTxt);
-				
-				}
-		
-			} // ClassReviewInfo End
+			@SuppressWarnings("static-access")   
+		public void TableInit(){
+			int i = Outer_Table.getRowCount();
+	        
+	        //작성자, 내용 , 평점으로 테이블 열 이름 설정
 			
-		
-		//해당 강의 후기 갯수 구하기
-			public void ValueCountReview() {
-				//int cid = DbAction.classid;
-				int cid = ShareVar.cId;
-				DbActionInfo dbActionInfo = new DbActionInfo(cid);
-				Bean2 valCountReview = dbActionInfo.CountReview();
+			
+			Outer_Table.addColumn("No.");   //강의 Id
+			Outer_Table.addColumn("작성자");
+	        Outer_Table.addColumn("내용");
+	        Outer_Table.addColumn("평점");
+	   
+	        Outer_Table.setColumnCount(4);
+
+	        for(int j = 0 ; j < i ; j++){
+	            Outer_Table.removeRow(0);
+	        }
+	        
+	        //Table 안쪽 Size 바꾸지 못하게 하기
+	        Inner_Table.setAutoResizeMode(Inner_Table.AUTO_RESIZE_OFF);
+	        
+
+	        int vColIndex = 0;
+	        TableColumn col = Inner_Table.getColumnModel().getColumn(vColIndex);
+	        int width = 50;
+	        col.setPreferredWidth(width);
+	        
+	        vColIndex = 1;
+	        col = Inner_Table.getColumnModel().getColumn(vColIndex);
+	        width = 100;
+	        col.setPreferredWidth(width);
+	        
+	        vColIndex = 2;
+	        col = Inner_Table.getColumnModel().getColumn(vColIndex);
+	        width = 200;
+	        col.setPreferredWidth(width);
+	        
+	        vColIndex = 3;
+	        col = Inner_Table.getColumnModel().getColumn(vColIndex);
+	        width = 100;
+	        col.setPreferredWidth(width);
+	        
+		        
+			}//Table Init End
+	
+
+	
+		//강의 아이디를 통한 강의 후기 불러오기
+		public void ClassReviewInfo() {
+			int cid = ShareVar.cId;
+			
+			DbActionInfo dbActionInfo = new DbActionInfo(cid);
+			ArrayList<Bean2>  beanList =  dbActionInfo.ClassReview();
+
+			int listCount = beanList.size();
+			
+			for(int i=0; i<listCount; i++) {
 				
-				tfrCount.setText(Integer.toString(valCountReview.getrCount()));
+				
+			String[] qTxt = { Integer.toString(beanList.get(i).getcId()),beanList.get(i).getsName(), beanList.get(i).getcReview(),Integer.toString(beanList.get(i).getcScore())};
+			Outer_Table.addRow(qTxt);
+			
 			}
-		private JLabel getLblCount() {
-			if (lblCount == null) {
-				lblCount = new JLabel("개");
-				lblCount.setBounds(157, 39, 18, 16);
-			}
-			return lblCount;
-		}
+	
+		} // ClassReviewInfo End
+		
+	
+		//해당 강의 후기 갯수 구하기
+		public void ValueCountReview() {
+			int cid = ShareVar.cId;
+			
+			DbActionInfo dbActionInfo = new DbActionInfo(cid);
+			Bean2 valCountReview = dbActionInfo.CountReview();
+			
+			tfrCount.setText(Integer.toString(valCountReview.getrCount()));
+			
+		}//ValueCountReview End
 
 
-}
+}//end
