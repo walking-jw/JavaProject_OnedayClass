@@ -25,7 +25,7 @@ import java.awt.Font;
 
 public class HomeView {
 
-	private JFrame 금손양성소;
+	private JFrame frame;
 	private JLabel lblNewLabel_1;
 	private JButton btnShowClass;
 	private JLabel lblNewLabel_2;
@@ -49,8 +49,9 @@ public class HomeView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		금손양성소 = new JFrame();
-		금손양성소.addWindowListener(new WindowAdapter() {
+		frame = new JFrame();
+		frame.setTitle("금손양성소");
+		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				//applyFirstRecommnd();
@@ -58,26 +59,26 @@ public class HomeView {
 				applyRecommend();
 			}
 		});
-		금손양성소.setBounds(100, 100, 560, 625);
-		금손양성소.setLocationRelativeTo(금손양성소);
-		금손양성소.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		금손양성소.getContentPane().setLayout(null);
-		금손양성소.getContentPane().add(getBtnShowClass());
-		금손양성소.getContentPane().add(getLblNewLabel_2());
-		금손양성소.getContentPane().add(getBtnRecOne());
-		금손양성소.getContentPane().add(getBtnShowSearch());
-		금손양성소.getContentPane().add(getBtnShowMyClass());
-		금손양성소.getContentPane().add(getBtnNewButton_9_2());
-		금손양성소.getContentPane().add(getLblFirstRecClassName());
-		금손양성소.getContentPane().add(getLblSecondRecClassName());
-		금손양성소.getContentPane().add(getBtnRecTwo());
-		금손양성소.getContentPane().add(getLblNewLabel_1());
-		금손양성소.getContentPane().add(getLblNewLabel());
+		frame.setBounds(100, 100, 560, 625);
+		frame.setLocationRelativeTo(frame);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(getBtnShowClass());
+		frame.getContentPane().add(getLblNewLabel_2());
+		frame.getContentPane().add(getBtnRecOne());
+		frame.getContentPane().add(getBtnShowSearch());
+		frame.getContentPane().add(getBtnShowMyClass());
+		frame.getContentPane().add(getBtnNewButton_9_2());
+		frame.getContentPane().add(getLblFirstRecClassName());
+		frame.getContentPane().add(getLblSecondRecClassName());
+		frame.getContentPane().add(getBtnRecTwo());
+		frame.getContentPane().add(getLblNewLabel_1());
+		frame.getContentPane().add(getLblNewLabel());
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon("/Users/ido/Desktop/Project_source_img/Artboard – 1.png"));
+			lblNewLabel_1.setIcon(new ImageIcon("/Users/ido/Desktop/Project_source_img/Artboard – 1-2.png"));
 			lblNewLabel_1.setBounds(0, 50, 560, 170);
 		}
 		return lblNewLabel_1;
@@ -92,7 +93,7 @@ public class HomeView {
 					
 					ClassList classlist = new ClassList();
 					classlist.setVisible_Classinfo(true);
-					금손양성소.dispose();
+					frame.dispose();
 					
 					//수강목
 				}
@@ -104,7 +105,7 @@ public class HomeView {
 	
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("이 강의는 어떤가요..");
+			lblNewLabel_2 = new JLabel("이 강의는 어떤가요?");
 			lblNewLabel_2.setFont(new Font("SF Pro Text", Font.BOLD, 15));
 			lblNewLabel_2.setBounds(30, 229, 159, 16);
 		}
@@ -119,7 +120,7 @@ public class HomeView {
 					ShareVar.cId = firstRecommendClassId;
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
-					금손양성소.dispose();
+					frame.dispose();
 				}
 			});
 			btnRecOne.setBounds(30, 257, 500, 135);
@@ -152,7 +153,7 @@ public class HomeView {
 					
 					StudentMyClass stumyclass = new StudentMyClass();
 					stumyclass.setVisible_StudentMyClass(true);
-					금손양성소.dispose();
+					frame.dispose();
 				}
 			});
 			btnShowMyClass.setBounds(369, 10, 95, 30);
@@ -170,7 +171,7 @@ public class HomeView {
 					//프로필
 					StudentProfile profile = new StudentProfile();
 					profile.setVisible_StudentProfile(true);
-					금손양성소.dispose();
+					frame.dispose();
 				}
 			});
 			btnNewButton_9_2.setBounds(459, 10, 95, 30);
@@ -203,7 +204,7 @@ public class HomeView {
 					ShareVar.cId = secondRecommendClassId;
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
-					금손양성소.dispose();
+					frame.dispose();
 				}
 			});
 			btnRecTwo.setBounds(30, 424, 500, 135);
@@ -266,13 +267,13 @@ public class HomeView {
 		file2.delete();
 	}
 	public void setVisible_HomeView(boolean b) {
-		금손양성소.setVisible(b);
+		frame.setVisible(b);
 	}
 	
 	public void segueToSearch() {
 		SearchView searchView = new SearchView();
 		searchView.setVisible_SearchView(true);
-		금손양성소.dispose();
+		frame.dispose();
 	}
 
 	private JLabel getLblNewLabel() {

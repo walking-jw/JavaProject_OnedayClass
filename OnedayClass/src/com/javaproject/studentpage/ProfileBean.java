@@ -4,16 +4,18 @@ public class ProfileBean {
 
 	String name;
 	String nickName;
+	String email;
 	String telNo;
 	
 	public ProfileBean() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProfileBean(String name, String nickName, String telNo) {
+	public ProfileBean(String name, String nickName,String email, String telNo) {
 		super();
 		this.name = name;
 		this.nickName = nickName;
+		this.email = email;
 		this.telNo = telNo;
 	}
 
@@ -31,6 +33,14 @@ public class ProfileBean {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getTelNo() {

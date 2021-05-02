@@ -21,6 +21,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class SignIn {
 
@@ -77,7 +79,7 @@ public class SignIn {
 			rdbtnCommon = new JRadioButton("일반회원");
 			buttonGroup.add(rdbtnCommon);
 			rdbtnCommon.setSelected(true);
-			rdbtnCommon.setBounds(176, 120, 90, 23);
+			rdbtnCommon.setBounds(184, 232, 90, 23);
 		}
 		return rdbtnCommon;
 	}
@@ -85,14 +87,14 @@ public class SignIn {
 		if (rdbtnTeacher == null) {
 			rdbtnTeacher = new JRadioButton("강사회원");
 			buttonGroup.add(rdbtnTeacher);
-			rdbtnTeacher.setBounds(277, 120, 90, 23);
+			rdbtnTeacher.setBounds(294, 232, 90, 23);
 		}
 		return rdbtnTeacher;
 	}
 	private JTextField getTfEmail() {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
-			tfEmail.setBounds(188, 168, 154, 26);
+			tfEmail.setBounds(164, 281, 178, 26);
 			tfEmail.setColumns(10);
 		}
 		return tfEmail;
@@ -101,20 +103,22 @@ public class SignIn {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
 			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "gmail.com", "daum.net", "kakao.com", "icloud.com"}));
-			cbEmail.setBounds(347, 169, 117, 27);
+			cbEmail.setBounds(343, 282, 117, 27);
 		}
 		return cbEmail;
 	}
 	private JPasswordField getPwdF() {
 		if (pwdF == null) {
 			pwdF = new JPasswordField();
-			pwdF.setBounds(188, 203, 154, 26);
+			pwdF.setBounds(164, 315, 291, 26);
 		}
 		return pwdF;
 	}
 	private JButton getBtnSignIn() {
 		if (btnSignIn == null) {
 			btnSignIn = new JButton("로그인");
+			btnSignIn.setBackground(Color.blue);
+			btnSignIn.setFont(new Font("SF Pro", Font.PLAIN, 13));
 			btnSignIn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// 로그인
@@ -125,13 +129,14 @@ public class SignIn {
 					}
 				}
 			});
-			btnSignIn.setBounds(142, 241, 241, 29);
+			btnSignIn.setBounds(90, 363, 382, 36);
 		}
 		return btnSignIn;
 	}
 	private JButton getBtnSignUp() {
 		if (btnSignUp == null) {
 			btnSignUp = new JButton("회원가입");
+			btnSignUp.setFont(new Font("SF Pro", Font.PLAIN, 13));
 			btnSignUp.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// 회원가입
@@ -140,7 +145,7 @@ public class SignIn {
 					frame.dispose();
 				}
 			});
-			btnSignUp.setBounds(142, 324, 241, 29);
+			btnSignUp.setBounds(90, 440, 382, 36);
 		}
 		return btnSignUp;
 	}
@@ -154,44 +159,46 @@ public class SignIn {
 					frame.dispose();
 				}
 			});
-			btnFind.setBounds(152, 487, 225, 29);
+			btnFind.setBounds(164, 534, 230, 29);
 		}
 		return btnFind;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("반갑습니다!");
+			lblNewLabel = new JLabel("");
+			lblNewLabel.setIcon(new ImageIcon("/Users/ido/Desktop/Project_source_img/Artboard – 2.png"));
 			lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 21));
-			lblNewLabel.setBounds(221, 47, 97, 36);
+			lblNewLabel.setBounds(0, 0, 560, 205);
 		}
 		return lblNewLabel;
 	}
 	private JLabel getLblId() {
 		if (lblId == null) {
 			lblId = new JLabel("아이디(이메일) :");
-			lblId.setBounds(87, 173, 82, 16);
+			lblId.setBounds(80, 286, 82, 16);
 		}
 		return lblId;
 	}
 	private JLabel getLblId_1() {
 		if (lblId_1 == null) {
 			lblId_1 = new JLabel("비밀번호 :");
-			lblId_1.setBounds(115, 208, 61, 16);
+			lblId_1.setBounds(110, 320, 61, 16);
 		}
 		return lblId_1;
 	}
 	private JLabel getLblId_1_1() {
 		if (lblId_1_1 == null) {
 			lblId_1_1 = new JLabel("또는");
+			lblId_1_1.setFont(new Font("SF Pro", Font.PLAIN, 13));
 			lblId_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblId_1_1.setBounds(231, 296, 61, 16);
+			lblId_1_1.setBounds(250, 412, 60, 16);
 		}
 		return lblId_1_1;
 	}
 	private JLabel getLblId_1_2() {
 		if (lblId_1_2 == null) {
 			lblId_1_2 = new JLabel("아이디 혹은 비밀번호를 잊어버렸습니까?");
-			lblId_1_2.setBounds(164, 444, 206, 16);
+			lblId_1_2.setBounds(174, 496, 210, 16);
 		}
 		return lblId_1_2;
 	}

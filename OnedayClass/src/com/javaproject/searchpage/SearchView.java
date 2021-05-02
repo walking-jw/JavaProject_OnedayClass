@@ -178,7 +178,7 @@ public class SearchView {
 			break;
 
 		case 3:
-			conditonQueryColumn = "cDateㄱ";
+			conditonQueryColumn = "cDate";
 			break;
 		default:
 			break;
