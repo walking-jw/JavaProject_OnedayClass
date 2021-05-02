@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 import com.javaproject.base.ShareVar;
 import com.javaproject.classlist.ClassList;
 import com.javaproject.classlist.DbAction;
+import com.javaproject.home.HomeView;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
@@ -53,6 +55,7 @@ public class Classinfo {
 		private JTextPane tfcContents;
 		private JLabel lblNewLabel_6;
 		private JLabel lblNewLabel_7;
+		private JButton btnHome;
 	
 		
 		//-----------------------------Constructor
@@ -106,6 +109,7 @@ public class Classinfo {
 			frame.getContentPane().add(getScrollPane());
 			frame.getContentPane().add(getLblNewLabel_6());
 			frame.getContentPane().add(getLblNewLabel_7());
+			frame.getContentPane().add(getBtnHome());
 		}
 		
 		
@@ -347,6 +351,21 @@ public class Classinfo {
 			return lblNewLabel_7;
 		}
 		
+		private JButton getBtnHome() {
+			if (btnHome == null) {
+				btnHome = new JButton("Home");
+				btnHome.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						//홈버튼 클릭시 홈으로 돌아가기
+						HomeView homeView = new HomeView();
+						homeView.setVisible_HomeView(true);
+						frame.dispose();
+					}
+				});
+				btnHome.setBounds(174, 550, 117, 29);
+			}
+			return btnHome;
+		}
 		
 		
 		//--------------------------------Method
@@ -425,11 +444,8 @@ public class Classinfo {
 			}//if문 End
 		  
 
-			
 		}//ClassAttendAction End
 		
 		
-	
-	
-	
+		
 }//end
