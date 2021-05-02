@@ -156,7 +156,7 @@ public class FindIdAndPwd {
 	private JComboBox getCbEmail() {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
-			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "google.com"}));
+			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "gmail.com", "daum.net", "kakao.com", "icloud.com"}));
 			cbEmail.setBounds(314, 407, 117, 27);
 		}
 		return cbEmail;
@@ -226,7 +226,7 @@ public class FindIdAndPwd {
 		} else {
 			String res = action.findTeacherId(name, phoneNo);
 			if (res == null) {
-				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 존재하지 않거나 정보를 다시 입력해주세.");
+				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 존재하지 않거나 정보를 다시 입력해주세요.");
 			}else {
 				JOptionPane.showMessageDialog(null, name + " 님의 아이디는 "+ res + " 입니다.");
 			}

@@ -89,7 +89,7 @@ public class Main {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_1.setIcon(new ImageIcon("/Users/hyoeunkwon/Desktop/Hand.png"));
+			lblNewLabel_1.setIcon(new ImageIcon("/Users/ido/Desktop/Project_source_img/KakaoTalk_Photo_2021-05-02-16-09-13.png"));
 			lblNewLabel_1.setBounds(53, 114, 445, 283);
 		}
 		return lblNewLabel_1;

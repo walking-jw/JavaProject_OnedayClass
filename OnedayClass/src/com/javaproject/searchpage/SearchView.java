@@ -9,6 +9,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.javaproject.base.ShareVar;
+import com.javaproject.classinfo.Classinfo;
 import com.javaproject.home.HomeView;
 
 import javax.swing.JButton;
@@ -34,6 +36,7 @@ public class SearchView {
 	private JTable inner_table;
 	
 	DefaultTableModel Outer_Table = new DefaultTableModel();
+	private JButton btnDetail;
 	
 
 	/**
@@ -58,6 +61,7 @@ public class SearchView {
 		frame.getContentPane().add(getBtnSearch());
 		frame.getContentPane().add(getBtnCancel());
 		frame.getContentPane().add(getScrollPane());
+		frame.getContentPane().add(getBtnDetail());
 	}
 
 	private JComboBox getSelectBox() {
@@ -82,6 +86,7 @@ public class SearchView {
 			btnSearch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//검색
+					//classId.removeAll(classId);
 					conditionQuery();
 				}
 			});
@@ -119,6 +124,8 @@ public class SearchView {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					//Click
+					System.out.println(classId.get(inner_table.getSelectedRow()));
+					ShareVar.cId = classId.get(inner_table.getSelectedRow());
 				}
 			});
 			inner_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -188,7 +195,7 @@ public class SearchView {
 		conditionQueryAction(conditonQueryColumn);
 	}
 	
-	
+	ArrayList<Integer> classId = new ArrayList<Integer>();
 	
 	private void conditionQueryAction(String ConditionQueryColumn) {
 		String conditionSearch = tfSearch.getText().trim();
@@ -202,11 +209,27 @@ public class SearchView {
 			String strDate = format.format(beanList.get(i).getDate());
 			
 			String[] qTxt = {beanList.get(i).getName(),beanList.get(i).getCategory(), beanList.get(i).getLacation(), strDate};
+			classId.add(beanList.get(i).getId());
 			Outer_Table.addRow(qTxt);
 		}
 	}
 	
 	public void setVisible_SearchView(boolean b) {
 		frame.setVisible(b);
+	}
+	private JButton getBtnDetail() {
+		if (btnDetail == null) {
+			btnDetail = new JButton("자세히보기");
+			btnDetail.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// show deail
+					Classinfo classinfo = new Classinfo();
+					classinfo.setVisible_Classinfo(true);
+					frame.dispose();
+				}
+			});
+			btnDetail.setBounds(272, 538, 117, 29);
+		}
+		return btnDetail;
 	}
 }

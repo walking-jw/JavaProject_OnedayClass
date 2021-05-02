@@ -303,7 +303,7 @@ public class SignUp {
 	}
 	
 	private void signUpAction() {
-		if (checking = false) {
+		if (checking == false) {
 			JOptionPane.showMessageDialog(null, "아이디 중복체크를 해주세요.");
 		} else if (tfName.getText().trim().isEmpty() || tfNickName.getText().trim().isEmpty() || tfPhone.getText().trim().isEmpty()){
 			JOptionPane.showMessageDialog(null, "정보를 전부 입력해주세요.");

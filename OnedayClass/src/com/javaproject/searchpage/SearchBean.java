@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class SearchBean {
 
+	int id;
 	String name;
 	String category;
 	String lacation;
@@ -14,14 +15,21 @@ public class SearchBean {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SearchBean(String name, String category, String lacation, Date date) {
+	public SearchBean(int id, String name, String category, String lacation, Date date) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.category = category;
 		this.lacation = lacation;
 		this.date = date;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getId() {
+		return id;
+	}
 	public String getName() {
 		return name;
 	}

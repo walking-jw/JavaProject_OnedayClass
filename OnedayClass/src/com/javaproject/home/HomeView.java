@@ -98,7 +98,7 @@ public class HomeView {
 					//수강목
 				}
 			});
-			btnShowClass.setBounds(188, 10, 95, 29);
+			btnShowClass.setBounds(174, 8, 95, 29);
 		}
 		return btnShowClass;
 	}
@@ -138,7 +138,7 @@ public class HomeView {
 					segueToSearch();
 				}
 			});
-			btnShowSearch.setBounds(281, 10, 95, 29);
+			btnShowSearch.setBounds(269, 8, 95, 29);
 		}
 		return btnShowSearch;
 	}
@@ -156,14 +156,14 @@ public class HomeView {
 					frame.dispose();
 				}
 			});
-			btnShowMyClass.setBounds(369, 10, 95, 30);
+			btnShowMyClass.setBounds(364, 7, 95, 30);
 		}
 		return btnShowMyClass;
 	}
 	
 	private JButton getBtnNewButton_9_2() {
 		if (btnNewButton_9_2 == null) {
-			btnNewButton_9_2 = new JButton("My profile");
+			btnNewButton_9_2 = new JButton("My Profile");
 			btnNewButton_9_2.setFont(new Font("SF Pro", Font.PLAIN, 13));
 			btnNewButton_9_2.setIcon(null);
 			btnNewButton_9_2.addActionListener(new ActionListener() {
@@ -174,7 +174,7 @@ public class HomeView {
 					frame.dispose();
 				}
 			});
-			btnNewButton_9_2.setBounds(459, 10, 95, 30);
+			btnNewButton_9_2.setBounds(459, 8, 95, 30);
 		}
 		return btnNewButton_9_2;
 	}

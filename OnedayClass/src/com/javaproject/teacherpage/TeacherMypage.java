@@ -287,7 +287,7 @@ public class TeacherMypage {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setIcon(new ImageIcon("/Users/parkjw/Desktop/스크린샷 2021-04-30 오후 2.54.40.png"));
+			lblNewLabel.setIcon(new ImageIcon("/Users/ido/Desktop/Project_source_img/KakaoTalk_Photo_2021-05-02-16-09-28.png"));
 			lblNewLabel.setBounds(20, 83, 155, 131);
 		}
 		return lblNewLabel;

@@ -305,7 +305,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 		if (lblImage == null) {
 			lblImage = new JLabel("");
 			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-			lblImage.setIcon(new ImageIcon("/Users/parksunghun/Desktop/KakaoTalk_Photo_2021-04-30-00-20-58.png"));
+			lblImage.setIcon(new ImageIcon("/Users/ido/Desktop/Project_source_img/KakaoTalk_Photo_2021-05-02-16-09-39.png"));
 			lblImage.setBounds(37, 20, 478, 152);
 		}
 		return lblImage;

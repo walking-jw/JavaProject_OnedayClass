@@ -224,7 +224,7 @@ public class TeacherInfo_QnA {
 		private JLabel getLblNewLabel() {
 			if (lblNewLabel == null) {
 				lblNewLabel = new JLabel("");
-				lblNewLabel.setIcon(new ImageIcon("/Users/hyoeunkwon/Desktop/KakaoTalk_Photo_2021-04-30-17-30-13.png"));
+				lblNewLabel.setIcon(new ImageIcon("/Users/ido/Desktop/Project_source_img/KakaoTalk_Photo_2021-05-02-16-09-28.png"));
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				lblNewLabel.setBounds(22, 64, 163, 152);
 			}

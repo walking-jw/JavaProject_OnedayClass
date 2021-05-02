@@ -38,28 +38,25 @@ public class DbSearchAction {
 		 
 		ArrayList<SearchBean> beanList = new ArrayList<SearchBean>();
  
-		String WhereDefault = "select cName, cCategory, concat(cLocation1, ' ',cLocation2), cDate from Class where " + conditionQueryColumn;
+		String WhereDefault = "select cid, cName, cCategory, concat(cLocation1, ' ',cLocation2), cDate from Class where " + conditionQueryColumn;
 		String WhereDefault2 = " like '%" + searching + "%'";
-		String WhereDefault3 = " and cid in (select cid from Register where cCloseDate is null) and cDate >= curdate()";
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
  
-			ResultSet rs = stmt_mysql.executeQuery(WhereDefault + WhereDefault2 + WhereDefault3);
+			ResultSet rs = stmt_mysql.executeQuery(WhereDefault + WhereDefault2);
  
 			while(rs.next()){
-				String wkName = rs.getString(1);
-				String wkCategory = rs.getString(2);
-				String wkLocation = rs.getString(3);
-				Date wkDate = rs.getDate(4);
+				int wkId = rs.getInt(1);
+				String wkName = rs.getString(2);
+				String wkCategory = rs.getString(3);
+				String wkLocation = rs.getString(4);
+				Date wkDate = rs.getDate(5);
 				
-				SearchBean bean = new SearchBean(wkName, wkCategory, wkLocation, wkDate);
+				SearchBean bean = new SearchBean(wkId, wkName, wkCategory, wkLocation, wkDate);
 				
-				wkName = bean.getName();
-				wkCategory = bean.getCategory();
-				wkLocation = bean.getLacation();
-				wkDate = bean.getDate();
+
 				beanList.add(bean);
 			}
 			conn_mysql.close();
