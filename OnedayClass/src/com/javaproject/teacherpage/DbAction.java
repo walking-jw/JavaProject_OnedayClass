@@ -204,24 +204,23 @@ public class DbAction {
 		}
 		
 	// 마이페이지에서 회원 탈퇴용
-	public void deleteAction() {
-		PreparedStatement ps = null;
+	// 탈퇴하기(탈퇴일 적용)
+		public void applySignOut() {
+			PreparedStatement ps = null;
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
+				@SuppressWarnings("unused")
+				Statement stmt_mysql = conn_mysql.createStatement();
 
-		try{
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(ShareVar.url_mysql,ShareVar.id_mysql,ShareVar.pw_mysql);
-			@SuppressWarnings("unused")
-			Statement stmt_mysql = conn_mysql.createStatement();
-
-			String A = "delete from Teacher where tEmail = "+ ShareVar.currentuser;
-
-			ps = conn_mysql.prepareStatement(A);
-			ps.executeUpdate();
-			conn_mysql.close();
-
-		} catch (Exception e){
-			e.printStackTrace();
+				String QueryA = "update	Teacher set tSignoutDate = curdate()";
+				String QueryB = " where tEmail = " + ShareVar.currentuser;
+				ps = conn_mysql.prepareStatement(QueryA+QueryB);
+				ps.executeUpdate();
+				conn_mysql.close();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
 		}
-	}
 	
 }// End of Class

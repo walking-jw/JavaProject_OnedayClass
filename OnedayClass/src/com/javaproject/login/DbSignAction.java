@@ -48,7 +48,7 @@ public class DbSignAction {
 	// 로그인 메소드
 	public boolean signInStudent() {
 		PreparedStatement ps = null;
-		String query = "SELECT sPassword FROM Student WHERE sEmail = ?";
+		String query = "SELECT sPassword FROM Student WHERE sEmail = ? and sSignoutDate is NULL";
 		try {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -74,7 +74,7 @@ public class DbSignAction {
 	
 	public boolean signInTeacher() {
 		PreparedStatement ps = null;
-		String query = "SELECT tPassword FROM Teacher WHERE tEmail = ?";
+		String query = "SELECT tPassword FROM Teacher WHERE tEmail = ? and tSignoutDate is NULL";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
@@ -103,7 +103,7 @@ public class DbSignAction {
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String query = "INSERT INTO Student (sEmail, sName, sNickName, sTelNo, sPassword) VALUES (?,?,?,?,?)";
+			String query = "INSERT INTO Student (sEmail, sName, sNickName, sTelNo, sPassword, sSignupDate) VALUES (?,?,?,?,?,curdate())";
 
 			ps = conn_mysql.prepareStatement(query);
 			ps.setString(1, email);
@@ -111,6 +111,7 @@ public class DbSignAction {
 			ps.setString(3, nickName);
 			ps.setString(4, telNo);
 			ps.setString(5, password);
+
 			ps.executeUpdate();
 
 			conn_mysql.close();
@@ -127,7 +128,7 @@ public class DbSignAction {
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String query = "INSERT INTO Teacher (tEmail, tName, tNickName, tTelNo, tPassword) VALUES (?,?,?,?,?)";
+			String query = "INSERT INTO Teacher (tEmail, tName, tNickName, tTelNo, tPassword, tSignupDate) VALUES (?,?,?,?,?,curdate())";
 
 			ps = conn_mysql.prepareStatement(query);
 			ps.setString(1, email);

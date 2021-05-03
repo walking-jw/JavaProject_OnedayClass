@@ -280,7 +280,6 @@ public class StudentProfile {
 		tfEmail.setText(bean.getEmail());
 		tfPhoneNumber.setText(bean.getTelNo());
 		
-		
 	}
 	
 	// 프로필 변경하기
@@ -328,8 +327,13 @@ public class StudentProfile {
 		if(result==JOptionPane.YES_OPTION) {
 			try {
 			DbProfileAction dbProfileAction = new DbProfileAction();
-			dbProfileAction.deleteAction();
-			signOutAction();
+			//dbProfileAction.deleteAction();
+			dbProfileAction.applySignOut();
+			JOptionPane.showMessageDialog(null, "회원 탈퇴가 되었습니다.");
+			ShareVar.currentuser = "";
+			SignIn signIn = new SignIn();
+			signIn.setVisible_SignIn(true);
+			frame.dispose();
 			} catch (Exception e) {
 				System.out.println("error!");
 			}
@@ -345,7 +349,7 @@ public class StudentProfile {
 		if (res < 1) {
 			lblLevel.setText("발!");
 		} 
-		else if (res < 5) {
+		else if (res < 2) {
 			lblLevel.setText("동손!");
 		}
 		else if (res < 12) {

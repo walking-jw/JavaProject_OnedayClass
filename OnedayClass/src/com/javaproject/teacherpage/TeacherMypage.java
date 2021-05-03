@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.login.SignIn;
+import com.javaproject.studentpage.DbProfileAction;
 
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
@@ -259,9 +260,8 @@ public class TeacherMypage {
 			btn_Out.setForeground(Color.RED);
 			btn_Out.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					DbAction db = new DbAction();
-					db.deleteAction();
-				
+					withdrawAction();
+					
 				}
 			});
 			btn_Out.setBounds(108, 515, 140, 29);
@@ -466,6 +466,24 @@ public class TeacherMypage {
 				JOptionPane.showMessageDialog(null, message);
 			}
 			return trigger;
+	}
+	
+	//탈퇴하기
+	private void withdrawAction() {
+		int result = JOptionPane.showConfirmDialog(null, "탈퇴하시겠습니까?\n탈퇴시 등록한 강좌가 없는지 확인바랍니다.", "예 아니오", JOptionPane.YES_NO_OPTION);
+		if(result==JOptionPane.YES_OPTION) {
+			try {
+				DbAction db = new DbAction();
+				db.applySignOut();
+				JOptionPane.showMessageDialog(null, "회원 탈퇴가 되었습니다.");
+				ShareVar.currentuser = "";
+				SignIn signIn = new SignIn();
+				signIn.setVisible_SignIn(true);
+				frame.dispose();
+			} catch (Exception e) {
+				System.out.println("error!");
+			}
+		}
 	}
 	
 }

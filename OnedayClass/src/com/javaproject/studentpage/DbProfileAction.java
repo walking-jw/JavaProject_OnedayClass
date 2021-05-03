@@ -109,7 +109,37 @@ public class DbProfileAction {
 		}
 	}
 	
-	// 탈퇴하기
+	// 탈퇴하기(완전 삭제)
+	public void deleteSubAction() {
+		PreparedStatement ps = null;
+
+		try{
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+
+			@SuppressWarnings("unused")
+
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+
+			String A = "delete from a,q ";
+			String B = "using Attend as a inner join QnA as q ";
+			String C = "on a.sEmail = q.sEmail where a.sEmail = " + ShareVar.currentuser;
+			ps = conn_mysql.prepareStatement(A + B + C);
+
+			ps.executeUpdate();
+
+			conn_mysql.close();
+
+		} catch (Exception e){
+
+			e.printStackTrace();
+
+		}
+	}
+	
 	public void deleteAction() {
 		PreparedStatement ps = null;
 
@@ -138,6 +168,26 @@ public class DbProfileAction {
 
 		}
 	}
+	
+	// 탈퇴하기(탈퇴일 적용)
+	public void applySignOut() {
+		PreparedStatement ps = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pwd_mysql);
+			@SuppressWarnings("unused")
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			String QueryA = "update	Student set sSignoutDate = curdate()";
+			String QueryB = " where sEmail = " + ShareVar.currentuser;
+			ps = conn_mysql.prepareStatement(QueryA+QueryB);
+			ps.executeUpdate();
+			conn_mysql.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 	// 등급구하기
 	public int countAttend() {
