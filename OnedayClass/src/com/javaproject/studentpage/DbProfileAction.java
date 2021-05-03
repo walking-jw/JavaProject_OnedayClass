@@ -180,6 +180,7 @@ public class DbProfileAction {
 
 			String QueryA = "update	Student set sSignoutDate = curdate()";
 			String QueryB = " where sEmail = " + ShareVar.currentuser;
+			String QueryC = " and sEmail not in (select sEmail from Attend)";
 			ps = conn_mysql.prepareStatement(QueryA+QueryB);
 			ps.executeUpdate();
 			conn_mysql.close();
