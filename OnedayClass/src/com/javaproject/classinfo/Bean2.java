@@ -5,7 +5,7 @@ public class Bean2 {
 	
 	//----------------------------------Field
 	
-		//ClassList에서 사용했던 정보들 (예비)
+		//ClassList에서 사용했던 정보들 
 		String tName;
 		String tNickName;
 		String tTelNo;
@@ -23,13 +23,14 @@ public class Bean2 {
 		String cTime;
 		String cContents;
 		
-		//이미지
 
 		
 		//강의 후기 sEmail  , cReview , cScore
 		int cScore;
 		String sEmail;
 		String cReview;
+		
+		
 		
 		////-----------------------------Constructor
 		
@@ -42,7 +43,6 @@ public class Bean2 {
 		int rCount;
 		
 		
-
 
 		//강의 후기 갯수를 위한 int값 하나
 		public Bean2(int rCount) {
@@ -88,7 +88,7 @@ public class Bean2 {
 		}
 		
 
-
+		//질문내용
 		public Bean2(String qContents) {
 			super();
 			this.qContents = qContents;

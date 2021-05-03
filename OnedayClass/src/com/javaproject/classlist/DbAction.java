@@ -20,8 +20,7 @@ public class DbAction {
 		
 			
 			
-			
-		//Field
+		//필드값	
 		int cId;
 		String tName;
 		String cName;
@@ -50,7 +49,6 @@ public class DbAction {
 		}
 		
 	
-		
 			
 		//콤보박스를 위해 하나만 (생성자)
 			
@@ -59,21 +57,6 @@ public class DbAction {
 		ComboxColumn = comboxColumn;
 		}
 			
-	
-		// 전체 (--예비)
-		public DbAction(int cId, String cName, String tName, String cLocation, String cDate, String cContents,
-				String comboxColumn) {
-			super();
-			this.cId = cId;
-			this.tName = tName;
-			this.cName = cName;
-			this.cLocation = cLocation;
-			this.cDate = cDate;
-			this.cContents = cContents;
-			ComboxColumn = comboxColumn;
-		}
-		
-		
 	
 		
 		

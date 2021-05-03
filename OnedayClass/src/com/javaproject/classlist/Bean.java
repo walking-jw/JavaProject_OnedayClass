@@ -1,7 +1,8 @@
 package com.javaproject.classlist;
 
 public class Bean {
-	//Field
+	
+		//-----------------------------------Field
 	
 		int cId;
 		int cPrice;
@@ -10,26 +11,22 @@ public class Bean {
 		String cDate;
 		String cTime;
 
-
 		String cContents;
 		String tName;
 		
-		///////
 		String tNickName;
 		String tTelNo;
 		String tEmail;
 			
-		//?!혹시
 		String ComboxColumn;
 
-		//Constuctor
+		//-----------------------------------Constructor
 
 		//기본 생성자 만들기
 		public Bean() {
 			// TODO Auto-generated constructor stub
 		}
 
-		
 		
 		
 		//강의명 , 강사, 장소 , 날짜 (테이블 열 이름)  ---search
@@ -43,10 +40,8 @@ public class Bean {
 
 		
 
-		
-		
+
 		//테이블
-		
 		public Bean(int cId, String cName,  String tName, String cLocation, String cDate) {
 			super();
 			this.cId = cId;
@@ -58,20 +53,6 @@ public class Bean {
 		
 		
 		
-		
-		
-		//cName 만!?
-
-		public Bean(String cName) {
-			super();
-			this.cName = cName;
-		}
-		
-		
-
-
-
-
 		//  강의정보를 위한 
 		
 		public Bean(String cName, String tName, String cLocation,  String cTime, String cDate, String cContents) {
@@ -88,14 +69,13 @@ public class Bean {
 		
 
 		
+		//-----------------------------------getter & setter
 		
-		// getter & setter
 		public int getcId() {
 			return cId;
 		}
 
-
-
+		
 		public void setcId(int cId) {
 			this.cId = cId;
 		}
@@ -142,19 +122,14 @@ public class Bean {
 
 
 
-
-
 		public int getcPrice() {
 			return cPrice;
 		}
 
 
-
-
 		public void setcPrice(int cPrice) {
 			this.cPrice = cPrice;
 		}
-
 
 
 
@@ -187,14 +162,10 @@ public class Bean {
 			ComboxColumn = comboxColumn;
 		}
 
-	//////////////
-
 
 		public String gettNickName() {
 			return tNickName;
 		}
-		
-		
 		
 		
 		public void settNickName(String tNickName) {
@@ -203,18 +174,14 @@ public class Bean {
 		
 		
 		
-		
 		public String gettTelNo() {
 			return tTelNo;
 		}
 		
 		
-		
-		
 		public void settTelNo(String tTelNo) {
 			this.tTelNo = tTelNo;
 		}
-		
 		
 		
 		
@@ -224,10 +191,9 @@ public class Bean {
 		
 		
 		
-		
 		public void settEmail(String tEmail) {
 			this.tEmail = tEmail;
 		}
 
 
-}
+}//end
