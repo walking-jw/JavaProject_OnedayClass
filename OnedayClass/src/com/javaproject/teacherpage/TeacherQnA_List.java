@@ -48,7 +48,7 @@ public class TeacherQnA_List {
 	 */
 	private void initialize() {
 		frmQna = new JFrame();
-		frmQna.setTitle("QnA");
+		frmQna.setTitle("QnA © Copyright 권효은, 박재원, 이도영, 조혜지");
 		frmQna.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {

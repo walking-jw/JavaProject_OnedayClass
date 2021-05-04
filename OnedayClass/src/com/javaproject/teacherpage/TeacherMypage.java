@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
 
 public class TeacherMypage {
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JLabel lbl_Name;
 	private JTextField tf_Name;
 	private JLabel lbl_Name_1;
@@ -52,7 +52,7 @@ public class TeacherMypage {
 	private JLabel lblNewLabel_1;
 
 	public void setVisible_TeacherMypage(boolean i){
-		   	frame.setVisible(i);
+		   	frmCopyright.setVisible(i);
 	}
 	/**
 	 * Create the application.
@@ -65,9 +65,9 @@ public class TeacherMypage {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("마이페이지");
-		frame.addWindowListener(new WindowAdapter() {
+		frmCopyright = new JFrame();
+		frmCopyright.setTitle("마이페이지 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.addWindowListener(new WindowAdapter() {
 			@Override()
 			public void windowOpened(WindowEvent e) {
 				DBtoClass();
@@ -76,34 +76,34 @@ public class TeacherMypage {
 				CounfOfQnA();
 			}
 		});
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getLbl_Name());
-		frame.getContentPane().add(getTf_Name());
-		frame.getContentPane().add(getLbl_Name_1());
-		frame.getContentPane().add(getTf_NickName());
-		frame.getContentPane().add(getTf_Email());
-		frame.getContentPane().add(getLbl_Email());
-		frame.getContentPane().add(getLbl_Email_1());
-		frame.getContentPane().add(getTf_Telno());
-		frame.getContentPane().add(getLbl_Email_1_1());
-		frame.getContentPane().add(getLbl_QnA());
-		frame.getContentPane().add(getLbl_Average());
-		frame.getContentPane().add(getTf_AveragePoint());
-		frame.getContentPane().add(getLbl_Myclass());
-		frame.getContentPane().add(getLbl_Average_1_1());
-		frame.getContentPane().add(getBtn_TeacherMyclass());
-		frame.getContentPane().add(getBtn_QnA());
-		frame.getContentPane().add(getBtn_Out());
-		frame.getContentPane().add(getBtn_Out_1());
-		frame.getContentPane().add(getLbl_PassCheck());
-		frame.getContentPane().add(getTf_Password());
-		frame.getContentPane().add(getTf_PasswordConfirm());
-		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getBtn_Logout());
-		frame.getContentPane().add(getLblNewLabel_1());
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getLbl_Name());
+		frmCopyright.getContentPane().add(getTf_Name());
+		frmCopyright.getContentPane().add(getLbl_Name_1());
+		frmCopyright.getContentPane().add(getTf_NickName());
+		frmCopyright.getContentPane().add(getTf_Email());
+		frmCopyright.getContentPane().add(getLbl_Email());
+		frmCopyright.getContentPane().add(getLbl_Email_1());
+		frmCopyright.getContentPane().add(getTf_Telno());
+		frmCopyright.getContentPane().add(getLbl_Email_1_1());
+		frmCopyright.getContentPane().add(getLbl_QnA());
+		frmCopyright.getContentPane().add(getLbl_Average());
+		frmCopyright.getContentPane().add(getTf_AveragePoint());
+		frmCopyright.getContentPane().add(getLbl_Myclass());
+		frmCopyright.getContentPane().add(getLbl_Average_1_1());
+		frmCopyright.getContentPane().add(getBtn_TeacherMyclass());
+		frmCopyright.getContentPane().add(getBtn_QnA());
+		frmCopyright.getContentPane().add(getBtn_Out());
+		frmCopyright.getContentPane().add(getBtn_Out_1());
+		frmCopyright.getContentPane().add(getLbl_PassCheck());
+		frmCopyright.getContentPane().add(getTf_Password());
+		frmCopyright.getContentPane().add(getTf_PasswordConfirm());
+		frmCopyright.getContentPane().add(getLblNewLabel());
+		frmCopyright.getContentPane().add(getBtn_Logout());
+		frmCopyright.getContentPane().add(getLblNewLabel_1());
 	}
 	private JLabel getLbl_Name() {
 		if (lbl_Name == null) {
@@ -229,7 +229,7 @@ public class TeacherMypage {
 					// 내 강의 Button :TeacherMypage -> TeacherMyClass  [2021.04.26, 11:34]
 					TeacherLectureList myclass = new TeacherLectureList();
 					myclass.setVisible_LectureList(true);
-					frame.dispose();		
+					frmCopyright.dispose();		
 					
 				}
 			});
@@ -246,7 +246,7 @@ public class TeacherMypage {
 					// Mypage --> QnA 
 					TeacherQnA_List qna = new TeacherQnA_List();    // * * * * * * * * * * * * * *  
 					qna.setVisible_TeacherQnA_List(true);
-					frame.dispose();		
+					frmCopyright.dispose();		
 					
 				}
 			});
@@ -301,7 +301,7 @@ public class TeacherMypage {
 					JOptionPane.showMessageDialog(null, "로그아웃 되었습니다");
 					SignIn signin = new SignIn();
 					signin.setVisible_SignIn(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btn_Logout.setForeground(Color.BLUE);
@@ -479,7 +479,7 @@ public class TeacherMypage {
 				ShareVar.currentuser = "";
 				SignIn signIn = new SignIn();
 				signIn.setVisible_SignIn(true);
-				frame.dispose();
+				frmCopyright.dispose();
 			} catch (Exception e) {
 				System.out.println("error!");
 			}

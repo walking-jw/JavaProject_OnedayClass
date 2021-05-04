@@ -53,7 +53,7 @@ public class FindIdAndPwd {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("아이디/비밀번호 찾기");
+		frame.setTitle("아이디/비밀번호 찾기 © Copyright 권효은, 박재원, 이도영, 조혜지");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

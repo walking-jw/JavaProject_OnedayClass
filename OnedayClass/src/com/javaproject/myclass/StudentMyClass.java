@@ -71,7 +71,7 @@ import java.awt.event.ActionEvent;
 					SearchActionBefore();
 				}
 			});
-			frmMyClass.setTitle("My Class");
+			frmMyClass.setTitle("My Class © Copyright 권효은, 박재원, 이도영, 조혜지");
 			frmMyClass.setBounds(100, 100, 560, 625);
 			frmMyClass.setLocationRelativeTo(frmMyClass);
 			frmMyClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

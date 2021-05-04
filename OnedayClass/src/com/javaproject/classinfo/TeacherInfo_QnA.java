@@ -71,7 +71,7 @@ public class TeacherInfo_QnA {
 					
 				}
 			});
-			frmQna.setTitle("강사정보 및 QnA");
+			frmQna.setTitle("강사정보 및 QnA © Copyright 권효은, 박재원, 이도영, 조혜지");
 			frmQna.getContentPane().setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			frmQna.setBounds(100, 100, 560, 625);
 			frmQna.setLocationRelativeTo(frmQna);

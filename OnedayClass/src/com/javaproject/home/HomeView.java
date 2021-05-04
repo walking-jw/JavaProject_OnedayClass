@@ -25,7 +25,7 @@ import java.awt.Font;
 
 public class HomeView {
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JLabel lblNewLabel_1;
 	private JButton btnShowClass;
 	private JLabel lblNewLabel_2;
@@ -49,9 +49,9 @@ public class HomeView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("금손양성소");
-		frame.addWindowListener(new WindowAdapter() {
+		frmCopyright = new JFrame();
+		frmCopyright.setTitle("금손양성소 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				//applyFirstRecommnd();
@@ -59,21 +59,21 @@ public class HomeView {
 				applyRecommend();
 			}
 		});
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getBtnShowClass());
-		frame.getContentPane().add(getLblNewLabel_2());
-		frame.getContentPane().add(getBtnRecOne());
-		frame.getContentPane().add(getBtnShowSearch());
-		frame.getContentPane().add(getBtnShowMyClass());
-		frame.getContentPane().add(getBtnNewButton_9_2());
-		frame.getContentPane().add(getLblFirstRecClassName());
-		frame.getContentPane().add(getLblSecondRecClassName());
-		frame.getContentPane().add(getBtnRecTwo());
-		frame.getContentPane().add(getLblNewLabel_1());
-		frame.getContentPane().add(getLblNewLabel());
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getBtnShowClass());
+		frmCopyright.getContentPane().add(getLblNewLabel_2());
+		frmCopyright.getContentPane().add(getBtnRecOne());
+		frmCopyright.getContentPane().add(getBtnShowSearch());
+		frmCopyright.getContentPane().add(getBtnShowMyClass());
+		frmCopyright.getContentPane().add(getBtnNewButton_9_2());
+		frmCopyright.getContentPane().add(getLblFirstRecClassName());
+		frmCopyright.getContentPane().add(getLblSecondRecClassName());
+		frmCopyright.getContentPane().add(getBtnRecTwo());
+		frmCopyright.getContentPane().add(getLblNewLabel_1());
+		frmCopyright.getContentPane().add(getLblNewLabel());
 	}
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
@@ -93,7 +93,7 @@ public class HomeView {
 					
 					ClassList classlist = new ClassList();
 					classlist.setVisible_Classinfo(true);
-					frame.dispose();
+					frmCopyright.dispose();
 					
 					//수강목
 				}
@@ -120,7 +120,7 @@ public class HomeView {
 					ShareVar.cId = firstRecommendClassId;
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnRecOne.setBounds(30, 257, 500, 135);
@@ -153,7 +153,7 @@ public class HomeView {
 					
 					StudentMyClass stumyclass = new StudentMyClass();
 					stumyclass.setVisible_StudentMyClass(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnShowMyClass.setBounds(364, 7, 95, 30);
@@ -171,7 +171,7 @@ public class HomeView {
 					//프로필
 					StudentProfile profile = new StudentProfile();
 					profile.setVisible_StudentProfile(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnNewButton_9_2.setBounds(459, 8, 95, 30);
@@ -204,7 +204,7 @@ public class HomeView {
 					ShareVar.cId = secondRecommendClassId;
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnRecTwo.setBounds(30, 424, 500, 135);
@@ -267,13 +267,13 @@ public class HomeView {
 		file2.delete();
 	}
 	public void setVisible_HomeView(boolean b) {
-		frame.setVisible(b);
+		frmCopyright.setVisible(b);
 	}
 	
 	public void segueToSearch() {
 		SearchView searchView = new SearchView();
 		searchView.setVisible_SearchView(true);
-		frame.dispose();
+		frmCopyright.dispose();
 	}
 
 	private JLabel getLblNewLabel() {

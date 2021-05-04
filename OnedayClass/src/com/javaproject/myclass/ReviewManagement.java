@@ -21,7 +21,7 @@ import javax.swing.table.TableColumn;
 
 public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 내역과 작성 내역 데이터 테이블표에 불러오기
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JLabel lblNewLabel;
 	private JScrollPane scrollPane;
 	private JTable Inner_Table_Incomplete;
@@ -48,8 +48,8 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.addWindowListener(new WindowAdapter() {
+		frmCopyright = new JFrame();
+		frmCopyright.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				// 창 뜨자마자 불러온 데이터를 보이게 하기 위해 아래의 4개 메소드 삽입
@@ -59,18 +59,18 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				SearchActionComplete();
 			}
 		});
-		frame.setTitle("후기관리");
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getScrollPane());
-		frame.getContentPane().add(getBtnRegister());
-		frame.getContentPane().add(getLblNewLabel_1());
-		frame.getContentPane().add(getScrollPane_1());
-		frame.getContentPane().add(getBtnUpdateDelete());
-		frame.getContentPane().add(getBtnClose());
+		frmCopyright.setTitle("후기관리 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getLblNewLabel());
+		frmCopyright.getContentPane().add(getScrollPane());
+		frmCopyright.getContentPane().add(getBtnRegister());
+		frmCopyright.getContentPane().add(getLblNewLabel_1());
+		frmCopyright.getContentPane().add(getScrollPane_1());
+		frmCopyright.getContentPane().add(getBtnUpdateDelete());
+		frmCopyright.getContentPane().add(getBtnClose());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -110,7 +110,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				public void actionPerformed(ActionEvent e) {
 					ReviewRegister register = new ReviewRegister();
 					register.setVisible_ReviewRegister(true);
-					frame.dispose();
+					frmCopyright.dispose();
 					
 					MyClassDbAction.ccId = ReviewIncomplete();
 				}
@@ -149,7 +149,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 					
 					ReviewUpdateDelete updateDelete = new ReviewUpdateDelete();
 					updateDelete.setVisible_ReviewUpdateDelete(true);
-					frame.dispose();
+					frmCopyright.dispose();
 					
 					MyClassDbAction.ccId = ReviewComplete();
 					
@@ -182,7 +182,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 				public void actionPerformed(ActionEvent e) {
 					StudentMyClass myClass = new StudentMyClass();
 					myClass.setVisible_StudentMyClass(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnClose.setBounds(445, 548, 86, 29);
@@ -194,7 +194,7 @@ public class ReviewManagement { // 2021.04.29 조혜지 view - 후기 미작성 
 	
 	// 메인과 해당 창을 연결하는 메소드
 	public void setVisible_ReviewManagement(boolean j) {
-		frame.setVisible(j);
+		frmCopyright.setVisible(j);
 	}
 	
 	// 후기 작성 미완료 테이블 초기화

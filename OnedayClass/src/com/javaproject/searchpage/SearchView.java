@@ -27,7 +27,7 @@ import javax.swing.DefaultComboBoxModel;
 
 public class SearchView {
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JComboBox selectBox;
 	private JTextField tfSearch;
 	private JButton btnSearch;
@@ -50,18 +50,18 @@ public class SearchView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("검색");
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getSelectBox());
-		frame.getContentPane().add(getTfSearch());
-		frame.getContentPane().add(getBtnSearch());
-		frame.getContentPane().add(getBtnCancel());
-		frame.getContentPane().add(getScrollPane());
-		frame.getContentPane().add(getBtnDetail());
+		frmCopyright = new JFrame();
+		frmCopyright.setTitle("검색 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getSelectBox());
+		frmCopyright.getContentPane().add(getTfSearch());
+		frmCopyright.getContentPane().add(getBtnSearch());
+		frmCopyright.getContentPane().add(getBtnCancel());
+		frmCopyright.getContentPane().add(getScrollPane());
+		frmCopyright.getContentPane().add(getBtnDetail());
 	}
 
 	private JComboBox getSelectBox() {
@@ -102,7 +102,7 @@ public class SearchView {
 					//닫기
 					HomeView homeView = new HomeView();
 					homeView.setVisible_HomeView(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnCancel.setBounds(396, 538, 117, 29);
@@ -215,7 +215,7 @@ public class SearchView {
 	}
 	
 	public void setVisible_SearchView(boolean b) {
-		frame.setVisible(b);
+		frmCopyright.setVisible(b);
 	}
 	private JButton getBtnDetail() {
 		if (btnDetail == null) {
@@ -225,7 +225,7 @@ public class SearchView {
 					// show deail
 					Classinfo classinfo = new Classinfo();
 					classinfo.setVisible_Classinfo(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnDetail.setBounds(272, 538, 117, 29);

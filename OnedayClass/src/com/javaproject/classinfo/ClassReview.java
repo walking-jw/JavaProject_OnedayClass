@@ -29,7 +29,7 @@ public class ClassReview {
 	//--------------------------------------Field
 		//강의에 대한 후기!
 		
-		private JFrame frame;
+		private JFrame frmCopyright;
 		private JLabel lblNewLabel;
 		private JTextField tfrCount;
 		private JScrollPane scrollPane;
@@ -58,8 +58,8 @@ public class ClassReview {
 		 * Initialize the contents of the frame.
 		 */
 		private void initialize() {
-			frame = new JFrame();
-			frame.addWindowListener(new WindowAdapter() {
+			frmCopyright = new JFrame();
+			frmCopyright.addWindowListener(new WindowAdapter() {
 				
 				//윈도우 오픈시 : 테이블 초기값 불러오기, 강의후기 및 후기갯수 불러오기
 				@Override
@@ -69,16 +69,16 @@ public class ClassReview {
 					ValueCountReview();
 				}
 			});
-			frame.setTitle("강의후기");
-			frame.setBounds(100, 100, 560, 625);
-			frame.setLocationRelativeTo(frame);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.getContentPane().setLayout(null);
-			frame.getContentPane().add(getLblNewLabel());
-			frame.getContentPane().add(getTfrCount());
-			frame.getContentPane().add(getScrollPane());
-			frame.getContentPane().add(getBtnNewButton());
-			frame.getContentPane().add(getLblCount());
+			frmCopyright.setTitle("강의후기 © Copyright 권효은, 박재원, 이도영, 조혜지");
+			frmCopyright.setBounds(100, 100, 560, 625);
+			frmCopyright.setLocationRelativeTo(frmCopyright);
+			frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frmCopyright.getContentPane().setLayout(null);
+			frmCopyright.getContentPane().add(getLblNewLabel());
+			frmCopyright.getContentPane().add(getTfrCount());
+			frmCopyright.getContentPane().add(getScrollPane());
+			frmCopyright.getContentPane().add(getBtnNewButton());
+			frmCopyright.getContentPane().add(getLblCount());
 		}
 
 		private JLabel getLblNewLabel() {
@@ -117,7 +117,7 @@ public class ClassReview {
 						//닫기버튼 클릭시 강의 정보 란으로 돌아가기
 						Classinfo classinfo = new Classinfo();
 						classinfo.setVisible_Classinfo(true);
-						frame.dispose();
+						frmCopyright.dispose();
 						
 					}
 				});
@@ -148,7 +148,7 @@ public class ClassReview {
 		
 		// Frame 보이게 안보이게 설정
 		public void setVisible_ClassReview(boolean h) {
-			frame.setVisible(h);
+			frmCopyright.setVisible(h);
 			
 		}
 		

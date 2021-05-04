@@ -56,7 +56,7 @@ public class StudentProfile {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("내 정보");
+		frame.setTitle("내 정보 © Copyright 권효은, 박재원, 이도영, 조혜지");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {

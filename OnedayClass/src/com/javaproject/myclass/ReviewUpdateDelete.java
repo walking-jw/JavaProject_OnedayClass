@@ -53,7 +53,7 @@ public class ReviewUpdateDelete {
 				ReviewData();
 			}
 		});
-		frame.setTitle("후기 수정 / 삭제");
+		frame.setTitle("후기 수정 / 삭제 © Copyright 권효은, 박재원, 이도영, 조혜지");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -27,7 +27,7 @@ public class ClassList {
 
 		//-----------------------------------Field
 	
-		private JFrame frame;
+		private JFrame frmCopyright;
 		private JComboBox cbSelection;
 		private JScrollPane scrollPane;
 		private JTable Inner_Table;
@@ -51,9 +51,9 @@ public class ClassList {
 		 * Initialize the contents of the frame.
 		 */
 		private void initialize() {
-			frame = new JFrame();
-			frame.setTitle("강의목록");
-			frame.addWindowListener(new WindowAdapter() {
+			frmCopyright = new JFrame();
+			frmCopyright.setTitle("강의목록 © Copyright 권효은, 박재원, 이도영, 조혜지");
+			frmCopyright.addWindowListener(new WindowAdapter() {
 			
 				@Override
 				public void windowOpened(WindowEvent e) {
@@ -61,14 +61,14 @@ public class ClassList {
 					ComboxClick();
 				}
 			});
-			frame.setBounds(100, 100, 560, 625);
-			frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.getContentPane().setLayout(null);
-			frame.getContentPane().add(getCbSelection());
-			frame.getContentPane().add(getScrollPane());
-			frame.getContentPane().add(getBtnNewButton());
-			frame.getContentPane().add(getBtnClose());
+			frmCopyright.setBounds(100, 100, 560, 625);
+			frmCopyright.setLocationRelativeTo(frmCopyright);  //  --------------- 가운데로 보내기
+			frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frmCopyright.getContentPane().setLayout(null);
+			frmCopyright.getContentPane().add(getCbSelection());
+			frmCopyright.getContentPane().add(getScrollPane());
+			frmCopyright.getContentPane().add(getBtnNewButton());
+			frmCopyright.getContentPane().add(getBtnClose());
 		}
 	
 		private JComboBox getCbSelection() {
@@ -123,7 +123,7 @@ public class ClassList {
 						ShareVar.cId = ClassId();
 						Classinfo classinfo = new Classinfo();
 						classinfo.setVisible_Classinfo(true);
-						frame.dispose();
+						frmCopyright.dispose();
 						
 						
 					}
@@ -143,7 +143,7 @@ public class ClassList {
 						// 닫기 클릭시 홈으로 돌아가기
 						HomeView homeView = new HomeView();
 						homeView.setVisible_HomeView(true);
-						frame.dispose();
+						frmCopyright.dispose();
 					}
 				});
 				btnClose.setBounds(302, 518, 117, 29);
@@ -162,7 +162,7 @@ public class ClassList {
 		
 		//frame이 보이게 하는 메소드 만들기 (열고 닫기위해 boolean으로 타입을 정한다!)
 		public void setVisible_Classinfo (boolean l) {
-			frame.setVisible(l);
+			frmCopyright.setVisible(l);
 		}//setVisible_Classinfo End
 		
 	

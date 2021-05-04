@@ -32,7 +32,7 @@ public class Classinfo {
 
 		//-----------------------------Field
 		
-		private JFrame frame;
+		private JFrame frmCopyright;
 		private JLabel lblNewLabel;
 		private JLabel lblNewLabel_1;
 		private JLabel lblNewLabel_2;
@@ -74,8 +74,8 @@ public class Classinfo {
 		 * Initialize the contents of the frame.
 		 */
 		private void initialize() {
-			frame = new JFrame();
-			frame.addWindowListener(new WindowAdapter() {
+			frmCopyright = new JFrame();
+			frmCopyright.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowOpened(WindowEvent e) {
 					//window 시작시 정보를 불러와라!
@@ -84,32 +84,32 @@ public class Classinfo {
 	
 				}
 			});
-			frame.setTitle("강의정보");
-			frame.setBounds(100, 100, 560, 625);
-			frame.setLocationRelativeTo(frame);  //  --------------- 가운데로 보내기
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.getContentPane().setLayout(null);
-			frame.getContentPane().add(getLblNewLabel());
-			frame.getContentPane().add(getLblNewLabel_1());
-			frame.getContentPane().add(getLblNewLabel_2());
-			frame.getContentPane().add(getLblNewLabel_3());
-			frame.getContentPane().add(getLblNewLabel_4());
-			frame.getContentPane().add(getTfcName());
-			frame.getContentPane().add(getTfcLocation());
-			frame.getContentPane().add(getTfcDate());
-			frame.getContentPane().add(getTfcTime());
-			frame.getContentPane().add(getBtntName());
-			frame.getContentPane().add(getLblNewLabel_5());
-			frame.getContentPane().add(getLblNewLabel_3_1());
-			frame.getContentPane().add(getBtnReview());
-			frame.getContentPane().add(getBtnAttend());
-			frame.getContentPane().add(getLblImage());
-			frame.getContentPane().add(getTfcPrice());
-			frame.getContentPane().add(getBtnBackClasslist());
-			frame.getContentPane().add(getScrollPane());
-			frame.getContentPane().add(getLblNewLabel_6());
-			frame.getContentPane().add(getLblNewLabel_7());
-			frame.getContentPane().add(getBtnHome());
+			frmCopyright.setTitle("강의정보 © Copyright 권효은, 박재원, 이도영, 조혜지");
+			frmCopyright.setBounds(100, 100, 560, 625);
+			frmCopyright.setLocationRelativeTo(frmCopyright);  //  --------------- 가운데로 보내기
+			frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frmCopyright.getContentPane().setLayout(null);
+			frmCopyright.getContentPane().add(getLblNewLabel());
+			frmCopyright.getContentPane().add(getLblNewLabel_1());
+			frmCopyright.getContentPane().add(getLblNewLabel_2());
+			frmCopyright.getContentPane().add(getLblNewLabel_3());
+			frmCopyright.getContentPane().add(getLblNewLabel_4());
+			frmCopyright.getContentPane().add(getTfcName());
+			frmCopyright.getContentPane().add(getTfcLocation());
+			frmCopyright.getContentPane().add(getTfcDate());
+			frmCopyright.getContentPane().add(getTfcTime());
+			frmCopyright.getContentPane().add(getBtntName());
+			frmCopyright.getContentPane().add(getLblNewLabel_5());
+			frmCopyright.getContentPane().add(getLblNewLabel_3_1());
+			frmCopyright.getContentPane().add(getBtnReview());
+			frmCopyright.getContentPane().add(getBtnAttend());
+			frmCopyright.getContentPane().add(getLblImage());
+			frmCopyright.getContentPane().add(getTfcPrice());
+			frmCopyright.getContentPane().add(getBtnBackClasslist());
+			frmCopyright.getContentPane().add(getScrollPane());
+			frmCopyright.getContentPane().add(getLblNewLabel_6());
+			frmCopyright.getContentPane().add(getLblNewLabel_7());
+			frmCopyright.getContentPane().add(getBtnHome());
 		}
 		
 		
@@ -207,7 +207,7 @@ public class Classinfo {
 						///강사 정보와 QnA창이 뜨게 하기
 						TeacherInfo_QnA tInfo_QnA = new TeacherInfo_QnA();
 						tInfo_QnA.setVisible_tInfo_QnA(true);
-						frame.dispose();
+						frmCopyright.dispose();
 					}
 				});
 				btntName.setBackground(Color.BLUE);
@@ -242,7 +242,7 @@ public class Classinfo {
 						//해당 강의에 대한 후기 나오게 하기
 						ClassReview classreview = new ClassReview();
 						classreview.setVisible_ClassReview(true);
-						frame.dispose();
+						frmCopyright.dispose();
 					}
 				});
 				btnReview.setBounds(408, 384, 117, 29);
@@ -306,7 +306,7 @@ public class Classinfo {
 						
 						ClassList classList = new ClassList();
 						classList.setVisible_Classinfo(true);
-						frame.dispose();
+						frmCopyright.dispose();
 						
 					}
 				});
@@ -359,7 +359,7 @@ public class Classinfo {
 						//홈버튼 클릭시 홈으로 돌아가기
 						HomeView homeView = new HomeView();
 						homeView.setVisible_HomeView(true);
-						frame.dispose();
+						frmCopyright.dispose();
 					}
 				});
 				btnHome.setBounds(174, 550, 117, 29);
@@ -373,7 +373,7 @@ public class Classinfo {
 		
 		// Classinfo frame 보이기/ 감추기
 		public void setVisible_Classinfo(boolean h) {
-			frame.setVisible(h);
+			frmCopyright.setVisible(h);
 			
 		}//setVisible End
 	

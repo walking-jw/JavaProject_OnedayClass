@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 
 public class Main {
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JButton btnStart;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -33,7 +33,7 @@ public class Main {
 			public void run() {
 				try {
 					Main window = new Main();
-					window.frame.setVisible(true);
+					window.frmCopyright.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,14 +52,15 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getBtnStart());
-		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getLblNewLabel_1());
+		frmCopyright = new JFrame();
+		frmCopyright.setTitle("금손양성소 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getBtnStart());
+		frmCopyright.getContentPane().add(getLblNewLabel());
+		frmCopyright.getContentPane().add(getLblNewLabel_1());
 	}
 	private JButton getBtnStart() {
 		if (btnStart == null) {
@@ -69,7 +70,7 @@ public class Main {
 					
 					SignIn signin = new SignIn();
 					signin.setVisible_SignIn(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnStart.setBounds(221, 472, 117, 29);

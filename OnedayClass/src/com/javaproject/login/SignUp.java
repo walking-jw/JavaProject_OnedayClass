@@ -19,7 +19,7 @@ import javax.swing.ButtonGroup;
 
 public class SignUp {
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JLabel lblNewLabel;
 	private JRadioButton rdbtnCommon;
 	private JRadioButton rdbtnTeacher;
@@ -52,32 +52,32 @@ public class SignUp {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("회원가입");
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getRdbtnCommon());
-		frame.getContentPane().add(getRdbtnTeacher());
-		frame.getContentPane().add(getLblNewLabel_1());
-		frame.getContentPane().add(getLblNewLabel_2());
-		frame.getContentPane().add(getLblNewLabel_3());
-		frame.getContentPane().add(getLblNewLabel_4());
-		frame.getContentPane().add(getLblNewLabel_5());
-		frame.getContentPane().add(getLblNewLabel_6());
-		frame.getContentPane().add(getTfName());
-		frame.getContentPane().add(getTfNickName());
-		frame.getContentPane().add(getTfPhone());
-		frame.getContentPane().add(getPwdF());
-		frame.getContentPane().add(getPwdFCheck());
-		frame.getContentPane().add(getTfEmail());
-		frame.getContentPane().add(getCbEmail());
-		frame.getContentPane().add(getCbPhone());
-		frame.getContentPane().add(getBtnCheck());
-		frame.getContentPane().add(getBtnCancel());
-		frame.getContentPane().add(getBtnDone());
+		frmCopyright = new JFrame();
+		frmCopyright.setTitle("회원가입 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getLblNewLabel());
+		frmCopyright.getContentPane().add(getRdbtnCommon());
+		frmCopyright.getContentPane().add(getRdbtnTeacher());
+		frmCopyright.getContentPane().add(getLblNewLabel_1());
+		frmCopyright.getContentPane().add(getLblNewLabel_2());
+		frmCopyright.getContentPane().add(getLblNewLabel_3());
+		frmCopyright.getContentPane().add(getLblNewLabel_4());
+		frmCopyright.getContentPane().add(getLblNewLabel_5());
+		frmCopyright.getContentPane().add(getLblNewLabel_6());
+		frmCopyright.getContentPane().add(getTfName());
+		frmCopyright.getContentPane().add(getTfNickName());
+		frmCopyright.getContentPane().add(getTfPhone());
+		frmCopyright.getContentPane().add(getPwdF());
+		frmCopyright.getContentPane().add(getPwdFCheck());
+		frmCopyright.getContentPane().add(getTfEmail());
+		frmCopyright.getContentPane().add(getCbEmail());
+		frmCopyright.getContentPane().add(getCbPhone());
+		frmCopyright.getContentPane().add(getBtnCheck());
+		frmCopyright.getContentPane().add(getBtnCancel());
+		frmCopyright.getContentPane().add(getBtnDone());
 	}
 
 	private JLabel getLblNewLabel() {
@@ -236,7 +236,7 @@ public class SignUp {
 				public void actionPerformed(ActionEvent e) {
 					SignIn signIn = new SignIn();
 					signIn.setVisible_SignIn(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnCancel.setBounds(270, 539, 117, 29);
@@ -258,7 +258,7 @@ public class SignUp {
 	}
 	
 	public void setVisible_SignUp(boolean b) {
-		frame.setVisible(b);
+		frmCopyright.setVisible(b);
 	}
 	
 	//Method
@@ -312,7 +312,7 @@ public class SignUp {
 			JOptionPane.showMessageDialog(null, "금손양성소에 오신걸 환영합니다.");
 			SignIn signIn = new SignIn();
 			signIn.setVisible_SignIn(true);
-			frame.dispose();
+			frmCopyright.dispose();
 		} else {
 			JOptionPane.showMessageDialog(null, "비밀번호가 확인과 다릅니다.");
 		}

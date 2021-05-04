@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 
 public class TeacherLectureDetail {
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JLabel lblNewLabel;
 	private JTextField tf_cName;
 	private JLabel lblNewLabel_1;
@@ -40,7 +40,7 @@ public class TeacherLectureDetail {
 	private JLabel lblNewLabel_3;
 	
 	public void setVisible_LectureListDetail(boolean i) {
-		frame.setVisible(true);
+		frmCopyright.setVisible(true);
 		
 	}
 	
@@ -55,9 +55,9 @@ public class TeacherLectureDetail {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("강의정보");
-		frame.addWindowListener(new WindowAdapter() {
+		frmCopyright = new JFrame();
+		frmCopyright.setTitle("강의정보 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				TableInitBefore();						// 1. 테이블 Column 세팅
@@ -65,24 +65,24 @@ public class TeacherLectureDetail {
 				SearchActionBefore();					// 3. 하단 후기 Table부분 DB에서 데이터 불러오기
 			}
 		});
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getTf_cName());
-		frame.getContentPane().add(getLblNewLabel_1());
-		frame.getContentPane().add(getTf_tName());
-		frame.getContentPane().add(getLblNewLabel_1_1());
-		frame.getContentPane().add(getTf_cLocation());
-		frame.getContentPane().add(getLblNewLabel_1_1_1());
-		frame.getContentPane().add(getTf_cTime());
-		frame.getContentPane().add(getLblNewLabel_1_1_1_1());
-		frame.getContentPane().add(getTf_cDate());
-		frame.getContentPane().add(getScrollPane());
-		frame.getContentPane().add(getLblNewLabel_2());
-		frame.getContentPane().add(getBtnNewButton());
-		frame.getContentPane().add(getLblNewLabel_3());
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getLblNewLabel());
+		frmCopyright.getContentPane().add(getTf_cName());
+		frmCopyright.getContentPane().add(getLblNewLabel_1());
+		frmCopyright.getContentPane().add(getTf_tName());
+		frmCopyright.getContentPane().add(getLblNewLabel_1_1());
+		frmCopyright.getContentPane().add(getTf_cLocation());
+		frmCopyright.getContentPane().add(getLblNewLabel_1_1_1());
+		frmCopyright.getContentPane().add(getTf_cTime());
+		frmCopyright.getContentPane().add(getLblNewLabel_1_1_1_1());
+		frmCopyright.getContentPane().add(getTf_cDate());
+		frmCopyright.getContentPane().add(getScrollPane());
+		frmCopyright.getContentPane().add(getLblNewLabel_2());
+		frmCopyright.getContentPane().add(getBtnNewButton());
+		frmCopyright.getContentPane().add(getLblNewLabel_3());
 		
 	}
 	private JLabel getLblNewLabel() {
@@ -203,7 +203,7 @@ public class TeacherLectureDetail {
 					
 					TeacherLectureList myClass = new TeacherLectureList();  // * * * * * * * 강의 리스트로 돌아가기
 					myClass.setVisible_LectureList(true);
-					frame.dispose();
+					frmCopyright.dispose();
 					
 				}
 			});

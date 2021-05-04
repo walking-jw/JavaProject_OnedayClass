@@ -71,7 +71,7 @@ public class TeacherClassRegister { // 2021.04.27 조혜지 view - 강사 강의
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("강의 등록");
+		frame.setTitle("강의 등록 © Copyright 권효은, 박재원, 이도영, 조혜지");
 		frame.setBounds(100, 100, 560, 625);
 		frame.setLocationRelativeTo(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

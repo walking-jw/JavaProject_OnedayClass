@@ -26,7 +26,7 @@ import java.awt.Color;
 
 public class SignIn {
 
-	private JFrame frame;
+	private JFrame frmCopyright;
 	private JRadioButton rdbtnCommon;
 	private JRadioButton rdbtnTeacher;
 	private JTextField tfEmail;
@@ -54,25 +54,25 @@ public class SignIn {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("로그인");
-		frame.setBounds(100, 100, 560, 625);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getRdbtnCommon());
-		frame.getContentPane().add(getRdbtnTeacher());
-		frame.getContentPane().add(getTfEmail());
-		frame.getContentPane().add(getCbEmail());
-		frame.getContentPane().add(getPwdF());
-		frame.getContentPane().add(getBtnSignIn());
-		frame.getContentPane().add(getBtnSignUp());
-		frame.getContentPane().add(getBtnFind());
-		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getLblId());
-		frame.getContentPane().add(getLblId_1());
-		frame.getContentPane().add(getLblId_1_1());
-		frame.getContentPane().add(getLblId_1_2());
+		frmCopyright = new JFrame();
+		frmCopyright.setTitle("로그인 © Copyright 권효은, 박재원, 이도영, 조혜지");
+		frmCopyright.setBounds(100, 100, 560, 625);
+		frmCopyright.setLocationRelativeTo(frmCopyright);
+		frmCopyright.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCopyright.getContentPane().setLayout(null);
+		frmCopyright.getContentPane().add(getRdbtnCommon());
+		frmCopyright.getContentPane().add(getRdbtnTeacher());
+		frmCopyright.getContentPane().add(getTfEmail());
+		frmCopyright.getContentPane().add(getCbEmail());
+		frmCopyright.getContentPane().add(getPwdF());
+		frmCopyright.getContentPane().add(getBtnSignIn());
+		frmCopyright.getContentPane().add(getBtnSignUp());
+		frmCopyright.getContentPane().add(getBtnFind());
+		frmCopyright.getContentPane().add(getLblNewLabel());
+		frmCopyright.getContentPane().add(getLblId());
+		frmCopyright.getContentPane().add(getLblId_1());
+		frmCopyright.getContentPane().add(getLblId_1_1());
+		frmCopyright.getContentPane().add(getLblId_1_2());
 	}
 	private JRadioButton getRdbtnCommon() {
 		if (rdbtnCommon == null) {
@@ -142,7 +142,7 @@ public class SignIn {
 					// 회원가입
 					SignUp signUp = new SignUp();
 					signUp.setVisible_SignUp(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnSignUp.setBounds(90, 440, 382, 36);
@@ -156,7 +156,7 @@ public class SignIn {
 				public void actionPerformed(ActionEvent e) {
 					FindIdAndPwd findView = new FindIdAndPwd();
 					findView.setVisible_FindView(true);
-					frame.dispose();
+					frmCopyright.dispose();
 				}
 			});
 			btnFind.setBounds(164, 534, 230, 29);
@@ -204,7 +204,7 @@ public class SignIn {
 	}
 	
 	public void setVisible_SignIn(boolean b) {
-		frame.setVisible(b);
+		frmCopyright.setVisible(b);
 	}
 	
 	// Method
@@ -234,7 +234,7 @@ public class SignIn {
 				
 				TeacherMypage tc = new TeacherMypage();
 				tc.setVisible_TeacherMypage(true);
-				frame.dispose();
+				frmCopyright.dispose();
 				// 강사페이지 열기
 			} else {
 				JOptionPane.showMessageDialog(null, "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
@@ -245,6 +245,6 @@ public class SignIn {
 	private void segueToStu() {
 		HomeView homeView = new HomeView();
 		homeView.setVisible_HomeView(true);
-		frame.dispose();
+		frmCopyright.dispose();
 	}
 }
